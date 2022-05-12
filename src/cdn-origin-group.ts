@@ -1,0 +1,303 @@
+// https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group
+// generated from terraform resource schema
+
+import { Construct } from 'constructs';
+import * as cdktf from 'cdktf';
+
+// Configuration
+
+export interface CdnOriginGroupConfig extends cdktf.TerraformMetaArguments {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#name CdnOriginGroup#name}
+  */
+  readonly name: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#use_next CdnOriginGroup#use_next}
+  */
+  readonly useNext?: boolean | cdktf.IResolvable;
+  /**
+  * origin block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#origin CdnOriginGroup#origin}
+  */
+  readonly origin: CdnOriginGroupOrigin[] | cdktf.IResolvable;
+  /**
+  * timeouts block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#timeouts CdnOriginGroup#timeouts}
+  */
+  readonly timeouts?: CdnOriginGroupTimeouts;
+}
+export interface CdnOriginGroupOrigin {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#backup CdnOriginGroup#backup}
+  */
+  readonly backup?: boolean | cdktf.IResolvable;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#enabled CdnOriginGroup#enabled}
+  */
+  readonly enabled?: boolean | cdktf.IResolvable;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#source CdnOriginGroup#source}
+  */
+  readonly source: string;
+}
+
+export function cdnOriginGroupOriginToTerraform(struct?: CdnOriginGroupOrigin | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    backup: cdktf.booleanToTerraform(struct!.backup),
+    enabled: cdktf.booleanToTerraform(struct!.enabled),
+    source: cdktf.stringToTerraform(struct!.source),
+  }
+}
+
+export interface CdnOriginGroupTimeouts {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#create CdnOriginGroup#create}
+  */
+  readonly create?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#delete CdnOriginGroup#delete}
+  */
+  readonly delete?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#update CdnOriginGroup#update}
+  */
+  readonly update?: string;
+}
+
+export function cdnOriginGroupTimeoutsToTerraform(struct?: CdnOriginGroupTimeoutsOutputReference | CdnOriginGroupTimeouts | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    create: cdktf.stringToTerraform(struct!.create),
+    delete: cdktf.stringToTerraform(struct!.delete),
+    update: cdktf.stringToTerraform(struct!.update),
+  }
+}
+
+export class CdnOriginGroupTimeoutsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): CdnOriginGroupTimeouts | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._create !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.create = this._create;
+    }
+    if (this._delete !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.delete = this._delete;
+    }
+    if (this._update !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.update = this._update;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: CdnOriginGroupTimeouts | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._create = undefined;
+      this._delete = undefined;
+      this._update = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._create = value.create;
+      this._delete = value.delete;
+      this._update = value.update;
+    }
+  }
+
+  // create - computed: false, optional: true, required: false
+  private _create?: string; 
+  public get create() {
+    return this.getStringAttribute('create');
+  }
+  public set create(value: string) {
+    this._create = value;
+  }
+  public resetCreate() {
+    this._create = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get createInput() {
+    return this._create;
+  }
+
+  // delete - computed: false, optional: true, required: false
+  private _delete?: string; 
+  public get delete() {
+    return this.getStringAttribute('delete');
+  }
+  public set delete(value: string) {
+    this._delete = value;
+  }
+  public resetDelete() {
+    this._delete = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get deleteInput() {
+    return this._delete;
+  }
+
+  // update - computed: false, optional: true, required: false
+  private _update?: string; 
+  public get update() {
+    return this.getStringAttribute('update');
+  }
+  public set update(value: string) {
+    this._update = value;
+  }
+  public resetUpdate() {
+    this._update = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get updateInput() {
+    return this._update;
+  }
+}
+
+/**
+* Represents a {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group yandex_cdn_origin_group}
+*/
+export class CdnOriginGroup extends cdktf.TerraformResource {
+
+  // =================
+  // STATIC PROPERTIES
+  // =================
+  public static readonly tfResourceType = "yandex_cdn_origin_group";
+
+  // ===========
+  // INITIALIZER
+  // ===========
+
+  /**
+  * Create a new {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group yandex_cdn_origin_group} Resource
+  *
+  * @param scope The scope in which to define this construct
+  * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
+  * @param options CdnOriginGroupConfig
+  */
+  public constructor(scope: Construct, id: string, config: CdnOriginGroupConfig) {
+    super(scope, id, {
+      terraformResourceType: 'yandex_cdn_origin_group',
+      terraformGeneratorMetadata: {
+        providerName: 'yandex',
+        providerVersion: '0.73.0',
+        providerVersionConstraint: '~> 0.73.0'
+      },
+      provider: config.provider,
+      dependsOn: config.dependsOn,
+      count: config.count,
+      lifecycle: config.lifecycle
+    });
+    this._name = config.name;
+    this._useNext = config.useNext;
+    this._origin = config.origin;
+    this._timeouts.internalValue = config.timeouts;
+  }
+
+  // ==========
+  // ATTRIBUTES
+  // ==========
+
+  // folder_id - computed: true, optional: false, required: false
+  public get folderId() {
+    return this.getStringAttribute('folder_id');
+  }
+
+  // id - computed: true, optional: true, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // use_next - computed: false, optional: true, required: false
+  private _useNext?: boolean | cdktf.IResolvable; 
+  public get useNext() {
+    return this.getBooleanAttribute('use_next');
+  }
+  public set useNext(value: boolean | cdktf.IResolvable) {
+    this._useNext = value;
+  }
+  public resetUseNext() {
+    this._useNext = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get useNextInput() {
+    return this._useNext;
+  }
+
+  // origin - computed: false, optional: false, required: true
+  private _origin?: CdnOriginGroupOrigin[] | cdktf.IResolvable; 
+  public get origin() {
+    // Getting the computed value is not yet implemented
+    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('origin')));
+  }
+  public set origin(value: CdnOriginGroupOrigin[] | cdktf.IResolvable) {
+    this._origin = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get originInput() {
+    return this._origin;
+  }
+
+  // timeouts - computed: false, optional: true, required: false
+  private _timeouts = new CdnOriginGroupTimeoutsOutputReference(this, "timeouts");
+  public get timeouts() {
+    return this._timeouts;
+  }
+  public putTimeouts(value: CdnOriginGroupTimeouts) {
+    this._timeouts.internalValue = value;
+  }
+  public resetTimeouts() {
+    this._timeouts.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get timeoutsInput() {
+    return this._timeouts.internalValue;
+  }
+
+  // =========
+  // SYNTHESIS
+  // =========
+
+  protected synthesizeAttributes(): { [name: string]: any } {
+    return {
+      name: cdktf.stringToTerraform(this._name),
+      use_next: cdktf.booleanToTerraform(this._useNext),
+      origin: cdktf.listMapper(cdnOriginGroupOriginToTerraform)(this._origin),
+      timeouts: cdnOriginGroupTimeoutsToTerraform(this._timeouts.internalValue),
+    };
+  }
+}
