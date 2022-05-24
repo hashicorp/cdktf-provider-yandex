@@ -20,6 +20,13 @@ export interface ComputeInstanceGroupConfig extends cdktf.TerraformMetaArguments
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#id ComputeInstanceGroup#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#labels ComputeInstanceGroup#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -731,6 +738,102 @@ export function computeInstanceGroupHealthCheckHttpOptionsToTerraform(struct?: C
   }
 }
 
+export class ComputeInstanceGroupHealthCheckHttpOptionsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupHealthCheckHttpOptions | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._path !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.path = this._path;
+    }
+    if (this._port !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.port = this._port;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupHealthCheckHttpOptions | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._path = undefined;
+      this._port = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._path = value.path;
+      this._port = value.port;
+    }
+  }
+
+  // path - computed: false, optional: false, required: true
+  private _path?: string; 
+  public get path() {
+    return this.getStringAttribute('path');
+  }
+  public set path(value: string) {
+    this._path = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get pathInput() {
+    return this._path;
+  }
+
+  // port - computed: false, optional: false, required: true
+  private _port?: number; 
+  public get port() {
+    return this.getNumberAttribute('port');
+  }
+  public set port(value: number) {
+    this._port = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get portInput() {
+    return this._port;
+  }
+}
+
+export class ComputeInstanceGroupHealthCheckHttpOptionsList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupHealthCheckHttpOptions[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupHealthCheckHttpOptionsOutputReference {
+    return new ComputeInstanceGroupHealthCheckHttpOptionsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupHealthCheckTcpOptions {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#port ComputeInstanceGroup#port}
@@ -839,6 +942,196 @@ export function computeInstanceGroupHealthCheckToTerraform(struct?: ComputeInsta
   }
 }
 
+export class ComputeInstanceGroupHealthCheckOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupHealthCheck | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._healthyThreshold !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.healthyThreshold = this._healthyThreshold;
+    }
+    if (this._interval !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.interval = this._interval;
+    }
+    if (this._timeout !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.timeout = this._timeout;
+    }
+    if (this._unhealthyThreshold !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.unhealthyThreshold = this._unhealthyThreshold;
+    }
+    if (this._httpOptions?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.httpOptions = this._httpOptions?.internalValue;
+    }
+    if (this._tcpOptions?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.tcpOptions = this._tcpOptions?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupHealthCheck | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._healthyThreshold = undefined;
+      this._interval = undefined;
+      this._timeout = undefined;
+      this._unhealthyThreshold = undefined;
+      this._httpOptions.internalValue = undefined;
+      this._tcpOptions.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._healthyThreshold = value.healthyThreshold;
+      this._interval = value.interval;
+      this._timeout = value.timeout;
+      this._unhealthyThreshold = value.unhealthyThreshold;
+      this._httpOptions.internalValue = value.httpOptions;
+      this._tcpOptions.internalValue = value.tcpOptions;
+    }
+  }
+
+  // healthy_threshold - computed: false, optional: true, required: false
+  private _healthyThreshold?: number; 
+  public get healthyThreshold() {
+    return this.getNumberAttribute('healthy_threshold');
+  }
+  public set healthyThreshold(value: number) {
+    this._healthyThreshold = value;
+  }
+  public resetHealthyThreshold() {
+    this._healthyThreshold = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get healthyThresholdInput() {
+    return this._healthyThreshold;
+  }
+
+  // interval - computed: false, optional: true, required: false
+  private _interval?: number; 
+  public get interval() {
+    return this.getNumberAttribute('interval');
+  }
+  public set interval(value: number) {
+    this._interval = value;
+  }
+  public resetInterval() {
+    this._interval = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get intervalInput() {
+    return this._interval;
+  }
+
+  // timeout - computed: false, optional: true, required: false
+  private _timeout?: number; 
+  public get timeout() {
+    return this.getNumberAttribute('timeout');
+  }
+  public set timeout(value: number) {
+    this._timeout = value;
+  }
+  public resetTimeout() {
+    this._timeout = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get timeoutInput() {
+    return this._timeout;
+  }
+
+  // unhealthy_threshold - computed: false, optional: true, required: false
+  private _unhealthyThreshold?: number; 
+  public get unhealthyThreshold() {
+    return this.getNumberAttribute('unhealthy_threshold');
+  }
+  public set unhealthyThreshold(value: number) {
+    this._unhealthyThreshold = value;
+  }
+  public resetUnhealthyThreshold() {
+    this._unhealthyThreshold = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get unhealthyThresholdInput() {
+    return this._unhealthyThreshold;
+  }
+
+  // http_options - computed: false, optional: true, required: false
+  private _httpOptions = new ComputeInstanceGroupHealthCheckHttpOptionsList(this, "http_options", false);
+  public get httpOptions() {
+    return this._httpOptions;
+  }
+  public putHttpOptions(value: ComputeInstanceGroupHealthCheckHttpOptions[] | cdktf.IResolvable) {
+    this._httpOptions.internalValue = value;
+  }
+  public resetHttpOptions() {
+    this._httpOptions.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get httpOptionsInput() {
+    return this._httpOptions.internalValue;
+  }
+
+  // tcp_options - computed: false, optional: true, required: false
+  private _tcpOptions = new ComputeInstanceGroupHealthCheckTcpOptionsOutputReference(this, "tcp_options");
+  public get tcpOptions() {
+    return this._tcpOptions;
+  }
+  public putTcpOptions(value: ComputeInstanceGroupHealthCheckTcpOptions) {
+    this._tcpOptions.internalValue = value;
+  }
+  public resetTcpOptions() {
+    this._tcpOptions.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tcpOptionsInput() {
+    return this._tcpOptions.internalValue;
+  }
+}
+
+export class ComputeInstanceGroupHealthCheckList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupHealthCheck[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupHealthCheckOutputReference {
+    return new ComputeInstanceGroupHealthCheckOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupInstanceTemplateBootDiskInitializeParams {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#description ComputeInstanceGroup#description}
@@ -1192,6 +1485,149 @@ export function computeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordToT
   }
 }
 
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecord | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._dnsZoneId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.dnsZoneId = this._dnsZoneId;
+    }
+    if (this._fqdn !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.fqdn = this._fqdn;
+    }
+    if (this._ptr !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ptr = this._ptr;
+    }
+    if (this._ttl !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ttl = this._ttl;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecord | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = undefined;
+      this._fqdn = undefined;
+      this._ptr = undefined;
+      this._ttl = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = value.dnsZoneId;
+      this._fqdn = value.fqdn;
+      this._ptr = value.ptr;
+      this._ttl = value.ttl;
+    }
+  }
+
+  // dns_zone_id - computed: false, optional: true, required: false
+  private _dnsZoneId?: string; 
+  public get dnsZoneId() {
+    return this.getStringAttribute('dns_zone_id');
+  }
+  public set dnsZoneId(value: string) {
+    this._dnsZoneId = value;
+  }
+  public resetDnsZoneId() {
+    this._dnsZoneId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dnsZoneIdInput() {
+    return this._dnsZoneId;
+  }
+
+  // fqdn - computed: false, optional: false, required: true
+  private _fqdn?: string; 
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+  public set fqdn(value: string) {
+    this._fqdn = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get fqdnInput() {
+    return this._fqdn;
+  }
+
+  // ptr - computed: true, optional: true, required: false
+  private _ptr?: boolean | cdktf.IResolvable; 
+  public get ptr() {
+    return this.getBooleanAttribute('ptr');
+  }
+  public set ptr(value: boolean | cdktf.IResolvable) {
+    this._ptr = value;
+  }
+  public resetPtr() {
+    this._ptr = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ptrInput() {
+    return this._ptr;
+  }
+
+  // ttl - computed: false, optional: true, required: false
+  private _ttl?: number; 
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+  public set ttl(value: number) {
+    this._ttl = value;
+  }
+  public resetTtl() {
+    this._ttl = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ttlInput() {
+    return this._ttl;
+  }
+}
+
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecord[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordOutputReference {
+    return new ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#dns_zone_id ComputeInstanceGroup#dns_zone_id}
@@ -1224,6 +1660,149 @@ export function computeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecor
   }
 }
 
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._dnsZoneId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.dnsZoneId = this._dnsZoneId;
+    }
+    if (this._fqdn !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.fqdn = this._fqdn;
+    }
+    if (this._ptr !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ptr = this._ptr;
+    }
+    if (this._ttl !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ttl = this._ttl;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = undefined;
+      this._fqdn = undefined;
+      this._ptr = undefined;
+      this._ttl = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = value.dnsZoneId;
+      this._fqdn = value.fqdn;
+      this._ptr = value.ptr;
+      this._ttl = value.ttl;
+    }
+  }
+
+  // dns_zone_id - computed: false, optional: true, required: false
+  private _dnsZoneId?: string; 
+  public get dnsZoneId() {
+    return this.getStringAttribute('dns_zone_id');
+  }
+  public set dnsZoneId(value: string) {
+    this._dnsZoneId = value;
+  }
+  public resetDnsZoneId() {
+    this._dnsZoneId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dnsZoneIdInput() {
+    return this._dnsZoneId;
+  }
+
+  // fqdn - computed: false, optional: false, required: true
+  private _fqdn?: string; 
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+  public set fqdn(value: string) {
+    this._fqdn = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get fqdnInput() {
+    return this._fqdn;
+  }
+
+  // ptr - computed: true, optional: true, required: false
+  private _ptr?: boolean | cdktf.IResolvable; 
+  public get ptr() {
+    return this.getBooleanAttribute('ptr');
+  }
+  public set ptr(value: boolean | cdktf.IResolvable) {
+    this._ptr = value;
+  }
+  public resetPtr() {
+    this._ptr = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ptrInput() {
+    return this._ptr;
+  }
+
+  // ttl - computed: false, optional: true, required: false
+  private _ttl?: number; 
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+  public set ttl(value: number) {
+    this._ttl = value;
+  }
+  public resetTtl() {
+    this._ttl = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ttlInput() {
+    return this._ttl;
+  }
+}
+
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordOutputReference {
+    return new ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#dns_zone_id ComputeInstanceGroup#dns_zone_id}
@@ -1256,6 +1835,149 @@ export function computeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord
   }
 }
 
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecordOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._dnsZoneId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.dnsZoneId = this._dnsZoneId;
+    }
+    if (this._fqdn !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.fqdn = this._fqdn;
+    }
+    if (this._ptr !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ptr = this._ptr;
+    }
+    if (this._ttl !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ttl = this._ttl;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = undefined;
+      this._fqdn = undefined;
+      this._ptr = undefined;
+      this._ttl = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = value.dnsZoneId;
+      this._fqdn = value.fqdn;
+      this._ptr = value.ptr;
+      this._ttl = value.ttl;
+    }
+  }
+
+  // dns_zone_id - computed: false, optional: true, required: false
+  private _dnsZoneId?: string; 
+  public get dnsZoneId() {
+    return this.getStringAttribute('dns_zone_id');
+  }
+  public set dnsZoneId(value: string) {
+    this._dnsZoneId = value;
+  }
+  public resetDnsZoneId() {
+    this._dnsZoneId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dnsZoneIdInput() {
+    return this._dnsZoneId;
+  }
+
+  // fqdn - computed: false, optional: false, required: true
+  private _fqdn?: string; 
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+  public set fqdn(value: string) {
+    this._fqdn = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get fqdnInput() {
+    return this._fqdn;
+  }
+
+  // ptr - computed: true, optional: true, required: false
+  private _ptr?: boolean | cdktf.IResolvable; 
+  public get ptr() {
+    return this.getBooleanAttribute('ptr');
+  }
+  public set ptr(value: boolean | cdktf.IResolvable) {
+    this._ptr = value;
+  }
+  public resetPtr() {
+    this._ptr = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ptrInput() {
+    return this._ptr;
+  }
+
+  // ttl - computed: false, optional: true, required: false
+  private _ttl?: number; 
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+  public set ttl(value: number) {
+    this._ttl = value;
+  }
+  public resetTtl() {
+    this._ttl = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ttlInput() {
+    return this._ttl;
+  }
+}
+
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecordList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecordOutputReference {
+    return new ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecordOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupInstanceTemplateNetworkInterface {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#ip_address ComputeInstanceGroup#ip_address}
@@ -1334,6 +2056,328 @@ export function computeInstanceGroupInstanceTemplateNetworkInterfaceToTerraform(
   }
 }
 
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupInstanceTemplateNetworkInterface | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._ipAddress !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipAddress = this._ipAddress;
+    }
+    if (this._ipv4 !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipv4 = this._ipv4;
+    }
+    if (this._ipv6 !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipv6 = this._ipv6;
+    }
+    if (this._ipv6Address !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipv6Address = this._ipv6Address;
+    }
+    if (this._nat !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.nat = this._nat;
+    }
+    if (this._natIpAddress !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.natIpAddress = this._natIpAddress;
+    }
+    if (this._networkId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.networkId = this._networkId;
+    }
+    if (this._securityGroupIds !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.securityGroupIds = this._securityGroupIds;
+    }
+    if (this._subnetIds !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetIds = this._subnetIds;
+    }
+    if (this._dnsRecord?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.dnsRecord = this._dnsRecord?.internalValue;
+    }
+    if (this._ipv6DnsRecord?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipv6DnsRecord = this._ipv6DnsRecord?.internalValue;
+    }
+    if (this._natDnsRecord?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.natDnsRecord = this._natDnsRecord?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupInstanceTemplateNetworkInterface | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._ipAddress = undefined;
+      this._ipv4 = undefined;
+      this._ipv6 = undefined;
+      this._ipv6Address = undefined;
+      this._nat = undefined;
+      this._natIpAddress = undefined;
+      this._networkId = undefined;
+      this._securityGroupIds = undefined;
+      this._subnetIds = undefined;
+      this._dnsRecord.internalValue = undefined;
+      this._ipv6DnsRecord.internalValue = undefined;
+      this._natDnsRecord.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._ipAddress = value.ipAddress;
+      this._ipv4 = value.ipv4;
+      this._ipv6 = value.ipv6;
+      this._ipv6Address = value.ipv6Address;
+      this._nat = value.nat;
+      this._natIpAddress = value.natIpAddress;
+      this._networkId = value.networkId;
+      this._securityGroupIds = value.securityGroupIds;
+      this._subnetIds = value.subnetIds;
+      this._dnsRecord.internalValue = value.dnsRecord;
+      this._ipv6DnsRecord.internalValue = value.ipv6DnsRecord;
+      this._natDnsRecord.internalValue = value.natDnsRecord;
+    }
+  }
+
+  // ip_address - computed: true, optional: true, required: false
+  private _ipAddress?: string; 
+  public get ipAddress() {
+    return this.getStringAttribute('ip_address');
+  }
+  public set ipAddress(value: string) {
+    this._ipAddress = value;
+  }
+  public resetIpAddress() {
+    this._ipAddress = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipAddressInput() {
+    return this._ipAddress;
+  }
+
+  // ipv4 - computed: false, optional: true, required: false
+  private _ipv4?: boolean | cdktf.IResolvable; 
+  public get ipv4() {
+    return this.getBooleanAttribute('ipv4');
+  }
+  public set ipv4(value: boolean | cdktf.IResolvable) {
+    this._ipv4 = value;
+  }
+  public resetIpv4() {
+    this._ipv4 = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipv4Input() {
+    return this._ipv4;
+  }
+
+  // ipv6 - computed: true, optional: true, required: false
+  private _ipv6?: boolean | cdktf.IResolvable; 
+  public get ipv6() {
+    return this.getBooleanAttribute('ipv6');
+  }
+  public set ipv6(value: boolean | cdktf.IResolvable) {
+    this._ipv6 = value;
+  }
+  public resetIpv6() {
+    this._ipv6 = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipv6Input() {
+    return this._ipv6;
+  }
+
+  // ipv6_address - computed: true, optional: true, required: false
+  private _ipv6Address?: string; 
+  public get ipv6Address() {
+    return this.getStringAttribute('ipv6_address');
+  }
+  public set ipv6Address(value: string) {
+    this._ipv6Address = value;
+  }
+  public resetIpv6Address() {
+    this._ipv6Address = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipv6AddressInput() {
+    return this._ipv6Address;
+  }
+
+  // nat - computed: true, optional: true, required: false
+  private _nat?: boolean | cdktf.IResolvable; 
+  public get nat() {
+    return this.getBooleanAttribute('nat');
+  }
+  public set nat(value: boolean | cdktf.IResolvable) {
+    this._nat = value;
+  }
+  public resetNat() {
+    this._nat = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get natInput() {
+    return this._nat;
+  }
+
+  // nat_ip_address - computed: false, optional: true, required: false
+  private _natIpAddress?: string; 
+  public get natIpAddress() {
+    return this.getStringAttribute('nat_ip_address');
+  }
+  public set natIpAddress(value: string) {
+    this._natIpAddress = value;
+  }
+  public resetNatIpAddress() {
+    this._natIpAddress = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get natIpAddressInput() {
+    return this._natIpAddress;
+  }
+
+  // network_id - computed: false, optional: true, required: false
+  private _networkId?: string; 
+  public get networkId() {
+    return this.getStringAttribute('network_id');
+  }
+  public set networkId(value: string) {
+    this._networkId = value;
+  }
+  public resetNetworkId() {
+    this._networkId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get networkIdInput() {
+    return this._networkId;
+  }
+
+  // security_group_ids - computed: false, optional: true, required: false
+  private _securityGroupIds?: string[]; 
+  public get securityGroupIds() {
+    return cdktf.Fn.tolist(this.getListAttribute('security_group_ids'));
+  }
+  public set securityGroupIds(value: string[]) {
+    this._securityGroupIds = value;
+  }
+  public resetSecurityGroupIds() {
+    this._securityGroupIds = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get securityGroupIdsInput() {
+    return this._securityGroupIds;
+  }
+
+  // subnet_ids - computed: false, optional: true, required: false
+  private _subnetIds?: string[]; 
+  public get subnetIds() {
+    return cdktf.Fn.tolist(this.getListAttribute('subnet_ids'));
+  }
+  public set subnetIds(value: string[]) {
+    this._subnetIds = value;
+  }
+  public resetSubnetIds() {
+    this._subnetIds = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdsInput() {
+    return this._subnetIds;
+  }
+
+  // dns_record - computed: false, optional: true, required: false
+  private _dnsRecord = new ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordList(this, "dns_record", false);
+  public get dnsRecord() {
+    return this._dnsRecord;
+  }
+  public putDnsRecord(value: ComputeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecord[] | cdktf.IResolvable) {
+    this._dnsRecord.internalValue = value;
+  }
+  public resetDnsRecord() {
+    this._dnsRecord.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dnsRecordInput() {
+    return this._dnsRecord.internalValue;
+  }
+
+  // ipv6_dns_record - computed: false, optional: true, required: false
+  private _ipv6DnsRecord = new ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordList(this, "ipv6_dns_record", false);
+  public get ipv6DnsRecord() {
+    return this._ipv6DnsRecord;
+  }
+  public putIpv6DnsRecord(value: ComputeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecord[] | cdktf.IResolvable) {
+    this._ipv6DnsRecord.internalValue = value;
+  }
+  public resetIpv6DnsRecord() {
+    this._ipv6DnsRecord.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipv6DnsRecordInput() {
+    return this._ipv6DnsRecord.internalValue;
+  }
+
+  // nat_dns_record - computed: false, optional: true, required: false
+  private _natDnsRecord = new ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecordList(this, "nat_dns_record", false);
+  public get natDnsRecord() {
+    return this._natDnsRecord;
+  }
+  public putNatDnsRecord(value: ComputeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecord[] | cdktf.IResolvable) {
+    this._natDnsRecord.internalValue = value;
+  }
+  public resetNatDnsRecord() {
+    this._natDnsRecord.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get natDnsRecordInput() {
+    return this._natDnsRecord.internalValue;
+  }
+}
+
+export class ComputeInstanceGroupInstanceTemplateNetworkInterfaceList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupInstanceTemplateNetworkInterface[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupInstanceTemplateNetworkInterfaceOutputReference {
+    return new ComputeInstanceGroupInstanceTemplateNetworkInterfaceOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupInstanceTemplateNetworkSettings {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#type ComputeInstanceGroup#type}
@@ -1351,6 +2395,86 @@ export function computeInstanceGroupInstanceTemplateNetworkSettingsToTerraform(s
   }
 }
 
+export class ComputeInstanceGroupInstanceTemplateNetworkSettingsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupInstanceTemplateNetworkSettings | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._type !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.type = this._type;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupInstanceTemplateNetworkSettings | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._type = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._type = value.type;
+    }
+  }
+
+  // type - computed: false, optional: true, required: false
+  private _type?: string; 
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+  public set type(value: string) {
+    this._type = value;
+  }
+  public resetType() {
+    this._type = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get typeInput() {
+    return this._type;
+  }
+}
+
+export class ComputeInstanceGroupInstanceTemplateNetworkSettingsList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupInstanceTemplateNetworkSettings[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupInstanceTemplateNetworkSettingsOutputReference {
+    return new ComputeInstanceGroupInstanceTemplateNetworkSettingsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupInstanceTemplatePlacementPolicy {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#placement_group_id ComputeInstanceGroup#placement_group_id}
@@ -1825,6 +2949,152 @@ export function computeInstanceGroupInstanceTemplateSecondaryDiskToTerraform(str
   }
 }
 
+export class ComputeInstanceGroupInstanceTemplateSecondaryDiskOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupInstanceTemplateSecondaryDisk | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._deviceName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.deviceName = this._deviceName;
+    }
+    if (this._diskId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.diskId = this._diskId;
+    }
+    if (this._mode !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.mode = this._mode;
+    }
+    if (this._initializeParams?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.initializeParams = this._initializeParams?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupInstanceTemplateSecondaryDisk | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._deviceName = undefined;
+      this._diskId = undefined;
+      this._mode = undefined;
+      this._initializeParams.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._deviceName = value.deviceName;
+      this._diskId = value.diskId;
+      this._mode = value.mode;
+      this._initializeParams.internalValue = value.initializeParams;
+    }
+  }
+
+  // device_name - computed: false, optional: true, required: false
+  private _deviceName?: string; 
+  public get deviceName() {
+    return this.getStringAttribute('device_name');
+  }
+  public set deviceName(value: string) {
+    this._deviceName = value;
+  }
+  public resetDeviceName() {
+    this._deviceName = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get deviceNameInput() {
+    return this._deviceName;
+  }
+
+  // disk_id - computed: false, optional: true, required: false
+  private _diskId?: string; 
+  public get diskId() {
+    return this.getStringAttribute('disk_id');
+  }
+  public set diskId(value: string) {
+    this._diskId = value;
+  }
+  public resetDiskId() {
+    this._diskId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get diskIdInput() {
+    return this._diskId;
+  }
+
+  // mode - computed: false, optional: true, required: false
+  private _mode?: string; 
+  public get mode() {
+    return this.getStringAttribute('mode');
+  }
+  public set mode(value: string) {
+    this._mode = value;
+  }
+  public resetMode() {
+    this._mode = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get modeInput() {
+    return this._mode;
+  }
+
+  // initialize_params - computed: false, optional: true, required: false
+  private _initializeParams = new ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParamsOutputReference(this, "initialize_params");
+  public get initializeParams() {
+    return this._initializeParams;
+  }
+  public putInitializeParams(value: ComputeInstanceGroupInstanceTemplateSecondaryDiskInitializeParams) {
+    this._initializeParams.internalValue = value;
+  }
+  public resetInitializeParams() {
+    this._initializeParams.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get initializeParamsInput() {
+    return this._initializeParams.internalValue;
+  }
+}
+
+export class ComputeInstanceGroupInstanceTemplateSecondaryDiskList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupInstanceTemplateSecondaryDisk[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupInstanceTemplateSecondaryDiskOutputReference {
+    return new ComputeInstanceGroupInstanceTemplateSecondaryDiskOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupInstanceTemplate {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#description ComputeInstanceGroup#description}
@@ -1967,13 +3237,13 @@ export class ComputeInstanceGroupInstanceTemplateOutputReference extends cdktf.C
       hasAnyValues = true;
       internalValueResult.bootDisk = this._bootDisk?.internalValue;
     }
-    if (this._networkInterface !== undefined) {
+    if (this._networkInterface?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.networkInterface = this._networkInterface;
+      internalValueResult.networkInterface = this._networkInterface?.internalValue;
     }
-    if (this._networkSettings !== undefined) {
+    if (this._networkSettings?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.networkSettings = this._networkSettings;
+      internalValueResult.networkSettings = this._networkSettings?.internalValue;
     }
     if (this._placementPolicy?.internalValue !== undefined) {
       hasAnyValues = true;
@@ -1987,9 +3257,9 @@ export class ComputeInstanceGroupInstanceTemplateOutputReference extends cdktf.C
       hasAnyValues = true;
       internalValueResult.schedulingPolicy = this._schedulingPolicy?.internalValue;
     }
-    if (this._secondaryDisk !== undefined) {
+    if (this._secondaryDisk?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.secondaryDisk = this._secondaryDisk;
+      internalValueResult.secondaryDisk = this._secondaryDisk?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -2005,12 +3275,12 @@ export class ComputeInstanceGroupInstanceTemplateOutputReference extends cdktf.C
       this._platformId = undefined;
       this._serviceAccountId = undefined;
       this._bootDisk.internalValue = undefined;
-      this._networkInterface = undefined;
-      this._networkSettings = undefined;
+      this._networkInterface.internalValue = undefined;
+      this._networkSettings.internalValue = undefined;
       this._placementPolicy.internalValue = undefined;
       this._resources.internalValue = undefined;
       this._schedulingPolicy.internalValue = undefined;
-      this._secondaryDisk = undefined;
+      this._secondaryDisk.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
@@ -2022,12 +3292,12 @@ export class ComputeInstanceGroupInstanceTemplateOutputReference extends cdktf.C
       this._platformId = value.platformId;
       this._serviceAccountId = value.serviceAccountId;
       this._bootDisk.internalValue = value.bootDisk;
-      this._networkInterface = value.networkInterface;
-      this._networkSettings = value.networkSettings;
+      this._networkInterface.internalValue = value.networkInterface;
+      this._networkSettings.internalValue = value.networkSettings;
       this._placementPolicy.internalValue = value.placementPolicy;
       this._resources.internalValue = value.resources;
       this._schedulingPolicy.internalValue = value.schedulingPolicy;
-      this._secondaryDisk = value.secondaryDisk;
+      this._secondaryDisk.internalValue = value.secondaryDisk;
     }
   }
 
@@ -2157,34 +3427,32 @@ export class ComputeInstanceGroupInstanceTemplateOutputReference extends cdktf.C
   }
 
   // network_interface - computed: false, optional: false, required: true
-  private _networkInterface?: ComputeInstanceGroupInstanceTemplateNetworkInterface[] | cdktf.IResolvable; 
+  private _networkInterface = new ComputeInstanceGroupInstanceTemplateNetworkInterfaceList(this, "network_interface", false);
   public get networkInterface() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('network_interface');
+    return this._networkInterface;
   }
-  public set networkInterface(value: ComputeInstanceGroupInstanceTemplateNetworkInterface[] | cdktf.IResolvable) {
-    this._networkInterface = value;
+  public putNetworkInterface(value: ComputeInstanceGroupInstanceTemplateNetworkInterface[] | cdktf.IResolvable) {
+    this._networkInterface.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get networkInterfaceInput() {
-    return this._networkInterface;
+    return this._networkInterface.internalValue;
   }
 
   // network_settings - computed: false, optional: true, required: false
-  private _networkSettings?: ComputeInstanceGroupInstanceTemplateNetworkSettings[] | cdktf.IResolvable; 
+  private _networkSettings = new ComputeInstanceGroupInstanceTemplateNetworkSettingsList(this, "network_settings", false);
   public get networkSettings() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('network_settings');
+    return this._networkSettings;
   }
-  public set networkSettings(value: ComputeInstanceGroupInstanceTemplateNetworkSettings[] | cdktf.IResolvable) {
-    this._networkSettings = value;
+  public putNetworkSettings(value: ComputeInstanceGroupInstanceTemplateNetworkSettings[] | cdktf.IResolvable) {
+    this._networkSettings.internalValue = value;
   }
   public resetNetworkSettings() {
-    this._networkSettings = undefined;
+    this._networkSettings.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get networkSettingsInput() {
-    return this._networkSettings;
+    return this._networkSettings.internalValue;
   }
 
   // placement_policy - computed: false, optional: true, required: false
@@ -2233,20 +3501,19 @@ export class ComputeInstanceGroupInstanceTemplateOutputReference extends cdktf.C
   }
 
   // secondary_disk - computed: false, optional: true, required: false
-  private _secondaryDisk?: ComputeInstanceGroupInstanceTemplateSecondaryDisk[] | cdktf.IResolvable; 
+  private _secondaryDisk = new ComputeInstanceGroupInstanceTemplateSecondaryDiskList(this, "secondary_disk", false);
   public get secondaryDisk() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('secondary_disk');
+    return this._secondaryDisk;
   }
-  public set secondaryDisk(value: ComputeInstanceGroupInstanceTemplateSecondaryDisk[] | cdktf.IResolvable) {
-    this._secondaryDisk = value;
+  public putSecondaryDisk(value: ComputeInstanceGroupInstanceTemplateSecondaryDisk[] | cdktf.IResolvable) {
+    this._secondaryDisk.internalValue = value;
   }
   public resetSecondaryDisk() {
-    this._secondaryDisk = undefined;
+    this._secondaryDisk.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get secondaryDiskInput() {
-    return this._secondaryDisk;
+    return this._secondaryDisk.internalValue;
   }
 }
 export interface ComputeInstanceGroupLoadBalancer {
@@ -2452,6 +3719,206 @@ export function computeInstanceGroupScalePolicyAutoScaleCustomRuleToTerraform(st
   }
 }
 
+export class ComputeInstanceGroupScalePolicyAutoScaleCustomRuleOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupScalePolicyAutoScaleCustomRule | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._folderId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.folderId = this._folderId;
+    }
+    if (this._labels !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.labels = this._labels;
+    }
+    if (this._metricName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.metricName = this._metricName;
+    }
+    if (this._metricType !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.metricType = this._metricType;
+    }
+    if (this._ruleType !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ruleType = this._ruleType;
+    }
+    if (this._service !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.service = this._service;
+    }
+    if (this._target !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.target = this._target;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupScalePolicyAutoScaleCustomRule | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._folderId = undefined;
+      this._labels = undefined;
+      this._metricName = undefined;
+      this._metricType = undefined;
+      this._ruleType = undefined;
+      this._service = undefined;
+      this._target = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._folderId = value.folderId;
+      this._labels = value.labels;
+      this._metricName = value.metricName;
+      this._metricType = value.metricType;
+      this._ruleType = value.ruleType;
+      this._service = value.service;
+      this._target = value.target;
+    }
+  }
+
+  // folder_id - computed: false, optional: true, required: false
+  private _folderId?: string; 
+  public get folderId() {
+    return this.getStringAttribute('folder_id');
+  }
+  public set folderId(value: string) {
+    this._folderId = value;
+  }
+  public resetFolderId() {
+    this._folderId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get folderIdInput() {
+    return this._folderId;
+  }
+
+  // labels - computed: false, optional: true, required: false
+  private _labels?: { [key: string]: string }; 
+  public get labels() {
+    return this.getStringMapAttribute('labels');
+  }
+  public set labels(value: { [key: string]: string }) {
+    this._labels = value;
+  }
+  public resetLabels() {
+    this._labels = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get labelsInput() {
+    return this._labels;
+  }
+
+  // metric_name - computed: false, optional: false, required: true
+  private _metricName?: string; 
+  public get metricName() {
+    return this.getStringAttribute('metric_name');
+  }
+  public set metricName(value: string) {
+    this._metricName = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get metricNameInput() {
+    return this._metricName;
+  }
+
+  // metric_type - computed: false, optional: false, required: true
+  private _metricType?: string; 
+  public get metricType() {
+    return this.getStringAttribute('metric_type');
+  }
+  public set metricType(value: string) {
+    this._metricType = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get metricTypeInput() {
+    return this._metricType;
+  }
+
+  // rule_type - computed: false, optional: false, required: true
+  private _ruleType?: string; 
+  public get ruleType() {
+    return this.getStringAttribute('rule_type');
+  }
+  public set ruleType(value: string) {
+    this._ruleType = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ruleTypeInput() {
+    return this._ruleType;
+  }
+
+  // service - computed: false, optional: true, required: false
+  private _service?: string; 
+  public get service() {
+    return this.getStringAttribute('service');
+  }
+  public set service(value: string) {
+    this._service = value;
+  }
+  public resetService() {
+    this._service = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get serviceInput() {
+    return this._service;
+  }
+
+  // target - computed: false, optional: false, required: true
+  private _target?: number; 
+  public get target() {
+    return this.getNumberAttribute('target');
+  }
+  public set target(value: number) {
+    this._target = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get targetInput() {
+    return this._target;
+  }
+}
+
+export class ComputeInstanceGroupScalePolicyAutoScaleCustomRuleList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupScalePolicyAutoScaleCustomRule[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupScalePolicyAutoScaleCustomRuleOutputReference {
+    return new ComputeInstanceGroupScalePolicyAutoScaleCustomRuleOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupScalePolicyAutoScale {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#cpu_utilization_target ComputeInstanceGroup#cpu_utilization_target}
@@ -2548,9 +4015,9 @@ export class ComputeInstanceGroupScalePolicyAutoScaleOutputReference extends cdk
       hasAnyValues = true;
       internalValueResult.warmupDuration = this._warmupDuration;
     }
-    if (this._customRule !== undefined) {
+    if (this._customRule?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.customRule = this._customRule;
+      internalValueResult.customRule = this._customRule?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -2565,7 +4032,7 @@ export class ComputeInstanceGroupScalePolicyAutoScaleOutputReference extends cdk
       this._minZoneSize = undefined;
       this._stabilizationDuration = undefined;
       this._warmupDuration = undefined;
-      this._customRule = undefined;
+      this._customRule.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
@@ -2576,7 +4043,7 @@ export class ComputeInstanceGroupScalePolicyAutoScaleOutputReference extends cdk
       this._minZoneSize = value.minZoneSize;
       this._stabilizationDuration = value.stabilizationDuration;
       this._warmupDuration = value.warmupDuration;
-      this._customRule = value.customRule;
+      this._customRule.internalValue = value.customRule;
     }
   }
 
@@ -2687,20 +4154,19 @@ export class ComputeInstanceGroupScalePolicyAutoScaleOutputReference extends cdk
   }
 
   // custom_rule - computed: false, optional: true, required: false
-  private _customRule?: ComputeInstanceGroupScalePolicyAutoScaleCustomRule[] | cdktf.IResolvable; 
+  private _customRule = new ComputeInstanceGroupScalePolicyAutoScaleCustomRuleList(this, "custom_rule", false);
   public get customRule() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('custom_rule');
+    return this._customRule;
   }
-  public set customRule(value: ComputeInstanceGroupScalePolicyAutoScaleCustomRule[] | cdktf.IResolvable) {
-    this._customRule = value;
+  public putCustomRule(value: ComputeInstanceGroupScalePolicyAutoScaleCustomRule[] | cdktf.IResolvable) {
+    this._customRule.internalValue = value;
   }
   public resetCustomRule() {
-    this._customRule = undefined;
+    this._customRule.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get customRuleInput() {
-    return this._customRule;
+    return this._customRule.internalValue;
   }
 }
 export interface ComputeInstanceGroupScalePolicyFixedScale {
@@ -2812,6 +4278,206 @@ export function computeInstanceGroupScalePolicyTestAutoScaleCustomRuleToTerrafor
   }
 }
 
+export class ComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._folderId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.folderId = this._folderId;
+    }
+    if (this._labels !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.labels = this._labels;
+    }
+    if (this._metricName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.metricName = this._metricName;
+    }
+    if (this._metricType !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.metricType = this._metricType;
+    }
+    if (this._ruleType !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ruleType = this._ruleType;
+    }
+    if (this._service !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.service = this._service;
+    }
+    if (this._target !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.target = this._target;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._folderId = undefined;
+      this._labels = undefined;
+      this._metricName = undefined;
+      this._metricType = undefined;
+      this._ruleType = undefined;
+      this._service = undefined;
+      this._target = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._folderId = value.folderId;
+      this._labels = value.labels;
+      this._metricName = value.metricName;
+      this._metricType = value.metricType;
+      this._ruleType = value.ruleType;
+      this._service = value.service;
+      this._target = value.target;
+    }
+  }
+
+  // folder_id - computed: false, optional: true, required: false
+  private _folderId?: string; 
+  public get folderId() {
+    return this.getStringAttribute('folder_id');
+  }
+  public set folderId(value: string) {
+    this._folderId = value;
+  }
+  public resetFolderId() {
+    this._folderId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get folderIdInput() {
+    return this._folderId;
+  }
+
+  // labels - computed: false, optional: true, required: false
+  private _labels?: { [key: string]: string }; 
+  public get labels() {
+    return this.getStringMapAttribute('labels');
+  }
+  public set labels(value: { [key: string]: string }) {
+    this._labels = value;
+  }
+  public resetLabels() {
+    this._labels = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get labelsInput() {
+    return this._labels;
+  }
+
+  // metric_name - computed: false, optional: false, required: true
+  private _metricName?: string; 
+  public get metricName() {
+    return this.getStringAttribute('metric_name');
+  }
+  public set metricName(value: string) {
+    this._metricName = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get metricNameInput() {
+    return this._metricName;
+  }
+
+  // metric_type - computed: false, optional: false, required: true
+  private _metricType?: string; 
+  public get metricType() {
+    return this.getStringAttribute('metric_type');
+  }
+  public set metricType(value: string) {
+    this._metricType = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get metricTypeInput() {
+    return this._metricType;
+  }
+
+  // rule_type - computed: false, optional: false, required: true
+  private _ruleType?: string; 
+  public get ruleType() {
+    return this.getStringAttribute('rule_type');
+  }
+  public set ruleType(value: string) {
+    this._ruleType = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ruleTypeInput() {
+    return this._ruleType;
+  }
+
+  // service - computed: false, optional: true, required: false
+  private _service?: string; 
+  public get service() {
+    return this.getStringAttribute('service');
+  }
+  public set service(value: string) {
+    this._service = value;
+  }
+  public resetService() {
+    this._service = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get serviceInput() {
+    return this._service;
+  }
+
+  // target - computed: false, optional: false, required: true
+  private _target?: number; 
+  public get target() {
+    return this.getNumberAttribute('target');
+  }
+  public set target(value: number) {
+    this._target = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get targetInput() {
+    return this._target;
+  }
+}
+
+export class ComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleOutputReference {
+    return new ComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface ComputeInstanceGroupScalePolicyTestAutoScale {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance_group#cpu_utilization_target ComputeInstanceGroup#cpu_utilization_target}
@@ -2908,9 +4574,9 @@ export class ComputeInstanceGroupScalePolicyTestAutoScaleOutputReference extends
       hasAnyValues = true;
       internalValueResult.warmupDuration = this._warmupDuration;
     }
-    if (this._customRule !== undefined) {
+    if (this._customRule?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.customRule = this._customRule;
+      internalValueResult.customRule = this._customRule?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -2925,7 +4591,7 @@ export class ComputeInstanceGroupScalePolicyTestAutoScaleOutputReference extends
       this._minZoneSize = undefined;
       this._stabilizationDuration = undefined;
       this._warmupDuration = undefined;
-      this._customRule = undefined;
+      this._customRule.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
@@ -2936,7 +4602,7 @@ export class ComputeInstanceGroupScalePolicyTestAutoScaleOutputReference extends
       this._minZoneSize = value.minZoneSize;
       this._stabilizationDuration = value.stabilizationDuration;
       this._warmupDuration = value.warmupDuration;
-      this._customRule = value.customRule;
+      this._customRule.internalValue = value.customRule;
     }
   }
 
@@ -3047,20 +4713,19 @@ export class ComputeInstanceGroupScalePolicyTestAutoScaleOutputReference extends
   }
 
   // custom_rule - computed: false, optional: true, required: false
-  private _customRule?: ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule[] | cdktf.IResolvable; 
+  private _customRule = new ComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleList(this, "custom_rule", false);
   public get customRule() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('custom_rule');
+    return this._customRule;
   }
-  public set customRule(value: ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule[] | cdktf.IResolvable) {
-    this._customRule = value;
+  public putCustomRule(value: ComputeInstanceGroupScalePolicyTestAutoScaleCustomRule[] | cdktf.IResolvable) {
+    this._customRule.internalValue = value;
   }
   public resetCustomRule() {
-    this._customRule = undefined;
+    this._customRule.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get customRuleInput() {
-    return this._customRule;
+    return this._customRule.internalValue;
   }
 }
 export interface ComputeInstanceGroupScalePolicy {
@@ -3217,6 +4882,7 @@ export function computeInstanceGroupTimeoutsToTerraform(struct?: ComputeInstance
 
 export class ComputeInstanceGroupTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -3226,7 +4892,10 @@ export class ComputeInstanceGroupTimeoutsOutputReference extends cdktf.ComplexOb
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): ComputeInstanceGroupTimeouts | undefined {
+  public get internalValue(): ComputeInstanceGroupTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -3244,15 +4913,21 @@ export class ComputeInstanceGroupTimeoutsOutputReference extends cdktf.ComplexOb
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: ComputeInstanceGroupTimeouts | undefined) {
+  public set internalValue(value: ComputeInstanceGroupTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -3345,6 +5020,7 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
     this._deletionProtection = config.deletionProtection;
     this._description = config.description;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._maxCheckingHealthDuration = config.maxCheckingHealthDuration;
     this._name = config.name;
@@ -3353,7 +5029,7 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
     this._allocationPolicy.internalValue = config.allocationPolicy;
     this._applicationLoadBalancer.internalValue = config.applicationLoadBalancer;
     this._deployPolicy.internalValue = config.deployPolicy;
-    this._healthCheck = config.healthCheck;
+    this._healthCheck.internalValue = config.healthCheck;
     this._instanceTemplate.internalValue = config.instanceTemplate;
     this._loadBalancer.internalValue = config.loadBalancer;
     this._scalePolicy.internalValue = config.scalePolicy;
@@ -3418,8 +5094,19 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // instances - computed: true, optional: false, required: false
@@ -3553,20 +5240,19 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
   }
 
   // health_check - computed: false, optional: true, required: false
-  private _healthCheck?: ComputeInstanceGroupHealthCheck[] | cdktf.IResolvable; 
+  private _healthCheck = new ComputeInstanceGroupHealthCheckList(this, "health_check", false);
   public get healthCheck() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('health_check');
+    return this._healthCheck;
   }
-  public set healthCheck(value: ComputeInstanceGroupHealthCheck[] | cdktf.IResolvable) {
-    this._healthCheck = value;
+  public putHealthCheck(value: ComputeInstanceGroupHealthCheck[] | cdktf.IResolvable) {
+    this._healthCheck.internalValue = value;
   }
   public resetHealthCheck() {
-    this._healthCheck = undefined;
+    this._healthCheck.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get healthCheckInput() {
-    return this._healthCheck;
+    return this._healthCheck.internalValue;
   }
 
   // instance_template - computed: false, optional: false, required: true
@@ -3636,6 +5322,7 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
       deletion_protection: cdktf.booleanToTerraform(this._deletionProtection),
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       max_checking_health_duration: cdktf.numberToTerraform(this._maxCheckingHealthDuration),
       name: cdktf.stringToTerraform(this._name),
@@ -3644,7 +5331,7 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
       allocation_policy: computeInstanceGroupAllocationPolicyToTerraform(this._allocationPolicy.internalValue),
       application_load_balancer: computeInstanceGroupApplicationLoadBalancerToTerraform(this._applicationLoadBalancer.internalValue),
       deploy_policy: computeInstanceGroupDeployPolicyToTerraform(this._deployPolicy.internalValue),
-      health_check: cdktf.listMapper(computeInstanceGroupHealthCheckToTerraform)(this._healthCheck),
+      health_check: cdktf.listMapper(computeInstanceGroupHealthCheckToTerraform)(this._healthCheck.internalValue),
       instance_template: computeInstanceGroupInstanceTemplateToTerraform(this._instanceTemplate.internalValue),
       load_balancer: computeInstanceGroupLoadBalancerToTerraform(this._loadBalancer.internalValue),
       scale_policy: computeInstanceGroupScalePolicyToTerraform(this._scalePolicy.internalValue),

@@ -24,6 +24,13 @@ export interface KubernetesClusterConfig extends cdktf.TerraformMetaArguments {
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_cluster#id KubernetesCluster#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_cluster#labels KubernetesCluster#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -259,6 +266,124 @@ export function kubernetesClusterMasterMaintenancePolicyMaintenanceWindowToTerra
   }
 }
 
+export class KubernetesClusterMasterMaintenancePolicyMaintenanceWindowOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): KubernetesClusterMasterMaintenancePolicyMaintenanceWindow | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._day !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.day = this._day;
+    }
+    if (this._duration !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.duration = this._duration;
+    }
+    if (this._startTime !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.startTime = this._startTime;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: KubernetesClusterMasterMaintenancePolicyMaintenanceWindow | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._day = undefined;
+      this._duration = undefined;
+      this._startTime = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._day = value.day;
+      this._duration = value.duration;
+      this._startTime = value.startTime;
+    }
+  }
+
+  // day - computed: true, optional: true, required: false
+  private _day?: string; 
+  public get day() {
+    return this.getStringAttribute('day');
+  }
+  public set day(value: string) {
+    this._day = value;
+  }
+  public resetDay() {
+    this._day = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dayInput() {
+    return this._day;
+  }
+
+  // duration - computed: false, optional: false, required: true
+  private _duration?: string; 
+  public get duration() {
+    return this.getStringAttribute('duration');
+  }
+  public set duration(value: string) {
+    this._duration = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get durationInput() {
+    return this._duration;
+  }
+
+  // start_time - computed: false, optional: false, required: true
+  private _startTime?: string; 
+  public get startTime() {
+    return this.getStringAttribute('start_time');
+  }
+  public set startTime(value: string) {
+    this._startTime = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get startTimeInput() {
+    return this._startTime;
+  }
+}
+
+export class KubernetesClusterMasterMaintenancePolicyMaintenanceWindowList extends cdktf.ComplexList {
+  public internalValue? : KubernetesClusterMasterMaintenancePolicyMaintenanceWindow[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): KubernetesClusterMasterMaintenancePolicyMaintenanceWindowOutputReference {
+    return new KubernetesClusterMasterMaintenancePolicyMaintenanceWindowOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface KubernetesClusterMasterMaintenancePolicy {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_cluster#auto_upgrade KubernetesCluster#auto_upgrade}
@@ -301,9 +426,9 @@ export class KubernetesClusterMasterMaintenancePolicyOutputReference extends cdk
       hasAnyValues = true;
       internalValueResult.autoUpgrade = this._autoUpgrade;
     }
-    if (this._maintenanceWindow !== undefined) {
+    if (this._maintenanceWindow?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.maintenanceWindow = this._maintenanceWindow;
+      internalValueResult.maintenanceWindow = this._maintenanceWindow?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -312,12 +437,12 @@ export class KubernetesClusterMasterMaintenancePolicyOutputReference extends cdk
     if (value === undefined) {
       this.isEmptyObject = false;
       this._autoUpgrade = undefined;
-      this._maintenanceWindow = undefined;
+      this._maintenanceWindow.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._autoUpgrade = value.autoUpgrade;
-      this._maintenanceWindow = value.maintenanceWindow;
+      this._maintenanceWindow.internalValue = value.maintenanceWindow;
     }
   }
 
@@ -335,20 +460,19 @@ export class KubernetesClusterMasterMaintenancePolicyOutputReference extends cdk
   }
 
   // maintenance_window - computed: false, optional: true, required: false
-  private _maintenanceWindow?: KubernetesClusterMasterMaintenancePolicyMaintenanceWindow[] | cdktf.IResolvable; 
+  private _maintenanceWindow = new KubernetesClusterMasterMaintenancePolicyMaintenanceWindowList(this, "maintenance_window", true);
   public get maintenanceWindow() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('maintenance_window')));
+    return this._maintenanceWindow;
   }
-  public set maintenanceWindow(value: KubernetesClusterMasterMaintenancePolicyMaintenanceWindow[] | cdktf.IResolvable) {
-    this._maintenanceWindow = value;
+  public putMaintenanceWindow(value: KubernetesClusterMasterMaintenancePolicyMaintenanceWindow[] | cdktf.IResolvable) {
+    this._maintenanceWindow.internalValue = value;
   }
   public resetMaintenanceWindow() {
-    this._maintenanceWindow = undefined;
+    this._maintenanceWindow.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get maintenanceWindowInput() {
-    return this._maintenanceWindow;
+    return this._maintenanceWindow.internalValue;
   }
 }
 export interface KubernetesClusterMasterRegionalLocation {
@@ -373,6 +497,108 @@ export function kubernetesClusterMasterRegionalLocationToTerraform(struct?: Kube
   }
 }
 
+export class KubernetesClusterMasterRegionalLocationOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): KubernetesClusterMasterRegionalLocation | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._subnetId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetId = this._subnetId;
+    }
+    if (this._zone !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.zone = this._zone;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: KubernetesClusterMasterRegionalLocation | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._subnetId = undefined;
+      this._zone = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._subnetId = value.subnetId;
+      this._zone = value.zone;
+    }
+  }
+
+  // subnet_id - computed: false, optional: true, required: false
+  private _subnetId?: string; 
+  public get subnetId() {
+    return this.getStringAttribute('subnet_id');
+  }
+  public set subnetId(value: string) {
+    this._subnetId = value;
+  }
+  public resetSubnetId() {
+    this._subnetId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdInput() {
+    return this._subnetId;
+  }
+
+  // zone - computed: false, optional: true, required: false
+  private _zone?: string; 
+  public get zone() {
+    return this.getStringAttribute('zone');
+  }
+  public set zone(value: string) {
+    this._zone = value;
+  }
+  public resetZone() {
+    this._zone = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get zoneInput() {
+    return this._zone;
+  }
+}
+
+export class KubernetesClusterMasterRegionalLocationList extends cdktf.ComplexList {
+  public internalValue? : KubernetesClusterMasterRegionalLocation[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): KubernetesClusterMasterRegionalLocationOutputReference {
+    return new KubernetesClusterMasterRegionalLocationOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface KubernetesClusterMasterRegional {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_cluster#region KubernetesCluster#region}
@@ -415,9 +641,9 @@ export class KubernetesClusterMasterRegionalOutputReference extends cdktf.Comple
       hasAnyValues = true;
       internalValueResult.region = this._region;
     }
-    if (this._location !== undefined) {
+    if (this._location?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.location = this._location;
+      internalValueResult.location = this._location?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -426,12 +652,12 @@ export class KubernetesClusterMasterRegionalOutputReference extends cdktf.Comple
     if (value === undefined) {
       this.isEmptyObject = false;
       this._region = undefined;
-      this._location = undefined;
+      this._location.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._region = value.region;
-      this._location = value.location;
+      this._location.internalValue = value.location;
     }
   }
 
@@ -449,20 +675,19 @@ export class KubernetesClusterMasterRegionalOutputReference extends cdktf.Comple
   }
 
   // location - computed: false, optional: true, required: false
-  private _location?: KubernetesClusterMasterRegionalLocation[] | cdktf.IResolvable; 
+  private _location = new KubernetesClusterMasterRegionalLocationList(this, "location", false);
   public get location() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('location');
+    return this._location;
   }
-  public set location(value: KubernetesClusterMasterRegionalLocation[] | cdktf.IResolvable) {
-    this._location = value;
+  public putLocation(value: KubernetesClusterMasterRegionalLocation[] | cdktf.IResolvable) {
+    this._location.internalValue = value;
   }
   public resetLocation() {
-    this._location = undefined;
+    this._location.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get locationInput() {
-    return this._location;
+    return this._location.internalValue;
   }
 }
 export interface KubernetesClusterMasterZonal {
@@ -630,6 +855,18 @@ export class KubernetesClusterMasterOutputReference extends cdktf.ComplexObject 
     if (this._version !== undefined) {
       hasAnyValues = true;
       internalValueResult.version = this._version;
+    }
+    if (this._maintenancePolicy?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.maintenancePolicy = this._maintenancePolicy?.internalValue;
+    }
+    if (this._regional?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.regional = this._regional?.internalValue;
+    }
+    if (this._zonal?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.zonal = this._zonal?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -921,6 +1158,7 @@ export function kubernetesClusterTimeoutsToTerraform(struct?: KubernetesClusterT
 
 export class KubernetesClusterTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -930,7 +1168,10 @@ export class KubernetesClusterTimeoutsOutputReference extends cdktf.ComplexObjec
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): KubernetesClusterTimeouts | undefined {
+  public get internalValue(): KubernetesClusterTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -952,16 +1193,22 @@ export class KubernetesClusterTimeoutsOutputReference extends cdktf.ComplexObjec
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: KubernetesClusterTimeouts | undefined) {
+  public set internalValue(value: KubernetesClusterTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._read = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._read = value.read;
@@ -1072,6 +1319,7 @@ export class KubernetesCluster extends cdktf.TerraformResource {
     this._clusterIpv6Range = config.clusterIpv6Range;
     this._description = config.description;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._networkId = config.networkId;
@@ -1167,8 +1415,19 @@ export class KubernetesCluster extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: true, optional: true, required: false
@@ -1403,6 +1662,7 @@ export class KubernetesCluster extends cdktf.TerraformResource {
       cluster_ipv6_range: cdktf.stringToTerraform(this._clusterIpv6Range),
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),

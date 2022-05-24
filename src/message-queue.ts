@@ -24,6 +24,13 @@ export interface MessageQueueConfig extends cdktf.TerraformMetaArguments {
   */
   readonly fifoQueue?: boolean | cdktf.IResolvable;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/message_queue#id MessageQueue#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/message_queue#max_message_size MessageQueue#max_message_size}
   */
   readonly maxMessageSize?: number;
@@ -95,6 +102,7 @@ export class MessageQueue extends cdktf.TerraformResource {
     this._contentBasedDeduplication = config.contentBasedDeduplication;
     this._delaySeconds = config.delaySeconds;
     this._fifoQueue = config.fifoQueue;
+    this._id = config.id;
     this._maxMessageSize = config.maxMessageSize;
     this._messageRetentionSeconds = config.messageRetentionSeconds;
     this._name = config.name;
@@ -179,8 +187,19 @@ export class MessageQueue extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // max_message_size - computed: false, optional: true, required: false
@@ -321,6 +340,7 @@ export class MessageQueue extends cdktf.TerraformResource {
       content_based_deduplication: cdktf.booleanToTerraform(this._contentBasedDeduplication),
       delay_seconds: cdktf.numberToTerraform(this._delaySeconds),
       fifo_queue: cdktf.booleanToTerraform(this._fifoQueue),
+      id: cdktf.stringToTerraform(this._id),
       max_message_size: cdktf.numberToTerraform(this._maxMessageSize),
       message_retention_seconds: cdktf.numberToTerraform(this._messageRetentionSeconds),
       name: cdktf.stringToTerraform(this._name),

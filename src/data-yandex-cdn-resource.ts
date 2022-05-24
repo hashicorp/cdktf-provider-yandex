@@ -16,6 +16,13 @@ export interface DataYandexCdnResourceConfig extends cdktf.TerraformMetaArgument
   */
   readonly cname?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/cdn_resource#id DataYandexCdnResource#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/cdn_resource#origin_group_id DataYandexCdnResource#origin_group_id}
   */
   readonly originGroupId?: number;
@@ -815,6 +822,7 @@ export class DataYandexCdnResource extends cdktf.TerraformDataSource {
     });
     this._active = config.active;
     this._cname = config.cname;
+    this._id = config.id;
     this._originGroupId = config.originGroupId;
     this._originGroupName = config.originGroupName;
     this._originProtocol = config.originProtocol;
@@ -872,8 +880,19 @@ export class DataYandexCdnResource extends cdktf.TerraformDataSource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // origin_group_id - computed: false, optional: true, required: false
@@ -1012,6 +1031,7 @@ export class DataYandexCdnResource extends cdktf.TerraformDataSource {
     return {
       active: cdktf.booleanToTerraform(this._active),
       cname: cdktf.stringToTerraform(this._cname),
+      id: cdktf.stringToTerraform(this._id),
       origin_group_id: cdktf.numberToTerraform(this._originGroupId),
       origin_group_name: cdktf.stringToTerraform(this._originGroupName),
       origin_protocol: cdktf.stringToTerraform(this._originProtocol),

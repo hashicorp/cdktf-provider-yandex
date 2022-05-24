@@ -36,6 +36,13 @@ export interface MdbClickhouseClusterConfig extends cdktf.TerraformMetaArguments
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#id MdbClickhouseCluster#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#labels MdbClickhouseCluster#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -411,6 +418,121 @@ export function mdbClickhouseClusterClickhouseConfigCompressionToTerraform(struc
   }
 }
 
+export class MdbClickhouseClusterClickhouseConfigCompressionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterClickhouseConfigCompression | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._method !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.method = this._method;
+    }
+    if (this._minPartSize !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.minPartSize = this._minPartSize;
+    }
+    if (this._minPartSizeRatio !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.minPartSizeRatio = this._minPartSizeRatio;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterClickhouseConfigCompression | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._method = undefined;
+      this._minPartSize = undefined;
+      this._minPartSizeRatio = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._method = value.method;
+      this._minPartSize = value.minPartSize;
+      this._minPartSizeRatio = value.minPartSizeRatio;
+    }
+  }
+
+  // method - computed: false, optional: false, required: true
+  private _method?: string; 
+  public get method() {
+    return this.getStringAttribute('method');
+  }
+  public set method(value: string) {
+    this._method = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get methodInput() {
+    return this._method;
+  }
+
+  // min_part_size - computed: false, optional: false, required: true
+  private _minPartSize?: number; 
+  public get minPartSize() {
+    return this.getNumberAttribute('min_part_size');
+  }
+  public set minPartSize(value: number) {
+    this._minPartSize = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get minPartSizeInput() {
+    return this._minPartSize;
+  }
+
+  // min_part_size_ratio - computed: false, optional: false, required: true
+  private _minPartSizeRatio?: number; 
+  public get minPartSizeRatio() {
+    return this.getNumberAttribute('min_part_size_ratio');
+  }
+  public set minPartSizeRatio(value: number) {
+    this._minPartSizeRatio = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get minPartSizeRatioInput() {
+    return this._minPartSizeRatio;
+  }
+}
+
+export class MdbClickhouseClusterClickhouseConfigCompressionList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterClickhouseConfigCompression[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterClickhouseConfigCompressionOutputReference {
+    return new MdbClickhouseClusterClickhouseConfigCompressionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#age MdbClickhouseCluster#age}
@@ -433,6 +555,102 @@ export function mdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetenti
   }
 }
 
+export class MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._age !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.age = this._age;
+    }
+    if (this._precision !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.precision = this._precision;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._age = undefined;
+      this._precision = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._age = value.age;
+      this._precision = value.precision;
+    }
+  }
+
+  // age - computed: false, optional: false, required: true
+  private _age?: number; 
+  public get age() {
+    return this.getNumberAttribute('age');
+  }
+  public set age(value: number) {
+    this._age = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ageInput() {
+    return this._age;
+  }
+
+  // precision - computed: false, optional: false, required: true
+  private _precision?: number; 
+  public get precision() {
+    return this.getNumberAttribute('precision');
+  }
+  public set precision(value: number) {
+    this._precision = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get precisionInput() {
+    return this._precision;
+  }
+}
+
+export class MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionOutputReference {
+    return new MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#function MdbClickhouseCluster#function}
@@ -462,6 +680,127 @@ export function mdbClickhouseClusterClickhouseConfigGraphiteRollupPatternToTerra
   }
 }
 
+export class MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._function !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.function = this._function;
+    }
+    if (this._regexp !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.regexp = this._regexp;
+    }
+    if (this._retention?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.retention = this._retention?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._function = undefined;
+      this._regexp = undefined;
+      this._retention.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._function = value.function;
+      this._regexp = value.regexp;
+      this._retention.internalValue = value.retention;
+    }
+  }
+
+  // function - computed: false, optional: false, required: true
+  private _function?: string; 
+  public get function() {
+    return this.getStringAttribute('function');
+  }
+  public set function(value: string) {
+    this._function = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get functionInput() {
+    return this._function;
+  }
+
+  // regexp - computed: true, optional: true, required: false
+  private _regexp?: string; 
+  public get regexp() {
+    return this.getStringAttribute('regexp');
+  }
+  public set regexp(value: string) {
+    this._regexp = value;
+  }
+  public resetRegexp() {
+    this._regexp = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get regexpInput() {
+    return this._regexp;
+  }
+
+  // retention - computed: false, optional: true, required: false
+  private _retention = new MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionList(this, "retention", false);
+  public get retention() {
+    return this._retention;
+  }
+  public putRetention(value: MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetention[] | cdktf.IResolvable) {
+    this._retention.internalValue = value;
+  }
+  public resetRetention() {
+    this._retention.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get retentionInput() {
+    return this._retention.internalValue;
+  }
+}
+
+export class MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternOutputReference {
+    return new MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterClickhouseConfigGraphiteRollup {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#name MdbClickhouseCluster#name}
@@ -486,6 +825,105 @@ export function mdbClickhouseClusterClickhouseConfigGraphiteRollupToTerraform(st
   }
 }
 
+export class MdbClickhouseClusterClickhouseConfigGraphiteRollupOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterClickhouseConfigGraphiteRollup | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._pattern?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.pattern = this._pattern?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterClickhouseConfigGraphiteRollup | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._pattern.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._pattern.internalValue = value.pattern;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // pattern - computed: false, optional: true, required: false
+  private _pattern = new MdbClickhouseClusterClickhouseConfigGraphiteRollupPatternList(this, "pattern", false);
+  public get pattern() {
+    return this._pattern;
+  }
+  public putPattern(value: MdbClickhouseClusterClickhouseConfigGraphiteRollupPattern[] | cdktf.IResolvable) {
+    this._pattern.internalValue = value;
+  }
+  public resetPattern() {
+    this._pattern.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get patternInput() {
+    return this._pattern.internalValue;
+  }
+}
+
+export class MdbClickhouseClusterClickhouseConfigGraphiteRollupList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterClickhouseConfigGraphiteRollup[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterClickhouseConfigGraphiteRollupOutputReference {
+    return new MdbClickhouseClusterClickhouseConfigGraphiteRollupOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterClickhouseConfigKafka {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#sasl_mechanism MdbClickhouseCluster#sasl_mechanism}
@@ -802,6 +1240,105 @@ export function mdbClickhouseClusterClickhouseConfigKafkaTopicToTerraform(struct
   }
 }
 
+export class MdbClickhouseClusterClickhouseConfigKafkaTopicOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterClickhouseConfigKafkaTopic | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._settings?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.settings = this._settings?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterClickhouseConfigKafkaTopic | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._settings.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._settings.internalValue = value.settings;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // settings - computed: false, optional: true, required: false
+  private _settings = new MdbClickhouseClusterClickhouseConfigKafkaTopicSettingsOutputReference(this, "settings");
+  public get settings() {
+    return this._settings;
+  }
+  public putSettings(value: MdbClickhouseClusterClickhouseConfigKafkaTopicSettings) {
+    this._settings.internalValue = value;
+  }
+  public resetSettings() {
+    this._settings.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get settingsInput() {
+    return this._settings.internalValue;
+  }
+}
+
+export class MdbClickhouseClusterClickhouseConfigKafkaTopicList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterClickhouseConfigKafkaTopic[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterClickhouseConfigKafkaTopicOutputReference {
+    return new MdbClickhouseClusterClickhouseConfigKafkaTopicOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterClickhouseConfigMergeTree {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#max_bytes_to_merge_at_min_space_in_pool MdbClickhouseCluster#max_bytes_to_merge_at_min_space_in_pool}
@@ -1450,21 +1987,21 @@ export class MdbClickhouseClusterClickhouseConfigOutputReference extends cdktf.C
       hasAnyValues = true;
       internalValueResult.uncompressedCacheSize = this._uncompressedCacheSize;
     }
-    if (this._compression !== undefined) {
+    if (this._compression?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.compression = this._compression;
+      internalValueResult.compression = this._compression?.internalValue;
     }
-    if (this._graphiteRollup !== undefined) {
+    if (this._graphiteRollup?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.graphiteRollup = this._graphiteRollup;
+      internalValueResult.graphiteRollup = this._graphiteRollup?.internalValue;
     }
     if (this._kafka?.internalValue !== undefined) {
       hasAnyValues = true;
       internalValueResult.kafka = this._kafka?.internalValue;
     }
-    if (this._kafkaTopic !== undefined) {
+    if (this._kafkaTopic?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.kafkaTopic = this._kafkaTopic;
+      internalValueResult.kafkaTopic = this._kafkaTopic?.internalValue;
     }
     if (this._mergeTree?.internalValue !== undefined) {
       hasAnyValues = true;
@@ -1509,10 +2046,10 @@ export class MdbClickhouseClusterClickhouseConfigOutputReference extends cdktf.C
       this._traceLogRetentionSize = undefined;
       this._traceLogRetentionTime = undefined;
       this._uncompressedCacheSize = undefined;
-      this._compression = undefined;
-      this._graphiteRollup = undefined;
+      this._compression.internalValue = undefined;
+      this._graphiteRollup.internalValue = undefined;
       this._kafka.internalValue = undefined;
-      this._kafkaTopic = undefined;
+      this._kafkaTopic.internalValue = undefined;
       this._mergeTree.internalValue = undefined;
       this._rabbitmq.internalValue = undefined;
     }
@@ -1547,10 +2084,10 @@ export class MdbClickhouseClusterClickhouseConfigOutputReference extends cdktf.C
       this._traceLogRetentionSize = value.traceLogRetentionSize;
       this._traceLogRetentionTime = value.traceLogRetentionTime;
       this._uncompressedCacheSize = value.uncompressedCacheSize;
-      this._compression = value.compression;
-      this._graphiteRollup = value.graphiteRollup;
+      this._compression.internalValue = value.compression;
+      this._graphiteRollup.internalValue = value.graphiteRollup;
       this._kafka.internalValue = value.kafka;
-      this._kafkaTopic = value.kafkaTopic;
+      this._kafkaTopic.internalValue = value.kafkaTopic;
       this._mergeTree.internalValue = value.mergeTree;
       this._rabbitmq.internalValue = value.rabbitmq;
     }
@@ -2021,37 +2558,35 @@ export class MdbClickhouseClusterClickhouseConfigOutputReference extends cdktf.C
   }
 
   // compression - computed: false, optional: true, required: false
-  private _compression?: MdbClickhouseClusterClickhouseConfigCompression[] | cdktf.IResolvable; 
+  private _compression = new MdbClickhouseClusterClickhouseConfigCompressionList(this, "compression", false);
   public get compression() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('compression');
+    return this._compression;
   }
-  public set compression(value: MdbClickhouseClusterClickhouseConfigCompression[] | cdktf.IResolvable) {
-    this._compression = value;
+  public putCompression(value: MdbClickhouseClusterClickhouseConfigCompression[] | cdktf.IResolvable) {
+    this._compression.internalValue = value;
   }
   public resetCompression() {
-    this._compression = undefined;
+    this._compression.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get compressionInput() {
-    return this._compression;
+    return this._compression.internalValue;
   }
 
   // graphite_rollup - computed: false, optional: true, required: false
-  private _graphiteRollup?: MdbClickhouseClusterClickhouseConfigGraphiteRollup[] | cdktf.IResolvable; 
+  private _graphiteRollup = new MdbClickhouseClusterClickhouseConfigGraphiteRollupList(this, "graphite_rollup", false);
   public get graphiteRollup() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('graphite_rollup');
+    return this._graphiteRollup;
   }
-  public set graphiteRollup(value: MdbClickhouseClusterClickhouseConfigGraphiteRollup[] | cdktf.IResolvable) {
-    this._graphiteRollup = value;
+  public putGraphiteRollup(value: MdbClickhouseClusterClickhouseConfigGraphiteRollup[] | cdktf.IResolvable) {
+    this._graphiteRollup.internalValue = value;
   }
   public resetGraphiteRollup() {
-    this._graphiteRollup = undefined;
+    this._graphiteRollup.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get graphiteRollupInput() {
-    return this._graphiteRollup;
+    return this._graphiteRollup.internalValue;
   }
 
   // kafka - computed: false, optional: true, required: false
@@ -2071,20 +2606,19 @@ export class MdbClickhouseClusterClickhouseConfigOutputReference extends cdktf.C
   }
 
   // kafka_topic - computed: false, optional: true, required: false
-  private _kafkaTopic?: MdbClickhouseClusterClickhouseConfigKafkaTopic[] | cdktf.IResolvable; 
+  private _kafkaTopic = new MdbClickhouseClusterClickhouseConfigKafkaTopicList(this, "kafka_topic", false);
   public get kafkaTopic() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('kafka_topic');
+    return this._kafkaTopic;
   }
-  public set kafkaTopic(value: MdbClickhouseClusterClickhouseConfigKafkaTopic[] | cdktf.IResolvable) {
-    this._kafkaTopic = value;
+  public putKafkaTopic(value: MdbClickhouseClusterClickhouseConfigKafkaTopic[] | cdktf.IResolvable) {
+    this._kafkaTopic.internalValue = value;
   }
   public resetKafkaTopic() {
-    this._kafkaTopic = undefined;
+    this._kafkaTopic.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get kafkaTopicInput() {
-    return this._kafkaTopic;
+    return this._kafkaTopic.internalValue;
   }
 
   // merge_tree - computed: false, optional: true, required: false
@@ -2401,6 +2935,83 @@ export function mdbClickhouseClusterDatabaseToTerraform(struct?: MdbClickhouseCl
   }
 }
 
+export class MdbClickhouseClusterDatabaseOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterDatabase | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterDatabase | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+}
+
+export class MdbClickhouseClusterDatabaseList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterDatabase[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterDatabaseOutputReference {
+    return new MdbClickhouseClusterDatabaseOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterFormatSchema {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#name MdbClickhouseCluster#name}
@@ -2428,6 +3039,121 @@ export function mdbClickhouseClusterFormatSchemaToTerraform(struct?: MdbClickhou
   }
 }
 
+export class MdbClickhouseClusterFormatSchemaOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterFormatSchema | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._type !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.type = this._type;
+    }
+    if (this._uri !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.uri = this._uri;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterFormatSchema | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._type = undefined;
+      this._uri = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._type = value.type;
+      this._uri = value.uri;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // type - computed: false, optional: false, required: true
+  private _type?: string; 
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+  public set type(value: string) {
+    this._type = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get typeInput() {
+    return this._type;
+  }
+
+  // uri - computed: false, optional: false, required: true
+  private _uri?: string; 
+  public get uri() {
+    return this.getStringAttribute('uri');
+  }
+  public set uri(value: string) {
+    this._uri = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get uriInput() {
+    return this._uri;
+  }
+}
+
+export class MdbClickhouseClusterFormatSchemaList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterFormatSchema[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterFormatSchemaOutputReference {
+    return new MdbClickhouseClusterFormatSchemaOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterHost {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#assign_public_ip MdbClickhouseCluster#assign_public_ip}
@@ -2465,6 +3191,173 @@ export function mdbClickhouseClusterHostToTerraform(struct?: MdbClickhouseCluste
   }
 }
 
+export class MdbClickhouseClusterHostOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterHost | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._assignPublicIp !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.assignPublicIp = this._assignPublicIp;
+    }
+    if (this._shardName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.shardName = this._shardName;
+    }
+    if (this._subnetId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetId = this._subnetId;
+    }
+    if (this._type !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.type = this._type;
+    }
+    if (this._zone !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.zone = this._zone;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterHost | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._assignPublicIp = undefined;
+      this._shardName = undefined;
+      this._subnetId = undefined;
+      this._type = undefined;
+      this._zone = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._assignPublicIp = value.assignPublicIp;
+      this._shardName = value.shardName;
+      this._subnetId = value.subnetId;
+      this._type = value.type;
+      this._zone = value.zone;
+    }
+  }
+
+  // assign_public_ip - computed: false, optional: true, required: false
+  private _assignPublicIp?: boolean | cdktf.IResolvable; 
+  public get assignPublicIp() {
+    return this.getBooleanAttribute('assign_public_ip');
+  }
+  public set assignPublicIp(value: boolean | cdktf.IResolvable) {
+    this._assignPublicIp = value;
+  }
+  public resetAssignPublicIp() {
+    this._assignPublicIp = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get assignPublicIpInput() {
+    return this._assignPublicIp;
+  }
+
+  // fqdn - computed: true, optional: false, required: false
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+
+  // shard_name - computed: true, optional: true, required: false
+  private _shardName?: string; 
+  public get shardName() {
+    return this.getStringAttribute('shard_name');
+  }
+  public set shardName(value: string) {
+    this._shardName = value;
+  }
+  public resetShardName() {
+    this._shardName = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get shardNameInput() {
+    return this._shardName;
+  }
+
+  // subnet_id - computed: true, optional: true, required: false
+  private _subnetId?: string; 
+  public get subnetId() {
+    return this.getStringAttribute('subnet_id');
+  }
+  public set subnetId(value: string) {
+    this._subnetId = value;
+  }
+  public resetSubnetId() {
+    this._subnetId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdInput() {
+    return this._subnetId;
+  }
+
+  // type - computed: false, optional: false, required: true
+  private _type?: string; 
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+  public set type(value: string) {
+    this._type = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get typeInput() {
+    return this._type;
+  }
+
+  // zone - computed: false, optional: false, required: true
+  private _zone?: string; 
+  public get zone() {
+    return this.getStringAttribute('zone');
+  }
+  public set zone(value: string) {
+    this._zone = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get zoneInput() {
+    return this._zone;
+  }
+}
+
+export class MdbClickhouseClusterHostList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterHost[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterHostOutputReference {
+    return new MdbClickhouseClusterHostOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterMaintenanceWindow {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#day MdbClickhouseCluster#day}
@@ -2608,6 +3501,121 @@ export function mdbClickhouseClusterMlModelToTerraform(struct?: MdbClickhouseClu
   }
 }
 
+export class MdbClickhouseClusterMlModelOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterMlModel | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._type !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.type = this._type;
+    }
+    if (this._uri !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.uri = this._uri;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterMlModel | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._type = undefined;
+      this._uri = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._type = value.type;
+      this._uri = value.uri;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // type - computed: false, optional: false, required: true
+  private _type?: string; 
+  public get type() {
+    return this.getStringAttribute('type');
+  }
+  public set type(value: string) {
+    this._type = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get typeInput() {
+    return this._type;
+  }
+
+  // uri - computed: false, optional: false, required: true
+  private _uri?: string; 
+  public get uri() {
+    return this.getStringAttribute('uri');
+  }
+  public set uri(value: string) {
+    this._uri = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get uriInput() {
+    return this._uri;
+  }
+}
+
+export class MdbClickhouseClusterMlModelList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterMlModel[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterMlModelOutputReference {
+    return new MdbClickhouseClusterMlModelOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterShardGroup {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#description MdbClickhouseCluster#description}
@@ -2635,6 +3643,124 @@ export function mdbClickhouseClusterShardGroupToTerraform(struct?: MdbClickhouse
   }
 }
 
+export class MdbClickhouseClusterShardGroupOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterShardGroup | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._description !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.description = this._description;
+    }
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._shardNames !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.shardNames = this._shardNames;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterShardGroup | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._description = undefined;
+      this._name = undefined;
+      this._shardNames = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._description = value.description;
+      this._name = value.name;
+      this._shardNames = value.shardNames;
+    }
+  }
+
+  // description - computed: false, optional: true, required: false
+  private _description?: string; 
+  public get description() {
+    return this.getStringAttribute('description');
+  }
+  public set description(value: string) {
+    this._description = value;
+  }
+  public resetDescription() {
+    this._description = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get descriptionInput() {
+    return this._description;
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // shard_names - computed: false, optional: false, required: true
+  private _shardNames?: string[]; 
+  public get shardNames() {
+    return this.getListAttribute('shard_names');
+  }
+  public set shardNames(value: string[]) {
+    this._shardNames = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get shardNamesInput() {
+    return this._shardNames;
+  }
+}
+
+export class MdbClickhouseClusterShardGroupList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterShardGroup[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterShardGroupOutputReference {
+    return new MdbClickhouseClusterShardGroupOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterTimeouts {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#create MdbClickhouseCluster#create}
@@ -2664,6 +3790,7 @@ export function mdbClickhouseClusterTimeoutsToTerraform(struct?: MdbClickhouseCl
 
 export class MdbClickhouseClusterTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -2673,7 +3800,10 @@ export class MdbClickhouseClusterTimeoutsOutputReference extends cdktf.ComplexOb
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): MdbClickhouseClusterTimeouts | undefined {
+  public get internalValue(): MdbClickhouseClusterTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -2691,15 +3821,21 @@ export class MdbClickhouseClusterTimeoutsOutputReference extends cdktf.ComplexOb
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: MdbClickhouseClusterTimeouts | undefined) {
+  public set internalValue(value: MdbClickhouseClusterTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -2771,6 +3907,83 @@ export function mdbClickhouseClusterUserPermissionToTerraform(struct?: MdbClickh
   }
 }
 
+export class MdbClickhouseClusterUserPermissionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterUserPermission | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._databaseName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.databaseName = this._databaseName;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterUserPermission | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._databaseName = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._databaseName = value.databaseName;
+    }
+  }
+
+  // database_name - computed: false, optional: false, required: true
+  private _databaseName?: string; 
+  public get databaseName() {
+    return this.getStringAttribute('database_name');
+  }
+  public set databaseName(value: string) {
+    this._databaseName = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get databaseNameInput() {
+    return this._databaseName;
+  }
+}
+
+export class MdbClickhouseClusterUserPermissionList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterUserPermission[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterUserPermissionOutputReference {
+    return new MdbClickhouseClusterUserPermissionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterUserQuota {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#errors MdbClickhouseCluster#errors}
@@ -2813,6 +4026,193 @@ export function mdbClickhouseClusterUserQuotaToTerraform(struct?: MdbClickhouseC
   }
 }
 
+export class MdbClickhouseClusterUserQuotaOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterUserQuota | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._errors !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.errors = this._errors;
+    }
+    if (this._executionTime !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.executionTime = this._executionTime;
+    }
+    if (this._intervalDuration !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.intervalDuration = this._intervalDuration;
+    }
+    if (this._queries !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.queries = this._queries;
+    }
+    if (this._readRows !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.readRows = this._readRows;
+    }
+    if (this._resultRows !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.resultRows = this._resultRows;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterUserQuota | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._errors = undefined;
+      this._executionTime = undefined;
+      this._intervalDuration = undefined;
+      this._queries = undefined;
+      this._readRows = undefined;
+      this._resultRows = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._errors = value.errors;
+      this._executionTime = value.executionTime;
+      this._intervalDuration = value.intervalDuration;
+      this._queries = value.queries;
+      this._readRows = value.readRows;
+      this._resultRows = value.resultRows;
+    }
+  }
+
+  // errors - computed: true, optional: true, required: false
+  private _errors?: number; 
+  public get errors() {
+    return this.getNumberAttribute('errors');
+  }
+  public set errors(value: number) {
+    this._errors = value;
+  }
+  public resetErrors() {
+    this._errors = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get errorsInput() {
+    return this._errors;
+  }
+
+  // execution_time - computed: true, optional: true, required: false
+  private _executionTime?: number; 
+  public get executionTime() {
+    return this.getNumberAttribute('execution_time');
+  }
+  public set executionTime(value: number) {
+    this._executionTime = value;
+  }
+  public resetExecutionTime() {
+    this._executionTime = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get executionTimeInput() {
+    return this._executionTime;
+  }
+
+  // interval_duration - computed: false, optional: false, required: true
+  private _intervalDuration?: number; 
+  public get intervalDuration() {
+    return this.getNumberAttribute('interval_duration');
+  }
+  public set intervalDuration(value: number) {
+    this._intervalDuration = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get intervalDurationInput() {
+    return this._intervalDuration;
+  }
+
+  // queries - computed: true, optional: true, required: false
+  private _queries?: number; 
+  public get queries() {
+    return this.getNumberAttribute('queries');
+  }
+  public set queries(value: number) {
+    this._queries = value;
+  }
+  public resetQueries() {
+    this._queries = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get queriesInput() {
+    return this._queries;
+  }
+
+  // read_rows - computed: true, optional: true, required: false
+  private _readRows?: number; 
+  public get readRows() {
+    return this.getNumberAttribute('read_rows');
+  }
+  public set readRows(value: number) {
+    this._readRows = value;
+  }
+  public resetReadRows() {
+    this._readRows = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get readRowsInput() {
+    return this._readRows;
+  }
+
+  // result_rows - computed: true, optional: true, required: false
+  private _resultRows?: number; 
+  public get resultRows() {
+    return this.getNumberAttribute('result_rows');
+  }
+  public set resultRows(value: number) {
+    this._resultRows = value;
+  }
+  public resetResultRows() {
+    this._resultRows = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get resultRowsInput() {
+    return this._resultRows;
+  }
+}
+
+export class MdbClickhouseClusterUserQuotaList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterUserQuota[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterUserQuotaOutputReference {
+    return new MdbClickhouseClusterUserQuotaOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterUserSettings {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#add_http_cors_header MdbClickhouseCluster#add_http_cors_header}
@@ -5405,6 +6805,168 @@ export function mdbClickhouseClusterUserToTerraform(struct?: MdbClickhouseCluste
   }
 }
 
+export class MdbClickhouseClusterUserOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbClickhouseClusterUser | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._password !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.password = this._password;
+    }
+    if (this._permission?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.permission = this._permission?.internalValue;
+    }
+    if (this._quota?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.quota = this._quota?.internalValue;
+    }
+    if (this._settings?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.settings = this._settings?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbClickhouseClusterUser | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._password = undefined;
+      this._permission.internalValue = undefined;
+      this._quota.internalValue = undefined;
+      this._settings.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._password = value.password;
+      this._permission.internalValue = value.permission;
+      this._quota.internalValue = value.quota;
+      this._settings.internalValue = value.settings;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // password - computed: false, optional: false, required: true
+  private _password?: string; 
+  public get password() {
+    return this.getStringAttribute('password');
+  }
+  public set password(value: string) {
+    this._password = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get passwordInput() {
+    return this._password;
+  }
+
+  // permission - computed: false, optional: true, required: false
+  private _permission = new MdbClickhouseClusterUserPermissionList(this, "permission", true);
+  public get permission() {
+    return this._permission;
+  }
+  public putPermission(value: MdbClickhouseClusterUserPermission[] | cdktf.IResolvable) {
+    this._permission.internalValue = value;
+  }
+  public resetPermission() {
+    this._permission.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get permissionInput() {
+    return this._permission.internalValue;
+  }
+
+  // quota - computed: false, optional: true, required: false
+  private _quota = new MdbClickhouseClusterUserQuotaList(this, "quota", true);
+  public get quota() {
+    return this._quota;
+  }
+  public putQuota(value: MdbClickhouseClusterUserQuota[] | cdktf.IResolvable) {
+    this._quota.internalValue = value;
+  }
+  public resetQuota() {
+    this._quota.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get quotaInput() {
+    return this._quota.internalValue;
+  }
+
+  // settings - computed: false, optional: true, required: false
+  private _settings = new MdbClickhouseClusterUserSettingsOutputReference(this, "settings");
+  public get settings() {
+    return this._settings;
+  }
+  public putSettings(value: MdbClickhouseClusterUserSettings) {
+    this._settings.internalValue = value;
+  }
+  public resetSettings() {
+    this._settings.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get settingsInput() {
+    return this._settings.internalValue;
+  }
+}
+
+export class MdbClickhouseClusterUserList extends cdktf.ComplexList {
+  public internalValue? : MdbClickhouseClusterUser[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbClickhouseClusterUserOutputReference {
+    return new MdbClickhouseClusterUserOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbClickhouseClusterZookeeperResources {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_clickhouse_cluster#disk_size MdbClickhouseCluster#disk_size}
@@ -5633,6 +7195,7 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
     this._embeddedKeeper = config.embeddedKeeper;
     this._environment = config.environment;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._networkId = config.networkId;
@@ -5645,14 +7208,14 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
     this._backupWindowStart.internalValue = config.backupWindowStart;
     this._clickhouse.internalValue = config.clickhouse;
     this._cloudStorage.internalValue = config.cloudStorage;
-    this._database = config.database;
-    this._formatSchema = config.formatSchema;
-    this._host = config.host;
+    this._database.internalValue = config.database;
+    this._formatSchema.internalValue = config.formatSchema;
+    this._host.internalValue = config.host;
     this._maintenanceWindow.internalValue = config.maintenanceWindow;
-    this._mlModel = config.mlModel;
-    this._shardGroup = config.shardGroup;
+    this._mlModel.internalValue = config.mlModel;
+    this._shardGroup.internalValue = config.shardGroup;
     this._timeouts.internalValue = config.timeouts;
-    this._user = config.user;
+    this._user.internalValue = config.user;
     this._zookeeper.internalValue = config.zookeeper;
   }
 
@@ -5780,8 +7343,19 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: true, optional: true, required: false
@@ -5973,51 +7547,48 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
   }
 
   // database - computed: false, optional: true, required: false
-  private _database?: MdbClickhouseClusterDatabase[] | cdktf.IResolvable; 
+  private _database = new MdbClickhouseClusterDatabaseList(this, "database", true);
   public get database() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('database')));
+    return this._database;
   }
-  public set database(value: MdbClickhouseClusterDatabase[] | cdktf.IResolvable) {
-    this._database = value;
+  public putDatabase(value: MdbClickhouseClusterDatabase[] | cdktf.IResolvable) {
+    this._database.internalValue = value;
   }
   public resetDatabase() {
-    this._database = undefined;
+    this._database.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get databaseInput() {
-    return this._database;
+    return this._database.internalValue;
   }
 
   // format_schema - computed: false, optional: true, required: false
-  private _formatSchema?: MdbClickhouseClusterFormatSchema[] | cdktf.IResolvable; 
+  private _formatSchema = new MdbClickhouseClusterFormatSchemaList(this, "format_schema", true);
   public get formatSchema() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('format_schema')));
+    return this._formatSchema;
   }
-  public set formatSchema(value: MdbClickhouseClusterFormatSchema[] | cdktf.IResolvable) {
-    this._formatSchema = value;
+  public putFormatSchema(value: MdbClickhouseClusterFormatSchema[] | cdktf.IResolvable) {
+    this._formatSchema.internalValue = value;
   }
   public resetFormatSchema() {
-    this._formatSchema = undefined;
+    this._formatSchema.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get formatSchemaInput() {
-    return this._formatSchema;
+    return this._formatSchema.internalValue;
   }
 
   // host - computed: false, optional: false, required: true
-  private _host?: MdbClickhouseClusterHost[] | cdktf.IResolvable; 
+  private _host = new MdbClickhouseClusterHostList(this, "host", false);
   public get host() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('host');
+    return this._host;
   }
-  public set host(value: MdbClickhouseClusterHost[] | cdktf.IResolvable) {
-    this._host = value;
+  public putHost(value: MdbClickhouseClusterHost[] | cdktf.IResolvable) {
+    this._host.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get hostInput() {
-    return this._host;
+    return this._host.internalValue;
   }
 
   // maintenance_window - computed: false, optional: true, required: false
@@ -6037,37 +7608,35 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
   }
 
   // ml_model - computed: false, optional: true, required: false
-  private _mlModel?: MdbClickhouseClusterMlModel[] | cdktf.IResolvable; 
+  private _mlModel = new MdbClickhouseClusterMlModelList(this, "ml_model", true);
   public get mlModel() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('ml_model')));
+    return this._mlModel;
   }
-  public set mlModel(value: MdbClickhouseClusterMlModel[] | cdktf.IResolvable) {
-    this._mlModel = value;
+  public putMlModel(value: MdbClickhouseClusterMlModel[] | cdktf.IResolvable) {
+    this._mlModel.internalValue = value;
   }
   public resetMlModel() {
-    this._mlModel = undefined;
+    this._mlModel.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get mlModelInput() {
-    return this._mlModel;
+    return this._mlModel.internalValue;
   }
 
   // shard_group - computed: false, optional: true, required: false
-  private _shardGroup?: MdbClickhouseClusterShardGroup[] | cdktf.IResolvable; 
+  private _shardGroup = new MdbClickhouseClusterShardGroupList(this, "shard_group", false);
   public get shardGroup() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('shard_group');
+    return this._shardGroup;
   }
-  public set shardGroup(value: MdbClickhouseClusterShardGroup[] | cdktf.IResolvable) {
-    this._shardGroup = value;
+  public putShardGroup(value: MdbClickhouseClusterShardGroup[] | cdktf.IResolvable) {
+    this._shardGroup.internalValue = value;
   }
   public resetShardGroup() {
-    this._shardGroup = undefined;
+    this._shardGroup.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get shardGroupInput() {
-    return this._shardGroup;
+    return this._shardGroup.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -6087,20 +7656,19 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
   }
 
   // user - computed: false, optional: true, required: false
-  private _user?: MdbClickhouseClusterUser[] | cdktf.IResolvable; 
+  private _user = new MdbClickhouseClusterUserList(this, "user", true);
   public get user() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('user')));
+    return this._user;
   }
-  public set user(value: MdbClickhouseClusterUser[] | cdktf.IResolvable) {
-    this._user = value;
+  public putUser(value: MdbClickhouseClusterUser[] | cdktf.IResolvable) {
+    this._user.internalValue = value;
   }
   public resetUser() {
-    this._user = undefined;
+    this._user.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get userInput() {
-    return this._user;
+    return this._user.internalValue;
   }
 
   // zookeeper - computed: false, optional: true, required: false
@@ -6132,6 +7700,7 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
       embedded_keeper: cdktf.booleanToTerraform(this._embeddedKeeper),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
@@ -6144,14 +7713,14 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
       backup_window_start: mdbClickhouseClusterBackupWindowStartToTerraform(this._backupWindowStart.internalValue),
       clickhouse: mdbClickhouseClusterClickhouseToTerraform(this._clickhouse.internalValue),
       cloud_storage: mdbClickhouseClusterCloudStorageToTerraform(this._cloudStorage.internalValue),
-      database: cdktf.listMapper(mdbClickhouseClusterDatabaseToTerraform)(this._database),
-      format_schema: cdktf.listMapper(mdbClickhouseClusterFormatSchemaToTerraform)(this._formatSchema),
-      host: cdktf.listMapper(mdbClickhouseClusterHostToTerraform)(this._host),
+      database: cdktf.listMapper(mdbClickhouseClusterDatabaseToTerraform)(this._database.internalValue),
+      format_schema: cdktf.listMapper(mdbClickhouseClusterFormatSchemaToTerraform)(this._formatSchema.internalValue),
+      host: cdktf.listMapper(mdbClickhouseClusterHostToTerraform)(this._host.internalValue),
       maintenance_window: mdbClickhouseClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
-      ml_model: cdktf.listMapper(mdbClickhouseClusterMlModelToTerraform)(this._mlModel),
-      shard_group: cdktf.listMapper(mdbClickhouseClusterShardGroupToTerraform)(this._shardGroup),
+      ml_model: cdktf.listMapper(mdbClickhouseClusterMlModelToTerraform)(this._mlModel.internalValue),
+      shard_group: cdktf.listMapper(mdbClickhouseClusterShardGroupToTerraform)(this._shardGroup.internalValue),
       timeouts: mdbClickhouseClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      user: cdktf.listMapper(mdbClickhouseClusterUserToTerraform)(this._user),
+      user: cdktf.listMapper(mdbClickhouseClusterUserToTerraform)(this._user.internalValue),
       zookeeper: mdbClickhouseClusterZookeeperToTerraform(this._zookeeper.internalValue),
     };
   }

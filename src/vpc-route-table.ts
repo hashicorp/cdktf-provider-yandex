@@ -16,6 +16,13 @@ export interface VpcRouteTableConfig extends cdktf.TerraformMetaArguments {
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/vpc_route_table#id VpcRouteTable#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/vpc_route_table#labels VpcRouteTable#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -62,6 +69,108 @@ export function vpcRouteTableStaticRouteToTerraform(struct?: VpcRouteTableStatic
   }
 }
 
+export class VpcRouteTableStaticRouteOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): VpcRouteTableStaticRoute | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._destinationPrefix !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.destinationPrefix = this._destinationPrefix;
+    }
+    if (this._nextHopAddress !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.nextHopAddress = this._nextHopAddress;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: VpcRouteTableStaticRoute | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._destinationPrefix = undefined;
+      this._nextHopAddress = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._destinationPrefix = value.destinationPrefix;
+      this._nextHopAddress = value.nextHopAddress;
+    }
+  }
+
+  // destination_prefix - computed: false, optional: true, required: false
+  private _destinationPrefix?: string; 
+  public get destinationPrefix() {
+    return this.getStringAttribute('destination_prefix');
+  }
+  public set destinationPrefix(value: string) {
+    this._destinationPrefix = value;
+  }
+  public resetDestinationPrefix() {
+    this._destinationPrefix = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get destinationPrefixInput() {
+    return this._destinationPrefix;
+  }
+
+  // next_hop_address - computed: false, optional: true, required: false
+  private _nextHopAddress?: string; 
+  public get nextHopAddress() {
+    return this.getStringAttribute('next_hop_address');
+  }
+  public set nextHopAddress(value: string) {
+    this._nextHopAddress = value;
+  }
+  public resetNextHopAddress() {
+    this._nextHopAddress = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nextHopAddressInput() {
+    return this._nextHopAddress;
+  }
+}
+
+export class VpcRouteTableStaticRouteList extends cdktf.ComplexList {
+  public internalValue? : VpcRouteTableStaticRoute[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): VpcRouteTableStaticRouteOutputReference {
+    return new VpcRouteTableStaticRouteOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface VpcRouteTableTimeouts {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/vpc_route_table#create VpcRouteTable#create}
@@ -91,6 +200,7 @@ export function vpcRouteTableTimeoutsToTerraform(struct?: VpcRouteTableTimeoutsO
 
 export class VpcRouteTableTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -100,7 +210,10 @@ export class VpcRouteTableTimeoutsOutputReference extends cdktf.ComplexObject {
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): VpcRouteTableTimeouts | undefined {
+  public get internalValue(): VpcRouteTableTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -118,15 +231,21 @@ export class VpcRouteTableTimeoutsOutputReference extends cdktf.ComplexObject {
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: VpcRouteTableTimeouts | undefined) {
+  public set internalValue(value: VpcRouteTableTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -218,10 +337,11 @@ export class VpcRouteTable extends cdktf.TerraformResource {
     });
     this._description = config.description;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._networkId = config.networkId;
-    this._staticRoute = config.staticRoute;
+    this._staticRoute.internalValue = config.staticRoute;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -267,8 +387,19 @@ export class VpcRouteTable extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: true, optional: true, required: false
@@ -317,20 +448,19 @@ export class VpcRouteTable extends cdktf.TerraformResource {
   }
 
   // static_route - computed: false, optional: true, required: false
-  private _staticRoute?: VpcRouteTableStaticRoute[] | cdktf.IResolvable; 
+  private _staticRoute = new VpcRouteTableStaticRouteList(this, "static_route", true);
   public get staticRoute() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('static_route')));
+    return this._staticRoute;
   }
-  public set staticRoute(value: VpcRouteTableStaticRoute[] | cdktf.IResolvable) {
-    this._staticRoute = value;
+  public putStaticRoute(value: VpcRouteTableStaticRoute[] | cdktf.IResolvable) {
+    this._staticRoute.internalValue = value;
   }
   public resetStaticRoute() {
-    this._staticRoute = undefined;
+    this._staticRoute.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get staticRouteInput() {
-    return this._staticRoute;
+    return this._staticRoute.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -357,10 +487,11 @@ export class VpcRouteTable extends cdktf.TerraformResource {
     return {
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      static_route: cdktf.listMapper(vpcRouteTableStaticRouteToTerraform)(this._staticRoute),
+      static_route: cdktf.listMapper(vpcRouteTableStaticRouteToTerraform)(this._staticRoute.internalValue),
       timeouts: vpcRouteTableTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

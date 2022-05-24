@@ -12,6 +12,13 @@ export interface DataYandexOrganizationmanagerSamlFederationUserAccountConfig ex
   */
   readonly federationId: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/organizationmanager_saml_federation_user_account#id DataYandexOrganizationmanagerSamlFederationUserAccount#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/organizationmanager_saml_federation_user_account#name_id DataYandexOrganizationmanagerSamlFederationUserAccount#name_id}
   */
   readonly nameId: string;
@@ -52,6 +59,7 @@ export class DataYandexOrganizationmanagerSamlFederationUserAccount extends cdkt
       lifecycle: config.lifecycle
     });
     this._federationId = config.federationId;
+    this._id = config.id;
     this._nameId = config.nameId;
   }
 
@@ -73,8 +81,19 @@ export class DataYandexOrganizationmanagerSamlFederationUserAccount extends cdkt
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // name_id - computed: false, optional: false, required: true
@@ -97,6 +116,7 @@ export class DataYandexOrganizationmanagerSamlFederationUserAccount extends cdkt
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       federation_id: cdktf.stringToTerraform(this._federationId),
+      id: cdktf.stringToTerraform(this._id),
       name_id: cdktf.stringToTerraform(this._nameId),
     };
   }

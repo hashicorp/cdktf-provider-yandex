@@ -16,6 +16,13 @@ export interface AlbLoadBalancerConfig extends cdktf.TerraformMetaArguments {
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_load_balancer#id AlbLoadBalancer#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_load_balancer#labels AlbLoadBalancer#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -81,6 +88,124 @@ export function albLoadBalancerAllocationPolicyLocationToTerraform(struct?: AlbL
   }
 }
 
+export class AlbLoadBalancerAllocationPolicyLocationOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbLoadBalancerAllocationPolicyLocation | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._disableTraffic !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.disableTraffic = this._disableTraffic;
+    }
+    if (this._subnetId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetId = this._subnetId;
+    }
+    if (this._zoneId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.zoneId = this._zoneId;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbLoadBalancerAllocationPolicyLocation | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._disableTraffic = undefined;
+      this._subnetId = undefined;
+      this._zoneId = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._disableTraffic = value.disableTraffic;
+      this._subnetId = value.subnetId;
+      this._zoneId = value.zoneId;
+    }
+  }
+
+  // disable_traffic - computed: false, optional: true, required: false
+  private _disableTraffic?: boolean | cdktf.IResolvable; 
+  public get disableTraffic() {
+    return this.getBooleanAttribute('disable_traffic');
+  }
+  public set disableTraffic(value: boolean | cdktf.IResolvable) {
+    this._disableTraffic = value;
+  }
+  public resetDisableTraffic() {
+    this._disableTraffic = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get disableTrafficInput() {
+    return this._disableTraffic;
+  }
+
+  // subnet_id - computed: false, optional: false, required: true
+  private _subnetId?: string; 
+  public get subnetId() {
+    return this.getStringAttribute('subnet_id');
+  }
+  public set subnetId(value: string) {
+    this._subnetId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdInput() {
+    return this._subnetId;
+  }
+
+  // zone_id - computed: false, optional: false, required: true
+  private _zoneId?: string; 
+  public get zoneId() {
+    return this.getStringAttribute('zone_id');
+  }
+  public set zoneId(value: string) {
+    this._zoneId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get zoneIdInput() {
+    return this._zoneId;
+  }
+}
+
+export class AlbLoadBalancerAllocationPolicyLocationList extends cdktf.ComplexList {
+  public internalValue? : AlbLoadBalancerAllocationPolicyLocation[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbLoadBalancerAllocationPolicyLocationOutputReference {
+    return new AlbLoadBalancerAllocationPolicyLocationOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbLoadBalancerAllocationPolicy {
   /**
   * location block
@@ -114,9 +239,9 @@ export class AlbLoadBalancerAllocationPolicyOutputReference extends cdktf.Comple
   public get internalValue(): AlbLoadBalancerAllocationPolicy | undefined {
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
-    if (this._location !== undefined) {
+    if (this._location?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.location = this._location;
+      internalValueResult.location = this._location?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -124,26 +249,25 @@ export class AlbLoadBalancerAllocationPolicyOutputReference extends cdktf.Comple
   public set internalValue(value: AlbLoadBalancerAllocationPolicy | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
-      this._location = undefined;
+      this._location.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
-      this._location = value.location;
+      this._location.internalValue = value.location;
     }
   }
 
   // location - computed: false, optional: false, required: true
-  private _location?: AlbLoadBalancerAllocationPolicyLocation[] | cdktf.IResolvable; 
+  private _location = new AlbLoadBalancerAllocationPolicyLocationList(this, "location", true);
   public get location() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('location')));
+    return this._location;
   }
-  public set location(value: AlbLoadBalancerAllocationPolicyLocation[] | cdktf.IResolvable) {
-    this._location = value;
+  public putLocation(value: AlbLoadBalancerAllocationPolicyLocation[] | cdktf.IResolvable) {
+    this._location.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get locationInput() {
-    return this._location;
+    return this._location.internalValue;
   }
 }
 export interface AlbLoadBalancerListenerEndpointAddressExternalIpv4Address {
@@ -401,6 +525,130 @@ export function albLoadBalancerListenerEndpointAddressToTerraform(struct?: AlbLo
   }
 }
 
+export class AlbLoadBalancerListenerEndpointAddressOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbLoadBalancerListenerEndpointAddress | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._externalIpv4Address?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.externalIpv4Address = this._externalIpv4Address?.internalValue;
+    }
+    if (this._externalIpv6Address?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.externalIpv6Address = this._externalIpv6Address?.internalValue;
+    }
+    if (this._internalIpv4Address?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.internalIpv4Address = this._internalIpv4Address?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbLoadBalancerListenerEndpointAddress | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._externalIpv4Address.internalValue = undefined;
+      this._externalIpv6Address.internalValue = undefined;
+      this._internalIpv4Address.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._externalIpv4Address.internalValue = value.externalIpv4Address;
+      this._externalIpv6Address.internalValue = value.externalIpv6Address;
+      this._internalIpv4Address.internalValue = value.internalIpv4Address;
+    }
+  }
+
+  // external_ipv4_address - computed: false, optional: true, required: false
+  private _externalIpv4Address = new AlbLoadBalancerListenerEndpointAddressExternalIpv4AddressOutputReference(this, "external_ipv4_address");
+  public get externalIpv4Address() {
+    return this._externalIpv4Address;
+  }
+  public putExternalIpv4Address(value: AlbLoadBalancerListenerEndpointAddressExternalIpv4Address) {
+    this._externalIpv4Address.internalValue = value;
+  }
+  public resetExternalIpv4Address() {
+    this._externalIpv4Address.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get externalIpv4AddressInput() {
+    return this._externalIpv4Address.internalValue;
+  }
+
+  // external_ipv6_address - computed: false, optional: true, required: false
+  private _externalIpv6Address = new AlbLoadBalancerListenerEndpointAddressExternalIpv6AddressOutputReference(this, "external_ipv6_address");
+  public get externalIpv6Address() {
+    return this._externalIpv6Address;
+  }
+  public putExternalIpv6Address(value: AlbLoadBalancerListenerEndpointAddressExternalIpv6Address) {
+    this._externalIpv6Address.internalValue = value;
+  }
+  public resetExternalIpv6Address() {
+    this._externalIpv6Address.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get externalIpv6AddressInput() {
+    return this._externalIpv6Address.internalValue;
+  }
+
+  // internal_ipv4_address - computed: false, optional: true, required: false
+  private _internalIpv4Address = new AlbLoadBalancerListenerEndpointAddressInternalIpv4AddressOutputReference(this, "internal_ipv4_address");
+  public get internalIpv4Address() {
+    return this._internalIpv4Address;
+  }
+  public putInternalIpv4Address(value: AlbLoadBalancerListenerEndpointAddressInternalIpv4Address) {
+    this._internalIpv4Address.internalValue = value;
+  }
+  public resetInternalIpv4Address() {
+    this._internalIpv4Address.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get internalIpv4AddressInput() {
+    return this._internalIpv4Address.internalValue;
+  }
+}
+
+export class AlbLoadBalancerListenerEndpointAddressList extends cdktf.ComplexList {
+  public internalValue? : AlbLoadBalancerListenerEndpointAddress[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbLoadBalancerListenerEndpointAddressOutputReference {
+    return new AlbLoadBalancerListenerEndpointAddressOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbLoadBalancerListenerEndpoint {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_load_balancer#ports AlbLoadBalancer#ports}
@@ -425,6 +673,102 @@ export function albLoadBalancerListenerEndpointToTerraform(struct?: AlbLoadBalan
   }
 }
 
+export class AlbLoadBalancerListenerEndpointOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbLoadBalancerListenerEndpoint | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._ports !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ports = this._ports;
+    }
+    if (this._address?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.address = this._address?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbLoadBalancerListenerEndpoint | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._ports = undefined;
+      this._address.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._ports = value.ports;
+      this._address.internalValue = value.address;
+    }
+  }
+
+  // ports - computed: false, optional: false, required: true
+  private _ports?: number[]; 
+  public get ports() {
+    return this.getNumberListAttribute('ports');
+  }
+  public set ports(value: number[]) {
+    this._ports = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get portsInput() {
+    return this._ports;
+  }
+
+  // address - computed: false, optional: false, required: true
+  private _address = new AlbLoadBalancerListenerEndpointAddressList(this, "address", false);
+  public get address() {
+    return this._address;
+  }
+  public putAddress(value: AlbLoadBalancerListenerEndpointAddress[] | cdktf.IResolvable) {
+    this._address.internalValue = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get addressInput() {
+    return this._address.internalValue;
+  }
+}
+
+export class AlbLoadBalancerListenerEndpointList extends cdktf.ComplexList {
+  public internalValue? : AlbLoadBalancerListenerEndpoint[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbLoadBalancerListenerEndpointOutputReference {
+    return new AlbLoadBalancerListenerEndpointOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbLoadBalancerListenerHttpHandlerHttp2Options {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_load_balancer#max_concurrent_streams AlbLoadBalancer#max_concurrent_streams}
@@ -1675,6 +2019,121 @@ export function albLoadBalancerListenerTlsSniHandlerToTerraform(struct?: AlbLoad
   }
 }
 
+export class AlbLoadBalancerListenerTlsSniHandlerOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbLoadBalancerListenerTlsSniHandler | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._serverNames !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.serverNames = this._serverNames;
+    }
+    if (this._handler?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.handler = this._handler?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbLoadBalancerListenerTlsSniHandler | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._serverNames = undefined;
+      this._handler.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._serverNames = value.serverNames;
+      this._handler.internalValue = value.handler;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // server_names - computed: false, optional: false, required: true
+  private _serverNames?: string[]; 
+  public get serverNames() {
+    return cdktf.Fn.tolist(this.getListAttribute('server_names'));
+  }
+  public set serverNames(value: string[]) {
+    this._serverNames = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get serverNamesInput() {
+    return this._serverNames;
+  }
+
+  // handler - computed: false, optional: false, required: true
+  private _handler = new AlbLoadBalancerListenerTlsSniHandlerHandlerOutputReference(this, "handler");
+  public get handler() {
+    return this._handler;
+  }
+  public putHandler(value: AlbLoadBalancerListenerTlsSniHandlerHandler) {
+    this._handler.internalValue = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get handlerInput() {
+    return this._handler.internalValue;
+  }
+}
+
+export class AlbLoadBalancerListenerTlsSniHandlerList extends cdktf.ComplexList {
+  public internalValue? : AlbLoadBalancerListenerTlsSniHandler[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbLoadBalancerListenerTlsSniHandlerOutputReference {
+    return new AlbLoadBalancerListenerTlsSniHandlerOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbLoadBalancerListenerTls {
   /**
   * default_handler block
@@ -1719,9 +2178,9 @@ export class AlbLoadBalancerListenerTlsOutputReference extends cdktf.ComplexObje
       hasAnyValues = true;
       internalValueResult.defaultHandler = this._defaultHandler?.internalValue;
     }
-    if (this._sniHandler !== undefined) {
+    if (this._sniHandler?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.sniHandler = this._sniHandler;
+      internalValueResult.sniHandler = this._sniHandler?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -1730,12 +2189,12 @@ export class AlbLoadBalancerListenerTlsOutputReference extends cdktf.ComplexObje
     if (value === undefined) {
       this.isEmptyObject = false;
       this._defaultHandler.internalValue = undefined;
-      this._sniHandler = undefined;
+      this._sniHandler.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._defaultHandler.internalValue = value.defaultHandler;
-      this._sniHandler = value.sniHandler;
+      this._sniHandler.internalValue = value.sniHandler;
     }
   }
 
@@ -1753,20 +2212,19 @@ export class AlbLoadBalancerListenerTlsOutputReference extends cdktf.ComplexObje
   }
 
   // sni_handler - computed: false, optional: true, required: false
-  private _sniHandler?: AlbLoadBalancerListenerTlsSniHandler[] | cdktf.IResolvable; 
+  private _sniHandler = new AlbLoadBalancerListenerTlsSniHandlerList(this, "sni_handler", false);
   public get sniHandler() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('sni_handler');
+    return this._sniHandler;
   }
-  public set sniHandler(value: AlbLoadBalancerListenerTlsSniHandler[] | cdktf.IResolvable) {
-    this._sniHandler = value;
+  public putSniHandler(value: AlbLoadBalancerListenerTlsSniHandler[] | cdktf.IResolvable) {
+    this._sniHandler.internalValue = value;
   }
   public resetSniHandler() {
-    this._sniHandler = undefined;
+    this._sniHandler.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get sniHandlerInput() {
-    return this._sniHandler;
+    return this._sniHandler.internalValue;
   }
 }
 export interface AlbLoadBalancerListener {
@@ -1814,6 +2272,171 @@ export function albLoadBalancerListenerToTerraform(struct?: AlbLoadBalancerListe
   }
 }
 
+export class AlbLoadBalancerListenerOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbLoadBalancerListener | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._endpoint?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.endpoint = this._endpoint?.internalValue;
+    }
+    if (this._http?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.http = this._http?.internalValue;
+    }
+    if (this._stream?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.stream = this._stream?.internalValue;
+    }
+    if (this._tls?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.tls = this._tls?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbLoadBalancerListener | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._endpoint.internalValue = undefined;
+      this._http.internalValue = undefined;
+      this._stream.internalValue = undefined;
+      this._tls.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._endpoint.internalValue = value.endpoint;
+      this._http.internalValue = value.http;
+      this._stream.internalValue = value.stream;
+      this._tls.internalValue = value.tls;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // endpoint - computed: false, optional: true, required: false
+  private _endpoint = new AlbLoadBalancerListenerEndpointList(this, "endpoint", false);
+  public get endpoint() {
+    return this._endpoint;
+  }
+  public putEndpoint(value: AlbLoadBalancerListenerEndpoint[] | cdktf.IResolvable) {
+    this._endpoint.internalValue = value;
+  }
+  public resetEndpoint() {
+    this._endpoint.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get endpointInput() {
+    return this._endpoint.internalValue;
+  }
+
+  // http - computed: false, optional: true, required: false
+  private _http = new AlbLoadBalancerListenerHttpOutputReference(this, "http");
+  public get http() {
+    return this._http;
+  }
+  public putHttp(value: AlbLoadBalancerListenerHttp) {
+    this._http.internalValue = value;
+  }
+  public resetHttp() {
+    this._http.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get httpInput() {
+    return this._http.internalValue;
+  }
+
+  // stream - computed: false, optional: true, required: false
+  private _stream = new AlbLoadBalancerListenerStreamOutputReference(this, "stream");
+  public get stream() {
+    return this._stream;
+  }
+  public putStream(value: AlbLoadBalancerListenerStream) {
+    this._stream.internalValue = value;
+  }
+  public resetStream() {
+    this._stream.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get streamInput() {
+    return this._stream.internalValue;
+  }
+
+  // tls - computed: false, optional: true, required: false
+  private _tls = new AlbLoadBalancerListenerTlsOutputReference(this, "tls");
+  public get tls() {
+    return this._tls;
+  }
+  public putTls(value: AlbLoadBalancerListenerTls) {
+    this._tls.internalValue = value;
+  }
+  public resetTls() {
+    this._tls.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tlsInput() {
+    return this._tls.internalValue;
+  }
+}
+
+export class AlbLoadBalancerListenerList extends cdktf.ComplexList {
+  public internalValue? : AlbLoadBalancerListener[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbLoadBalancerListenerOutputReference {
+    return new AlbLoadBalancerListenerOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbLoadBalancerTimeouts {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_load_balancer#create AlbLoadBalancer#create}
@@ -1843,6 +2466,7 @@ export function albLoadBalancerTimeoutsToTerraform(struct?: AlbLoadBalancerTimeo
 
 export class AlbLoadBalancerTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -1852,7 +2476,10 @@ export class AlbLoadBalancerTimeoutsOutputReference extends cdktf.ComplexObject 
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): AlbLoadBalancerTimeouts | undefined {
+  public get internalValue(): AlbLoadBalancerTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -1870,15 +2497,21 @@ export class AlbLoadBalancerTimeoutsOutputReference extends cdktf.ComplexObject 
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: AlbLoadBalancerTimeouts | undefined) {
+  public set internalValue(value: AlbLoadBalancerTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -1970,13 +2603,14 @@ export class AlbLoadBalancer extends cdktf.TerraformResource {
     });
     this._description = config.description;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._networkId = config.networkId;
     this._regionId = config.regionId;
     this._securityGroupIds = config.securityGroupIds;
     this._allocationPolicy.internalValue = config.allocationPolicy;
-    this._listener = config.listener;
+    this._listener.internalValue = config.listener;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -2022,8 +2656,19 @@ export class AlbLoadBalancer extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: false, optional: true, required: false
@@ -2127,20 +2772,19 @@ export class AlbLoadBalancer extends cdktf.TerraformResource {
   }
 
   // listener - computed: false, optional: true, required: false
-  private _listener?: AlbLoadBalancerListener[] | cdktf.IResolvable; 
+  private _listener = new AlbLoadBalancerListenerList(this, "listener", false);
   public get listener() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('listener');
+    return this._listener;
   }
-  public set listener(value: AlbLoadBalancerListener[] | cdktf.IResolvable) {
-    this._listener = value;
+  public putListener(value: AlbLoadBalancerListener[] | cdktf.IResolvable) {
+    this._listener.internalValue = value;
   }
   public resetListener() {
-    this._listener = undefined;
+    this._listener.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get listenerInput() {
-    return this._listener;
+    return this._listener.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -2167,13 +2811,14 @@ export class AlbLoadBalancer extends cdktf.TerraformResource {
     return {
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
       region_id: cdktf.stringToTerraform(this._regionId),
       security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
       allocation_policy: albLoadBalancerAllocationPolicyToTerraform(this._allocationPolicy.internalValue),
-      listener: cdktf.listMapper(albLoadBalancerListenerToTerraform)(this._listener),
+      listener: cdktf.listMapper(albLoadBalancerListenerToTerraform)(this._listener.internalValue),
       timeouts: albLoadBalancerTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

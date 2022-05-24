@@ -32,6 +32,13 @@ export interface StorageObjectConfig extends cdktf.TerraformMetaArguments {
   */
   readonly contentType?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_object#id StorageObject#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_object#key StorageObject#key}
   */
   readonly key: string;
@@ -85,6 +92,7 @@ export class StorageObject extends cdktf.TerraformResource {
     this._content = config.content;
     this._contentBase64 = config.contentBase64;
     this._contentType = config.contentType;
+    this._id = config.id;
     this._key = config.key;
     this._secretKey = config.secretKey;
     this._source = config.source;
@@ -188,8 +196,19 @@ export class StorageObject extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // key - computed: false, optional: false, required: true
@@ -249,6 +268,7 @@ export class StorageObject extends cdktf.TerraformResource {
       content: cdktf.stringToTerraform(this._content),
       content_base64: cdktf.stringToTerraform(this._contentBase64),
       content_type: cdktf.stringToTerraform(this._contentType),
+      id: cdktf.stringToTerraform(this._id),
       key: cdktf.stringToTerraform(this._key),
       secret_key: cdktf.stringToTerraform(this._secretKey),
       source: cdktf.stringToTerraform(this._source),

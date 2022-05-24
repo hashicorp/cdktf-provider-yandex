@@ -16,6 +16,13 @@ export interface DataYandexFunctionConfig extends cdktf.TerraformMetaArguments {
   */
   readonly functionId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/function#id DataYandexFunction#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/function#name DataYandexFunction#name}
   */
   readonly name?: string;
@@ -57,6 +64,7 @@ export class DataYandexFunction extends cdktf.TerraformDataSource {
     });
     this._folderId = config.folderId;
     this._functionId = config.functionId;
+    this._id = config.id;
     this._name = config.name;
   }
 
@@ -80,8 +88,9 @@ export class DataYandexFunction extends cdktf.TerraformDataSource {
   }
 
   // environment - computed: true, optional: false, required: false
-  public environment(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'environment').lookup(key);
+  private _environment = new cdktf.StringMap(this, "environment");
+  public get environment() {
+    return this._environment;
   }
 
   // execution_timeout - computed: true, optional: false, required: false
@@ -122,8 +131,19 @@ export class DataYandexFunction extends cdktf.TerraformDataSource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // image_size - computed: true, optional: false, required: false
@@ -132,8 +152,9 @@ export class DataYandexFunction extends cdktf.TerraformDataSource {
   }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // loggroup_id - computed: true, optional: false, required: false
@@ -190,6 +211,7 @@ export class DataYandexFunction extends cdktf.TerraformDataSource {
     return {
       folder_id: cdktf.stringToTerraform(this._folderId),
       function_id: cdktf.stringToTerraform(this._functionId),
+      id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
     };
   }
