@@ -12,6 +12,13 @@ export interface DnsRecordsetConfig extends cdktf.TerraformMetaArguments {
   */
   readonly data: string[];
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/dns_recordset#id DnsRecordset#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/dns_recordset#name DnsRecordset#name}
   */
   readonly name: string;
@@ -63,6 +70,7 @@ export function dnsRecordsetTimeoutsToTerraform(struct?: DnsRecordsetTimeoutsOut
 
 export class DnsRecordsetTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -72,7 +80,10 @@ export class DnsRecordsetTimeoutsOutputReference extends cdktf.ComplexObject {
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): DnsRecordsetTimeouts | undefined {
+  public get internalValue(): DnsRecordsetTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -90,15 +101,21 @@ export class DnsRecordsetTimeoutsOutputReference extends cdktf.ComplexObject {
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: DnsRecordsetTimeouts | undefined) {
+  public set internalValue(value: DnsRecordsetTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -189,6 +206,7 @@ export class DnsRecordset extends cdktf.TerraformResource {
       lifecycle: config.lifecycle
     });
     this._data = config.data;
+    this._id = config.id;
     this._name = config.name;
     this._ttl = config.ttl;
     this._type = config.type;
@@ -214,8 +232,19 @@ export class DnsRecordset extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // name - computed: false, optional: false, required: true
@@ -293,6 +322,7 @@ export class DnsRecordset extends cdktf.TerraformResource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       data: cdktf.listMapper(cdktf.stringToTerraform)(this._data),
+      id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       ttl: cdktf.numberToTerraform(this._ttl),
       type: cdktf.stringToTerraform(this._type),

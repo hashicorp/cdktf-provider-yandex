@@ -16,6 +16,13 @@ export interface LbNetworkLoadBalancerConfig extends cdktf.TerraformMetaArgument
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_network_load_balancer#id LbNetworkLoadBalancer#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_network_load_balancer#labels LbNetworkLoadBalancer#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -252,6 +259,215 @@ export function lbNetworkLoadBalancerAttachedTargetGroupHealthcheckToTerraform(s
   }
 }
 
+export class LbNetworkLoadBalancerAttachedTargetGroupHealthcheckOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): LbNetworkLoadBalancerAttachedTargetGroupHealthcheck | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._healthyThreshold !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.healthyThreshold = this._healthyThreshold;
+    }
+    if (this._interval !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.interval = this._interval;
+    }
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._timeout !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.timeout = this._timeout;
+    }
+    if (this._unhealthyThreshold !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.unhealthyThreshold = this._unhealthyThreshold;
+    }
+    if (this._httpOptions?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.httpOptions = this._httpOptions?.internalValue;
+    }
+    if (this._tcpOptions?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.tcpOptions = this._tcpOptions?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: LbNetworkLoadBalancerAttachedTargetGroupHealthcheck | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._healthyThreshold = undefined;
+      this._interval = undefined;
+      this._name = undefined;
+      this._timeout = undefined;
+      this._unhealthyThreshold = undefined;
+      this._httpOptions.internalValue = undefined;
+      this._tcpOptions.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._healthyThreshold = value.healthyThreshold;
+      this._interval = value.interval;
+      this._name = value.name;
+      this._timeout = value.timeout;
+      this._unhealthyThreshold = value.unhealthyThreshold;
+      this._httpOptions.internalValue = value.httpOptions;
+      this._tcpOptions.internalValue = value.tcpOptions;
+    }
+  }
+
+  // healthy_threshold - computed: false, optional: true, required: false
+  private _healthyThreshold?: number; 
+  public get healthyThreshold() {
+    return this.getNumberAttribute('healthy_threshold');
+  }
+  public set healthyThreshold(value: number) {
+    this._healthyThreshold = value;
+  }
+  public resetHealthyThreshold() {
+    this._healthyThreshold = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get healthyThresholdInput() {
+    return this._healthyThreshold;
+  }
+
+  // interval - computed: false, optional: true, required: false
+  private _interval?: number; 
+  public get interval() {
+    return this.getNumberAttribute('interval');
+  }
+  public set interval(value: number) {
+    this._interval = value;
+  }
+  public resetInterval() {
+    this._interval = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get intervalInput() {
+    return this._interval;
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // timeout - computed: false, optional: true, required: false
+  private _timeout?: number; 
+  public get timeout() {
+    return this.getNumberAttribute('timeout');
+  }
+  public set timeout(value: number) {
+    this._timeout = value;
+  }
+  public resetTimeout() {
+    this._timeout = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get timeoutInput() {
+    return this._timeout;
+  }
+
+  // unhealthy_threshold - computed: false, optional: true, required: false
+  private _unhealthyThreshold?: number; 
+  public get unhealthyThreshold() {
+    return this.getNumberAttribute('unhealthy_threshold');
+  }
+  public set unhealthyThreshold(value: number) {
+    this._unhealthyThreshold = value;
+  }
+  public resetUnhealthyThreshold() {
+    this._unhealthyThreshold = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get unhealthyThresholdInput() {
+    return this._unhealthyThreshold;
+  }
+
+  // http_options - computed: false, optional: true, required: false
+  private _httpOptions = new LbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptionsOutputReference(this, "http_options");
+  public get httpOptions() {
+    return this._httpOptions;
+  }
+  public putHttpOptions(value: LbNetworkLoadBalancerAttachedTargetGroupHealthcheckHttpOptions) {
+    this._httpOptions.internalValue = value;
+  }
+  public resetHttpOptions() {
+    this._httpOptions.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get httpOptionsInput() {
+    return this._httpOptions.internalValue;
+  }
+
+  // tcp_options - computed: false, optional: true, required: false
+  private _tcpOptions = new LbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptionsOutputReference(this, "tcp_options");
+  public get tcpOptions() {
+    return this._tcpOptions;
+  }
+  public putTcpOptions(value: LbNetworkLoadBalancerAttachedTargetGroupHealthcheckTcpOptions) {
+    this._tcpOptions.internalValue = value;
+  }
+  public resetTcpOptions() {
+    this._tcpOptions.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tcpOptionsInput() {
+    return this._tcpOptions.internalValue;
+  }
+}
+
+export class LbNetworkLoadBalancerAttachedTargetGroupHealthcheckList extends cdktf.ComplexList {
+  public internalValue? : LbNetworkLoadBalancerAttachedTargetGroupHealthcheck[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): LbNetworkLoadBalancerAttachedTargetGroupHealthcheckOutputReference {
+    return new LbNetworkLoadBalancerAttachedTargetGroupHealthcheckOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface LbNetworkLoadBalancerAttachedTargetGroup {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_network_load_balancer#target_group_id LbNetworkLoadBalancer#target_group_id}
@@ -276,6 +492,102 @@ export function lbNetworkLoadBalancerAttachedTargetGroupToTerraform(struct?: LbN
   }
 }
 
+export class LbNetworkLoadBalancerAttachedTargetGroupOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): LbNetworkLoadBalancerAttachedTargetGroup | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._targetGroupId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.targetGroupId = this._targetGroupId;
+    }
+    if (this._healthcheck?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.healthcheck = this._healthcheck?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: LbNetworkLoadBalancerAttachedTargetGroup | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._targetGroupId = undefined;
+      this._healthcheck.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._targetGroupId = value.targetGroupId;
+      this._healthcheck.internalValue = value.healthcheck;
+    }
+  }
+
+  // target_group_id - computed: false, optional: false, required: true
+  private _targetGroupId?: string; 
+  public get targetGroupId() {
+    return this.getStringAttribute('target_group_id');
+  }
+  public set targetGroupId(value: string) {
+    this._targetGroupId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get targetGroupIdInput() {
+    return this._targetGroupId;
+  }
+
+  // healthcheck - computed: false, optional: false, required: true
+  private _healthcheck = new LbNetworkLoadBalancerAttachedTargetGroupHealthcheckList(this, "healthcheck", false);
+  public get healthcheck() {
+    return this._healthcheck;
+  }
+  public putHealthcheck(value: LbNetworkLoadBalancerAttachedTargetGroupHealthcheck[] | cdktf.IResolvable) {
+    this._healthcheck.internalValue = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get healthcheckInput() {
+    return this._healthcheck.internalValue;
+  }
+}
+
+export class LbNetworkLoadBalancerAttachedTargetGroupList extends cdktf.ComplexList {
+  public internalValue? : LbNetworkLoadBalancerAttachedTargetGroup[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): LbNetworkLoadBalancerAttachedTargetGroupOutputReference {
+    return new LbNetworkLoadBalancerAttachedTargetGroupOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface LbNetworkLoadBalancerListenerExternalAddressSpec {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_network_load_balancer#address LbNetworkLoadBalancer#address}
@@ -530,6 +842,190 @@ export function lbNetworkLoadBalancerListenerToTerraform(struct?: LbNetworkLoadB
   }
 }
 
+export class LbNetworkLoadBalancerListenerOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): LbNetworkLoadBalancerListener | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._port !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.port = this._port;
+    }
+    if (this._protocol !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.protocol = this._protocol;
+    }
+    if (this._targetPort !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.targetPort = this._targetPort;
+    }
+    if (this._externalAddressSpec?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.externalAddressSpec = this._externalAddressSpec?.internalValue;
+    }
+    if (this._internalAddressSpec?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.internalAddressSpec = this._internalAddressSpec?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: LbNetworkLoadBalancerListener | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._port = undefined;
+      this._protocol = undefined;
+      this._targetPort = undefined;
+      this._externalAddressSpec.internalValue = undefined;
+      this._internalAddressSpec.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._port = value.port;
+      this._protocol = value.protocol;
+      this._targetPort = value.targetPort;
+      this._externalAddressSpec.internalValue = value.externalAddressSpec;
+      this._internalAddressSpec.internalValue = value.internalAddressSpec;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // port - computed: false, optional: false, required: true
+  private _port?: number; 
+  public get port() {
+    return this.getNumberAttribute('port');
+  }
+  public set port(value: number) {
+    this._port = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get portInput() {
+    return this._port;
+  }
+
+  // protocol - computed: true, optional: true, required: false
+  private _protocol?: string; 
+  public get protocol() {
+    return this.getStringAttribute('protocol');
+  }
+  public set protocol(value: string) {
+    this._protocol = value;
+  }
+  public resetProtocol() {
+    this._protocol = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get protocolInput() {
+    return this._protocol;
+  }
+
+  // target_port - computed: true, optional: true, required: false
+  private _targetPort?: number; 
+  public get targetPort() {
+    return this.getNumberAttribute('target_port');
+  }
+  public set targetPort(value: number) {
+    this._targetPort = value;
+  }
+  public resetTargetPort() {
+    this._targetPort = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get targetPortInput() {
+    return this._targetPort;
+  }
+
+  // external_address_spec - computed: false, optional: true, required: false
+  private _externalAddressSpec = new LbNetworkLoadBalancerListenerExternalAddressSpecOutputReference(this, "external_address_spec");
+  public get externalAddressSpec() {
+    return this._externalAddressSpec;
+  }
+  public putExternalAddressSpec(value: LbNetworkLoadBalancerListenerExternalAddressSpec) {
+    this._externalAddressSpec.internalValue = value;
+  }
+  public resetExternalAddressSpec() {
+    this._externalAddressSpec.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get externalAddressSpecInput() {
+    return this._externalAddressSpec.internalValue;
+  }
+
+  // internal_address_spec - computed: false, optional: true, required: false
+  private _internalAddressSpec = new LbNetworkLoadBalancerListenerInternalAddressSpecOutputReference(this, "internal_address_spec");
+  public get internalAddressSpec() {
+    return this._internalAddressSpec;
+  }
+  public putInternalAddressSpec(value: LbNetworkLoadBalancerListenerInternalAddressSpec) {
+    this._internalAddressSpec.internalValue = value;
+  }
+  public resetInternalAddressSpec() {
+    this._internalAddressSpec.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get internalAddressSpecInput() {
+    return this._internalAddressSpec.internalValue;
+  }
+}
+
+export class LbNetworkLoadBalancerListenerList extends cdktf.ComplexList {
+  public internalValue? : LbNetworkLoadBalancerListener[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): LbNetworkLoadBalancerListenerOutputReference {
+    return new LbNetworkLoadBalancerListenerOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface LbNetworkLoadBalancerTimeouts {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_network_load_balancer#create LbNetworkLoadBalancer#create}
@@ -559,6 +1055,7 @@ export function lbNetworkLoadBalancerTimeoutsToTerraform(struct?: LbNetworkLoadB
 
 export class LbNetworkLoadBalancerTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -568,7 +1065,10 @@ export class LbNetworkLoadBalancerTimeoutsOutputReference extends cdktf.ComplexO
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): LbNetworkLoadBalancerTimeouts | undefined {
+  public get internalValue(): LbNetworkLoadBalancerTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -586,15 +1086,21 @@ export class LbNetworkLoadBalancerTimeoutsOutputReference extends cdktf.ComplexO
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: LbNetworkLoadBalancerTimeouts | undefined) {
+  public set internalValue(value: LbNetworkLoadBalancerTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -686,12 +1192,13 @@ export class LbNetworkLoadBalancer extends cdktf.TerraformResource {
     });
     this._description = config.description;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._regionId = config.regionId;
     this._type = config.type;
-    this._attachedTargetGroup = config.attachedTargetGroup;
-    this._listener = config.listener;
+    this._attachedTargetGroup.internalValue = config.attachedTargetGroup;
+    this._listener.internalValue = config.listener;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -737,8 +1244,19 @@ export class LbNetworkLoadBalancer extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: false, optional: true, required: false
@@ -806,37 +1324,35 @@ export class LbNetworkLoadBalancer extends cdktf.TerraformResource {
   }
 
   // attached_target_group - computed: false, optional: true, required: false
-  private _attachedTargetGroup?: LbNetworkLoadBalancerAttachedTargetGroup[] | cdktf.IResolvable; 
+  private _attachedTargetGroup = new LbNetworkLoadBalancerAttachedTargetGroupList(this, "attached_target_group", true);
   public get attachedTargetGroup() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('attached_target_group')));
+    return this._attachedTargetGroup;
   }
-  public set attachedTargetGroup(value: LbNetworkLoadBalancerAttachedTargetGroup[] | cdktf.IResolvable) {
-    this._attachedTargetGroup = value;
+  public putAttachedTargetGroup(value: LbNetworkLoadBalancerAttachedTargetGroup[] | cdktf.IResolvable) {
+    this._attachedTargetGroup.internalValue = value;
   }
   public resetAttachedTargetGroup() {
-    this._attachedTargetGroup = undefined;
+    this._attachedTargetGroup.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get attachedTargetGroupInput() {
-    return this._attachedTargetGroup;
+    return this._attachedTargetGroup.internalValue;
   }
 
   // listener - computed: false, optional: true, required: false
-  private _listener?: LbNetworkLoadBalancerListener[] | cdktf.IResolvable; 
+  private _listener = new LbNetworkLoadBalancerListenerList(this, "listener", true);
   public get listener() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('listener')));
+    return this._listener;
   }
-  public set listener(value: LbNetworkLoadBalancerListener[] | cdktf.IResolvable) {
-    this._listener = value;
+  public putListener(value: LbNetworkLoadBalancerListener[] | cdktf.IResolvable) {
+    this._listener.internalValue = value;
   }
   public resetListener() {
-    this._listener = undefined;
+    this._listener.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get listenerInput() {
-    return this._listener;
+    return this._listener.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -863,12 +1379,13 @@ export class LbNetworkLoadBalancer extends cdktf.TerraformResource {
     return {
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       region_id: cdktf.stringToTerraform(this._regionId),
       type: cdktf.stringToTerraform(this._type),
-      attached_target_group: cdktf.listMapper(lbNetworkLoadBalancerAttachedTargetGroupToTerraform)(this._attachedTargetGroup),
-      listener: cdktf.listMapper(lbNetworkLoadBalancerListenerToTerraform)(this._listener),
+      attached_target_group: cdktf.listMapper(lbNetworkLoadBalancerAttachedTargetGroupToTerraform)(this._attachedTargetGroup.internalValue),
+      listener: cdktf.listMapper(lbNetworkLoadBalancerListenerToTerraform)(this._listener.internalValue),
       timeouts: lbNetworkLoadBalancerTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

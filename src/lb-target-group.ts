@@ -16,6 +16,13 @@ export interface LbTargetGroupConfig extends cdktf.TerraformMetaArguments {
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_target_group#id LbTargetGroup#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_target_group#labels LbTargetGroup#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -62,6 +69,102 @@ export function lbTargetGroupTargetToTerraform(struct?: LbTargetGroupTarget | cd
   }
 }
 
+export class LbTargetGroupTargetOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): LbTargetGroupTarget | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._address !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.address = this._address;
+    }
+    if (this._subnetId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetId = this._subnetId;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: LbTargetGroupTarget | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._address = undefined;
+      this._subnetId = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._address = value.address;
+      this._subnetId = value.subnetId;
+    }
+  }
+
+  // address - computed: false, optional: false, required: true
+  private _address?: string; 
+  public get address() {
+    return this.getStringAttribute('address');
+  }
+  public set address(value: string) {
+    this._address = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get addressInput() {
+    return this._address;
+  }
+
+  // subnet_id - computed: false, optional: false, required: true
+  private _subnetId?: string; 
+  public get subnetId() {
+    return this.getStringAttribute('subnet_id');
+  }
+  public set subnetId(value: string) {
+    this._subnetId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdInput() {
+    return this._subnetId;
+  }
+}
+
+export class LbTargetGroupTargetList extends cdktf.ComplexList {
+  public internalValue? : LbTargetGroupTarget[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): LbTargetGroupTargetOutputReference {
+    return new LbTargetGroupTargetOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface LbTargetGroupTimeouts {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/lb_target_group#create LbTargetGroup#create}
@@ -91,6 +194,7 @@ export function lbTargetGroupTimeoutsToTerraform(struct?: LbTargetGroupTimeoutsO
 
 export class LbTargetGroupTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -100,7 +204,10 @@ export class LbTargetGroupTimeoutsOutputReference extends cdktf.ComplexObject {
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): LbTargetGroupTimeouts | undefined {
+  public get internalValue(): LbTargetGroupTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -118,15 +225,21 @@ export class LbTargetGroupTimeoutsOutputReference extends cdktf.ComplexObject {
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: LbTargetGroupTimeouts | undefined) {
+  public set internalValue(value: LbTargetGroupTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -218,10 +331,11 @@ export class LbTargetGroup extends cdktf.TerraformResource {
     });
     this._description = config.description;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._regionId = config.regionId;
-    this._target = config.target;
+    this._target.internalValue = config.target;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -267,8 +381,19 @@ export class LbTargetGroup extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: false, optional: true, required: false
@@ -320,20 +445,19 @@ export class LbTargetGroup extends cdktf.TerraformResource {
   }
 
   // target - computed: false, optional: true, required: false
-  private _target?: LbTargetGroupTarget[] | cdktf.IResolvable; 
+  private _target = new LbTargetGroupTargetList(this, "target", true);
   public get target() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('target')));
+    return this._target;
   }
-  public set target(value: LbTargetGroupTarget[] | cdktf.IResolvable) {
-    this._target = value;
+  public putTarget(value: LbTargetGroupTarget[] | cdktf.IResolvable) {
+    this._target.internalValue = value;
   }
   public resetTarget() {
-    this._target = undefined;
+    this._target.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get targetInput() {
-    return this._target;
+    return this._target.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -360,10 +484,11 @@ export class LbTargetGroup extends cdktf.TerraformResource {
     return {
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       region_id: cdktf.stringToTerraform(this._regionId),
-      target: cdktf.listMapper(lbTargetGroupTargetToTerraform)(this._target),
+      target: cdktf.listMapper(lbTargetGroupTargetToTerraform)(this._target.internalValue),
       timeouts: lbTargetGroupTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

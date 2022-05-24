@@ -12,6 +12,13 @@ export interface DataYandexComputeInstanceConfig extends cdktf.TerraformMetaArgu
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance#id DataYandexComputeInstance#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance#instance_id DataYandexComputeInstance#instance_id}
   */
   readonly instanceId?: string;
@@ -823,6 +830,130 @@ export function dataYandexComputeInstancePlacementPolicyHostAffinityRulesToTerra
   }
 }
 
+export class DataYandexComputeInstancePlacementPolicyHostAffinityRulesOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexComputeInstancePlacementPolicyHostAffinityRules | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._key !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.key = this._key;
+    }
+    if (this._op !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.op = this._op;
+    }
+    if (this._values !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.values = this._values;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexComputeInstancePlacementPolicyHostAffinityRules | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._key = undefined;
+      this._op = undefined;
+      this._values = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._key = value.key;
+      this._op = value.op;
+      this._values = value.values;
+    }
+  }
+
+  // key - computed: true, optional: true, required: false
+  private _key?: string; 
+  public get key() {
+    return this.getStringAttribute('key');
+  }
+  public set key(value: string) {
+    this._key = value;
+  }
+  public resetKey() {
+    this._key = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get keyInput() {
+    return this._key;
+  }
+
+  // op - computed: true, optional: true, required: false
+  private _op?: string; 
+  public get op() {
+    return this.getStringAttribute('op');
+  }
+  public set op(value: string) {
+    this._op = value;
+  }
+  public resetOp() {
+    this._op = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get opInput() {
+    return this._op;
+  }
+
+  // values - computed: true, optional: true, required: false
+  private _values?: string[]; 
+  public get values() {
+    return this.getListAttribute('values');
+  }
+  public set values(value: string[]) {
+    this._values = value;
+  }
+  public resetValues() {
+    this._values = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get valuesInput() {
+    return this._values;
+  }
+}
+
+export class DataYandexComputeInstancePlacementPolicyHostAffinityRulesList extends cdktf.ComplexList {
+  public internalValue? : DataYandexComputeInstancePlacementPolicyHostAffinityRules[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexComputeInstancePlacementPolicyHostAffinityRulesOutputReference {
+    return new DataYandexComputeInstancePlacementPolicyHostAffinityRulesOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataYandexComputeInstancePlacementPolicy {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance#host_affinity_rules DataYandexComputeInstance#host_affinity_rules}
@@ -859,9 +990,9 @@ export class DataYandexComputeInstancePlacementPolicyOutputReference extends cdk
   public get internalValue(): DataYandexComputeInstancePlacementPolicy | undefined {
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
-    if (this._hostAffinityRules !== undefined) {
+    if (this._hostAffinityRules?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.hostAffinityRules = this._hostAffinityRules;
+      internalValueResult.hostAffinityRules = this._hostAffinityRules?.internalValue;
     }
     if (this._placementGroupId !== undefined) {
       hasAnyValues = true;
@@ -873,31 +1004,30 @@ export class DataYandexComputeInstancePlacementPolicyOutputReference extends cdk
   public set internalValue(value: DataYandexComputeInstancePlacementPolicy | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
-      this._hostAffinityRules = undefined;
+      this._hostAffinityRules.internalValue = undefined;
       this._placementGroupId = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
-      this._hostAffinityRules = value.hostAffinityRules;
+      this._hostAffinityRules.internalValue = value.hostAffinityRules;
       this._placementGroupId = value.placementGroupId;
     }
   }
 
   // host_affinity_rules - computed: true, optional: true, required: false
-  private _hostAffinityRules?: DataYandexComputeInstancePlacementPolicyHostAffinityRules[] | cdktf.IResolvable; 
+  private _hostAffinityRules = new DataYandexComputeInstancePlacementPolicyHostAffinityRulesList(this, "host_affinity_rules", false);
   public get hostAffinityRules() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('host_affinity_rules');
+    return this._hostAffinityRules;
   }
-  public set hostAffinityRules(value: DataYandexComputeInstancePlacementPolicyHostAffinityRules[] | cdktf.IResolvable) {
-    this._hostAffinityRules = value;
+  public putHostAffinityRules(value: DataYandexComputeInstancePlacementPolicyHostAffinityRules[] | cdktf.IResolvable) {
+    this._hostAffinityRules.internalValue = value;
   }
   public resetHostAffinityRules() {
-    this._hostAffinityRules = undefined;
+    this._hostAffinityRules.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get hostAffinityRulesInput() {
-    return this._hostAffinityRules;
+    return this._hostAffinityRules.internalValue;
   }
 
   // placement_group_id - computed: false, optional: true, required: false
@@ -952,6 +1082,7 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
       lifecycle: config.lifecycle
     });
     this._folderId = config.folderId;
+    this._id = config.id;
     this._instanceId = config.instanceId;
     this._name = config.name;
     this._placementPolicy.internalValue = config.placementPolicy;
@@ -999,8 +1130,19 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // instance_id - computed: true, optional: true, required: false
@@ -1020,13 +1162,15 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
   }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // metadata - computed: true, optional: false, required: false
-  public metadata(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'metadata').lookup(key);
+  private _metadata = new cdktf.StringMap(this, "metadata");
+  public get metadata() {
+    return this._metadata;
   }
 
   // name - computed: true, optional: true, required: false
@@ -1117,6 +1261,7 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       instance_id: cdktf.stringToTerraform(this._instanceId),
       name: cdktf.stringToTerraform(this._name),
       placement_policy: dataYandexComputeInstancePlacementPolicyToTerraform(this._placementPolicy.internalValue),

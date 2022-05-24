@@ -16,6 +16,13 @@ export interface AlbVirtualHostConfig extends cdktf.TerraformMetaArguments {
   */
   readonly httpRouterId: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_virtual_host#id AlbVirtualHost#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_virtual_host#name AlbVirtualHost#name}
   */
   readonly name: string;
@@ -76,6 +83,149 @@ export function albVirtualHostModifyRequestHeadersToTerraform(struct?: AlbVirtua
   }
 }
 
+export class AlbVirtualHostModifyRequestHeadersOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbVirtualHostModifyRequestHeaders | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._append !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.append = this._append;
+    }
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._remove !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.remove = this._remove;
+    }
+    if (this._replace !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.replace = this._replace;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbVirtualHostModifyRequestHeaders | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._append = undefined;
+      this._name = undefined;
+      this._remove = undefined;
+      this._replace = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._append = value.append;
+      this._name = value.name;
+      this._remove = value.remove;
+      this._replace = value.replace;
+    }
+  }
+
+  // append - computed: false, optional: true, required: false
+  private _append?: string; 
+  public get append() {
+    return this.getStringAttribute('append');
+  }
+  public set append(value: string) {
+    this._append = value;
+  }
+  public resetAppend() {
+    this._append = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get appendInput() {
+    return this._append;
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // remove - computed: false, optional: true, required: false
+  private _remove?: boolean | cdktf.IResolvable; 
+  public get remove() {
+    return this.getBooleanAttribute('remove');
+  }
+  public set remove(value: boolean | cdktf.IResolvable) {
+    this._remove = value;
+  }
+  public resetRemove() {
+    this._remove = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get removeInput() {
+    return this._remove;
+  }
+
+  // replace - computed: false, optional: true, required: false
+  private _replace?: string; 
+  public get replace() {
+    return this.getStringAttribute('replace');
+  }
+  public set replace(value: string) {
+    this._replace = value;
+  }
+  public resetReplace() {
+    this._replace = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get replaceInput() {
+    return this._replace;
+  }
+}
+
+export class AlbVirtualHostModifyRequestHeadersList extends cdktf.ComplexList {
+  public internalValue? : AlbVirtualHostModifyRequestHeaders[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbVirtualHostModifyRequestHeadersOutputReference {
+    return new AlbVirtualHostModifyRequestHeadersOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbVirtualHostModifyResponseHeaders {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_virtual_host#append AlbVirtualHost#append}
@@ -108,6 +258,149 @@ export function albVirtualHostModifyResponseHeadersToTerraform(struct?: AlbVirtu
   }
 }
 
+export class AlbVirtualHostModifyResponseHeadersOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbVirtualHostModifyResponseHeaders | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._append !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.append = this._append;
+    }
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._remove !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.remove = this._remove;
+    }
+    if (this._replace !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.replace = this._replace;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbVirtualHostModifyResponseHeaders | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._append = undefined;
+      this._name = undefined;
+      this._remove = undefined;
+      this._replace = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._append = value.append;
+      this._name = value.name;
+      this._remove = value.remove;
+      this._replace = value.replace;
+    }
+  }
+
+  // append - computed: false, optional: true, required: false
+  private _append?: string; 
+  public get append() {
+    return this.getStringAttribute('append');
+  }
+  public set append(value: string) {
+    this._append = value;
+  }
+  public resetAppend() {
+    this._append = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get appendInput() {
+    return this._append;
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // remove - computed: false, optional: true, required: false
+  private _remove?: boolean | cdktf.IResolvable; 
+  public get remove() {
+    return this.getBooleanAttribute('remove');
+  }
+  public set remove(value: boolean | cdktf.IResolvable) {
+    this._remove = value;
+  }
+  public resetRemove() {
+    this._remove = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get removeInput() {
+    return this._remove;
+  }
+
+  // replace - computed: false, optional: true, required: false
+  private _replace?: string; 
+  public get replace() {
+    return this.getStringAttribute('replace');
+  }
+  public set replace(value: string) {
+    this._replace = value;
+  }
+  public resetReplace() {
+    this._replace = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get replaceInput() {
+    return this._replace;
+  }
+}
+
+export class AlbVirtualHostModifyResponseHeadersList extends cdktf.ComplexList {
+  public internalValue? : AlbVirtualHostModifyResponseHeaders[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbVirtualHostModifyResponseHeadersOutputReference {
+    return new AlbVirtualHostModifyResponseHeadersOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbVirtualHostRouteGrpcRouteGrpcMatchFqmn {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_virtual_host#exact AlbVirtualHost#exact}
@@ -219,6 +512,86 @@ export function albVirtualHostRouteGrpcRouteGrpcMatchToTerraform(struct?: AlbVir
   }
 }
 
+export class AlbVirtualHostRouteGrpcRouteGrpcMatchOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbVirtualHostRouteGrpcRouteGrpcMatch | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._fqmn?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.fqmn = this._fqmn?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbVirtualHostRouteGrpcRouteGrpcMatch | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._fqmn.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._fqmn.internalValue = value.fqmn;
+    }
+  }
+
+  // fqmn - computed: false, optional: true, required: false
+  private _fqmn = new AlbVirtualHostRouteGrpcRouteGrpcMatchFqmnOutputReference(this, "fqmn");
+  public get fqmn() {
+    return this._fqmn;
+  }
+  public putFqmn(value: AlbVirtualHostRouteGrpcRouteGrpcMatchFqmn) {
+    this._fqmn.internalValue = value;
+  }
+  public resetFqmn() {
+    this._fqmn.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get fqmnInput() {
+    return this._fqmn.internalValue;
+  }
+}
+
+export class AlbVirtualHostRouteGrpcRouteGrpcMatchList extends cdktf.ComplexList {
+  public internalValue? : AlbVirtualHostRouteGrpcRouteGrpcMatch[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbVirtualHostRouteGrpcRouteGrpcMatchOutputReference {
+    return new AlbVirtualHostRouteGrpcRouteGrpcMatchOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbVirtualHostRouteGrpcRouteGrpcRouteAction {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_virtual_host#auto_host_rewrite AlbVirtualHost#auto_host_rewrite}
@@ -501,9 +874,9 @@ export class AlbVirtualHostRouteGrpcRouteOutputReference extends cdktf.ComplexOb
   public get internalValue(): AlbVirtualHostRouteGrpcRoute | undefined {
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
-    if (this._grpcMatch !== undefined) {
+    if (this._grpcMatch?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.grpcMatch = this._grpcMatch;
+      internalValueResult.grpcMatch = this._grpcMatch?.internalValue;
     }
     if (this._grpcRouteAction?.internalValue !== undefined) {
       hasAnyValues = true;
@@ -519,33 +892,32 @@ export class AlbVirtualHostRouteGrpcRouteOutputReference extends cdktf.ComplexOb
   public set internalValue(value: AlbVirtualHostRouteGrpcRoute | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
-      this._grpcMatch = undefined;
+      this._grpcMatch.internalValue = undefined;
       this._grpcRouteAction.internalValue = undefined;
       this._grpcStatusResponseAction.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
-      this._grpcMatch = value.grpcMatch;
+      this._grpcMatch.internalValue = value.grpcMatch;
       this._grpcRouteAction.internalValue = value.grpcRouteAction;
       this._grpcStatusResponseAction.internalValue = value.grpcStatusResponseAction;
     }
   }
 
   // grpc_match - computed: false, optional: true, required: false
-  private _grpcMatch?: AlbVirtualHostRouteGrpcRouteGrpcMatch[] | cdktf.IResolvable; 
+  private _grpcMatch = new AlbVirtualHostRouteGrpcRouteGrpcMatchList(this, "grpc_match", false);
   public get grpcMatch() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('grpc_match');
+    return this._grpcMatch;
   }
-  public set grpcMatch(value: AlbVirtualHostRouteGrpcRouteGrpcMatch[] | cdktf.IResolvable) {
-    this._grpcMatch = value;
+  public putGrpcMatch(value: AlbVirtualHostRouteGrpcRouteGrpcMatch[] | cdktf.IResolvable) {
+    this._grpcMatch.internalValue = value;
   }
   public resetGrpcMatch() {
-    this._grpcMatch = undefined;
+    this._grpcMatch.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get grpcMatchInput() {
-    return this._grpcMatch;
+    return this._grpcMatch.internalValue;
   }
 
   // grpc_route_action - computed: false, optional: true, required: false
@@ -788,6 +1160,108 @@ export function albVirtualHostRouteHttpRouteHttpMatchToTerraform(struct?: AlbVir
   }
 }
 
+export class AlbVirtualHostRouteHttpRouteHttpMatchOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbVirtualHostRouteHttpRouteHttpMatch | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._httpMethod !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.httpMethod = this._httpMethod;
+    }
+    if (this._path?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.path = this._path?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbVirtualHostRouteHttpRouteHttpMatch | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._httpMethod = undefined;
+      this._path.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._httpMethod = value.httpMethod;
+      this._path.internalValue = value.path;
+    }
+  }
+
+  // http_method - computed: false, optional: true, required: false
+  private _httpMethod?: string[]; 
+  public get httpMethod() {
+    return cdktf.Fn.tolist(this.getListAttribute('http_method'));
+  }
+  public set httpMethod(value: string[]) {
+    this._httpMethod = value;
+  }
+  public resetHttpMethod() {
+    this._httpMethod = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get httpMethodInput() {
+    return this._httpMethod;
+  }
+
+  // path - computed: false, optional: true, required: false
+  private _path = new AlbVirtualHostRouteHttpRouteHttpMatchPathOutputReference(this, "path");
+  public get path() {
+    return this._path;
+  }
+  public putPath(value: AlbVirtualHostRouteHttpRouteHttpMatchPath) {
+    this._path.internalValue = value;
+  }
+  public resetPath() {
+    this._path.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get pathInput() {
+    return this._path.internalValue;
+  }
+}
+
+export class AlbVirtualHostRouteHttpRouteHttpMatchList extends cdktf.ComplexList {
+  public internalValue? : AlbVirtualHostRouteHttpRouteHttpMatch[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbVirtualHostRouteHttpRouteHttpMatchOutputReference {
+    return new AlbVirtualHostRouteHttpRouteHttpMatchOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbVirtualHostRouteHttpRouteHttpRouteAction {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_virtual_host#auto_host_rewrite AlbVirtualHost#auto_host_rewrite}
@@ -1297,9 +1771,9 @@ export class AlbVirtualHostRouteHttpRouteOutputReference extends cdktf.ComplexOb
       hasAnyValues = true;
       internalValueResult.directResponseAction = this._directResponseAction?.internalValue;
     }
-    if (this._httpMatch !== undefined) {
+    if (this._httpMatch?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.httpMatch = this._httpMatch;
+      internalValueResult.httpMatch = this._httpMatch?.internalValue;
     }
     if (this._httpRouteAction?.internalValue !== undefined) {
       hasAnyValues = true;
@@ -1316,14 +1790,14 @@ export class AlbVirtualHostRouteHttpRouteOutputReference extends cdktf.ComplexOb
     if (value === undefined) {
       this.isEmptyObject = false;
       this._directResponseAction.internalValue = undefined;
-      this._httpMatch = undefined;
+      this._httpMatch.internalValue = undefined;
       this._httpRouteAction.internalValue = undefined;
       this._redirectAction.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._directResponseAction.internalValue = value.directResponseAction;
-      this._httpMatch = value.httpMatch;
+      this._httpMatch.internalValue = value.httpMatch;
       this._httpRouteAction.internalValue = value.httpRouteAction;
       this._redirectAction.internalValue = value.redirectAction;
     }
@@ -1346,20 +1820,19 @@ export class AlbVirtualHostRouteHttpRouteOutputReference extends cdktf.ComplexOb
   }
 
   // http_match - computed: false, optional: true, required: false
-  private _httpMatch?: AlbVirtualHostRouteHttpRouteHttpMatch[] | cdktf.IResolvable; 
+  private _httpMatch = new AlbVirtualHostRouteHttpRouteHttpMatchList(this, "http_match", false);
   public get httpMatch() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('http_match');
+    return this._httpMatch;
   }
-  public set httpMatch(value: AlbVirtualHostRouteHttpRouteHttpMatch[] | cdktf.IResolvable) {
-    this._httpMatch = value;
+  public putHttpMatch(value: AlbVirtualHostRouteHttpRouteHttpMatch[] | cdktf.IResolvable) {
+    this._httpMatch.internalValue = value;
   }
   public resetHttpMatch() {
-    this._httpMatch = undefined;
+    this._httpMatch.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get httpMatchInput() {
-    return this._httpMatch;
+    return this._httpMatch.internalValue;
   }
 
   // http_route_action - computed: false, optional: true, required: false
@@ -1425,6 +1898,130 @@ export function albVirtualHostRouteToTerraform(struct?: AlbVirtualHostRoute | cd
   }
 }
 
+export class AlbVirtualHostRouteOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): AlbVirtualHostRoute | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._grpcRoute?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.grpcRoute = this._grpcRoute?.internalValue;
+    }
+    if (this._httpRoute?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.httpRoute = this._httpRoute?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: AlbVirtualHostRoute | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._grpcRoute.internalValue = undefined;
+      this._httpRoute.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._grpcRoute.internalValue = value.grpcRoute;
+      this._httpRoute.internalValue = value.httpRoute;
+    }
+  }
+
+  // name - computed: false, optional: true, required: false
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  public resetName() {
+    this._name = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // grpc_route - computed: false, optional: true, required: false
+  private _grpcRoute = new AlbVirtualHostRouteGrpcRouteOutputReference(this, "grpc_route");
+  public get grpcRoute() {
+    return this._grpcRoute;
+  }
+  public putGrpcRoute(value: AlbVirtualHostRouteGrpcRoute) {
+    this._grpcRoute.internalValue = value;
+  }
+  public resetGrpcRoute() {
+    this._grpcRoute.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get grpcRouteInput() {
+    return this._grpcRoute.internalValue;
+  }
+
+  // http_route - computed: false, optional: true, required: false
+  private _httpRoute = new AlbVirtualHostRouteHttpRouteOutputReference(this, "http_route");
+  public get httpRoute() {
+    return this._httpRoute;
+  }
+  public putHttpRoute(value: AlbVirtualHostRouteHttpRoute) {
+    this._httpRoute.internalValue = value;
+  }
+  public resetHttpRoute() {
+    this._httpRoute.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get httpRouteInput() {
+    return this._httpRoute.internalValue;
+  }
+}
+
+export class AlbVirtualHostRouteList extends cdktf.ComplexList {
+  public internalValue? : AlbVirtualHostRoute[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): AlbVirtualHostRouteOutputReference {
+    return new AlbVirtualHostRouteOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface AlbVirtualHostTimeouts {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/alb_virtual_host#create AlbVirtualHost#create}
@@ -1454,6 +2051,7 @@ export function albVirtualHostTimeoutsToTerraform(struct?: AlbVirtualHostTimeout
 
 export class AlbVirtualHostTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -1463,7 +2061,10 @@ export class AlbVirtualHostTimeoutsOutputReference extends cdktf.ComplexObject {
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): AlbVirtualHostTimeouts | undefined {
+  public get internalValue(): AlbVirtualHostTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -1481,15 +2082,21 @@ export class AlbVirtualHostTimeoutsOutputReference extends cdktf.ComplexObject {
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: AlbVirtualHostTimeouts | undefined) {
+  public set internalValue(value: AlbVirtualHostTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -1581,10 +2188,11 @@ export class AlbVirtualHost extends cdktf.TerraformResource {
     });
     this._authority = config.authority;
     this._httpRouterId = config.httpRouterId;
+    this._id = config.id;
     this._name = config.name;
-    this._modifyRequestHeaders = config.modifyRequestHeaders;
-    this._modifyResponseHeaders = config.modifyResponseHeaders;
-    this._route = config.route;
+    this._modifyRequestHeaders.internalValue = config.modifyRequestHeaders;
+    this._modifyResponseHeaders.internalValue = config.modifyResponseHeaders;
+    this._route.internalValue = config.route;
     this._timeouts.internalValue = config.timeouts;
   }
 
@@ -1622,8 +2230,19 @@ export class AlbVirtualHost extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // name - computed: false, optional: false, required: true
@@ -1640,54 +2259,51 @@ export class AlbVirtualHost extends cdktf.TerraformResource {
   }
 
   // modify_request_headers - computed: false, optional: true, required: false
-  private _modifyRequestHeaders?: AlbVirtualHostModifyRequestHeaders[] | cdktf.IResolvable; 
+  private _modifyRequestHeaders = new AlbVirtualHostModifyRequestHeadersList(this, "modify_request_headers", false);
   public get modifyRequestHeaders() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('modify_request_headers');
+    return this._modifyRequestHeaders;
   }
-  public set modifyRequestHeaders(value: AlbVirtualHostModifyRequestHeaders[] | cdktf.IResolvable) {
-    this._modifyRequestHeaders = value;
+  public putModifyRequestHeaders(value: AlbVirtualHostModifyRequestHeaders[] | cdktf.IResolvable) {
+    this._modifyRequestHeaders.internalValue = value;
   }
   public resetModifyRequestHeaders() {
-    this._modifyRequestHeaders = undefined;
+    this._modifyRequestHeaders.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get modifyRequestHeadersInput() {
-    return this._modifyRequestHeaders;
+    return this._modifyRequestHeaders.internalValue;
   }
 
   // modify_response_headers - computed: false, optional: true, required: false
-  private _modifyResponseHeaders?: AlbVirtualHostModifyResponseHeaders[] | cdktf.IResolvable; 
+  private _modifyResponseHeaders = new AlbVirtualHostModifyResponseHeadersList(this, "modify_response_headers", false);
   public get modifyResponseHeaders() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('modify_response_headers');
+    return this._modifyResponseHeaders;
   }
-  public set modifyResponseHeaders(value: AlbVirtualHostModifyResponseHeaders[] | cdktf.IResolvable) {
-    this._modifyResponseHeaders = value;
+  public putModifyResponseHeaders(value: AlbVirtualHostModifyResponseHeaders[] | cdktf.IResolvable) {
+    this._modifyResponseHeaders.internalValue = value;
   }
   public resetModifyResponseHeaders() {
-    this._modifyResponseHeaders = undefined;
+    this._modifyResponseHeaders.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get modifyResponseHeadersInput() {
-    return this._modifyResponseHeaders;
+    return this._modifyResponseHeaders.internalValue;
   }
 
   // route - computed: false, optional: true, required: false
-  private _route?: AlbVirtualHostRoute[] | cdktf.IResolvable; 
+  private _route = new AlbVirtualHostRouteList(this, "route", false);
   public get route() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('route');
+    return this._route;
   }
-  public set route(value: AlbVirtualHostRoute[] | cdktf.IResolvable) {
-    this._route = value;
+  public putRoute(value: AlbVirtualHostRoute[] | cdktf.IResolvable) {
+    this._route.internalValue = value;
   }
   public resetRoute() {
-    this._route = undefined;
+    this._route.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get routeInput() {
-    return this._route;
+    return this._route.internalValue;
   }
 
   // timeouts - computed: false, optional: true, required: false
@@ -1714,10 +2330,11 @@ export class AlbVirtualHost extends cdktf.TerraformResource {
     return {
       authority: cdktf.listMapper(cdktf.stringToTerraform)(this._authority),
       http_router_id: cdktf.stringToTerraform(this._httpRouterId),
+      id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
-      modify_request_headers: cdktf.listMapper(albVirtualHostModifyRequestHeadersToTerraform)(this._modifyRequestHeaders),
-      modify_response_headers: cdktf.listMapper(albVirtualHostModifyResponseHeadersToTerraform)(this._modifyResponseHeaders),
-      route: cdktf.listMapper(albVirtualHostRouteToTerraform)(this._route),
+      modify_request_headers: cdktf.listMapper(albVirtualHostModifyRequestHeadersToTerraform)(this._modifyRequestHeaders.internalValue),
+      modify_response_headers: cdktf.listMapper(albVirtualHostModifyResponseHeadersToTerraform)(this._modifyResponseHeaders.internalValue),
+      route: cdktf.listMapper(albVirtualHostRouteToTerraform)(this._route.internalValue),
       timeouts: albVirtualHostTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

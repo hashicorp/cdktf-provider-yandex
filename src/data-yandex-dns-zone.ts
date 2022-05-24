@@ -16,6 +16,13 @@ export interface DataYandexDnsZoneConfig extends cdktf.TerraformMetaArguments {
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/dns_zone#id DataYandexDnsZone#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/dns_zone#name DataYandexDnsZone#name}
   */
   readonly name?: string;
@@ -55,6 +62,7 @@ export function dataYandexDnsZoneTimeoutsToTerraform(struct?: DataYandexDnsZoneT
 
 export class DataYandexDnsZoneTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -64,7 +72,10 @@ export class DataYandexDnsZoneTimeoutsOutputReference extends cdktf.ComplexObjec
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): DataYandexDnsZoneTimeouts | undefined {
+  public get internalValue(): DataYandexDnsZoneTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -82,15 +93,21 @@ export class DataYandexDnsZoneTimeoutsOutputReference extends cdktf.ComplexObjec
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: DataYandexDnsZoneTimeouts | undefined) {
+  public set internalValue(value: DataYandexDnsZoneTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -182,6 +199,7 @@ export class DataYandexDnsZone extends cdktf.TerraformDataSource {
     });
     this._dnsZoneId = config.dnsZoneId;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._name = config.name;
     this._timeouts.internalValue = config.timeouts;
   }
@@ -233,13 +251,25 @@ export class DataYandexDnsZone extends cdktf.TerraformDataSource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
   }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
+  }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // name - computed: true, optional: true, required: false
@@ -297,6 +327,7 @@ export class DataYandexDnsZone extends cdktf.TerraformDataSource {
     return {
       dns_zone_id: cdktf.stringToTerraform(this._dnsZoneId),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       timeouts: dataYandexDnsZoneTimeoutsToTerraform(this._timeouts.internalValue),
     };

@@ -28,6 +28,13 @@ export interface MdbSqlserverClusterConfig extends cdktf.TerraformMetaArguments 
   */
   readonly hostGroupIds?: string[];
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster#id MdbSqlserverCluster#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster#labels MdbSqlserverCluster#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -197,6 +204,83 @@ export function mdbSqlserverClusterDatabaseToTerraform(struct?: MdbSqlserverClus
   }
 }
 
+export class MdbSqlserverClusterDatabaseOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbSqlserverClusterDatabase | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbSqlserverClusterDatabase | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+}
+
+export class MdbSqlserverClusterDatabaseList extends cdktf.ComplexList {
+  public internalValue? : MdbSqlserverClusterDatabase[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbSqlserverClusterDatabaseOutputReference {
+    return new MdbSqlserverClusterDatabaseOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbSqlserverClusterHost {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster#assign_public_ip MdbSqlserverCluster#assign_public_ip}
@@ -224,6 +308,132 @@ export function mdbSqlserverClusterHostToTerraform(struct?: MdbSqlserverClusterH
   }
 }
 
+export class MdbSqlserverClusterHostOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbSqlserverClusterHost | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._assignPublicIp !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.assignPublicIp = this._assignPublicIp;
+    }
+    if (this._subnetId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetId = this._subnetId;
+    }
+    if (this._zone !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.zone = this._zone;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbSqlserverClusterHost | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._assignPublicIp = undefined;
+      this._subnetId = undefined;
+      this._zone = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._assignPublicIp = value.assignPublicIp;
+      this._subnetId = value.subnetId;
+      this._zone = value.zone;
+    }
+  }
+
+  // assign_public_ip - computed: false, optional: true, required: false
+  private _assignPublicIp?: boolean | cdktf.IResolvable; 
+  public get assignPublicIp() {
+    return this.getBooleanAttribute('assign_public_ip');
+  }
+  public set assignPublicIp(value: boolean | cdktf.IResolvable) {
+    this._assignPublicIp = value;
+  }
+  public resetAssignPublicIp() {
+    this._assignPublicIp = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get assignPublicIpInput() {
+    return this._assignPublicIp;
+  }
+
+  // fqdn - computed: true, optional: false, required: false
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+
+  // subnet_id - computed: true, optional: true, required: false
+  private _subnetId?: string; 
+  public get subnetId() {
+    return this.getStringAttribute('subnet_id');
+  }
+  public set subnetId(value: string) {
+    this._subnetId = value;
+  }
+  public resetSubnetId() {
+    this._subnetId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdInput() {
+    return this._subnetId;
+  }
+
+  // zone - computed: false, optional: false, required: true
+  private _zone?: string; 
+  public get zone() {
+    return this.getStringAttribute('zone');
+  }
+  public set zone(value: string) {
+    this._zone = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get zoneInput() {
+    return this._zone;
+  }
+}
+
+export class MdbSqlserverClusterHostList extends cdktf.ComplexList {
+  public internalValue? : MdbSqlserverClusterHost[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbSqlserverClusterHostOutputReference {
+    return new MdbSqlserverClusterHostOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbSqlserverClusterResources {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster#disk_size MdbSqlserverCluster#disk_size}
@@ -363,6 +573,7 @@ export function mdbSqlserverClusterTimeoutsToTerraform(struct?: MdbSqlserverClus
 
 export class MdbSqlserverClusterTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -372,7 +583,10 @@ export class MdbSqlserverClusterTimeoutsOutputReference extends cdktf.ComplexObj
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): MdbSqlserverClusterTimeouts | undefined {
+  public get internalValue(): MdbSqlserverClusterTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -390,15 +604,21 @@ export class MdbSqlserverClusterTimeoutsOutputReference extends cdktf.ComplexObj
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: MdbSqlserverClusterTimeouts | undefined) {
+  public set internalValue(value: MdbSqlserverClusterTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -475,6 +695,105 @@ export function mdbSqlserverClusterUserPermissionToTerraform(struct?: MdbSqlserv
   }
 }
 
+export class MdbSqlserverClusterUserPermissionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbSqlserverClusterUserPermission | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._databaseName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.databaseName = this._databaseName;
+    }
+    if (this._roles !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.roles = this._roles;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbSqlserverClusterUserPermission | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._databaseName = undefined;
+      this._roles = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._databaseName = value.databaseName;
+      this._roles = value.roles;
+    }
+  }
+
+  // database_name - computed: false, optional: false, required: true
+  private _databaseName?: string; 
+  public get databaseName() {
+    return this.getStringAttribute('database_name');
+  }
+  public set databaseName(value: string) {
+    this._databaseName = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get databaseNameInput() {
+    return this._databaseName;
+  }
+
+  // roles - computed: false, optional: true, required: false
+  private _roles?: string[]; 
+  public get roles() {
+    return cdktf.Fn.tolist(this.getListAttribute('roles'));
+  }
+  public set roles(value: string[]) {
+    this._roles = value;
+  }
+  public resetRoles() {
+    this._roles = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get rolesInput() {
+    return this._roles;
+  }
+}
+
+export class MdbSqlserverClusterUserPermissionList extends cdktf.ComplexList {
+  public internalValue? : MdbSqlserverClusterUserPermission[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbSqlserverClusterUserPermissionOutputReference {
+    return new MdbSqlserverClusterUserPermissionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbSqlserverClusterUser {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster#name MdbSqlserverCluster#name}
@@ -504,6 +823,124 @@ export function mdbSqlserverClusterUserToTerraform(struct?: MdbSqlserverClusterU
   }
 }
 
+export class MdbSqlserverClusterUserOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbSqlserverClusterUser | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._password !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.password = this._password;
+    }
+    if (this._permission?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.permission = this._permission?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbSqlserverClusterUser | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._password = undefined;
+      this._permission.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._password = value.password;
+      this._permission.internalValue = value.permission;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // password - computed: false, optional: false, required: true
+  private _password?: string; 
+  public get password() {
+    return this.getStringAttribute('password');
+  }
+  public set password(value: string) {
+    this._password = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get passwordInput() {
+    return this._password;
+  }
+
+  // permission - computed: false, optional: true, required: false
+  private _permission = new MdbSqlserverClusterUserPermissionList(this, "permission", true);
+  public get permission() {
+    return this._permission;
+  }
+  public putPermission(value: MdbSqlserverClusterUserPermission[] | cdktf.IResolvable) {
+    this._permission.internalValue = value;
+  }
+  public resetPermission() {
+    this._permission.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get permissionInput() {
+    return this._permission.internalValue;
+  }
+}
+
+export class MdbSqlserverClusterUserList extends cdktf.ComplexList {
+  public internalValue? : MdbSqlserverClusterUser[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbSqlserverClusterUserOutputReference {
+    return new MdbSqlserverClusterUserOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
 * Represents a {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster yandex_mdb_sqlserver_cluster}
@@ -544,6 +981,7 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
     this._environment = config.environment;
     this._folderId = config.folderId;
     this._hostGroupIds = config.hostGroupIds;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._networkId = config.networkId;
@@ -551,11 +989,11 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
     this._sqlserverConfig = config.sqlserverConfig;
     this._version = config.version;
     this._backupWindowStart.internalValue = config.backupWindowStart;
-    this._database = config.database;
-    this._host = config.host;
+    this._database.internalValue = config.database;
+    this._host.internalValue = config.host;
     this._resources.internalValue = config.resources;
     this._timeouts.internalValue = config.timeouts;
-    this._user = config.user;
+    this._user.internalValue = config.user;
   }
 
   // ==========
@@ -650,8 +1088,19 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: false, optional: true, required: false
@@ -763,31 +1212,29 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
   }
 
   // database - computed: false, optional: false, required: true
-  private _database?: MdbSqlserverClusterDatabase[] | cdktf.IResolvable; 
+  private _database = new MdbSqlserverClusterDatabaseList(this, "database", false);
   public get database() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('database');
+    return this._database;
   }
-  public set database(value: MdbSqlserverClusterDatabase[] | cdktf.IResolvable) {
-    this._database = value;
+  public putDatabase(value: MdbSqlserverClusterDatabase[] | cdktf.IResolvable) {
+    this._database.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get databaseInput() {
-    return this._database;
+    return this._database.internalValue;
   }
 
   // host - computed: false, optional: false, required: true
-  private _host?: MdbSqlserverClusterHost[] | cdktf.IResolvable; 
+  private _host = new MdbSqlserverClusterHostList(this, "host", false);
   public get host() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('host');
+    return this._host;
   }
-  public set host(value: MdbSqlserverClusterHost[] | cdktf.IResolvable) {
-    this._host = value;
+  public putHost(value: MdbSqlserverClusterHost[] | cdktf.IResolvable) {
+    this._host.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get hostInput() {
-    return this._host;
+    return this._host.internalValue;
   }
 
   // resources - computed: false, optional: false, required: true
@@ -820,17 +1267,16 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
   }
 
   // user - computed: false, optional: false, required: true
-  private _user?: MdbSqlserverClusterUser[] | cdktf.IResolvable; 
+  private _user = new MdbSqlserverClusterUserList(this, "user", false);
   public get user() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('user');
+    return this._user;
   }
-  public set user(value: MdbSqlserverClusterUser[] | cdktf.IResolvable) {
-    this._user = value;
+  public putUser(value: MdbSqlserverClusterUser[] | cdktf.IResolvable) {
+    this._user.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get userInput() {
-    return this._user;
+    return this._user.internalValue;
   }
 
   // =========
@@ -844,6 +1290,7 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
       host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
@@ -851,11 +1298,11 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
       sqlserver_config: cdktf.hashMapper(cdktf.stringToTerraform)(this._sqlserverConfig),
       version: cdktf.stringToTerraform(this._version),
       backup_window_start: mdbSqlserverClusterBackupWindowStartToTerraform(this._backupWindowStart.internalValue),
-      database: cdktf.listMapper(mdbSqlserverClusterDatabaseToTerraform)(this._database),
-      host: cdktf.listMapper(mdbSqlserverClusterHostToTerraform)(this._host),
+      database: cdktf.listMapper(mdbSqlserverClusterDatabaseToTerraform)(this._database.internalValue),
+      host: cdktf.listMapper(mdbSqlserverClusterHostToTerraform)(this._host.internalValue),
       resources: mdbSqlserverClusterResourcesToTerraform(this._resources.internalValue),
       timeouts: mdbSqlserverClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      user: cdktf.listMapper(mdbSqlserverClusterUserToTerraform)(this._user),
+      user: cdktf.listMapper(mdbSqlserverClusterUserToTerraform)(this._user.internalValue),
     };
   }
 }

@@ -16,6 +16,13 @@ export interface IamServiceAccountKeyConfig extends cdktf.TerraformMetaArguments
   */
   readonly format?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/iam_service_account_key#id IamServiceAccountKey#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/iam_service_account_key#key_algorithm IamServiceAccountKey#key_algorithm}
   */
   readonly keyAlgorithm?: string;
@@ -65,6 +72,7 @@ export class IamServiceAccountKey extends cdktf.TerraformResource {
     });
     this._description = config.description;
     this._format = config.format;
+    this._id = config.id;
     this._keyAlgorithm = config.keyAlgorithm;
     this._pgpKey = config.pgpKey;
     this._serviceAccountId = config.serviceAccountId;
@@ -117,8 +125,19 @@ export class IamServiceAccountKey extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // key_algorithm - computed: false, optional: true, required: false
@@ -189,6 +208,7 @@ export class IamServiceAccountKey extends cdktf.TerraformResource {
     return {
       description: cdktf.stringToTerraform(this._description),
       format: cdktf.stringToTerraform(this._format),
+      id: cdktf.stringToTerraform(this._id),
       key_algorithm: cdktf.stringToTerraform(this._keyAlgorithm),
       pgp_key: cdktf.stringToTerraform(this._pgpKey),
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),

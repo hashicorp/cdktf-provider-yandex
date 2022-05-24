@@ -28,6 +28,13 @@ export interface MdbKafkaClusterConfig extends cdktf.TerraformMetaArguments {
   */
   readonly hostGroupIds?: string[];
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_cluster#id MdbKafkaCluster#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_cluster#labels MdbKafkaCluster#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -1398,6 +1405,7 @@ export function mdbKafkaClusterTimeoutsToTerraform(struct?: MdbKafkaClusterTimeo
 
 export class MdbKafkaClusterTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -1407,7 +1415,10 @@ export class MdbKafkaClusterTimeoutsOutputReference extends cdktf.ComplexObject 
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): MdbKafkaClusterTimeouts | undefined {
+  public get internalValue(): MdbKafkaClusterTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -1429,16 +1440,22 @@ export class MdbKafkaClusterTimeoutsOutputReference extends cdktf.ComplexObject 
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: MdbKafkaClusterTimeouts | undefined) {
+  public set internalValue(value: MdbKafkaClusterTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._read = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._read = value.read;
@@ -1933,6 +1950,143 @@ export function mdbKafkaClusterTopicToTerraform(struct?: MdbKafkaClusterTopic | 
   }
 }
 
+export class MdbKafkaClusterTopicOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaClusterTopic | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._partitions !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.partitions = this._partitions;
+    }
+    if (this._replicationFactor !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.replicationFactor = this._replicationFactor;
+    }
+    if (this._topicConfig?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.topicConfig = this._topicConfig?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaClusterTopic | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._partitions = undefined;
+      this._replicationFactor = undefined;
+      this._topicConfig.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._partitions = value.partitions;
+      this._replicationFactor = value.replicationFactor;
+      this._topicConfig.internalValue = value.topicConfig;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // partitions - computed: false, optional: false, required: true
+  private _partitions?: number; 
+  public get partitions() {
+    return this.getNumberAttribute('partitions');
+  }
+  public set partitions(value: number) {
+    this._partitions = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get partitionsInput() {
+    return this._partitions;
+  }
+
+  // replication_factor - computed: false, optional: false, required: true
+  private _replicationFactor?: number; 
+  public get replicationFactor() {
+    return this.getNumberAttribute('replication_factor');
+  }
+  public set replicationFactor(value: number) {
+    this._replicationFactor = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get replicationFactorInput() {
+    return this._replicationFactor;
+  }
+
+  // topic_config - computed: false, optional: true, required: false
+  private _topicConfig = new MdbKafkaClusterTopicTopicConfigOutputReference(this, "topic_config");
+  public get topicConfig() {
+    return this._topicConfig;
+  }
+  public putTopicConfig(value: MdbKafkaClusterTopicTopicConfig) {
+    this._topicConfig.internalValue = value;
+  }
+  public resetTopicConfig() {
+    this._topicConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get topicConfigInput() {
+    return this._topicConfig.internalValue;
+  }
+}
+
+export class MdbKafkaClusterTopicList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaClusterTopic[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaClusterTopicOutputReference {
+    return new MdbKafkaClusterTopicOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbKafkaClusterUserPermission {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_cluster#role MdbKafkaCluster#role}
@@ -1955,6 +2109,102 @@ export function mdbKafkaClusterUserPermissionToTerraform(struct?: MdbKafkaCluste
   }
 }
 
+export class MdbKafkaClusterUserPermissionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaClusterUserPermission | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._role !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.role = this._role;
+    }
+    if (this._topicName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.topicName = this._topicName;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaClusterUserPermission | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._role = undefined;
+      this._topicName = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._role = value.role;
+      this._topicName = value.topicName;
+    }
+  }
+
+  // role - computed: false, optional: false, required: true
+  private _role?: string; 
+  public get role() {
+    return this.getStringAttribute('role');
+  }
+  public set role(value: string) {
+    this._role = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get roleInput() {
+    return this._role;
+  }
+
+  // topic_name - computed: false, optional: false, required: true
+  private _topicName?: string; 
+  public get topicName() {
+    return this.getStringAttribute('topic_name');
+  }
+  public set topicName(value: string) {
+    this._topicName = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get topicNameInput() {
+    return this._topicName;
+  }
+}
+
+export class MdbKafkaClusterUserPermissionList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaClusterUserPermission[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaClusterUserPermissionOutputReference {
+    return new MdbKafkaClusterUserPermissionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbKafkaClusterUser {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_cluster#name MdbKafkaCluster#name}
@@ -1984,6 +2234,124 @@ export function mdbKafkaClusterUserToTerraform(struct?: MdbKafkaClusterUser | cd
   }
 }
 
+export class MdbKafkaClusterUserOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaClusterUser | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._password !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.password = this._password;
+    }
+    if (this._permission?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.permission = this._permission?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaClusterUser | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._name = undefined;
+      this._password = undefined;
+      this._permission.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._name = value.name;
+      this._password = value.password;
+      this._permission.internalValue = value.permission;
+    }
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // password - computed: false, optional: false, required: true
+  private _password?: string; 
+  public get password() {
+    return this.getStringAttribute('password');
+  }
+  public set password(value: string) {
+    this._password = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get passwordInput() {
+    return this._password;
+  }
+
+  // permission - computed: false, optional: true, required: false
+  private _permission = new MdbKafkaClusterUserPermissionList(this, "permission", true);
+  public get permission() {
+    return this._permission;
+  }
+  public putPermission(value: MdbKafkaClusterUserPermission[] | cdktf.IResolvable) {
+    this._permission.internalValue = value;
+  }
+  public resetPermission() {
+    this._permission.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get permissionInput() {
+    return this._permission.internalValue;
+  }
+}
+
+export class MdbKafkaClusterUserList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaClusterUser[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaClusterUserOutputReference {
+    return new MdbKafkaClusterUserOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
 * Represents a {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_cluster yandex_mdb_kafka_cluster}
@@ -2024,6 +2392,7 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
     this._environment = config.environment;
     this._folderId = config.folderId;
     this._hostGroupIds = config.hostGroupIds;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._networkId = config.networkId;
@@ -2032,8 +2401,8 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
     this._config.internalValue = config.config;
     this._maintenanceWindow.internalValue = config.maintenanceWindow;
     this._timeouts.internalValue = config.timeouts;
-    this._topic = config.topic;
-    this._user = config.user;
+    this._topic.internalValue = config.topic;
+    this._user.internalValue = config.user;
   }
 
   // ==========
@@ -2137,8 +2506,19 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: true, optional: true, required: false
@@ -2266,37 +2646,35 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
   }
 
   // topic - computed: false, optional: true, required: false
-  private _topic?: MdbKafkaClusterTopic[] | cdktf.IResolvable; 
+  private _topic = new MdbKafkaClusterTopicList(this, "topic", false);
   public get topic() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('topic');
+    return this._topic;
   }
-  public set topic(value: MdbKafkaClusterTopic[] | cdktf.IResolvable) {
-    this._topic = value;
+  public putTopic(value: MdbKafkaClusterTopic[] | cdktf.IResolvable) {
+    this._topic.internalValue = value;
   }
   public resetTopic() {
-    this._topic = undefined;
+    this._topic.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get topicInput() {
-    return this._topic;
+    return this._topic.internalValue;
   }
 
   // user - computed: false, optional: true, required: false
-  private _user?: MdbKafkaClusterUser[] | cdktf.IResolvable; 
+  private _user = new MdbKafkaClusterUserList(this, "user", true);
   public get user() {
-    // Getting the computed value is not yet implemented
-    return cdktf.Token.asAny(cdktf.Fn.tolist(this.interpolationForAttribute('user')));
+    return this._user;
   }
-  public set user(value: MdbKafkaClusterUser[] | cdktf.IResolvable) {
-    this._user = value;
+  public putUser(value: MdbKafkaClusterUser[] | cdktf.IResolvable) {
+    this._user.internalValue = value;
   }
   public resetUser() {
-    this._user = undefined;
+    this._user.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get userInput() {
-    return this._user;
+    return this._user.internalValue;
   }
 
   // =========
@@ -2310,6 +2688,7 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
       host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
@@ -2318,8 +2697,8 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
       config: mdbKafkaClusterConfigAToTerraform(this._config.internalValue),
       maintenance_window: mdbKafkaClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       timeouts: mdbKafkaClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      topic: cdktf.listMapper(mdbKafkaClusterTopicToTerraform)(this._topic),
-      user: cdktf.listMapper(mdbKafkaClusterUserToTerraform)(this._user),
+      topic: cdktf.listMapper(mdbKafkaClusterTopicToTerraform)(this._topic.internalValue),
+      user: cdktf.listMapper(mdbKafkaClusterUserToTerraform)(this._user.internalValue),
     };
   }
 }

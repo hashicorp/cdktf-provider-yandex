@@ -28,6 +28,13 @@ export interface DataprocClusterConfig extends cdktf.TerraformMetaArguments {
   */
   readonly hostGroupIds?: string[];
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/dataproc_cluster#id DataprocCluster#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/dataproc_cluster#labels DataprocCluster#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -571,6 +578,208 @@ export function dataprocClusterClusterConfigSubclusterSpecToTerraform(struct?: D
   }
 }
 
+export class DataprocClusterClusterConfigSubclusterSpecOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataprocClusterClusterConfigSubclusterSpec | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._assignPublicIp !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.assignPublicIp = this._assignPublicIp;
+    }
+    if (this._hostsCount !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.hostsCount = this._hostsCount;
+    }
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
+    }
+    if (this._role !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.role = this._role;
+    }
+    if (this._subnetId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetId = this._subnetId;
+    }
+    if (this._autoscalingConfig?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.autoscalingConfig = this._autoscalingConfig?.internalValue;
+    }
+    if (this._resources?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.resources = this._resources?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataprocClusterClusterConfigSubclusterSpec | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._assignPublicIp = undefined;
+      this._hostsCount = undefined;
+      this._name = undefined;
+      this._role = undefined;
+      this._subnetId = undefined;
+      this._autoscalingConfig.internalValue = undefined;
+      this._resources.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._assignPublicIp = value.assignPublicIp;
+      this._hostsCount = value.hostsCount;
+      this._name = value.name;
+      this._role = value.role;
+      this._subnetId = value.subnetId;
+      this._autoscalingConfig.internalValue = value.autoscalingConfig;
+      this._resources.internalValue = value.resources;
+    }
+  }
+
+  // assign_public_ip - computed: false, optional: true, required: false
+  private _assignPublicIp?: boolean | cdktf.IResolvable; 
+  public get assignPublicIp() {
+    return this.getBooleanAttribute('assign_public_ip');
+  }
+  public set assignPublicIp(value: boolean | cdktf.IResolvable) {
+    this._assignPublicIp = value;
+  }
+  public resetAssignPublicIp() {
+    this._assignPublicIp = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get assignPublicIpInput() {
+    return this._assignPublicIp;
+  }
+
+  // hosts_count - computed: false, optional: false, required: true
+  private _hostsCount?: number; 
+  public get hostsCount() {
+    return this.getNumberAttribute('hosts_count');
+  }
+  public set hostsCount(value: number) {
+    this._hostsCount = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get hostsCountInput() {
+    return this._hostsCount;
+  }
+
+  // id - computed: true, optional: false, required: false
+  public get id() {
+    return this.getStringAttribute('id');
+  }
+
+  // name - computed: false, optional: false, required: true
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
+  }
+
+  // role - computed: false, optional: false, required: true
+  private _role?: string; 
+  public get role() {
+    return this.getStringAttribute('role');
+  }
+  public set role(value: string) {
+    this._role = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get roleInput() {
+    return this._role;
+  }
+
+  // subnet_id - computed: false, optional: false, required: true
+  private _subnetId?: string; 
+  public get subnetId() {
+    return this.getStringAttribute('subnet_id');
+  }
+  public set subnetId(value: string) {
+    this._subnetId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdInput() {
+    return this._subnetId;
+  }
+
+  // autoscaling_config - computed: false, optional: true, required: false
+  private _autoscalingConfig = new DataprocClusterClusterConfigSubclusterSpecAutoscalingConfigOutputReference(this, "autoscaling_config");
+  public get autoscalingConfig() {
+    return this._autoscalingConfig;
+  }
+  public putAutoscalingConfig(value: DataprocClusterClusterConfigSubclusterSpecAutoscalingConfig) {
+    this._autoscalingConfig.internalValue = value;
+  }
+  public resetAutoscalingConfig() {
+    this._autoscalingConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get autoscalingConfigInput() {
+    return this._autoscalingConfig.internalValue;
+  }
+
+  // resources - computed: false, optional: false, required: true
+  private _resources = new DataprocClusterClusterConfigSubclusterSpecResourcesOutputReference(this, "resources");
+  public get resources() {
+    return this._resources;
+  }
+  public putResources(value: DataprocClusterClusterConfigSubclusterSpecResources) {
+    this._resources.internalValue = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get resourcesInput() {
+    return this._resources.internalValue;
+  }
+}
+
+export class DataprocClusterClusterConfigSubclusterSpecList extends cdktf.ComplexList {
+  public internalValue? : DataprocClusterClusterConfigSubclusterSpec[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataprocClusterClusterConfigSubclusterSpecOutputReference {
+    return new DataprocClusterClusterConfigSubclusterSpecOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataprocClusterClusterConfig {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/dataproc_cluster#version_id DataprocCluster#version_id}
@@ -624,9 +833,9 @@ export class DataprocClusterClusterConfigOutputReference extends cdktf.ComplexOb
       hasAnyValues = true;
       internalValueResult.hadoop = this._hadoop?.internalValue;
     }
-    if (this._subclusterSpec !== undefined) {
+    if (this._subclusterSpec?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.subclusterSpec = this._subclusterSpec;
+      internalValueResult.subclusterSpec = this._subclusterSpec?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -636,13 +845,13 @@ export class DataprocClusterClusterConfigOutputReference extends cdktf.ComplexOb
       this.isEmptyObject = false;
       this._versionId = undefined;
       this._hadoop.internalValue = undefined;
-      this._subclusterSpec = undefined;
+      this._subclusterSpec.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._versionId = value.versionId;
       this._hadoop.internalValue = value.hadoop;
-      this._subclusterSpec = value.subclusterSpec;
+      this._subclusterSpec.internalValue = value.subclusterSpec;
     }
   }
 
@@ -679,17 +888,16 @@ export class DataprocClusterClusterConfigOutputReference extends cdktf.ComplexOb
   }
 
   // subcluster_spec - computed: false, optional: false, required: true
-  private _subclusterSpec?: DataprocClusterClusterConfigSubclusterSpec[] | cdktf.IResolvable; 
+  private _subclusterSpec = new DataprocClusterClusterConfigSubclusterSpecList(this, "subcluster_spec", false);
   public get subclusterSpec() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('subcluster_spec');
+    return this._subclusterSpec;
   }
-  public set subclusterSpec(value: DataprocClusterClusterConfigSubclusterSpec[] | cdktf.IResolvable) {
-    this._subclusterSpec = value;
+  public putSubclusterSpec(value: DataprocClusterClusterConfigSubclusterSpec[] | cdktf.IResolvable) {
+    this._subclusterSpec.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get subclusterSpecInput() {
-    return this._subclusterSpec;
+    return this._subclusterSpec.internalValue;
   }
 }
 export interface DataprocClusterTimeouts {
@@ -721,6 +929,7 @@ export function dataprocClusterTimeoutsToTerraform(struct?: DataprocClusterTimeo
 
 export class DataprocClusterTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -730,7 +939,10 @@ export class DataprocClusterTimeoutsOutputReference extends cdktf.ComplexObject 
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): DataprocClusterTimeouts | undefined {
+  public get internalValue(): DataprocClusterTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -748,15 +960,21 @@ export class DataprocClusterTimeoutsOutputReference extends cdktf.ComplexObject 
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: DataprocClusterTimeouts | undefined) {
+  public set internalValue(value: DataprocClusterTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -851,6 +1069,7 @@ export class DataprocCluster extends cdktf.TerraformResource {
     this._description = config.description;
     this._folderId = config.folderId;
     this._hostGroupIds = config.hostGroupIds;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._securityGroupIds = config.securityGroupIds;
@@ -951,8 +1170,19 @@ export class DataprocCluster extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: false, optional: true, required: false
@@ -1085,6 +1315,7 @@ export class DataprocCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
       host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),

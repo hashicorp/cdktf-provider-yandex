@@ -24,6 +24,13 @@ export interface MdbRedisClusterConfig extends cdktf.TerraformMetaArguments {
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#id MdbRedisCluster#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#labels MdbRedisCluster#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -357,6 +364,132 @@ export function mdbRedisClusterHostToTerraform(struct?: MdbRedisClusterHost | cd
   }
 }
 
+export class MdbRedisClusterHostOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbRedisClusterHost | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._shardName !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.shardName = this._shardName;
+    }
+    if (this._subnetId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.subnetId = this._subnetId;
+    }
+    if (this._zone !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.zone = this._zone;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbRedisClusterHost | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._shardName = undefined;
+      this._subnetId = undefined;
+      this._zone = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._shardName = value.shardName;
+      this._subnetId = value.subnetId;
+      this._zone = value.zone;
+    }
+  }
+
+  // fqdn - computed: true, optional: false, required: false
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+
+  // shard_name - computed: true, optional: true, required: false
+  private _shardName?: string; 
+  public get shardName() {
+    return this.getStringAttribute('shard_name');
+  }
+  public set shardName(value: string) {
+    this._shardName = value;
+  }
+  public resetShardName() {
+    this._shardName = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get shardNameInput() {
+    return this._shardName;
+  }
+
+  // subnet_id - computed: true, optional: true, required: false
+  private _subnetId?: string; 
+  public get subnetId() {
+    return this.getStringAttribute('subnet_id');
+  }
+  public set subnetId(value: string) {
+    this._subnetId = value;
+  }
+  public resetSubnetId() {
+    this._subnetId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get subnetIdInput() {
+    return this._subnetId;
+  }
+
+  // zone - computed: false, optional: false, required: true
+  private _zone?: string; 
+  public get zone() {
+    return this.getStringAttribute('zone');
+  }
+  public set zone(value: string) {
+    this._zone = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get zoneInput() {
+    return this._zone;
+  }
+}
+
+export class MdbRedisClusterHostList extends cdktf.ComplexList {
+  public internalValue? : MdbRedisClusterHost[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbRedisClusterHostOutputReference {
+    return new MdbRedisClusterHostOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbRedisClusterMaintenanceWindow {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#day MdbRedisCluster#day}
@@ -615,6 +748,7 @@ export function mdbRedisClusterTimeoutsToTerraform(struct?: MdbRedisClusterTimeo
 
 export class MdbRedisClusterTimeoutsOutputReference extends cdktf.ComplexObject {
   private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
 
   /**
   * @param terraformResource The parent resource
@@ -624,7 +758,10 @@ export class MdbRedisClusterTimeoutsOutputReference extends cdktf.ComplexObject 
     super(terraformResource, terraformAttribute, false, 0);
   }
 
-  public get internalValue(): MdbRedisClusterTimeouts | undefined {
+  public get internalValue(): MdbRedisClusterTimeouts | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
     if (this._create !== undefined) {
@@ -642,15 +779,21 @@ export class MdbRedisClusterTimeoutsOutputReference extends cdktf.ComplexObject 
     return hasAnyValues ? internalValueResult : undefined;
   }
 
-  public set internalValue(value: MdbRedisClusterTimeouts | undefined) {
+  public set internalValue(value: MdbRedisClusterTimeouts | cdktf.IResolvable | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this.resolvableValue = undefined;
       this._create = undefined;
       this._delete = undefined;
       this._update = undefined;
     }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
       this._create = value.create;
       this._delete = value.delete;
       this._update = value.update;
@@ -744,6 +887,7 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
     this._description = config.description;
     this._environment = config.environment;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
     this._networkId = config.networkId;
@@ -752,7 +896,7 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
     this._sharded = config.sharded;
     this._tlsEnabled = config.tlsEnabled;
     this._config.internalValue = config.config;
-    this._host = config.host;
+    this._host.internalValue = config.host;
     this._maintenanceWindow.internalValue = config.maintenanceWindow;
     this._resources.internalValue = config.resources;
     this._timeouts.internalValue = config.timeouts;
@@ -834,8 +978,19 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: false, optional: true, required: false
@@ -963,17 +1118,16 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
   }
 
   // host - computed: false, optional: false, required: true
-  private _host?: MdbRedisClusterHost[] | cdktf.IResolvable; 
+  private _host = new MdbRedisClusterHostList(this, "host", false);
   public get host() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('host');
+    return this._host;
   }
-  public set host(value: MdbRedisClusterHost[] | cdktf.IResolvable) {
-    this._host = value;
+  public putHost(value: MdbRedisClusterHost[] | cdktf.IResolvable) {
+    this._host.internalValue = value;
   }
   // Temporarily expose input value. Use with caution.
   public get hostInput() {
-    return this._host;
+    return this._host.internalValue;
   }
 
   // maintenance_window - computed: false, optional: true, required: false
@@ -1031,6 +1185,7 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
@@ -1039,7 +1194,7 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
       sharded: cdktf.booleanToTerraform(this._sharded),
       tls_enabled: cdktf.booleanToTerraform(this._tlsEnabled),
       config: mdbRedisClusterConfigAToTerraform(this._config.internalValue),
-      host: cdktf.listMapper(mdbRedisClusterHostToTerraform)(this._host),
+      host: cdktf.listMapper(mdbRedisClusterHostToTerraform)(this._host.internalValue),
       maintenance_window: mdbRedisClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       resources: mdbRedisClusterResourcesToTerraform(this._resources.internalValue),
       timeouts: mdbRedisClusterTimeoutsToTerraform(this._timeouts.internalValue),

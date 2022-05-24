@@ -20,6 +20,13 @@ export interface DataYandexAlbBackendGroupConfig extends cdktf.TerraformMetaArgu
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#id DataYandexAlbBackendGroup#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#labels DataYandexAlbBackendGroup#labels}
   */
   readonly labels?: { [key: string]: string };
@@ -891,6 +898,184 @@ export function dataYandexAlbBackendGroupGrpcBackendToTerraform(struct?: DataYan
   }
 }
 
+export class DataYandexAlbBackendGroupGrpcBackendOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexAlbBackendGroupGrpcBackend | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._port !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.port = this._port;
+    }
+    if (this._weight !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.weight = this._weight;
+    }
+    if (this._healthcheck?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.healthcheck = this._healthcheck?.internalValue;
+    }
+    if (this._loadBalancingConfig?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.loadBalancingConfig = this._loadBalancingConfig?.internalValue;
+    }
+    if (this._tls?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.tls = this._tls?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexAlbBackendGroupGrpcBackend | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._port = undefined;
+      this._weight = undefined;
+      this._healthcheck.internalValue = undefined;
+      this._loadBalancingConfig.internalValue = undefined;
+      this._tls.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._port = value.port;
+      this._weight = value.weight;
+      this._healthcheck.internalValue = value.healthcheck;
+      this._loadBalancingConfig.internalValue = value.loadBalancingConfig;
+      this._tls.internalValue = value.tls;
+    }
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // port - computed: true, optional: true, required: false
+  private _port?: number; 
+  public get port() {
+    return this.getNumberAttribute('port');
+  }
+  public set port(value: number) {
+    this._port = value;
+  }
+  public resetPort() {
+    this._port = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get portInput() {
+    return this._port;
+  }
+
+  // target_group_ids - computed: true, optional: false, required: false
+  public get targetGroupIds() {
+    return this.getListAttribute('target_group_ids');
+  }
+
+  // weight - computed: true, optional: true, required: false
+  private _weight?: number; 
+  public get weight() {
+    return this.getNumberAttribute('weight');
+  }
+  public set weight(value: number) {
+    this._weight = value;
+  }
+  public resetWeight() {
+    this._weight = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get weightInput() {
+    return this._weight;
+  }
+
+  // healthcheck - computed: false, optional: true, required: false
+  private _healthcheck = new DataYandexAlbBackendGroupGrpcBackendHealthcheckOutputReference(this, "healthcheck");
+  public get healthcheck() {
+    return this._healthcheck;
+  }
+  public putHealthcheck(value: DataYandexAlbBackendGroupGrpcBackendHealthcheck) {
+    this._healthcheck.internalValue = value;
+  }
+  public resetHealthcheck() {
+    this._healthcheck.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get healthcheckInput() {
+    return this._healthcheck.internalValue;
+  }
+
+  // load_balancing_config - computed: false, optional: true, required: false
+  private _loadBalancingConfig = new DataYandexAlbBackendGroupGrpcBackendLoadBalancingConfigOutputReference(this, "load_balancing_config");
+  public get loadBalancingConfig() {
+    return this._loadBalancingConfig;
+  }
+  public putLoadBalancingConfig(value: DataYandexAlbBackendGroupGrpcBackendLoadBalancingConfig) {
+    this._loadBalancingConfig.internalValue = value;
+  }
+  public resetLoadBalancingConfig() {
+    this._loadBalancingConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get loadBalancingConfigInput() {
+    return this._loadBalancingConfig.internalValue;
+  }
+
+  // tls - computed: false, optional: true, required: false
+  private _tls = new DataYandexAlbBackendGroupGrpcBackendTlsOutputReference(this, "tls");
+  public get tls() {
+    return this._tls;
+  }
+  public putTls(value: DataYandexAlbBackendGroupGrpcBackendTls) {
+    this._tls.internalValue = value;
+  }
+  public resetTls() {
+    this._tls.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tlsInput() {
+    return this._tls.internalValue;
+  }
+}
+
+export class DataYandexAlbBackendGroupGrpcBackendList extends cdktf.ComplexList {
+  public internalValue? : DataYandexAlbBackendGroupGrpcBackend[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexAlbBackendGroupGrpcBackendOutputReference {
+    return new DataYandexAlbBackendGroupGrpcBackendOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataYandexAlbBackendGroupHttpBackendHealthcheckGrpcHealthcheck {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#service_name DataYandexAlbBackendGroup#service_name}
@@ -1751,6 +1936,245 @@ export function dataYandexAlbBackendGroupHttpBackendToTerraform(struct?: DataYan
   }
 }
 
+export class DataYandexAlbBackendGroupHttpBackendOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexAlbBackendGroupHttpBackend | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._http2 !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.http2 = this._http2;
+    }
+    if (this._port !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.port = this._port;
+    }
+    if (this._storageBucket !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.storageBucket = this._storageBucket;
+    }
+    if (this._targetGroupIds !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.targetGroupIds = this._targetGroupIds;
+    }
+    if (this._weight !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.weight = this._weight;
+    }
+    if (this._healthcheck?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.healthcheck = this._healthcheck?.internalValue;
+    }
+    if (this._loadBalancingConfig?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.loadBalancingConfig = this._loadBalancingConfig?.internalValue;
+    }
+    if (this._tls?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.tls = this._tls?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexAlbBackendGroupHttpBackend | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._http2 = undefined;
+      this._port = undefined;
+      this._storageBucket = undefined;
+      this._targetGroupIds = undefined;
+      this._weight = undefined;
+      this._healthcheck.internalValue = undefined;
+      this._loadBalancingConfig.internalValue = undefined;
+      this._tls.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._http2 = value.http2;
+      this._port = value.port;
+      this._storageBucket = value.storageBucket;
+      this._targetGroupIds = value.targetGroupIds;
+      this._weight = value.weight;
+      this._healthcheck.internalValue = value.healthcheck;
+      this._loadBalancingConfig.internalValue = value.loadBalancingConfig;
+      this._tls.internalValue = value.tls;
+    }
+  }
+
+  // http2 - computed: true, optional: true, required: false
+  private _http2?: boolean | cdktf.IResolvable; 
+  public get http2() {
+    return this.getBooleanAttribute('http2');
+  }
+  public set http2(value: boolean | cdktf.IResolvable) {
+    this._http2 = value;
+  }
+  public resetHttp2() {
+    this._http2 = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get http2Input() {
+    return this._http2;
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // port - computed: true, optional: true, required: false
+  private _port?: number; 
+  public get port() {
+    return this.getNumberAttribute('port');
+  }
+  public set port(value: number) {
+    this._port = value;
+  }
+  public resetPort() {
+    this._port = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get portInput() {
+    return this._port;
+  }
+
+  // storage_bucket - computed: true, optional: true, required: false
+  private _storageBucket?: string; 
+  public get storageBucket() {
+    return this.getStringAttribute('storage_bucket');
+  }
+  public set storageBucket(value: string) {
+    this._storageBucket = value;
+  }
+  public resetStorageBucket() {
+    this._storageBucket = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get storageBucketInput() {
+    return this._storageBucket;
+  }
+
+  // target_group_ids - computed: true, optional: true, required: false
+  private _targetGroupIds?: string[]; 
+  public get targetGroupIds() {
+    return this.getListAttribute('target_group_ids');
+  }
+  public set targetGroupIds(value: string[]) {
+    this._targetGroupIds = value;
+  }
+  public resetTargetGroupIds() {
+    this._targetGroupIds = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get targetGroupIdsInput() {
+    return this._targetGroupIds;
+  }
+
+  // weight - computed: true, optional: true, required: false
+  private _weight?: number; 
+  public get weight() {
+    return this.getNumberAttribute('weight');
+  }
+  public set weight(value: number) {
+    this._weight = value;
+  }
+  public resetWeight() {
+    this._weight = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get weightInput() {
+    return this._weight;
+  }
+
+  // healthcheck - computed: false, optional: true, required: false
+  private _healthcheck = new DataYandexAlbBackendGroupHttpBackendHealthcheckOutputReference(this, "healthcheck");
+  public get healthcheck() {
+    return this._healthcheck;
+  }
+  public putHealthcheck(value: DataYandexAlbBackendGroupHttpBackendHealthcheck) {
+    this._healthcheck.internalValue = value;
+  }
+  public resetHealthcheck() {
+    this._healthcheck.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get healthcheckInput() {
+    return this._healthcheck.internalValue;
+  }
+
+  // load_balancing_config - computed: false, optional: true, required: false
+  private _loadBalancingConfig = new DataYandexAlbBackendGroupHttpBackendLoadBalancingConfigOutputReference(this, "load_balancing_config");
+  public get loadBalancingConfig() {
+    return this._loadBalancingConfig;
+  }
+  public putLoadBalancingConfig(value: DataYandexAlbBackendGroupHttpBackendLoadBalancingConfig) {
+    this._loadBalancingConfig.internalValue = value;
+  }
+  public resetLoadBalancingConfig() {
+    this._loadBalancingConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get loadBalancingConfigInput() {
+    return this._loadBalancingConfig.internalValue;
+  }
+
+  // tls - computed: false, optional: true, required: false
+  private _tls = new DataYandexAlbBackendGroupHttpBackendTlsOutputReference(this, "tls");
+  public get tls() {
+    return this._tls;
+  }
+  public putTls(value: DataYandexAlbBackendGroupHttpBackendTls) {
+    this._tls.internalValue = value;
+  }
+  public resetTls() {
+    this._tls.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tlsInput() {
+    return this._tls.internalValue;
+  }
+}
+
+export class DataYandexAlbBackendGroupHttpBackendList extends cdktf.ComplexList {
+  public internalValue? : DataYandexAlbBackendGroupHttpBackend[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexAlbBackendGroupHttpBackendOutputReference {
+    return new DataYandexAlbBackendGroupHttpBackendOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataYandexAlbBackendGroupStreamBackendHealthcheckGrpcHealthcheck {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#service_name DataYandexAlbBackendGroup#service_name}
@@ -2596,6 +3020,184 @@ export function dataYandexAlbBackendGroupStreamBackendToTerraform(struct?: DataY
   }
 }
 
+export class DataYandexAlbBackendGroupStreamBackendOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexAlbBackendGroupStreamBackend | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._port !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.port = this._port;
+    }
+    if (this._weight !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.weight = this._weight;
+    }
+    if (this._healthcheck?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.healthcheck = this._healthcheck?.internalValue;
+    }
+    if (this._loadBalancingConfig?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.loadBalancingConfig = this._loadBalancingConfig?.internalValue;
+    }
+    if (this._tls?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.tls = this._tls?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexAlbBackendGroupStreamBackend | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._port = undefined;
+      this._weight = undefined;
+      this._healthcheck.internalValue = undefined;
+      this._loadBalancingConfig.internalValue = undefined;
+      this._tls.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._port = value.port;
+      this._weight = value.weight;
+      this._healthcheck.internalValue = value.healthcheck;
+      this._loadBalancingConfig.internalValue = value.loadBalancingConfig;
+      this._tls.internalValue = value.tls;
+    }
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // port - computed: true, optional: true, required: false
+  private _port?: number; 
+  public get port() {
+    return this.getNumberAttribute('port');
+  }
+  public set port(value: number) {
+    this._port = value;
+  }
+  public resetPort() {
+    this._port = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get portInput() {
+    return this._port;
+  }
+
+  // target_group_ids - computed: true, optional: false, required: false
+  public get targetGroupIds() {
+    return this.getListAttribute('target_group_ids');
+  }
+
+  // weight - computed: true, optional: true, required: false
+  private _weight?: number; 
+  public get weight() {
+    return this.getNumberAttribute('weight');
+  }
+  public set weight(value: number) {
+    this._weight = value;
+  }
+  public resetWeight() {
+    this._weight = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get weightInput() {
+    return this._weight;
+  }
+
+  // healthcheck - computed: false, optional: true, required: false
+  private _healthcheck = new DataYandexAlbBackendGroupStreamBackendHealthcheckOutputReference(this, "healthcheck");
+  public get healthcheck() {
+    return this._healthcheck;
+  }
+  public putHealthcheck(value: DataYandexAlbBackendGroupStreamBackendHealthcheck) {
+    this._healthcheck.internalValue = value;
+  }
+  public resetHealthcheck() {
+    this._healthcheck.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get healthcheckInput() {
+    return this._healthcheck.internalValue;
+  }
+
+  // load_balancing_config - computed: false, optional: true, required: false
+  private _loadBalancingConfig = new DataYandexAlbBackendGroupStreamBackendLoadBalancingConfigOutputReference(this, "load_balancing_config");
+  public get loadBalancingConfig() {
+    return this._loadBalancingConfig;
+  }
+  public putLoadBalancingConfig(value: DataYandexAlbBackendGroupStreamBackendLoadBalancingConfig) {
+    this._loadBalancingConfig.internalValue = value;
+  }
+  public resetLoadBalancingConfig() {
+    this._loadBalancingConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get loadBalancingConfigInput() {
+    return this._loadBalancingConfig.internalValue;
+  }
+
+  // tls - computed: false, optional: true, required: false
+  private _tls = new DataYandexAlbBackendGroupStreamBackendTlsOutputReference(this, "tls");
+  public get tls() {
+    return this._tls;
+  }
+  public putTls(value: DataYandexAlbBackendGroupStreamBackendTls) {
+    this._tls.internalValue = value;
+  }
+  public resetTls() {
+    this._tls.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get tlsInput() {
+    return this._tls.internalValue;
+  }
+}
+
+export class DataYandexAlbBackendGroupStreamBackendList extends cdktf.ComplexList {
+  public internalValue? : DataYandexAlbBackendGroupStreamBackend[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexAlbBackendGroupStreamBackendOutputReference {
+    return new DataYandexAlbBackendGroupStreamBackendOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
 * Represents a {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group yandex_alb_backend_group}
@@ -2634,11 +3236,12 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
     this._backendGroupId = config.backendGroupId;
     this._description = config.description;
     this._folderId = config.folderId;
+    this._id = config.id;
     this._labels = config.labels;
     this._name = config.name;
-    this._grpcBackend = config.grpcBackend;
-    this._httpBackend = config.httpBackend;
-    this._streamBackend = config.streamBackend;
+    this._grpcBackend.internalValue = config.grpcBackend;
+    this._httpBackend.internalValue = config.httpBackend;
+    this._streamBackend.internalValue = config.streamBackend;
   }
 
   // ==========
@@ -2699,8 +3302,19 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // labels - computed: true, optional: true, required: false
@@ -2736,54 +3350,51 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
   }
 
   // grpc_backend - computed: false, optional: true, required: false
-  private _grpcBackend?: DataYandexAlbBackendGroupGrpcBackend[] | cdktf.IResolvable; 
+  private _grpcBackend = new DataYandexAlbBackendGroupGrpcBackendList(this, "grpc_backend", false);
   public get grpcBackend() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('grpc_backend');
+    return this._grpcBackend;
   }
-  public set grpcBackend(value: DataYandexAlbBackendGroupGrpcBackend[] | cdktf.IResolvable) {
-    this._grpcBackend = value;
+  public putGrpcBackend(value: DataYandexAlbBackendGroupGrpcBackend[] | cdktf.IResolvable) {
+    this._grpcBackend.internalValue = value;
   }
   public resetGrpcBackend() {
-    this._grpcBackend = undefined;
+    this._grpcBackend.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get grpcBackendInput() {
-    return this._grpcBackend;
+    return this._grpcBackend.internalValue;
   }
 
   // http_backend - computed: false, optional: true, required: false
-  private _httpBackend?: DataYandexAlbBackendGroupHttpBackend[] | cdktf.IResolvable; 
+  private _httpBackend = new DataYandexAlbBackendGroupHttpBackendList(this, "http_backend", false);
   public get httpBackend() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('http_backend');
+    return this._httpBackend;
   }
-  public set httpBackend(value: DataYandexAlbBackendGroupHttpBackend[] | cdktf.IResolvable) {
-    this._httpBackend = value;
+  public putHttpBackend(value: DataYandexAlbBackendGroupHttpBackend[] | cdktf.IResolvable) {
+    this._httpBackend.internalValue = value;
   }
   public resetHttpBackend() {
-    this._httpBackend = undefined;
+    this._httpBackend.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get httpBackendInput() {
-    return this._httpBackend;
+    return this._httpBackend.internalValue;
   }
 
   // stream_backend - computed: false, optional: true, required: false
-  private _streamBackend?: DataYandexAlbBackendGroupStreamBackend[] | cdktf.IResolvable; 
+  private _streamBackend = new DataYandexAlbBackendGroupStreamBackendList(this, "stream_backend", false);
   public get streamBackend() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('stream_backend');
+    return this._streamBackend;
   }
-  public set streamBackend(value: DataYandexAlbBackendGroupStreamBackend[] | cdktf.IResolvable) {
-    this._streamBackend = value;
+  public putStreamBackend(value: DataYandexAlbBackendGroupStreamBackend[] | cdktf.IResolvable) {
+    this._streamBackend.internalValue = value;
   }
   public resetStreamBackend() {
-    this._streamBackend = undefined;
+    this._streamBackend.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get streamBackendInput() {
-    return this._streamBackend;
+    return this._streamBackend.internalValue;
   }
 
   // =========
@@ -2795,11 +3406,12 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
       backend_group_id: cdktf.stringToTerraform(this._backendGroupId),
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
-      grpc_backend: cdktf.listMapper(dataYandexAlbBackendGroupGrpcBackendToTerraform)(this._grpcBackend),
-      http_backend: cdktf.listMapper(dataYandexAlbBackendGroupHttpBackendToTerraform)(this._httpBackend),
-      stream_backend: cdktf.listMapper(dataYandexAlbBackendGroupStreamBackendToTerraform)(this._streamBackend),
+      grpc_backend: cdktf.listMapper(dataYandexAlbBackendGroupGrpcBackendToTerraform)(this._grpcBackend.internalValue),
+      http_backend: cdktf.listMapper(dataYandexAlbBackendGroupHttpBackendToTerraform)(this._httpBackend.internalValue),
+      stream_backend: cdktf.listMapper(dataYandexAlbBackendGroupStreamBackendToTerraform)(this._streamBackend.internalValue),
     };
   }
 }

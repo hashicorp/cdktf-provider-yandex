@@ -12,6 +12,13 @@ export interface MdbKafkaConnectorConfig extends cdktf.TerraformMetaArguments {
   */
   readonly clusterId: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_connector#id MdbKafkaConnector#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_connector#name MdbKafkaConnector#name}
   */
   readonly name: string;
@@ -67,6 +74,171 @@ export function mdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternal
   }
 }
 
+export class MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalClusterOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._bootstrapServers !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.bootstrapServers = this._bootstrapServers;
+    }
+    if (this._saslMechanism !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.saslMechanism = this._saslMechanism;
+    }
+    if (this._saslPassword !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.saslPassword = this._saslPassword;
+    }
+    if (this._saslUsername !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.saslUsername = this._saslUsername;
+    }
+    if (this._securityProtocol !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.securityProtocol = this._securityProtocol;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._bootstrapServers = undefined;
+      this._saslMechanism = undefined;
+      this._saslPassword = undefined;
+      this._saslUsername = undefined;
+      this._securityProtocol = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._bootstrapServers = value.bootstrapServers;
+      this._saslMechanism = value.saslMechanism;
+      this._saslPassword = value.saslPassword;
+      this._saslUsername = value.saslUsername;
+      this._securityProtocol = value.securityProtocol;
+    }
+  }
+
+  // bootstrap_servers - computed: false, optional: false, required: true
+  private _bootstrapServers?: string; 
+  public get bootstrapServers() {
+    return this.getStringAttribute('bootstrap_servers');
+  }
+  public set bootstrapServers(value: string) {
+    this._bootstrapServers = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get bootstrapServersInput() {
+    return this._bootstrapServers;
+  }
+
+  // sasl_mechanism - computed: false, optional: true, required: false
+  private _saslMechanism?: string; 
+  public get saslMechanism() {
+    return this.getStringAttribute('sasl_mechanism');
+  }
+  public set saslMechanism(value: string) {
+    this._saslMechanism = value;
+  }
+  public resetSaslMechanism() {
+    this._saslMechanism = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get saslMechanismInput() {
+    return this._saslMechanism;
+  }
+
+  // sasl_password - computed: false, optional: true, required: false
+  private _saslPassword?: string; 
+  public get saslPassword() {
+    return this.getStringAttribute('sasl_password');
+  }
+  public set saslPassword(value: string) {
+    this._saslPassword = value;
+  }
+  public resetSaslPassword() {
+    this._saslPassword = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get saslPasswordInput() {
+    return this._saslPassword;
+  }
+
+  // sasl_username - computed: false, optional: true, required: false
+  private _saslUsername?: string; 
+  public get saslUsername() {
+    return this.getStringAttribute('sasl_username');
+  }
+  public set saslUsername(value: string) {
+    this._saslUsername = value;
+  }
+  public resetSaslUsername() {
+    this._saslUsername = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get saslUsernameInput() {
+    return this._saslUsername;
+  }
+
+  // security_protocol - computed: false, optional: true, required: false
+  private _securityProtocol?: string; 
+  public get securityProtocol() {
+    return this.getStringAttribute('security_protocol');
+  }
+  public set securityProtocol(value: string) {
+    this._securityProtocol = value;
+  }
+  public resetSecurityProtocol() {
+    this._securityProtocol = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get securityProtocolInput() {
+    return this._securityProtocol;
+  }
+}
+
+export class MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalClusterList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalClusterOutputReference {
+    return new MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalClusterOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster {
 }
 
@@ -79,6 +251,64 @@ export function mdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClus
   }
 }
 
+export class MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClusterOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+    }
+  }
+}
+
+export class MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClusterList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClusterOutputReference {
+    return new MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClusterOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbKafkaConnectorConnectorConfigMirrormakerSourceCluster {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_connector#alias MdbKafkaConnector#alias}
@@ -128,13 +358,13 @@ export class MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterOutputRefer
       hasAnyValues = true;
       internalValueResult.alias = this._alias;
     }
-    if (this._externalCluster !== undefined) {
+    if (this._externalCluster?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.externalCluster = this._externalCluster;
+      internalValueResult.externalCluster = this._externalCluster?.internalValue;
     }
-    if (this._thisCluster !== undefined) {
+    if (this._thisCluster?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.thisCluster = this._thisCluster;
+      internalValueResult.thisCluster = this._thisCluster?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -143,14 +373,14 @@ export class MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterOutputRefer
     if (value === undefined) {
       this.isEmptyObject = false;
       this._alias = undefined;
-      this._externalCluster = undefined;
-      this._thisCluster = undefined;
+      this._externalCluster.internalValue = undefined;
+      this._thisCluster.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._alias = value.alias;
-      this._externalCluster = value.externalCluster;
-      this._thisCluster = value.thisCluster;
+      this._externalCluster.internalValue = value.externalCluster;
+      this._thisCluster.internalValue = value.thisCluster;
     }
   }
 
@@ -171,37 +401,35 @@ export class MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterOutputRefer
   }
 
   // external_cluster - computed: false, optional: true, required: false
-  private _externalCluster?: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster[] | cdktf.IResolvable; 
+  private _externalCluster = new MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalClusterList(this, "external_cluster", false);
   public get externalCluster() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('external_cluster');
+    return this._externalCluster;
   }
-  public set externalCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster[] | cdktf.IResolvable) {
-    this._externalCluster = value;
+  public putExternalCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalCluster[] | cdktf.IResolvable) {
+    this._externalCluster.internalValue = value;
   }
   public resetExternalCluster() {
-    this._externalCluster = undefined;
+    this._externalCluster.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get externalClusterInput() {
-    return this._externalCluster;
+    return this._externalCluster.internalValue;
   }
 
   // this_cluster - computed: false, optional: true, required: false
-  private _thisCluster?: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster[] | cdktf.IResolvable; 
+  private _thisCluster = new MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClusterList(this, "this_cluster", false);
   public get thisCluster() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('this_cluster');
+    return this._thisCluster;
   }
-  public set thisCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster[] | cdktf.IResolvable) {
-    this._thisCluster = value;
+  public putThisCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisCluster[] | cdktf.IResolvable) {
+    this._thisCluster.internalValue = value;
   }
   public resetThisCluster() {
-    this._thisCluster = undefined;
+    this._thisCluster.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get thisClusterInput() {
-    return this._thisCluster;
+    return this._thisCluster.internalValue;
   }
 }
 export interface MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster {
@@ -241,6 +469,171 @@ export function mdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternal
   }
 }
 
+export class MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalClusterOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._bootstrapServers !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.bootstrapServers = this._bootstrapServers;
+    }
+    if (this._saslMechanism !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.saslMechanism = this._saslMechanism;
+    }
+    if (this._saslPassword !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.saslPassword = this._saslPassword;
+    }
+    if (this._saslUsername !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.saslUsername = this._saslUsername;
+    }
+    if (this._securityProtocol !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.securityProtocol = this._securityProtocol;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._bootstrapServers = undefined;
+      this._saslMechanism = undefined;
+      this._saslPassword = undefined;
+      this._saslUsername = undefined;
+      this._securityProtocol = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._bootstrapServers = value.bootstrapServers;
+      this._saslMechanism = value.saslMechanism;
+      this._saslPassword = value.saslPassword;
+      this._saslUsername = value.saslUsername;
+      this._securityProtocol = value.securityProtocol;
+    }
+  }
+
+  // bootstrap_servers - computed: false, optional: false, required: true
+  private _bootstrapServers?: string; 
+  public get bootstrapServers() {
+    return this.getStringAttribute('bootstrap_servers');
+  }
+  public set bootstrapServers(value: string) {
+    this._bootstrapServers = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get bootstrapServersInput() {
+    return this._bootstrapServers;
+  }
+
+  // sasl_mechanism - computed: false, optional: true, required: false
+  private _saslMechanism?: string; 
+  public get saslMechanism() {
+    return this.getStringAttribute('sasl_mechanism');
+  }
+  public set saslMechanism(value: string) {
+    this._saslMechanism = value;
+  }
+  public resetSaslMechanism() {
+    this._saslMechanism = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get saslMechanismInput() {
+    return this._saslMechanism;
+  }
+
+  // sasl_password - computed: false, optional: true, required: false
+  private _saslPassword?: string; 
+  public get saslPassword() {
+    return this.getStringAttribute('sasl_password');
+  }
+  public set saslPassword(value: string) {
+    this._saslPassword = value;
+  }
+  public resetSaslPassword() {
+    this._saslPassword = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get saslPasswordInput() {
+    return this._saslPassword;
+  }
+
+  // sasl_username - computed: false, optional: true, required: false
+  private _saslUsername?: string; 
+  public get saslUsername() {
+    return this.getStringAttribute('sasl_username');
+  }
+  public set saslUsername(value: string) {
+    this._saslUsername = value;
+  }
+  public resetSaslUsername() {
+    this._saslUsername = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get saslUsernameInput() {
+    return this._saslUsername;
+  }
+
+  // security_protocol - computed: false, optional: true, required: false
+  private _securityProtocol?: string; 
+  public get securityProtocol() {
+    return this.getStringAttribute('security_protocol');
+  }
+  public set securityProtocol(value: string) {
+    this._securityProtocol = value;
+  }
+  public resetSecurityProtocol() {
+    this._securityProtocol = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get securityProtocolInput() {
+    return this._securityProtocol;
+  }
+}
+
+export class MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalClusterList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalClusterOutputReference {
+    return new MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalClusterOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster {
 }
 
@@ -253,6 +646,64 @@ export function mdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClus
   }
 }
 
+export class MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClusterOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+    }
+  }
+}
+
+export class MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClusterList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClusterOutputReference {
+    return new MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClusterOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface MdbKafkaConnectorConnectorConfigMirrormakerTargetCluster {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_connector#alias MdbKafkaConnector#alias}
@@ -302,13 +753,13 @@ export class MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterOutputRefer
       hasAnyValues = true;
       internalValueResult.alias = this._alias;
     }
-    if (this._externalCluster !== undefined) {
+    if (this._externalCluster?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.externalCluster = this._externalCluster;
+      internalValueResult.externalCluster = this._externalCluster?.internalValue;
     }
-    if (this._thisCluster !== undefined) {
+    if (this._thisCluster?.internalValue !== undefined) {
       hasAnyValues = true;
-      internalValueResult.thisCluster = this._thisCluster;
+      internalValueResult.thisCluster = this._thisCluster?.internalValue;
     }
     return hasAnyValues ? internalValueResult : undefined;
   }
@@ -317,14 +768,14 @@ export class MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterOutputRefer
     if (value === undefined) {
       this.isEmptyObject = false;
       this._alias = undefined;
-      this._externalCluster = undefined;
-      this._thisCluster = undefined;
+      this._externalCluster.internalValue = undefined;
+      this._thisCluster.internalValue = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._alias = value.alias;
-      this._externalCluster = value.externalCluster;
-      this._thisCluster = value.thisCluster;
+      this._externalCluster.internalValue = value.externalCluster;
+      this._thisCluster.internalValue = value.thisCluster;
     }
   }
 
@@ -345,37 +796,35 @@ export class MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterOutputRefer
   }
 
   // external_cluster - computed: false, optional: true, required: false
-  private _externalCluster?: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster[] | cdktf.IResolvable; 
+  private _externalCluster = new MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalClusterList(this, "external_cluster", false);
   public get externalCluster() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('external_cluster');
+    return this._externalCluster;
   }
-  public set externalCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster[] | cdktf.IResolvable) {
-    this._externalCluster = value;
+  public putExternalCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalCluster[] | cdktf.IResolvable) {
+    this._externalCluster.internalValue = value;
   }
   public resetExternalCluster() {
-    this._externalCluster = undefined;
+    this._externalCluster.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get externalClusterInput() {
-    return this._externalCluster;
+    return this._externalCluster.internalValue;
   }
 
   // this_cluster - computed: false, optional: true, required: false
-  private _thisCluster?: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster[] | cdktf.IResolvable; 
+  private _thisCluster = new MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClusterList(this, "this_cluster", false);
   public get thisCluster() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('this_cluster');
+    return this._thisCluster;
   }
-  public set thisCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster[] | cdktf.IResolvable) {
-    this._thisCluster = value;
+  public putThisCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisCluster[] | cdktf.IResolvable) {
+    this._thisCluster.internalValue = value;
   }
   public resetThisCluster() {
-    this._thisCluster = undefined;
+    this._thisCluster.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get thisClusterInput() {
-    return this._thisCluster;
+    return this._thisCluster.internalValue;
   }
 }
 export interface MdbKafkaConnectorConnectorConfigMirrormaker {
@@ -414,6 +863,140 @@ export function mdbKafkaConnectorConnectorConfigMirrormakerToTerraform(struct?: 
   }
 }
 
+export class MdbKafkaConnectorConnectorConfigMirrormakerOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): MdbKafkaConnectorConnectorConfigMirrormaker | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._replicationFactor !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.replicationFactor = this._replicationFactor;
+    }
+    if (this._topics !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.topics = this._topics;
+    }
+    if (this._sourceCluster?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.sourceCluster = this._sourceCluster?.internalValue;
+    }
+    if (this._targetCluster?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.targetCluster = this._targetCluster?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbKafkaConnectorConnectorConfigMirrormaker | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._replicationFactor = undefined;
+      this._topics = undefined;
+      this._sourceCluster.internalValue = undefined;
+      this._targetCluster.internalValue = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._replicationFactor = value.replicationFactor;
+      this._topics = value.topics;
+      this._sourceCluster.internalValue = value.sourceCluster;
+      this._targetCluster.internalValue = value.targetCluster;
+    }
+  }
+
+  // replication_factor - computed: false, optional: false, required: true
+  private _replicationFactor?: number; 
+  public get replicationFactor() {
+    return this.getNumberAttribute('replication_factor');
+  }
+  public set replicationFactor(value: number) {
+    this._replicationFactor = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get replicationFactorInput() {
+    return this._replicationFactor;
+  }
+
+  // topics - computed: false, optional: false, required: true
+  private _topics?: string; 
+  public get topics() {
+    return this.getStringAttribute('topics');
+  }
+  public set topics(value: string) {
+    this._topics = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get topicsInput() {
+    return this._topics;
+  }
+
+  // source_cluster - computed: false, optional: false, required: true
+  private _sourceCluster = new MdbKafkaConnectorConnectorConfigMirrormakerSourceClusterOutputReference(this, "source_cluster");
+  public get sourceCluster() {
+    return this._sourceCluster;
+  }
+  public putSourceCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerSourceCluster) {
+    this._sourceCluster.internalValue = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sourceClusterInput() {
+    return this._sourceCluster.internalValue;
+  }
+
+  // target_cluster - computed: false, optional: false, required: true
+  private _targetCluster = new MdbKafkaConnectorConnectorConfigMirrormakerTargetClusterOutputReference(this, "target_cluster");
+  public get targetCluster() {
+    return this._targetCluster;
+  }
+  public putTargetCluster(value: MdbKafkaConnectorConnectorConfigMirrormakerTargetCluster) {
+    this._targetCluster.internalValue = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get targetClusterInput() {
+    return this._targetCluster.internalValue;
+  }
+}
+
+export class MdbKafkaConnectorConnectorConfigMirrormakerList extends cdktf.ComplexList {
+  public internalValue? : MdbKafkaConnectorConnectorConfigMirrormaker[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): MdbKafkaConnectorConnectorConfigMirrormakerOutputReference {
+    return new MdbKafkaConnectorConnectorConfigMirrormakerOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 
 /**
 * Represents a {@link https://www.terraform.io/docs/providers/yandex/r/mdb_kafka_connector yandex_mdb_kafka_connector}
@@ -450,10 +1033,11 @@ export class MdbKafkaConnector extends cdktf.TerraformResource {
       lifecycle: config.lifecycle
     });
     this._clusterId = config.clusterId;
+    this._id = config.id;
     this._name = config.name;
     this._properties = config.properties;
     this._tasksMax = config.tasksMax;
-    this._connectorConfigMirrormaker = config.connectorConfigMirrormaker;
+    this._connectorConfigMirrormaker.internalValue = config.connectorConfigMirrormaker;
   }
 
   // ==========
@@ -474,8 +1058,19 @@ export class MdbKafkaConnector extends cdktf.TerraformResource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // name - computed: false, optional: false, required: true
@@ -524,20 +1119,19 @@ export class MdbKafkaConnector extends cdktf.TerraformResource {
   }
 
   // connector_config_mirrormaker - computed: false, optional: true, required: false
-  private _connectorConfigMirrormaker?: MdbKafkaConnectorConnectorConfigMirrormaker[] | cdktf.IResolvable; 
+  private _connectorConfigMirrormaker = new MdbKafkaConnectorConnectorConfigMirrormakerList(this, "connector_config_mirrormaker", false);
   public get connectorConfigMirrormaker() {
-    // Getting the computed value is not yet implemented
-    return this.interpolationForAttribute('connector_config_mirrormaker');
+    return this._connectorConfigMirrormaker;
   }
-  public set connectorConfigMirrormaker(value: MdbKafkaConnectorConnectorConfigMirrormaker[] | cdktf.IResolvable) {
-    this._connectorConfigMirrormaker = value;
+  public putConnectorConfigMirrormaker(value: MdbKafkaConnectorConnectorConfigMirrormaker[] | cdktf.IResolvable) {
+    this._connectorConfigMirrormaker.internalValue = value;
   }
   public resetConnectorConfigMirrormaker() {
-    this._connectorConfigMirrormaker = undefined;
+    this._connectorConfigMirrormaker.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get connectorConfigMirrormakerInput() {
-    return this._connectorConfigMirrormaker;
+    return this._connectorConfigMirrormaker.internalValue;
   }
 
   // =========
@@ -547,10 +1141,11 @@ export class MdbKafkaConnector extends cdktf.TerraformResource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       cluster_id: cdktf.stringToTerraform(this._clusterId),
+      id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       properties: cdktf.hashMapper(cdktf.stringToTerraform)(this._properties),
       tasks_max: cdktf.numberToTerraform(this._tasksMax),
-      connector_config_mirrormaker: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerToTerraform)(this._connectorConfigMirrormaker),
+      connector_config_mirrormaker: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerToTerraform)(this._connectorConfigMirrormaker.internalValue),
     };
   }
 }

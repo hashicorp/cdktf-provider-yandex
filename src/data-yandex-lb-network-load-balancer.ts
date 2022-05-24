@@ -12,6 +12,13 @@ export interface DataYandexLbNetworkLoadBalancerConfig extends cdktf.TerraformMe
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/lb_network_load_balancer#id DataYandexLbNetworkLoadBalancer#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/lb_network_load_balancer#name DataYandexLbNetworkLoadBalancer#name}
   */
   readonly name?: string;
@@ -589,6 +596,7 @@ export class DataYandexLbNetworkLoadBalancer extends cdktf.TerraformDataSource {
       lifecycle: config.lifecycle
     });
     this._folderId = config.folderId;
+    this._id = config.id;
     this._name = config.name;
     this._networkLoadBalancerId = config.networkLoadBalancerId;
   }
@@ -630,13 +638,25 @@ export class DataYandexLbNetworkLoadBalancer extends cdktf.TerraformDataSource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
   }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
+  }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // listener - computed: true, optional: false, required: false
@@ -694,6 +714,7 @@ export class DataYandexLbNetworkLoadBalancer extends cdktf.TerraformDataSource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       folder_id: cdktf.stringToTerraform(this._folderId),
+      id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       network_load_balancer_id: cdktf.stringToTerraform(this._networkLoadBalancerId),
     };

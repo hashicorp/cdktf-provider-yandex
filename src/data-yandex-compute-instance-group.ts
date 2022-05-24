@@ -8,6 +8,13 @@ import * as cdktf from 'cdktf';
 
 export interface DataYandexComputeInstanceGroupConfig extends cdktf.TerraformMetaArguments {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance_group#id DataYandexComputeInstanceGroup#id}
+  *
+  * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
+  * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
+  */
+  readonly id?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance_group#instance_group_id DataYandexComputeInstanceGroup#instance_group_id}
   */
   readonly instanceGroupId: string;
@@ -206,8 +213,9 @@ export class DataYandexComputeInstanceGroupApplicationLoadBalancerOutputReferenc
   }
 
   // target_group_labels - computed: true, optional: false, required: false
-  public targetGroupLabels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'target_group_labels').lookup(key);
+  private _targetGroupLabels = new cdktf.StringMap(this, "target_group_labels");
+  public get targetGroupLabels() {
+    return this._targetGroupLabels;
   }
 
   // target_group_name - computed: true, optional: false, required: false
@@ -1562,13 +1570,15 @@ export class DataYandexComputeInstanceGroupInstanceTemplateOutputReference exten
   }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // metadata - computed: true, optional: false, required: false
-  public metadata(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'metadata').lookup(key);
+  private _metadata = new cdktf.StringMap(this, "metadata");
+  public get metadata() {
+    return this._metadata;
   }
 
   // name - computed: true, optional: false, required: false
@@ -1911,8 +1921,9 @@ export class DataYandexComputeInstanceGroupLoadBalancerOutputReference extends c
   }
 
   // target_group_labels - computed: true, optional: false, required: false
-  public targetGroupLabels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'target_group_labels').lookup(key);
+  private _targetGroupLabels = new cdktf.StringMap(this, "target_group_labels");
+  public get targetGroupLabels() {
+    return this._targetGroupLabels;
   }
 
   // target_group_name - computed: true, optional: false, required: false
@@ -2054,8 +2065,9 @@ export class DataYandexComputeInstanceGroupScalePolicyAutoScaleCustomRuleOutputR
   }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // metric_name - computed: true, optional: false, required: false
@@ -2312,8 +2324,9 @@ export class DataYandexComputeInstanceGroupScalePolicyTestAutoScaleCustomRuleOut
   }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // metric_name - computed: true, optional: false, required: false
@@ -2572,6 +2585,7 @@ export class DataYandexComputeInstanceGroup extends cdktf.TerraformDataSource {
       count: config.count,
       lifecycle: config.lifecycle
     });
+    this._id = config.id;
     this._instanceGroupId = config.instanceGroupId;
   }
 
@@ -2630,8 +2644,19 @@ export class DataYandexComputeInstanceGroup extends cdktf.TerraformDataSource {
   }
 
   // id - computed: true, optional: true, required: false
+  private _id?: string; 
   public get id() {
     return this.getStringAttribute('id');
+  }
+  public set id(value: string) {
+    this._id = value;
+  }
+  public resetId() {
+    this._id = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get idInput() {
+    return this._id;
   }
 
   // instance_group_id - computed: false, optional: false, required: true
@@ -2660,8 +2685,9 @@ export class DataYandexComputeInstanceGroup extends cdktf.TerraformDataSource {
   }
 
   // labels - computed: true, optional: false, required: false
-  public labels(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'labels').lookup(key);
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
   }
 
   // load_balancer - computed: true, optional: false, required: false
@@ -2703,8 +2729,9 @@ export class DataYandexComputeInstanceGroup extends cdktf.TerraformDataSource {
   }
 
   // variables - computed: true, optional: false, required: false
-  public variables(key: string): string | cdktf.IResolvable {
-    return new cdktf.StringMap(this, 'variables').lookup(key);
+  private _variables = new cdktf.StringMap(this, "variables");
+  public get variables() {
+    return this._variables;
   }
 
   // =========
@@ -2713,6 +2740,7 @@ export class DataYandexComputeInstanceGroup extends cdktf.TerraformDataSource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      id: cdktf.stringToTerraform(this._id),
       instance_group_id: cdktf.stringToTerraform(this._instanceGroupId),
     };
   }
