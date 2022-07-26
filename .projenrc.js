@@ -1,6 +1,6 @@
 const { CdktfProviderProject } = require("@cdktf/provider-project");
 const project = new CdktfProviderProject({
-  terraformProvider: "yandex-cloud/yandex@~> 0.73.0",
+  terraformProvider: "yandex-cloud/yandex@~> 0.73",
   cdktfVersion: "^0.11.0",
   constructsVersion: "^10.0.0",
   minNodeVersion: "14.17.0",

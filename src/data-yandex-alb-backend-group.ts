@@ -47,6 +47,12 @@ export interface DataYandexAlbBackendGroupConfig extends cdktf.TerraformMetaArgu
   */
   readonly httpBackend?: DataYandexAlbBackendGroupHttpBackend[] | cdktf.IResolvable;
   /**
+  * session_affinity block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#session_affinity DataYandexAlbBackendGroup#session_affinity}
+  */
+  readonly sessionAffinity?: DataYandexAlbBackendGroupSessionAffinity;
+  /**
   * stream_backend block
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#stream_backend DataYandexAlbBackendGroup#stream_backend}
@@ -556,6 +562,10 @@ export interface DataYandexAlbBackendGroupGrpcBackendLoadBalancingConfig {
   */
   readonly localityAwareRoutingPercent?: number;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#mode DataYandexAlbBackendGroup#mode}
+  */
+  readonly mode?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#panic_threshold DataYandexAlbBackendGroup#panic_threshold}
   */
   readonly panicThreshold?: number;
@@ -572,6 +582,7 @@ export function dataYandexAlbBackendGroupGrpcBackendLoadBalancingConfigToTerrafo
   }
   return {
     locality_aware_routing_percent: cdktf.numberToTerraform(struct!.localityAwareRoutingPercent),
+    mode: cdktf.stringToTerraform(struct!.mode),
     panic_threshold: cdktf.numberToTerraform(struct!.panicThreshold),
     strict_locality: cdktf.booleanToTerraform(struct!.strictLocality),
   }
@@ -595,6 +606,10 @@ export class DataYandexAlbBackendGroupGrpcBackendLoadBalancingConfigOutputRefere
       hasAnyValues = true;
       internalValueResult.localityAwareRoutingPercent = this._localityAwareRoutingPercent;
     }
+    if (this._mode !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.mode = this._mode;
+    }
     if (this._panicThreshold !== undefined) {
       hasAnyValues = true;
       internalValueResult.panicThreshold = this._panicThreshold;
@@ -610,12 +625,14 @@ export class DataYandexAlbBackendGroupGrpcBackendLoadBalancingConfigOutputRefere
     if (value === undefined) {
       this.isEmptyObject = false;
       this._localityAwareRoutingPercent = undefined;
+      this._mode = undefined;
       this._panicThreshold = undefined;
       this._strictLocality = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._localityAwareRoutingPercent = value.localityAwareRoutingPercent;
+      this._mode = value.mode;
       this._panicThreshold = value.panicThreshold;
       this._strictLocality = value.strictLocality;
     }
@@ -635,6 +652,22 @@ export class DataYandexAlbBackendGroupGrpcBackendLoadBalancingConfigOutputRefere
   // Temporarily expose input value. Use with caution.
   public get localityAwareRoutingPercentInput() {
     return this._localityAwareRoutingPercent;
+  }
+
+  // mode - computed: true, optional: true, required: false
+  private _mode?: string; 
+  public get mode() {
+    return this.getStringAttribute('mode');
+  }
+  public set mode(value: string) {
+    this._mode = value;
+  }
+  public resetMode() {
+    this._mode = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get modeInput() {
+    return this._mode;
   }
 
   // panic_threshold - computed: true, optional: true, required: false
@@ -1579,6 +1612,10 @@ export interface DataYandexAlbBackendGroupHttpBackendLoadBalancingConfig {
   */
   readonly localityAwareRoutingPercent?: number;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#mode DataYandexAlbBackendGroup#mode}
+  */
+  readonly mode?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#panic_threshold DataYandexAlbBackendGroup#panic_threshold}
   */
   readonly panicThreshold?: number;
@@ -1595,6 +1632,7 @@ export function dataYandexAlbBackendGroupHttpBackendLoadBalancingConfigToTerrafo
   }
   return {
     locality_aware_routing_percent: cdktf.numberToTerraform(struct!.localityAwareRoutingPercent),
+    mode: cdktf.stringToTerraform(struct!.mode),
     panic_threshold: cdktf.numberToTerraform(struct!.panicThreshold),
     strict_locality: cdktf.booleanToTerraform(struct!.strictLocality),
   }
@@ -1618,6 +1656,10 @@ export class DataYandexAlbBackendGroupHttpBackendLoadBalancingConfigOutputRefere
       hasAnyValues = true;
       internalValueResult.localityAwareRoutingPercent = this._localityAwareRoutingPercent;
     }
+    if (this._mode !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.mode = this._mode;
+    }
     if (this._panicThreshold !== undefined) {
       hasAnyValues = true;
       internalValueResult.panicThreshold = this._panicThreshold;
@@ -1633,12 +1675,14 @@ export class DataYandexAlbBackendGroupHttpBackendLoadBalancingConfigOutputRefere
     if (value === undefined) {
       this.isEmptyObject = false;
       this._localityAwareRoutingPercent = undefined;
+      this._mode = undefined;
       this._panicThreshold = undefined;
       this._strictLocality = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._localityAwareRoutingPercent = value.localityAwareRoutingPercent;
+      this._mode = value.mode;
       this._panicThreshold = value.panicThreshold;
       this._strictLocality = value.strictLocality;
     }
@@ -1658,6 +1702,22 @@ export class DataYandexAlbBackendGroupHttpBackendLoadBalancingConfigOutputRefere
   // Temporarily expose input value. Use with caution.
   public get localityAwareRoutingPercentInput() {
     return this._localityAwareRoutingPercent;
+  }
+
+  // mode - computed: true, optional: true, required: false
+  private _mode?: string; 
+  public get mode() {
+    return this.getStringAttribute('mode');
+  }
+  public set mode(value: string) {
+    this._mode = value;
+  }
+  public resetMode() {
+    this._mode = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get modeInput() {
+    return this._mode;
   }
 
   // panic_threshold - computed: true, optional: true, required: false
@@ -2175,6 +2235,313 @@ export class DataYandexAlbBackendGroupHttpBackendList extends cdktf.ComplexList 
     return new DataYandexAlbBackendGroupHttpBackendOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataYandexAlbBackendGroupSessionAffinityConnection {
+  /**
+  * Use source IP address
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#source_ip DataYandexAlbBackendGroup#source_ip}
+  */
+  readonly sourceIp?: boolean | cdktf.IResolvable;
+}
+
+export function dataYandexAlbBackendGroupSessionAffinityConnectionToTerraform(struct?: DataYandexAlbBackendGroupSessionAffinityConnectionOutputReference | DataYandexAlbBackendGroupSessionAffinityConnection): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    source_ip: cdktf.booleanToTerraform(struct!.sourceIp),
+  }
+}
+
+export class DataYandexAlbBackendGroupSessionAffinityConnectionOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): DataYandexAlbBackendGroupSessionAffinityConnection | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._sourceIp !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.sourceIp = this._sourceIp;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexAlbBackendGroupSessionAffinityConnection | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._sourceIp = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._sourceIp = value.sourceIp;
+    }
+  }
+
+  // source_ip - computed: true, optional: true, required: false
+  private _sourceIp?: boolean | cdktf.IResolvable; 
+  public get sourceIp() {
+    return this.getBooleanAttribute('source_ip');
+  }
+  public set sourceIp(value: boolean | cdktf.IResolvable) {
+    this._sourceIp = value;
+  }
+  public resetSourceIp() {
+    this._sourceIp = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sourceIpInput() {
+    return this._sourceIp;
+  }
+}
+export interface DataYandexAlbBackendGroupSessionAffinityCookie {
+  /**
+  * TTL for the cookie (if not set, session cookie will be used)
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#ttl DataYandexAlbBackendGroup#ttl}
+  */
+  readonly ttl?: string;
+}
+
+export function dataYandexAlbBackendGroupSessionAffinityCookieToTerraform(struct?: DataYandexAlbBackendGroupSessionAffinityCookieOutputReference | DataYandexAlbBackendGroupSessionAffinityCookie): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    ttl: cdktf.stringToTerraform(struct!.ttl),
+  }
+}
+
+export class DataYandexAlbBackendGroupSessionAffinityCookieOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): DataYandexAlbBackendGroupSessionAffinityCookie | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._ttl !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ttl = this._ttl;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexAlbBackendGroupSessionAffinityCookie | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._ttl = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._ttl = value.ttl;
+    }
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+
+  // ttl - computed: true, optional: true, required: false
+  private _ttl?: string; 
+  public get ttl() {
+    return this.getStringAttribute('ttl');
+  }
+  public set ttl(value: string) {
+    this._ttl = value;
+  }
+  public resetTtl() {
+    this._ttl = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ttlInput() {
+    return this._ttl;
+  }
+}
+export interface DataYandexAlbBackendGroupSessionAffinityHeader {
+}
+
+export function dataYandexAlbBackendGroupSessionAffinityHeaderToTerraform(struct?: DataYandexAlbBackendGroupSessionAffinityHeaderOutputReference | DataYandexAlbBackendGroupSessionAffinityHeader): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+export class DataYandexAlbBackendGroupSessionAffinityHeaderOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): DataYandexAlbBackendGroupSessionAffinityHeader | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexAlbBackendGroupSessionAffinityHeader | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // header_name - computed: true, optional: false, required: false
+  public get headerName() {
+    return this.getStringAttribute('header_name');
+  }
+}
+export interface DataYandexAlbBackendGroupSessionAffinity {
+  /**
+  * connection block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#connection DataYandexAlbBackendGroup#connection}
+  */
+  readonly connection?: DataYandexAlbBackendGroupSessionAffinityConnection;
+  /**
+  * cookie block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#cookie DataYandexAlbBackendGroup#cookie}
+  */
+  readonly cookie?: DataYandexAlbBackendGroupSessionAffinityCookie;
+  /**
+  * header block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#header DataYandexAlbBackendGroup#header}
+  */
+  readonly header?: DataYandexAlbBackendGroupSessionAffinityHeader;
+}
+
+export function dataYandexAlbBackendGroupSessionAffinityToTerraform(struct?: DataYandexAlbBackendGroupSessionAffinityOutputReference | DataYandexAlbBackendGroupSessionAffinity): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    connection: dataYandexAlbBackendGroupSessionAffinityConnectionToTerraform(struct!.connection),
+    cookie: dataYandexAlbBackendGroupSessionAffinityCookieToTerraform(struct!.cookie),
+    header: dataYandexAlbBackendGroupSessionAffinityHeaderToTerraform(struct!.header),
+  }
+}
+
+export class DataYandexAlbBackendGroupSessionAffinityOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): DataYandexAlbBackendGroupSessionAffinity | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._connection?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.connection = this._connection?.internalValue;
+    }
+    if (this._cookie?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.cookie = this._cookie?.internalValue;
+    }
+    if (this._header?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.header = this._header?.internalValue;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexAlbBackendGroupSessionAffinity | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._connection.internalValue = undefined;
+      this._cookie.internalValue = undefined;
+      this._header.internalValue = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._connection.internalValue = value.connection;
+      this._cookie.internalValue = value.cookie;
+      this._header.internalValue = value.header;
+    }
+  }
+
+  // connection - computed: false, optional: true, required: false
+  private _connection = new DataYandexAlbBackendGroupSessionAffinityConnectionOutputReference(this, "connection");
+  public get connection() {
+    return this._connection;
+  }
+  public putConnection(value: DataYandexAlbBackendGroupSessionAffinityConnection) {
+    this._connection.internalValue = value;
+  }
+  public resetConnection() {
+    this._connection.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get connectionInput() {
+    return this._connection.internalValue;
+  }
+
+  // cookie - computed: false, optional: true, required: false
+  private _cookie = new DataYandexAlbBackendGroupSessionAffinityCookieOutputReference(this, "cookie");
+  public get cookie() {
+    return this._cookie;
+  }
+  public putCookie(value: DataYandexAlbBackendGroupSessionAffinityCookie) {
+    this._cookie.internalValue = value;
+  }
+  public resetCookie() {
+    this._cookie.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get cookieInput() {
+    return this._cookie.internalValue;
+  }
+
+  // header - computed: false, optional: true, required: false
+  private _header = new DataYandexAlbBackendGroupSessionAffinityHeaderOutputReference(this, "header");
+  public get header() {
+    return this._header;
+  }
+  public putHeader(value: DataYandexAlbBackendGroupSessionAffinityHeader) {
+    this._header.internalValue = value;
+  }
+  public resetHeader() {
+    this._header.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get headerInput() {
+    return this._header.internalValue;
+  }
+}
 export interface DataYandexAlbBackendGroupStreamBackendHealthcheckGrpcHealthcheck {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#service_name DataYandexAlbBackendGroup#service_name}
@@ -2678,6 +3045,10 @@ export interface DataYandexAlbBackendGroupStreamBackendLoadBalancingConfig {
   */
   readonly localityAwareRoutingPercent?: number;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#mode DataYandexAlbBackendGroup#mode}
+  */
+  readonly mode?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#panic_threshold DataYandexAlbBackendGroup#panic_threshold}
   */
   readonly panicThreshold?: number;
@@ -2694,6 +3065,7 @@ export function dataYandexAlbBackendGroupStreamBackendLoadBalancingConfigToTerra
   }
   return {
     locality_aware_routing_percent: cdktf.numberToTerraform(struct!.localityAwareRoutingPercent),
+    mode: cdktf.stringToTerraform(struct!.mode),
     panic_threshold: cdktf.numberToTerraform(struct!.panicThreshold),
     strict_locality: cdktf.booleanToTerraform(struct!.strictLocality),
   }
@@ -2717,6 +3089,10 @@ export class DataYandexAlbBackendGroupStreamBackendLoadBalancingConfigOutputRefe
       hasAnyValues = true;
       internalValueResult.localityAwareRoutingPercent = this._localityAwareRoutingPercent;
     }
+    if (this._mode !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.mode = this._mode;
+    }
     if (this._panicThreshold !== undefined) {
       hasAnyValues = true;
       internalValueResult.panicThreshold = this._panicThreshold;
@@ -2732,12 +3108,14 @@ export class DataYandexAlbBackendGroupStreamBackendLoadBalancingConfigOutputRefe
     if (value === undefined) {
       this.isEmptyObject = false;
       this._localityAwareRoutingPercent = undefined;
+      this._mode = undefined;
       this._panicThreshold = undefined;
       this._strictLocality = undefined;
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this._localityAwareRoutingPercent = value.localityAwareRoutingPercent;
+      this._mode = value.mode;
       this._panicThreshold = value.panicThreshold;
       this._strictLocality = value.strictLocality;
     }
@@ -2757,6 +3135,22 @@ export class DataYandexAlbBackendGroupStreamBackendLoadBalancingConfigOutputRefe
   // Temporarily expose input value. Use with caution.
   public get localityAwareRoutingPercentInput() {
     return this._localityAwareRoutingPercent;
+  }
+
+  // mode - computed: true, optional: true, required: false
+  private _mode?: string; 
+  public get mode() {
+    return this.getStringAttribute('mode');
+  }
+  public set mode(value: string) {
+    this._mode = value;
+  }
+  public resetMode() {
+    this._mode = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get modeInput() {
+    return this._mode;
   }
 
   // panic_threshold - computed: true, optional: true, required: false
@@ -2979,6 +3373,10 @@ export class DataYandexAlbBackendGroupStreamBackendTlsOutputReference extends cd
 }
 export interface DataYandexAlbBackendGroupStreamBackend {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#enable_proxy_protocol DataYandexAlbBackendGroup#enable_proxy_protocol}
+  */
+  readonly enableProxyProtocol?: boolean | cdktf.IResolvable;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/alb_backend_group#port DataYandexAlbBackendGroup#port}
   */
   readonly port?: number;
@@ -3012,6 +3410,7 @@ export function dataYandexAlbBackendGroupStreamBackendToTerraform(struct?: DataY
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
+    enable_proxy_protocol: cdktf.booleanToTerraform(struct!.enableProxyProtocol),
     port: cdktf.numberToTerraform(struct!.port),
     weight: cdktf.numberToTerraform(struct!.weight),
     healthcheck: dataYandexAlbBackendGroupStreamBackendHealthcheckToTerraform(struct!.healthcheck),
@@ -3040,6 +3439,10 @@ export class DataYandexAlbBackendGroupStreamBackendOutputReference extends cdktf
     }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
+    if (this._enableProxyProtocol !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.enableProxyProtocol = this._enableProxyProtocol;
+    }
     if (this._port !== undefined) {
       hasAnyValues = true;
       internalValueResult.port = this._port;
@@ -3067,6 +3470,7 @@ export class DataYandexAlbBackendGroupStreamBackendOutputReference extends cdktf
     if (value === undefined) {
       this.isEmptyObject = false;
       this.resolvableValue = undefined;
+      this._enableProxyProtocol = undefined;
       this._port = undefined;
       this._weight = undefined;
       this._healthcheck.internalValue = undefined;
@@ -3080,12 +3484,29 @@ export class DataYandexAlbBackendGroupStreamBackendOutputReference extends cdktf
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this.resolvableValue = undefined;
+      this._enableProxyProtocol = value.enableProxyProtocol;
       this._port = value.port;
       this._weight = value.weight;
       this._healthcheck.internalValue = value.healthcheck;
       this._loadBalancingConfig.internalValue = value.loadBalancingConfig;
       this._tls.internalValue = value.tls;
     }
+  }
+
+  // enable_proxy_protocol - computed: true, optional: true, required: false
+  private _enableProxyProtocol?: boolean | cdktf.IResolvable; 
+  public get enableProxyProtocol() {
+    return this.getBooleanAttribute('enable_proxy_protocol');
+  }
+  public set enableProxyProtocol(value: boolean | cdktf.IResolvable) {
+    this._enableProxyProtocol = value;
+  }
+  public resetEnableProxyProtocol() {
+    this._enableProxyProtocol = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get enableProxyProtocolInput() {
+    return this._enableProxyProtocol;
   }
 
   // name - computed: true, optional: false, required: false
@@ -3225,8 +3646,8 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_alb_backend_group',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -3241,6 +3662,7 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
     this._name = config.name;
     this._grpcBackend.internalValue = config.grpcBackend;
     this._httpBackend.internalValue = config.httpBackend;
+    this._sessionAffinity.internalValue = config.sessionAffinity;
     this._streamBackend.internalValue = config.streamBackend;
   }
 
@@ -3381,6 +3803,22 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
     return this._httpBackend.internalValue;
   }
 
+  // session_affinity - computed: false, optional: true, required: false
+  private _sessionAffinity = new DataYandexAlbBackendGroupSessionAffinityOutputReference(this, "session_affinity");
+  public get sessionAffinity() {
+    return this._sessionAffinity;
+  }
+  public putSessionAffinity(value: DataYandexAlbBackendGroupSessionAffinity) {
+    this._sessionAffinity.internalValue = value;
+  }
+  public resetSessionAffinity() {
+    this._sessionAffinity.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sessionAffinityInput() {
+    return this._sessionAffinity.internalValue;
+  }
+
   // stream_backend - computed: false, optional: true, required: false
   private _streamBackend = new DataYandexAlbBackendGroupStreamBackendList(this, "stream_backend", false);
   public get streamBackend() {
@@ -3411,6 +3849,7 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
       name: cdktf.stringToTerraform(this._name),
       grpc_backend: cdktf.listMapper(dataYandexAlbBackendGroupGrpcBackendToTerraform)(this._grpcBackend.internalValue),
       http_backend: cdktf.listMapper(dataYandexAlbBackendGroupHttpBackendToTerraform)(this._httpBackend.internalValue),
+      session_affinity: dataYandexAlbBackendGroupSessionAffinityToTerraform(this._sessionAffinity.internalValue),
       stream_backend: cdktf.listMapper(dataYandexAlbBackendGroupStreamBackendToTerraform)(this._streamBackend.internalValue),
     };
   }

@@ -28,6 +28,10 @@ export interface MdbMysqlClusterConfig extends cdktf.TerraformMetaArguments {
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#host_group_ids MdbMysqlCluster#host_group_ids}
+  */
+  readonly hostGroupIds?: string[];
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#id MdbMysqlCluster#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
@@ -75,7 +79,7 @@ export interface MdbMysqlClusterConfig extends cdktf.TerraformMetaArguments {
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#database MdbMysqlCluster#database}
   */
-  readonly database: MdbMysqlClusterDatabase[] | cdktf.IResolvable;
+  readonly database?: MdbMysqlClusterDatabase[] | cdktf.IResolvable;
   /**
   * host block
   * 
@@ -88,6 +92,12 @@ export interface MdbMysqlClusterConfig extends cdktf.TerraformMetaArguments {
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#maintenance_window MdbMysqlCluster#maintenance_window}
   */
   readonly maintenanceWindow?: MdbMysqlClusterMaintenanceWindow;
+  /**
+  * performance_diagnostics block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#performance_diagnostics MdbMysqlCluster#performance_diagnostics}
+  */
+  readonly performanceDiagnostics?: MdbMysqlClusterPerformanceDiagnostics;
   /**
   * resources block
   * 
@@ -111,7 +121,7 @@ export interface MdbMysqlClusterConfig extends cdktf.TerraformMetaArguments {
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#user MdbMysqlCluster#user}
   */
-  readonly user: MdbMysqlClusterUser[] | cdktf.IResolvable;
+  readonly user?: MdbMysqlClusterUser[] | cdktf.IResolvable;
 }
 export interface MdbMysqlClusterAccess {
   /**
@@ -771,6 +781,119 @@ export class MdbMysqlClusterMaintenanceWindowOutputReference extends cdktf.Compl
   // Temporarily expose input value. Use with caution.
   public get typeInput() {
     return this._type;
+  }
+}
+export interface MdbMysqlClusterPerformanceDiagnostics {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#enabled MdbMysqlCluster#enabled}
+  */
+  readonly enabled?: boolean | cdktf.IResolvable;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#sessions_sampling_interval MdbMysqlCluster#sessions_sampling_interval}
+  */
+  readonly sessionsSamplingInterval: number;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_mysql_cluster#statements_sampling_interval MdbMysqlCluster#statements_sampling_interval}
+  */
+  readonly statementsSamplingInterval: number;
+}
+
+export function mdbMysqlClusterPerformanceDiagnosticsToTerraform(struct?: MdbMysqlClusterPerformanceDiagnosticsOutputReference | MdbMysqlClusterPerformanceDiagnostics): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    enabled: cdktf.booleanToTerraform(struct!.enabled),
+    sessions_sampling_interval: cdktf.numberToTerraform(struct!.sessionsSamplingInterval),
+    statements_sampling_interval: cdktf.numberToTerraform(struct!.statementsSamplingInterval),
+  }
+}
+
+export class MdbMysqlClusterPerformanceDiagnosticsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): MdbMysqlClusterPerformanceDiagnostics | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._enabled !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.enabled = this._enabled;
+    }
+    if (this._sessionsSamplingInterval !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.sessionsSamplingInterval = this._sessionsSamplingInterval;
+    }
+    if (this._statementsSamplingInterval !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.statementsSamplingInterval = this._statementsSamplingInterval;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbMysqlClusterPerformanceDiagnostics | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._enabled = undefined;
+      this._sessionsSamplingInterval = undefined;
+      this._statementsSamplingInterval = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._enabled = value.enabled;
+      this._sessionsSamplingInterval = value.sessionsSamplingInterval;
+      this._statementsSamplingInterval = value.statementsSamplingInterval;
+    }
+  }
+
+  // enabled - computed: true, optional: true, required: false
+  private _enabled?: boolean | cdktf.IResolvable; 
+  public get enabled() {
+    return this.getBooleanAttribute('enabled');
+  }
+  public set enabled(value: boolean | cdktf.IResolvable) {
+    this._enabled = value;
+  }
+  public resetEnabled() {
+    this._enabled = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get enabledInput() {
+    return this._enabled;
+  }
+
+  // sessions_sampling_interval - computed: false, optional: false, required: true
+  private _sessionsSamplingInterval?: number; 
+  public get sessionsSamplingInterval() {
+    return this.getNumberAttribute('sessions_sampling_interval');
+  }
+  public set sessionsSamplingInterval(value: number) {
+    this._sessionsSamplingInterval = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sessionsSamplingIntervalInput() {
+    return this._sessionsSamplingInterval;
+  }
+
+  // statements_sampling_interval - computed: false, optional: false, required: true
+  private _statementsSamplingInterval?: number; 
+  public get statementsSamplingInterval() {
+    return this.getNumberAttribute('statements_sampling_interval');
+  }
+  public set statementsSamplingInterval(value: number) {
+    this._statementsSamplingInterval = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get statementsSamplingIntervalInput() {
+    return this._statementsSamplingInterval;
   }
 }
 export interface MdbMysqlClusterResources {
@@ -1507,7 +1630,7 @@ export class MdbMysqlClusterUserOutputReference extends cdktf.ComplexObject {
   // global_permissions - computed: true, optional: true, required: false
   private _globalPermissions?: string[]; 
   public get globalPermissions() {
-    return this.getListAttribute('global_permissions');
+    return cdktf.Fn.tolist(this.getListAttribute('global_permissions'));
   }
   public set globalPermissions(value: string[]) {
     this._globalPermissions = value;
@@ -1625,8 +1748,8 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_mdb_mysql_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1638,6 +1761,7 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
     this._description = config.description;
     this._environment = config.environment;
     this._folderId = config.folderId;
+    this._hostGroupIds = config.hostGroupIds;
     this._id = config.id;
     this._labels = config.labels;
     this._mysqlConfig = config.mysqlConfig;
@@ -1650,6 +1774,7 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
     this._database.internalValue = config.database;
     this._host.internalValue = config.host;
     this._maintenanceWindow.internalValue = config.maintenanceWindow;
+    this._performanceDiagnostics.internalValue = config.performanceDiagnostics;
     this._resources.internalValue = config.resources;
     this._restore.internalValue = config.restore;
     this._timeouts.internalValue = config.timeouts;
@@ -1745,6 +1870,22 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
   // health - computed: true, optional: false, required: false
   public get health() {
     return this.getStringAttribute('health');
+  }
+
+  // host_group_ids - computed: true, optional: true, required: false
+  private _hostGroupIds?: string[]; 
+  public get hostGroupIds() {
+    return cdktf.Fn.tolist(this.getListAttribute('host_group_ids'));
+  }
+  public set hostGroupIds(value: string[]) {
+    this._hostGroupIds = value;
+  }
+  public resetHostGroupIds() {
+    this._hostGroupIds = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get hostGroupIdsInput() {
+    return this._hostGroupIds;
   }
 
   // id - computed: true, optional: true, required: false
@@ -1887,13 +2028,16 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
     return this._backupWindowStart.internalValue;
   }
 
-  // database - computed: false, optional: false, required: true
+  // database - computed: false, optional: true, required: false
   private _database = new MdbMysqlClusterDatabaseList(this, "database", true);
   public get database() {
     return this._database;
   }
   public putDatabase(value: MdbMysqlClusterDatabase[] | cdktf.IResolvable) {
     this._database.internalValue = value;
+  }
+  public resetDatabase() {
+    this._database.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get databaseInput() {
@@ -1927,6 +2071,22 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get maintenanceWindowInput() {
     return this._maintenanceWindow.internalValue;
+  }
+
+  // performance_diagnostics - computed: false, optional: true, required: false
+  private _performanceDiagnostics = new MdbMysqlClusterPerformanceDiagnosticsOutputReference(this, "performance_diagnostics");
+  public get performanceDiagnostics() {
+    return this._performanceDiagnostics;
+  }
+  public putPerformanceDiagnostics(value: MdbMysqlClusterPerformanceDiagnostics) {
+    this._performanceDiagnostics.internalValue = value;
+  }
+  public resetPerformanceDiagnostics() {
+    this._performanceDiagnostics.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get performanceDiagnosticsInput() {
+    return this._performanceDiagnostics.internalValue;
   }
 
   // resources - computed: false, optional: false, required: true
@@ -1974,13 +2134,16 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
     return this._timeouts.internalValue;
   }
 
-  // user - computed: false, optional: false, required: true
+  // user - computed: false, optional: true, required: false
   private _user = new MdbMysqlClusterUserList(this, "user", false);
   public get user() {
     return this._user;
   }
   public putUser(value: MdbMysqlClusterUser[] | cdktf.IResolvable) {
     this._user.internalValue = value;
+  }
+  public resetUser() {
+    this._user.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get userInput() {
@@ -1998,6 +2161,7 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       mysql_config: cdktf.hashMapper(cdktf.stringToTerraform)(this._mysqlConfig),
@@ -2010,6 +2174,7 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
       database: cdktf.listMapper(mdbMysqlClusterDatabaseToTerraform)(this._database.internalValue),
       host: cdktf.listMapper(mdbMysqlClusterHostToTerraform)(this._host.internalValue),
       maintenance_window: mdbMysqlClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
+      performance_diagnostics: mdbMysqlClusterPerformanceDiagnosticsToTerraform(this._performanceDiagnostics.internalValue),
       resources: mdbMysqlClusterResourcesToTerraform(this._resources.internalValue),
       restore: mdbMysqlClusterRestoreToTerraform(this._restore.internalValue),
       timeouts: mdbMysqlClusterTimeoutsToTerraform(this._timeouts.internalValue),

@@ -505,160 +505,6 @@ export class DataYandexMdbPostgresqlClusterConfigAList extends cdktf.ComplexList
     return new DataYandexMdbPostgresqlClusterConfigAOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
-export interface DataYandexMdbPostgresqlClusterDatabaseExtension {
-}
-
-export function dataYandexMdbPostgresqlClusterDatabaseExtensionToTerraform(struct?: DataYandexMdbPostgresqlClusterDatabaseExtension): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  return {
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterDatabaseExtensionOutputReference extends cdktf.ComplexObject {
-  private isEmptyObject = false;
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param complexObjectIndex the index of this item in the list
-  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
-    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
-  }
-
-  public get internalValue(): DataYandexMdbPostgresqlClusterDatabaseExtension | undefined {
-    let hasAnyValues = this.isEmptyObject;
-    const internalValueResult: any = {};
-    return hasAnyValues ? internalValueResult : undefined;
-  }
-
-  public set internalValue(value: DataYandexMdbPostgresqlClusterDatabaseExtension | undefined) {
-    if (value === undefined) {
-      this.isEmptyObject = false;
-    }
-    else {
-      this.isEmptyObject = Object.keys(value).length === 0;
-    }
-  }
-
-  // name - computed: true, optional: false, required: false
-  public get name() {
-    return this.getStringAttribute('name');
-  }
-
-  // version - computed: true, optional: false, required: false
-  public get version() {
-    return this.getStringAttribute('version');
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterDatabaseExtensionList extends cdktf.ComplexList {
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
-    super(terraformResource, terraformAttribute, wrapsSet)
-  }
-
-  /**
-  * @param index the index of the item to return
-  */
-  public get(index: number): DataYandexMdbPostgresqlClusterDatabaseExtensionOutputReference {
-    return new DataYandexMdbPostgresqlClusterDatabaseExtensionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
-  }
-}
-export interface DataYandexMdbPostgresqlClusterDatabase {
-}
-
-export function dataYandexMdbPostgresqlClusterDatabaseToTerraform(struct?: DataYandexMdbPostgresqlClusterDatabase): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  return {
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterDatabaseOutputReference extends cdktf.ComplexObject {
-  private isEmptyObject = false;
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param complexObjectIndex the index of this item in the list
-  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
-    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
-  }
-
-  public get internalValue(): DataYandexMdbPostgresqlClusterDatabase | undefined {
-    let hasAnyValues = this.isEmptyObject;
-    const internalValueResult: any = {};
-    return hasAnyValues ? internalValueResult : undefined;
-  }
-
-  public set internalValue(value: DataYandexMdbPostgresqlClusterDatabase | undefined) {
-    if (value === undefined) {
-      this.isEmptyObject = false;
-    }
-    else {
-      this.isEmptyObject = Object.keys(value).length === 0;
-    }
-  }
-
-  // extension - computed: true, optional: false, required: false
-  private _extension = new DataYandexMdbPostgresqlClusterDatabaseExtensionList(this, "extension", true);
-  public get extension() {
-    return this._extension;
-  }
-
-  // lc_collate - computed: true, optional: false, required: false
-  public get lcCollate() {
-    return this.getStringAttribute('lc_collate');
-  }
-
-  // lc_type - computed: true, optional: false, required: false
-  public get lcType() {
-    return this.getStringAttribute('lc_type');
-  }
-
-  // name - computed: true, optional: false, required: false
-  public get name() {
-    return this.getStringAttribute('name');
-  }
-
-  // owner - computed: true, optional: false, required: false
-  public get owner() {
-    return this.getStringAttribute('owner');
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterDatabaseList extends cdktf.ComplexList {
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
-    super(terraformResource, terraformAttribute, wrapsSet)
-  }
-
-  /**
-  * @param index the index of the item to return
-  */
-  public get(index: number): DataYandexMdbPostgresqlClusterDatabaseOutputReference {
-    return new DataYandexMdbPostgresqlClusterDatabaseOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
-  }
-}
 export interface DataYandexMdbPostgresqlClusterHost {
 }
 
@@ -827,166 +673,6 @@ export class DataYandexMdbPostgresqlClusterMaintenanceWindowList extends cdktf.C
     return new DataYandexMdbPostgresqlClusterMaintenanceWindowOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
-export interface DataYandexMdbPostgresqlClusterUserPermission {
-}
-
-export function dataYandexMdbPostgresqlClusterUserPermissionToTerraform(struct?: DataYandexMdbPostgresqlClusterUserPermission): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  return {
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterUserPermissionOutputReference extends cdktf.ComplexObject {
-  private isEmptyObject = false;
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param complexObjectIndex the index of this item in the list
-  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
-    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
-  }
-
-  public get internalValue(): DataYandexMdbPostgresqlClusterUserPermission | undefined {
-    let hasAnyValues = this.isEmptyObject;
-    const internalValueResult: any = {};
-    return hasAnyValues ? internalValueResult : undefined;
-  }
-
-  public set internalValue(value: DataYandexMdbPostgresqlClusterUserPermission | undefined) {
-    if (value === undefined) {
-      this.isEmptyObject = false;
-    }
-    else {
-      this.isEmptyObject = Object.keys(value).length === 0;
-    }
-  }
-
-  // database_name - computed: true, optional: false, required: false
-  public get databaseName() {
-    return this.getStringAttribute('database_name');
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterUserPermissionList extends cdktf.ComplexList {
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
-    super(terraformResource, terraformAttribute, wrapsSet)
-  }
-
-  /**
-  * @param index the index of the item to return
-  */
-  public get(index: number): DataYandexMdbPostgresqlClusterUserPermissionOutputReference {
-    return new DataYandexMdbPostgresqlClusterUserPermissionOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
-  }
-}
-export interface DataYandexMdbPostgresqlClusterUser {
-}
-
-export function dataYandexMdbPostgresqlClusterUserToTerraform(struct?: DataYandexMdbPostgresqlClusterUser): any {
-  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
-  if (cdktf.isComplexElement(struct)) {
-    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
-  }
-  return {
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterUserOutputReference extends cdktf.ComplexObject {
-  private isEmptyObject = false;
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param complexObjectIndex the index of this item in the list
-  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
-    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
-  }
-
-  public get internalValue(): DataYandexMdbPostgresqlClusterUser | undefined {
-    let hasAnyValues = this.isEmptyObject;
-    const internalValueResult: any = {};
-    return hasAnyValues ? internalValueResult : undefined;
-  }
-
-  public set internalValue(value: DataYandexMdbPostgresqlClusterUser | undefined) {
-    if (value === undefined) {
-      this.isEmptyObject = false;
-    }
-    else {
-      this.isEmptyObject = Object.keys(value).length === 0;
-    }
-  }
-
-  // conn_limit - computed: true, optional: false, required: false
-  public get connLimit() {
-    return this.getNumberAttribute('conn_limit');
-  }
-
-  // grants - computed: true, optional: false, required: false
-  public get grants() {
-    return this.getListAttribute('grants');
-  }
-
-  // login - computed: true, optional: false, required: false
-  public get login() {
-    return this.getBooleanAttribute('login');
-  }
-
-  // name - computed: true, optional: false, required: false
-  public get name() {
-    return this.getStringAttribute('name');
-  }
-
-  // password - computed: true, optional: false, required: false
-  public get password() {
-    return this.getStringAttribute('password');
-  }
-
-  // permission - computed: true, optional: false, required: false
-  private _permission = new DataYandexMdbPostgresqlClusterUserPermissionList(this, "permission", true);
-  public get permission() {
-    return this._permission;
-  }
-
-  // settings - computed: true, optional: false, required: false
-  private _settings = new cdktf.StringMap(this, "settings");
-  public get settings() {
-    return this._settings;
-  }
-}
-
-export class DataYandexMdbPostgresqlClusterUserList extends cdktf.ComplexList {
-
-  /**
-  * @param terraformResource The parent resource
-  * @param terraformAttribute The attribute on the parent resource this class is referencing
-  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
-  */
-  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
-    super(terraformResource, terraformAttribute, wrapsSet)
-  }
-
-  /**
-  * @param index the index of the item to return
-  */
-  public get(index: number): DataYandexMdbPostgresqlClusterUserOutputReference {
-    return new DataYandexMdbPostgresqlClusterUserOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
-  }
-}
 
 /**
 * Represents a {@link https://www.terraform.io/docs/providers/yandex/d/mdb_postgresql_cluster yandex_mdb_postgresql_cluster}
@@ -1014,8 +700,8 @@ export class DataYandexMdbPostgresqlCluster extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_mdb_postgresql_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1059,12 +745,6 @@ export class DataYandexMdbPostgresqlCluster extends cdktf.TerraformDataSource {
   // created_at - computed: true, optional: false, required: false
   public get createdAt() {
     return this.getStringAttribute('created_at');
-  }
-
-  // database - computed: true, optional: false, required: false
-  private _database = new DataYandexMdbPostgresqlClusterDatabaseList(this, "database", false);
-  public get database() {
-    return this._database;
   }
 
   // deletion_protection - computed: true, optional: true, required: false
@@ -1131,6 +811,11 @@ export class DataYandexMdbPostgresqlCluster extends cdktf.TerraformDataSource {
     return this._host;
   }
 
+  // host_group_ids - computed: true, optional: false, required: false
+  public get hostGroupIds() {
+    return cdktf.Fn.tolist(this.getListAttribute('host_group_ids'));
+  }
+
   // id - computed: true, optional: true, required: false
   private _id?: string; 
   public get id() {
@@ -1188,12 +873,6 @@ export class DataYandexMdbPostgresqlCluster extends cdktf.TerraformDataSource {
   // status - computed: true, optional: false, required: false
   public get status() {
     return this.getStringAttribute('status');
-  }
-
-  // user - computed: true, optional: false, required: false
-  private _user = new DataYandexMdbPostgresqlClusterUserList(this, "user", false);
-  public get user() {
-    return this._user;
   }
 
   // =========

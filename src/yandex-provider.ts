@@ -49,6 +49,10 @@ If the API request still fails, an error is thrown.
   */
   readonly plaintext?: boolean | cdktf.IResolvable;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex#region_id YandexProvider#region_id}
+  */
+  readonly regionId?: string;
+  /**
   * Either the path to or the contents of a Service Account key file in JSON format.
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex#service_account_key_file YandexProvider#service_account_key_file}
@@ -143,8 +147,8 @@ export class YandexProvider extends cdktf.TerraformProvider {
       terraformResourceType: 'yandex',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       terraformProviderSource: 'yandex-cloud/yandex'
     });
@@ -155,6 +159,7 @@ export class YandexProvider extends cdktf.TerraformProvider {
     this._maxRetries = config.maxRetries;
     this._organizationId = config.organizationId;
     this._plaintext = config.plaintext;
+    this._regionId = config.regionId;
     this._serviceAccountKeyFile = config.serviceAccountKeyFile;
     this._storageAccessKey = config.storageAccessKey;
     this._storageEndpoint = config.storageEndpoint;
@@ -281,6 +286,22 @@ export class YandexProvider extends cdktf.TerraformProvider {
   // Temporarily expose input value. Use with caution.
   public get plaintextInput() {
     return this._plaintext;
+  }
+
+  // region_id - computed: false, optional: true, required: false
+  private _regionId?: string; 
+  public get regionId() {
+    return this._regionId;
+  }
+  public set regionId(value: string | undefined) {
+    this._regionId = value;
+  }
+  public resetRegionId() {
+    this._regionId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get regionIdInput() {
+    return this._regionId;
   }
 
   // service_account_key_file - computed: false, optional: true, required: false
@@ -456,6 +477,7 @@ export class YandexProvider extends cdktf.TerraformProvider {
       max_retries: cdktf.numberToTerraform(this._maxRetries),
       organization_id: cdktf.stringToTerraform(this._organizationId),
       plaintext: cdktf.booleanToTerraform(this._plaintext),
+      region_id: cdktf.stringToTerraform(this._regionId),
       service_account_key_file: cdktf.stringToTerraform(this._serviceAccountKeyFile),
       storage_access_key: cdktf.stringToTerraform(this._storageAccessKey),
       storage_endpoint: cdktf.stringToTerraform(this._storageEndpoint),

@@ -27,6 +27,12 @@ export interface DataYandexComputeInstanceConfig extends cdktf.TerraformMetaArgu
   */
   readonly name?: string;
   /**
+  * local_disk block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance#local_disk DataYandexComputeInstance#local_disk}
+  */
+  readonly localDisk?: DataYandexComputeInstanceLocalDisk[] | cdktf.IResolvable;
+  /**
   * placement_policy block
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance#placement_policy DataYandexComputeInstance#placement_policy}
@@ -803,6 +809,105 @@ export class DataYandexComputeInstanceSecondaryDiskList extends cdktf.ComplexLis
     return new DataYandexComputeInstanceSecondaryDiskOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataYandexComputeInstanceLocalDisk {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance#size_bytes DataYandexComputeInstance#size_bytes}
+  */
+  readonly sizeBytes: number;
+}
+
+export function dataYandexComputeInstanceLocalDiskToTerraform(struct?: DataYandexComputeInstanceLocalDisk | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    size_bytes: cdktf.numberToTerraform(struct!.sizeBytes),
+  }
+}
+
+export class DataYandexComputeInstanceLocalDiskOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexComputeInstanceLocalDisk | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._sizeBytes !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.sizeBytes = this._sizeBytes;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexComputeInstanceLocalDisk | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._sizeBytes = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._sizeBytes = value.sizeBytes;
+    }
+  }
+
+  // device_name - computed: true, optional: false, required: false
+  public get deviceName() {
+    return this.getStringAttribute('device_name');
+  }
+
+  // size_bytes - computed: false, optional: false, required: true
+  private _sizeBytes?: number; 
+  public get sizeBytes() {
+    return this.getNumberAttribute('size_bytes');
+  }
+  public set sizeBytes(value: number) {
+    this._sizeBytes = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sizeBytesInput() {
+    return this._sizeBytes;
+  }
+}
+
+export class DataYandexComputeInstanceLocalDiskList extends cdktf.ComplexList {
+  public internalValue? : DataYandexComputeInstanceLocalDisk[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexComputeInstanceLocalDiskOutputReference {
+    return new DataYandexComputeInstanceLocalDiskOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataYandexComputeInstancePlacementPolicyHostAffinityRules {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/compute_instance#key DataYandexComputeInstance#key}
@@ -1073,8 +1178,8 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_compute_instance',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1085,6 +1190,7 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
     this._id = config.id;
     this._instanceId = config.instanceId;
     this._name = config.name;
+    this._localDisk.internalValue = config.localDisk;
     this._placementPolicy.internalValue = config.placementPolicy;
   }
 
@@ -1238,6 +1344,22 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
     return this.getStringAttribute('zone');
   }
 
+  // local_disk - computed: false, optional: true, required: false
+  private _localDisk = new DataYandexComputeInstanceLocalDiskList(this, "local_disk", false);
+  public get localDisk() {
+    return this._localDisk;
+  }
+  public putLocalDisk(value: DataYandexComputeInstanceLocalDisk[] | cdktf.IResolvable) {
+    this._localDisk.internalValue = value;
+  }
+  public resetLocalDisk() {
+    this._localDisk.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get localDiskInput() {
+    return this._localDisk.internalValue;
+  }
+
   // placement_policy - computed: false, optional: true, required: false
   private _placementPolicy = new DataYandexComputeInstancePlacementPolicyOutputReference(this, "placement_policy");
   public get placementPolicy() {
@@ -1264,6 +1386,7 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
       id: cdktf.stringToTerraform(this._id),
       instance_id: cdktf.stringToTerraform(this._instanceId),
       name: cdktf.stringToTerraform(this._name),
+      local_disk: cdktf.listMapper(dataYandexComputeInstanceLocalDiskToTerraform)(this._localDisk.internalValue),
       placement_policy: dataYandexComputeInstancePlacementPolicyToTerraform(this._placementPolicy.internalValue),
     };
   }

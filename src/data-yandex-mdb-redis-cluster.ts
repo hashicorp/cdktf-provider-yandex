@@ -71,6 +71,16 @@ export class DataYandexMdbRedisClusterConfigAOutputReference extends cdktf.Compl
     }
   }
 
+  // client_output_buffer_limit_normal - computed: true, optional: false, required: false
+  public get clientOutputBufferLimitNormal() {
+    return this.getStringAttribute('client_output_buffer_limit_normal');
+  }
+
+  // client_output_buffer_limit_pubsub - computed: true, optional: false, required: false
+  public get clientOutputBufferLimitPubsub() {
+    return this.getStringAttribute('client_output_buffer_limit_pubsub');
+  }
+
   // databases - computed: true, optional: false, required: false
   public get databases() {
     return this.getNumberAttribute('databases');
@@ -165,9 +175,19 @@ export class DataYandexMdbRedisClusterHostOutputReference extends cdktf.ComplexO
     }
   }
 
+  // assign_public_ip - computed: true, optional: false, required: false
+  public get assignPublicIp() {
+    return this.getBooleanAttribute('assign_public_ip');
+  }
+
   // fqdn - computed: true, optional: false, required: false
   public get fqdn() {
     return this.getStringAttribute('fqdn');
+  }
+
+  // replica_priority - computed: true, optional: false, required: false
+  public get replicaPriority() {
+    return this.getNumberAttribute('replica_priority');
   }
 
   // shard_name - computed: true, optional: false, required: false
@@ -379,8 +399,8 @@ export class DataYandexMdbRedisCluster extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_mdb_redis_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

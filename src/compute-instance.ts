@@ -8,6 +8,10 @@ import * as cdktf from 'cdktf';
 
 export interface ComputeInstanceConfig extends cdktf.TerraformMetaArguments {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance#allow_recreate ComputeInstance#allow_recreate}
+  */
+  readonly allowRecreate?: boolean | cdktf.IResolvable;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance#allow_stopping_for_update ComputeInstance#allow_stopping_for_update}
   */
   readonly allowStoppingForUpdate?: boolean | cdktf.IResolvable;
@@ -64,6 +68,12 @@ export interface ComputeInstanceConfig extends cdktf.TerraformMetaArguments {
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance#boot_disk ComputeInstance#boot_disk}
   */
   readonly bootDisk: ComputeInstanceBootDisk;
+  /**
+  * local_disk block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance#local_disk ComputeInstance#local_disk}
+  */
+  readonly localDisk?: ComputeInstanceLocalDisk[] | cdktf.IResolvable;
   /**
   * network_interface block
   * 
@@ -501,6 +511,105 @@ export class ComputeInstanceBootDiskOutputReference extends cdktf.ComplexObject 
   // Temporarily expose input value. Use with caution.
   public get initializeParamsInput() {
     return this._initializeParams.internalValue;
+  }
+}
+export interface ComputeInstanceLocalDisk {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_instance#size_bytes ComputeInstance#size_bytes}
+  */
+  readonly sizeBytes: number;
+}
+
+export function computeInstanceLocalDiskToTerraform(struct?: ComputeInstanceLocalDisk | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    size_bytes: cdktf.numberToTerraform(struct!.sizeBytes),
+  }
+}
+
+export class ComputeInstanceLocalDiskOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): ComputeInstanceLocalDisk | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._sizeBytes !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.sizeBytes = this._sizeBytes;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: ComputeInstanceLocalDisk | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._sizeBytes = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._sizeBytes = value.sizeBytes;
+    }
+  }
+
+  // device_name - computed: true, optional: false, required: false
+  public get deviceName() {
+    return this.getStringAttribute('device_name');
+  }
+
+  // size_bytes - computed: false, optional: false, required: true
+  private _sizeBytes?: number; 
+  public get sizeBytes() {
+    return this.getNumberAttribute('size_bytes');
+  }
+  public set sizeBytes(value: number) {
+    this._sizeBytes = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sizeBytesInput() {
+    return this._sizeBytes;
+  }
+}
+
+export class ComputeInstanceLocalDiskList extends cdktf.ComplexList {
+  public internalValue? : ComputeInstanceLocalDisk[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): ComputeInstanceLocalDiskOutputReference {
+    return new ComputeInstanceLocalDiskOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
 export interface ComputeInstanceNetworkInterfaceDnsRecord {
@@ -2192,14 +2301,15 @@ export class ComputeInstance extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_compute_instance',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
       lifecycle: config.lifecycle
     });
+    this._allowRecreate = config.allowRecreate;
     this._allowStoppingForUpdate = config.allowStoppingForUpdate;
     this._description = config.description;
     this._folderId = config.folderId;
@@ -2213,6 +2323,7 @@ export class ComputeInstance extends cdktf.TerraformResource {
     this._serviceAccountId = config.serviceAccountId;
     this._zone = config.zone;
     this._bootDisk.internalValue = config.bootDisk;
+    this._localDisk.internalValue = config.localDisk;
     this._networkInterface.internalValue = config.networkInterface;
     this._placementPolicy.internalValue = config.placementPolicy;
     this._resources.internalValue = config.resources;
@@ -2224,6 +2335,22 @@ export class ComputeInstance extends cdktf.TerraformResource {
   // ==========
   // ATTRIBUTES
   // ==========
+
+  // allow_recreate - computed: false, optional: true, required: false
+  private _allowRecreate?: boolean | cdktf.IResolvable; 
+  public get allowRecreate() {
+    return this.getBooleanAttribute('allow_recreate');
+  }
+  public set allowRecreate(value: boolean | cdktf.IResolvable) {
+    this._allowRecreate = value;
+  }
+  public resetAllowRecreate() {
+    this._allowRecreate = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get allowRecreateInput() {
+    return this._allowRecreate;
+  }
 
   // allow_stopping_for_update - computed: false, optional: true, required: false
   private _allowStoppingForUpdate?: boolean | cdktf.IResolvable; 
@@ -2445,6 +2572,22 @@ export class ComputeInstance extends cdktf.TerraformResource {
     return this._bootDisk.internalValue;
   }
 
+  // local_disk - computed: false, optional: true, required: false
+  private _localDisk = new ComputeInstanceLocalDiskList(this, "local_disk", false);
+  public get localDisk() {
+    return this._localDisk;
+  }
+  public putLocalDisk(value: ComputeInstanceLocalDisk[] | cdktf.IResolvable) {
+    this._localDisk.internalValue = value;
+  }
+  public resetLocalDisk() {
+    this._localDisk.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get localDiskInput() {
+    return this._localDisk.internalValue;
+  }
+
   // network_interface - computed: false, optional: false, required: true
   private _networkInterface = new ComputeInstanceNetworkInterfaceList(this, "network_interface", false);
   public get networkInterface() {
@@ -2541,6 +2684,7 @@ export class ComputeInstance extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      allow_recreate: cdktf.booleanToTerraform(this._allowRecreate),
       allow_stopping_for_update: cdktf.booleanToTerraform(this._allowStoppingForUpdate),
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
@@ -2554,6 +2698,7 @@ export class ComputeInstance extends cdktf.TerraformResource {
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),
       zone: cdktf.stringToTerraform(this._zone),
       boot_disk: computeInstanceBootDiskToTerraform(this._bootDisk.internalValue),
+      local_disk: cdktf.listMapper(computeInstanceLocalDiskToTerraform)(this._localDisk.internalValue),
       network_interface: cdktf.listMapper(computeInstanceNetworkInterfaceToTerraform)(this._networkInterface.internalValue),
       placement_policy: computeInstancePlacementPolicyToTerraform(this._placementPolicy.internalValue),
       resources: computeInstanceResourcesToTerraform(this._resources.internalValue),

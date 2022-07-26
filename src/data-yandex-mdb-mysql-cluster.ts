@@ -350,6 +350,80 @@ export class DataYandexMdbMysqlClusterMaintenanceWindowList extends cdktf.Comple
     return new DataYandexMdbMysqlClusterMaintenanceWindowOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataYandexMdbMysqlClusterPerformanceDiagnostics {
+}
+
+export function dataYandexMdbMysqlClusterPerformanceDiagnosticsToTerraform(struct?: DataYandexMdbMysqlClusterPerformanceDiagnostics): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+export class DataYandexMdbMysqlClusterPerformanceDiagnosticsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexMdbMysqlClusterPerformanceDiagnostics | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexMdbMysqlClusterPerformanceDiagnostics | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // enabled - computed: true, optional: false, required: false
+  public get enabled() {
+    return this.getBooleanAttribute('enabled');
+  }
+
+  // sessions_sampling_interval - computed: true, optional: false, required: false
+  public get sessionsSamplingInterval() {
+    return this.getNumberAttribute('sessions_sampling_interval');
+  }
+
+  // statements_sampling_interval - computed: true, optional: false, required: false
+  public get statementsSamplingInterval() {
+    return this.getNumberAttribute('statements_sampling_interval');
+  }
+}
+
+export class DataYandexMdbMysqlClusterPerformanceDiagnosticsList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexMdbMysqlClusterPerformanceDiagnosticsOutputReference {
+    return new DataYandexMdbMysqlClusterPerformanceDiagnosticsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataYandexMdbMysqlClusterResources {
 }
 
@@ -625,7 +699,7 @@ export class DataYandexMdbMysqlClusterUserOutputReference extends cdktf.ComplexO
 
   // global_permissions - computed: true, optional: false, required: false
   public get globalPermissions() {
-    return this.getListAttribute('global_permissions');
+    return cdktf.Fn.tolist(this.getListAttribute('global_permissions'));
   }
 
   // name - computed: true, optional: false, required: false
@@ -738,8 +812,8 @@ export class DataYandexMdbMysqlCluster extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_mdb_mysql_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -858,6 +932,11 @@ export class DataYandexMdbMysqlCluster extends cdktf.TerraformDataSource {
     return this._host;
   }
 
+  // host_group_ids - computed: true, optional: false, required: false
+  public get hostGroupIds() {
+    return cdktf.Fn.tolist(this.getListAttribute('host_group_ids'));
+  }
+
   // id - computed: true, optional: true, required: false
   private _id?: string; 
   public get id() {
@@ -931,6 +1010,12 @@ export class DataYandexMdbMysqlCluster extends cdktf.TerraformDataSource {
   // network_id - computed: true, optional: false, required: false
   public get networkId() {
     return this.getStringAttribute('network_id');
+  }
+
+  // performance_diagnostics - computed: true, optional: false, required: false
+  private _performanceDiagnostics = new DataYandexMdbMysqlClusterPerformanceDiagnosticsList(this, "performance_diagnostics", false);
+  public get performanceDiagnostics() {
+    return this._performanceDiagnostics;
   }
 
   // resources - computed: true, optional: false, required: false

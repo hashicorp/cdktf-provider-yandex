@@ -8,6 +8,10 @@ import * as cdktf from 'cdktf';
 
 export interface ComputeDiskConfig extends cdktf.TerraformMetaArguments {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_disk#allow_recreate ComputeDisk#allow_recreate}
+  */
+  readonly allowRecreate?: boolean | cdktf.IResolvable;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/compute_disk#block_size ComputeDisk#block_size}
   */
   readonly blockSize?: number;
@@ -285,14 +289,15 @@ export class ComputeDisk extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_compute_disk',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
       lifecycle: config.lifecycle
     });
+    this._allowRecreate = config.allowRecreate;
     this._blockSize = config.blockSize;
     this._description = config.description;
     this._folderId = config.folderId;
@@ -311,6 +316,22 @@ export class ComputeDisk extends cdktf.TerraformResource {
   // ==========
   // ATTRIBUTES
   // ==========
+
+  // allow_recreate - computed: false, optional: true, required: false
+  private _allowRecreate?: boolean | cdktf.IResolvable; 
+  public get allowRecreate() {
+    return this.getBooleanAttribute('allow_recreate');
+  }
+  public set allowRecreate(value: boolean | cdktf.IResolvable) {
+    this._allowRecreate = value;
+  }
+  public resetAllowRecreate() {
+    this._allowRecreate = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get allowRecreateInput() {
+    return this._allowRecreate;
+  }
 
   // block_size - computed: false, optional: true, required: false
   private _blockSize?: number; 
@@ -541,6 +562,7 @@ export class ComputeDisk extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      allow_recreate: cdktf.booleanToTerraform(this._allowRecreate),
       block_size: cdktf.numberToTerraform(this._blockSize),
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),

@@ -91,6 +91,14 @@ export interface MdbRedisClusterConfig extends cdktf.TerraformMetaArguments {
 }
 export interface MdbRedisClusterConfigA {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#client_output_buffer_limit_normal MdbRedisCluster#client_output_buffer_limit_normal}
+  */
+  readonly clientOutputBufferLimitNormal?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#client_output_buffer_limit_pubsub MdbRedisCluster#client_output_buffer_limit_pubsub}
+  */
+  readonly clientOutputBufferLimitPubsub?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#databases MdbRedisCluster#databases}
   */
   readonly databases?: number;
@@ -130,6 +138,8 @@ export function mdbRedisClusterConfigAToTerraform(struct?: MdbRedisClusterConfig
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
+    client_output_buffer_limit_normal: cdktf.stringToTerraform(struct!.clientOutputBufferLimitNormal),
+    client_output_buffer_limit_pubsub: cdktf.stringToTerraform(struct!.clientOutputBufferLimitPubsub),
     databases: cdktf.numberToTerraform(struct!.databases),
     maxmemory_policy: cdktf.stringToTerraform(struct!.maxmemoryPolicy),
     notify_keyspace_events: cdktf.stringToTerraform(struct!.notifyKeyspaceEvents),
@@ -155,6 +165,14 @@ export class MdbRedisClusterConfigAOutputReference extends cdktf.ComplexObject {
   public get internalValue(): MdbRedisClusterConfigA | undefined {
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
+    if (this._clientOutputBufferLimitNormal !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.clientOutputBufferLimitNormal = this._clientOutputBufferLimitNormal;
+    }
+    if (this._clientOutputBufferLimitPubsub !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.clientOutputBufferLimitPubsub = this._clientOutputBufferLimitPubsub;
+    }
     if (this._databases !== undefined) {
       hasAnyValues = true;
       internalValueResult.databases = this._databases;
@@ -193,6 +211,8 @@ export class MdbRedisClusterConfigAOutputReference extends cdktf.ComplexObject {
   public set internalValue(value: MdbRedisClusterConfigA | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this._clientOutputBufferLimitNormal = undefined;
+      this._clientOutputBufferLimitPubsub = undefined;
       this._databases = undefined;
       this._maxmemoryPolicy = undefined;
       this._notifyKeyspaceEvents = undefined;
@@ -204,6 +224,8 @@ export class MdbRedisClusterConfigAOutputReference extends cdktf.ComplexObject {
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this._clientOutputBufferLimitNormal = value.clientOutputBufferLimitNormal;
+      this._clientOutputBufferLimitPubsub = value.clientOutputBufferLimitPubsub;
       this._databases = value.databases;
       this._maxmemoryPolicy = value.maxmemoryPolicy;
       this._notifyKeyspaceEvents = value.notifyKeyspaceEvents;
@@ -213,6 +235,38 @@ export class MdbRedisClusterConfigAOutputReference extends cdktf.ComplexObject {
       this._timeout = value.timeout;
       this._version = value.version;
     }
+  }
+
+  // client_output_buffer_limit_normal - computed: true, optional: true, required: false
+  private _clientOutputBufferLimitNormal?: string; 
+  public get clientOutputBufferLimitNormal() {
+    return this.getStringAttribute('client_output_buffer_limit_normal');
+  }
+  public set clientOutputBufferLimitNormal(value: string) {
+    this._clientOutputBufferLimitNormal = value;
+  }
+  public resetClientOutputBufferLimitNormal() {
+    this._clientOutputBufferLimitNormal = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get clientOutputBufferLimitNormalInput() {
+    return this._clientOutputBufferLimitNormal;
+  }
+
+  // client_output_buffer_limit_pubsub - computed: true, optional: true, required: false
+  private _clientOutputBufferLimitPubsub?: string; 
+  public get clientOutputBufferLimitPubsub() {
+    return this.getStringAttribute('client_output_buffer_limit_pubsub');
+  }
+  public set clientOutputBufferLimitPubsub(value: string) {
+    this._clientOutputBufferLimitPubsub = value;
+  }
+  public resetClientOutputBufferLimitPubsub() {
+    this._clientOutputBufferLimitPubsub = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get clientOutputBufferLimitPubsubInput() {
+    return this._clientOutputBufferLimitPubsub;
   }
 
   // databases - computed: true, optional: true, required: false
@@ -339,6 +393,14 @@ export class MdbRedisClusterConfigAOutputReference extends cdktf.ComplexObject {
 }
 export interface MdbRedisClusterHost {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#assign_public_ip MdbRedisCluster#assign_public_ip}
+  */
+  readonly assignPublicIp?: boolean | cdktf.IResolvable;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#replica_priority MdbRedisCluster#replica_priority}
+  */
+  readonly replicaPriority?: number;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_redis_cluster#shard_name MdbRedisCluster#shard_name}
   */
   readonly shardName?: string;
@@ -358,6 +420,8 @@ export function mdbRedisClusterHostToTerraform(struct?: MdbRedisClusterHost | cd
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
+    assign_public_ip: cdktf.booleanToTerraform(struct!.assignPublicIp),
+    replica_priority: cdktf.numberToTerraform(struct!.replicaPriority),
     shard_name: cdktf.stringToTerraform(struct!.shardName),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     zone: cdktf.stringToTerraform(struct!.zone),
@@ -384,6 +448,14 @@ export class MdbRedisClusterHostOutputReference extends cdktf.ComplexObject {
     }
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
+    if (this._assignPublicIp !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.assignPublicIp = this._assignPublicIp;
+    }
+    if (this._replicaPriority !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.replicaPriority = this._replicaPriority;
+    }
     if (this._shardName !== undefined) {
       hasAnyValues = true;
       internalValueResult.shardName = this._shardName;
@@ -403,6 +475,8 @@ export class MdbRedisClusterHostOutputReference extends cdktf.ComplexObject {
     if (value === undefined) {
       this.isEmptyObject = false;
       this.resolvableValue = undefined;
+      this._assignPublicIp = undefined;
+      this._replicaPriority = undefined;
       this._shardName = undefined;
       this._subnetId = undefined;
       this._zone = undefined;
@@ -414,15 +488,49 @@ export class MdbRedisClusterHostOutputReference extends cdktf.ComplexObject {
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
       this.resolvableValue = undefined;
+      this._assignPublicIp = value.assignPublicIp;
+      this._replicaPriority = value.replicaPriority;
       this._shardName = value.shardName;
       this._subnetId = value.subnetId;
       this._zone = value.zone;
     }
   }
 
+  // assign_public_ip - computed: false, optional: true, required: false
+  private _assignPublicIp?: boolean | cdktf.IResolvable; 
+  public get assignPublicIp() {
+    return this.getBooleanAttribute('assign_public_ip');
+  }
+  public set assignPublicIp(value: boolean | cdktf.IResolvable) {
+    this._assignPublicIp = value;
+  }
+  public resetAssignPublicIp() {
+    this._assignPublicIp = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get assignPublicIpInput() {
+    return this._assignPublicIp;
+  }
+
   // fqdn - computed: true, optional: false, required: false
   public get fqdn() {
     return this.getStringAttribute('fqdn');
+  }
+
+  // replica_priority - computed: false, optional: true, required: false
+  private _replicaPriority?: number; 
+  public get replicaPriority() {
+    return this.getNumberAttribute('replica_priority');
+  }
+  public set replicaPriority(value: number) {
+    this._replicaPriority = value;
+  }
+  public resetReplicaPriority() {
+    this._replicaPriority = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get replicaPriorityInput() {
+    return this._replicaPriority;
   }
 
   // shard_name - computed: true, optional: true, required: false
@@ -875,8 +983,8 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_mdb_redis_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
