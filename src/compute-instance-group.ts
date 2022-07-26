@@ -317,7 +317,7 @@ export function computeInstanceGroupAllocationPolicyToTerraform(struct?: Compute
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    zones: cdktf.listMapper(cdktf.stringToTerraform)(struct!.zones),
+    zones: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.zones),
   }
 }
 
@@ -937,7 +937,7 @@ export function computeInstanceGroupHealthCheckToTerraform(struct?: ComputeInsta
     interval: cdktf.numberToTerraform(struct!.interval),
     timeout: cdktf.numberToTerraform(struct!.timeout),
     unhealthy_threshold: cdktf.numberToTerraform(struct!.unhealthyThreshold),
-    http_options: cdktf.listMapper(computeInstanceGroupHealthCheckHttpOptionsToTerraform)(struct!.httpOptions),
+    http_options: cdktf.listMapper(computeInstanceGroupHealthCheckHttpOptionsToTerraform, true)(struct!.httpOptions),
     tcp_options: computeInstanceGroupHealthCheckTcpOptionsToTerraform(struct!.tcpOptions),
   }
 }
@@ -2048,11 +2048,11 @@ export function computeInstanceGroupInstanceTemplateNetworkInterfaceToTerraform(
     nat: cdktf.booleanToTerraform(struct!.nat),
     nat_ip_address: cdktf.stringToTerraform(struct!.natIpAddress),
     network_id: cdktf.stringToTerraform(struct!.networkId),
-    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroupIds),
-    subnet_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.subnetIds),
-    dns_record: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordToTerraform)(struct!.dnsRecord),
-    ipv6_dns_record: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordToTerraform)(struct!.ipv6DnsRecord),
-    nat_dns_record: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecordToTerraform)(struct!.natDnsRecord),
+    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroupIds),
+    subnet_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.subnetIds),
+    dns_record: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceDnsRecordToTerraform, true)(struct!.dnsRecord),
+    ipv6_dns_record: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordToTerraform, true)(struct!.ipv6DnsRecord),
+    nat_dns_record: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceNatDnsRecordToTerraform, true)(struct!.natDnsRecord),
   }
 }
 
@@ -3182,12 +3182,12 @@ export function computeInstanceGroupInstanceTemplateToTerraform(struct?: Compute
     platform_id: cdktf.stringToTerraform(struct!.platformId),
     service_account_id: cdktf.stringToTerraform(struct!.serviceAccountId),
     boot_disk: computeInstanceGroupInstanceTemplateBootDiskToTerraform(struct!.bootDisk),
-    network_interface: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceToTerraform)(struct!.networkInterface),
-    network_settings: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkSettingsToTerraform)(struct!.networkSettings),
+    network_interface: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkInterfaceToTerraform, true)(struct!.networkInterface),
+    network_settings: cdktf.listMapper(computeInstanceGroupInstanceTemplateNetworkSettingsToTerraform, true)(struct!.networkSettings),
     placement_policy: computeInstanceGroupInstanceTemplatePlacementPolicyToTerraform(struct!.placementPolicy),
     resources: computeInstanceGroupInstanceTemplateResourcesToTerraform(struct!.resources),
     scheduling_policy: computeInstanceGroupInstanceTemplateSchedulingPolicyToTerraform(struct!.schedulingPolicy),
-    secondary_disk: cdktf.listMapper(computeInstanceGroupInstanceTemplateSecondaryDiskToTerraform)(struct!.secondaryDisk),
+    secondary_disk: cdktf.listMapper(computeInstanceGroupInstanceTemplateSecondaryDiskToTerraform, true)(struct!.secondaryDisk),
   }
 }
 
@@ -3969,7 +3969,7 @@ export function computeInstanceGroupScalePolicyAutoScaleToTerraform(struct?: Com
     min_zone_size: cdktf.numberToTerraform(struct!.minZoneSize),
     stabilization_duration: cdktf.numberToTerraform(struct!.stabilizationDuration),
     warmup_duration: cdktf.numberToTerraform(struct!.warmupDuration),
-    custom_rule: cdktf.listMapper(computeInstanceGroupScalePolicyAutoScaleCustomRuleToTerraform)(struct!.customRule),
+    custom_rule: cdktf.listMapper(computeInstanceGroupScalePolicyAutoScaleCustomRuleToTerraform, true)(struct!.customRule),
   }
 }
 
@@ -4528,7 +4528,7 @@ export function computeInstanceGroupScalePolicyTestAutoScaleToTerraform(struct?:
     min_zone_size: cdktf.numberToTerraform(struct!.minZoneSize),
     stabilization_duration: cdktf.numberToTerraform(struct!.stabilizationDuration),
     warmup_duration: cdktf.numberToTerraform(struct!.warmupDuration),
-    custom_rule: cdktf.listMapper(computeInstanceGroupScalePolicyTestAutoScaleCustomRuleToTerraform)(struct!.customRule),
+    custom_rule: cdktf.listMapper(computeInstanceGroupScalePolicyTestAutoScaleCustomRuleToTerraform, true)(struct!.customRule),
   }
 }
 
@@ -5015,7 +5015,10 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._deletionProtection = config.deletionProtection;
     this._description = config.description;
@@ -5331,7 +5334,7 @@ export class ComputeInstanceGroup extends cdktf.TerraformResource {
       allocation_policy: computeInstanceGroupAllocationPolicyToTerraform(this._allocationPolicy.internalValue),
       application_load_balancer: computeInstanceGroupApplicationLoadBalancerToTerraform(this._applicationLoadBalancer.internalValue),
       deploy_policy: computeInstanceGroupDeployPolicyToTerraform(this._deployPolicy.internalValue),
-      health_check: cdktf.listMapper(computeInstanceGroupHealthCheckToTerraform)(this._healthCheck.internalValue),
+      health_check: cdktf.listMapper(computeInstanceGroupHealthCheckToTerraform, true)(this._healthCheck.internalValue),
       instance_template: computeInstanceGroupInstanceTemplateToTerraform(this._instanceTemplate.internalValue),
       load_balancer: computeInstanceGroupLoadBalancerToTerraform(this._loadBalancer.internalValue),
       scale_policy: computeInstanceGroupScalePolicyToTerraform(this._scalePolicy.internalValue),

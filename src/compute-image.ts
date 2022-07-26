@@ -239,7 +239,10 @@ export class ComputeImage extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._family = config.family;
@@ -549,7 +552,7 @@ export class ComputeImage extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       os_type: cdktf.stringToTerraform(this._osType),
       pooled: cdktf.booleanToTerraform(this._pooled),
-      product_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._productIds),
+      product_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._productIds),
       source_disk: cdktf.stringToTerraform(this._sourceDisk),
       source_family: cdktf.stringToTerraform(this._sourceFamily),
       source_image: cdktf.stringToTerraform(this._sourceImage),

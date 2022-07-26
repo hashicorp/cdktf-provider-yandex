@@ -1056,7 +1056,7 @@ export function mdbKafkaClusterConfigAToTerraform(struct?: MdbKafkaClusterConfig
     schema_registry: cdktf.booleanToTerraform(struct!.schemaRegistry),
     unmanaged_topics: cdktf.booleanToTerraform(struct!.unmanagedTopics),
     version: cdktf.stringToTerraform(struct!.version),
-    zones: cdktf.listMapper(cdktf.stringToTerraform)(struct!.zones),
+    zones: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.zones),
     kafka: mdbKafkaClusterConfigKafkaToTerraform(struct!.kafka),
     zookeeper: mdbKafkaClusterConfigZookeeperToTerraform(struct!.zookeeper),
   }
@@ -2230,7 +2230,7 @@ export function mdbKafkaClusterUserToTerraform(struct?: MdbKafkaClusterUser | cd
   return {
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
-    permission: cdktf.listMapper(mdbKafkaClusterUserPermissionToTerraform)(struct!.permission),
+    permission: cdktf.listMapper(mdbKafkaClusterUserPermissionToTerraform, true)(struct!.permission),
   }
 }
 
@@ -2385,7 +2385,10 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._deletionProtection = config.deletionProtection;
     this._description = config.description;
@@ -2687,18 +2690,18 @@ export class MdbKafkaCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
-      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._hostGroupIds),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
-      subnet_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._subnetIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
+      subnet_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._subnetIds),
       config: mdbKafkaClusterConfigAToTerraform(this._config.internalValue),
       maintenance_window: mdbKafkaClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       timeouts: mdbKafkaClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      topic: cdktf.listMapper(mdbKafkaClusterTopicToTerraform)(this._topic.internalValue),
-      user: cdktf.listMapper(mdbKafkaClusterUserToTerraform)(this._user.internalValue),
+      topic: cdktf.listMapper(mdbKafkaClusterTopicToTerraform, true)(this._topic.internalValue),
+      user: cdktf.listMapper(mdbKafkaClusterUserToTerraform, true)(this._user.internalValue),
     };
   }
 }

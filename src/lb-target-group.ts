@@ -327,7 +327,10 @@ export class LbTargetGroup extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -488,7 +491,7 @@ export class LbTargetGroup extends cdktf.TerraformResource {
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       region_id: cdktf.stringToTerraform(this._regionId),
-      target: cdktf.listMapper(lbTargetGroupTargetToTerraform)(this._target.internalValue),
+      target: cdktf.listMapper(lbTargetGroupTargetToTerraform, true)(this._target.internalValue),
       timeouts: lbTargetGroupTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

@@ -207,7 +207,10 @@ export class IotCoreDevice extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._aliases = config.aliases;
     this._certificates = config.certificates;
@@ -357,11 +360,11 @@ export class IotCoreDevice extends cdktf.TerraformResource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       aliases: cdktf.hashMapper(cdktf.stringToTerraform)(this._aliases),
-      certificates: cdktf.listMapper(cdktf.stringToTerraform)(this._certificates),
+      certificates: cdktf.listMapper(cdktf.stringToTerraform, false)(this._certificates),
       description: cdktf.stringToTerraform(this._description),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
-      passwords: cdktf.listMapper(cdktf.stringToTerraform)(this._passwords),
+      passwords: cdktf.listMapper(cdktf.stringToTerraform, false)(this._passwords),
       registry_id: cdktf.stringToTerraform(this._registryId),
       timeouts: iotCoreDeviceTimeoutsToTerraform(this._timeouts.internalValue),
     };

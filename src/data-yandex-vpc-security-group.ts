@@ -290,7 +290,10 @@ export class DataYandexVpcSecurityGroup extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._folderId = config.folderId;
     this._id = config.id;

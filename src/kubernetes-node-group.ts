@@ -301,7 +301,7 @@ export function kubernetesNodeGroupAllocationPolicyToTerraform(struct?: Kubernet
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    location: cdktf.listMapper(kubernetesNodeGroupAllocationPolicyLocationToTerraform)(struct!.location),
+    location: cdktf.listMapper(kubernetesNodeGroupAllocationPolicyLocationToTerraform, true)(struct!.location),
   }
 }
 
@@ -625,8 +625,8 @@ export function kubernetesNodeGroupInstanceTemplateNetworkInterfaceToTerraform(s
     ipv4: cdktf.booleanToTerraform(struct!.ipv4),
     ipv6: cdktf.booleanToTerraform(struct!.ipv6),
     nat: cdktf.booleanToTerraform(struct!.nat),
-    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroupIds),
-    subnet_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.subnetIds),
+    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroupIds),
+    subnet_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.subnetIds),
   }
 }
 
@@ -1135,7 +1135,7 @@ export function kubernetesNodeGroupInstanceTemplateToTerraform(struct?: Kubernet
     platform_id: cdktf.stringToTerraform(struct!.platformId),
     boot_disk: kubernetesNodeGroupInstanceTemplateBootDiskToTerraform(struct!.bootDisk),
     container_runtime: kubernetesNodeGroupInstanceTemplateContainerRuntimeToTerraform(struct!.containerRuntime),
-    network_interface: cdktf.listMapper(kubernetesNodeGroupInstanceTemplateNetworkInterfaceToTerraform)(struct!.networkInterface),
+    network_interface: cdktf.listMapper(kubernetesNodeGroupInstanceTemplateNetworkInterfaceToTerraform, true)(struct!.networkInterface),
     placement_policy: kubernetesNodeGroupInstanceTemplatePlacementPolicyToTerraform(struct!.placementPolicy),
     resources: kubernetesNodeGroupInstanceTemplateResourcesToTerraform(struct!.resources),
     scheduling_policy: kubernetesNodeGroupInstanceTemplateSchedulingPolicyToTerraform(struct!.schedulingPolicy),
@@ -1558,7 +1558,7 @@ export function kubernetesNodeGroupMaintenancePolicyToTerraform(struct?: Kuberne
   return {
     auto_repair: cdktf.booleanToTerraform(struct!.autoRepair),
     auto_upgrade: cdktf.booleanToTerraform(struct!.autoUpgrade),
-    maintenance_window: cdktf.listMapper(kubernetesNodeGroupMaintenancePolicyMaintenanceWindowToTerraform)(struct!.maintenanceWindow),
+    maintenance_window: cdktf.listMapper(kubernetesNodeGroupMaintenancePolicyMaintenanceWindowToTerraform, true)(struct!.maintenanceWindow),
   }
 }
 
@@ -2108,7 +2108,10 @@ export class KubernetesNodeGroup extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._allowedUnsafeSysctls = config.allowedUnsafeSysctls;
     this._clusterId = config.clusterId;
@@ -2389,14 +2392,14 @@ export class KubernetesNodeGroup extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
-      allowed_unsafe_sysctls: cdktf.listMapper(cdktf.stringToTerraform)(this._allowedUnsafeSysctls),
+      allowed_unsafe_sysctls: cdktf.listMapper(cdktf.stringToTerraform, false)(this._allowedUnsafeSysctls),
       cluster_id: cdktf.stringToTerraform(this._clusterId),
       description: cdktf.stringToTerraform(this._description),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       node_labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._nodeLabels),
-      node_taints: cdktf.listMapper(cdktf.stringToTerraform)(this._nodeTaints),
+      node_taints: cdktf.listMapper(cdktf.stringToTerraform, false)(this._nodeTaints),
       version: cdktf.stringToTerraform(this._version),
       allocation_policy: kubernetesNodeGroupAllocationPolicyToTerraform(this._allocationPolicy.internalValue),
       deploy_policy: kubernetesNodeGroupDeployPolicyToTerraform(this._deployPolicy.internalValue),

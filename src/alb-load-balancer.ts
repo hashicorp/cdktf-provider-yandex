@@ -221,7 +221,7 @@ export function albLoadBalancerAllocationPolicyToTerraform(struct?: AlbLoadBalan
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    location: cdktf.listMapper(albLoadBalancerAllocationPolicyLocationToTerraform)(struct!.location),
+    location: cdktf.listMapper(albLoadBalancerAllocationPolicyLocationToTerraform, true)(struct!.location),
   }
 }
 
@@ -668,8 +668,8 @@ export function albLoadBalancerListenerEndpointToTerraform(struct?: AlbLoadBalan
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    ports: cdktf.listMapper(cdktf.numberToTerraform)(struct!.ports),
-    address: cdktf.listMapper(albLoadBalancerListenerEndpointAddressToTerraform)(struct!.address),
+    ports: cdktf.listMapper(cdktf.numberToTerraform, false)(struct!.ports),
+    address: cdktf.listMapper(albLoadBalancerListenerEndpointAddressToTerraform, true)(struct!.address),
   }
 }
 
@@ -1524,7 +1524,7 @@ export function albLoadBalancerListenerTlsDefaultHandlerToTerraform(struct?: Alb
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    certificate_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.certificateIds),
+    certificate_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.certificateIds),
     http_handler: albLoadBalancerListenerTlsDefaultHandlerHttpHandlerToTerraform(struct!.httpHandler),
     stream_handler: albLoadBalancerListenerTlsDefaultHandlerStreamHandlerToTerraform(struct!.streamHandler),
   }
@@ -1895,7 +1895,7 @@ export function albLoadBalancerListenerTlsSniHandlerHandlerToTerraform(struct?: 
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    certificate_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.certificateIds),
+    certificate_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.certificateIds),
     http_handler: albLoadBalancerListenerTlsSniHandlerHandlerHttpHandlerToTerraform(struct!.httpHandler),
     stream_handler: albLoadBalancerListenerTlsSniHandlerHandlerStreamHandlerToTerraform(struct!.streamHandler),
   }
@@ -2014,7 +2014,7 @@ export function albLoadBalancerListenerTlsSniHandlerToTerraform(struct?: AlbLoad
   }
   return {
     name: cdktf.stringToTerraform(struct!.name),
-    server_names: cdktf.listMapper(cdktf.stringToTerraform)(struct!.serverNames),
+    server_names: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.serverNames),
     handler: albLoadBalancerListenerTlsSniHandlerHandlerToTerraform(struct!.handler),
   }
 }
@@ -2156,7 +2156,7 @@ export function albLoadBalancerListenerTlsToTerraform(struct?: AlbLoadBalancerLi
   }
   return {
     default_handler: albLoadBalancerListenerTlsDefaultHandlerToTerraform(struct!.defaultHandler),
-    sni_handler: cdktf.listMapper(albLoadBalancerListenerTlsSniHandlerToTerraform)(struct!.sniHandler),
+    sni_handler: cdktf.listMapper(albLoadBalancerListenerTlsSniHandlerToTerraform, true)(struct!.sniHandler),
   }
 }
 
@@ -2265,7 +2265,7 @@ export function albLoadBalancerListenerToTerraform(struct?: AlbLoadBalancerListe
   }
   return {
     name: cdktf.stringToTerraform(struct!.name),
-    endpoint: cdktf.listMapper(albLoadBalancerListenerEndpointToTerraform)(struct!.endpoint),
+    endpoint: cdktf.listMapper(albLoadBalancerListenerEndpointToTerraform, true)(struct!.endpoint),
     http: albLoadBalancerListenerHttpToTerraform(struct!.http),
     stream: albLoadBalancerListenerStreamToTerraform(struct!.stream),
     tls: albLoadBalancerListenerTlsToTerraform(struct!.tls),
@@ -2599,7 +2599,10 @@ export class AlbLoadBalancer extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -2816,9 +2819,9 @@ export class AlbLoadBalancer extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
       region_id: cdktf.stringToTerraform(this._regionId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       allocation_policy: albLoadBalancerAllocationPolicyToTerraform(this._allocationPolicy.internalValue),
-      listener: cdktf.listMapper(albLoadBalancerListenerToTerraform)(this._listener.internalValue),
+      listener: cdktf.listMapper(albLoadBalancerListenerToTerraform, true)(this._listener.internalValue),
       timeouts: albLoadBalancerTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

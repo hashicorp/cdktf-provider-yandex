@@ -483,7 +483,7 @@ export function functionTriggerLogGroupToTerraform(struct?: FunctionTriggerLogGr
   return {
     batch_cutoff: cdktf.stringToTerraform(struct!.batchCutoff),
     batch_size: cdktf.stringToTerraform(struct!.batchSize),
-    log_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.logGroupIds),
+    log_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.logGroupIds),
   }
 }
 
@@ -609,9 +609,9 @@ export function functionTriggerLoggingToTerraform(struct?: FunctionTriggerLoggin
     batch_cutoff: cdktf.stringToTerraform(struct!.batchCutoff),
     batch_size: cdktf.stringToTerraform(struct!.batchSize),
     group_id: cdktf.stringToTerraform(struct!.groupId),
-    levels: cdktf.listMapper(cdktf.stringToTerraform)(struct!.levels),
-    resource_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.resourceIds),
-    resource_types: cdktf.listMapper(cdktf.stringToTerraform)(struct!.resourceTypes),
+    levels: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.levels),
+    resource_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.resourceIds),
+    resource_types: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.resourceTypes),
   }
 }
 
@@ -1343,7 +1343,10 @@ export class FunctionTrigger extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;

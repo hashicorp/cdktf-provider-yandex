@@ -38,7 +38,7 @@ export function dataYandexIamPolicyBindingToTerraform(struct?: DataYandexIamPoli
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    members: cdktf.listMapper(cdktf.stringToTerraform)(struct!.members),
+    members: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.members),
     role: cdktf.stringToTerraform(struct!.role),
   }
 }
@@ -172,7 +172,10 @@ export class DataYandexIamPolicy extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._id = config.id;
     this._binding.internalValue = config.binding;
@@ -223,7 +226,7 @@ export class DataYandexIamPolicy extends cdktf.TerraformDataSource {
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       id: cdktf.stringToTerraform(this._id),
-      binding: cdktf.listMapper(dataYandexIamPolicyBindingToTerraform)(this._binding.internalValue),
+      binding: cdktf.listMapper(dataYandexIamPolicyBindingToTerraform, true)(this._binding.internalValue),
     };
   }
 }

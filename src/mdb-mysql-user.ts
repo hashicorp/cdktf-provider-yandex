@@ -217,7 +217,7 @@ export function mdbMysqlUserPermissionToTerraform(struct?: MdbMysqlUserPermissio
   }
   return {
     database_name: cdktf.stringToTerraform(struct!.databaseName),
-    roles: cdktf.listMapper(cdktf.stringToTerraform)(struct!.roles),
+    roles: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.roles),
   }
 }
 
@@ -509,7 +509,10 @@ export class MdbMysqlUser extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._authenticationPlugin = config.authenticationPlugin;
     this._clusterId = config.clusterId;
@@ -669,12 +672,12 @@ export class MdbMysqlUser extends cdktf.TerraformResource {
     return {
       authentication_plugin: cdktf.stringToTerraform(this._authenticationPlugin),
       cluster_id: cdktf.stringToTerraform(this._clusterId),
-      global_permissions: cdktf.listMapper(cdktf.stringToTerraform)(this._globalPermissions),
+      global_permissions: cdktf.listMapper(cdktf.stringToTerraform, false)(this._globalPermissions),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       password: cdktf.stringToTerraform(this._password),
       connection_limits: mdbMysqlUserConnectionLimitsToTerraform(this._connectionLimits.internalValue),
-      permission: cdktf.listMapper(mdbMysqlUserPermissionToTerraform)(this._permission.internalValue),
+      permission: cdktf.listMapper(mdbMysqlUserPermissionToTerraform, true)(this._permission.internalValue),
       timeouts: mdbMysqlUserTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

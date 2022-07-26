@@ -612,7 +612,10 @@ export class DataYandexMdbElasticsearchCluster extends cdktf.TerraformDataSource
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._deletionProtection = config.deletionProtection;
@@ -829,7 +832,7 @@ export class DataYandexMdbElasticsearchCluster extends cdktf.TerraformDataSource
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),
     };
   }

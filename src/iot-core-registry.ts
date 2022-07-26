@@ -207,7 +207,10 @@ export class IotCoreRegistry extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._certificates = config.certificates;
     this._description = config.description;
@@ -359,13 +362,13 @@ export class IotCoreRegistry extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
-      certificates: cdktf.listMapper(cdktf.stringToTerraform)(this._certificates),
+      certificates: cdktf.listMapper(cdktf.stringToTerraform, false)(this._certificates),
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
-      passwords: cdktf.listMapper(cdktf.stringToTerraform)(this._passwords),
+      passwords: cdktf.listMapper(cdktf.stringToTerraform, false)(this._passwords),
       timeouts: iotCoreRegistryTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

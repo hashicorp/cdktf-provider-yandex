@@ -488,7 +488,7 @@ export function lbNetworkLoadBalancerAttachedTargetGroupToTerraform(struct?: LbN
   }
   return {
     target_group_id: cdktf.stringToTerraform(struct!.targetGroupId),
-    healthcheck: cdktf.listMapper(lbNetworkLoadBalancerAttachedTargetGroupHealthcheckToTerraform)(struct!.healthcheck),
+    healthcheck: cdktf.listMapper(lbNetworkLoadBalancerAttachedTargetGroupHealthcheckToTerraform, true)(struct!.healthcheck),
   }
 }
 
@@ -1188,7 +1188,10 @@ export class LbNetworkLoadBalancer extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -1384,8 +1387,8 @@ export class LbNetworkLoadBalancer extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       region_id: cdktf.stringToTerraform(this._regionId),
       type: cdktf.stringToTerraform(this._type),
-      attached_target_group: cdktf.listMapper(lbNetworkLoadBalancerAttachedTargetGroupToTerraform)(this._attachedTargetGroup.internalValue),
-      listener: cdktf.listMapper(lbNetworkLoadBalancerListenerToTerraform)(this._listener.internalValue),
+      attached_target_group: cdktf.listMapper(lbNetworkLoadBalancerAttachedTargetGroupToTerraform, true)(this._attachedTargetGroup.internalValue),
+      listener: cdktf.listMapper(lbNetworkLoadBalancerListenerToTerraform, true)(this._listener.internalValue),
       timeouts: lbNetworkLoadBalancerTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

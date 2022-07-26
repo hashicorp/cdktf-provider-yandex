@@ -60,7 +60,10 @@ export class DataYandexResourcemanagerCloud extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._cloudId = config.cloudId;
     this._description = config.description;

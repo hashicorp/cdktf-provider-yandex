@@ -203,7 +203,10 @@ export class DnsRecordset extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._data = config.data;
     this._id = config.id;
@@ -321,7 +324,7 @@ export class DnsRecordset extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
-      data: cdktf.listMapper(cdktf.stringToTerraform)(this._data),
+      data: cdktf.listMapper(cdktf.stringToTerraform, false)(this._data),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       ttl: cdktf.numberToTerraform(this._ttl),

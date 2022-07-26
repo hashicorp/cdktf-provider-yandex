@@ -187,7 +187,10 @@ export class DataYandexFunctionScalingPolicy extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._functionId = config.functionId;
     this._id = config.id;
@@ -251,7 +254,7 @@ export class DataYandexFunctionScalingPolicy extends cdktf.TerraformDataSource {
     return {
       function_id: cdktf.stringToTerraform(this._functionId),
       id: cdktf.stringToTerraform(this._id),
-      policy: cdktf.listMapper(dataYandexFunctionScalingPolicyPolicyToTerraform)(this._policy.internalValue),
+      policy: cdktf.listMapper(dataYandexFunctionScalingPolicyPolicyToTerraform, true)(this._policy.internalValue),
     };
   }
 }

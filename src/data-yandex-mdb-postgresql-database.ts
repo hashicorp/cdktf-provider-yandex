@@ -195,7 +195,10 @@ export class DataYandexMdbPostgresqlDatabase extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._id = config.id;
@@ -328,7 +331,7 @@ export class DataYandexMdbPostgresqlDatabase extends cdktf.TerraformDataSource {
       lc_type: cdktf.stringToTerraform(this._lcType),
       name: cdktf.stringToTerraform(this._name),
       owner: cdktf.stringToTerraform(this._owner),
-      extension: cdktf.listMapper(dataYandexMdbPostgresqlDatabaseExtensionToTerraform)(this._extension.internalValue),
+      extension: cdktf.listMapper(dataYandexMdbPostgresqlDatabaseExtensionToTerraform, true)(this._extension.internalValue),
     };
   }
 }

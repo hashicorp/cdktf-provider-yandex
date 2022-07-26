@@ -121,7 +121,7 @@ export function dataYandexMdbMysqlUserPermissionToTerraform(struct?: DataYandexM
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    roles: cdktf.listMapper(cdktf.stringToTerraform)(struct!.roles),
+    roles: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.roles),
   }
 }
 
@@ -243,7 +243,10 @@ export class DataYandexMdbMysqlUser extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._id = config.id;
@@ -338,7 +341,7 @@ export class DataYandexMdbMysqlUser extends cdktf.TerraformDataSource {
       cluster_id: cdktf.stringToTerraform(this._clusterId),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
-      permission: cdktf.listMapper(dataYandexMdbMysqlUserPermissionToTerraform)(this._permission.internalValue),
+      permission: cdktf.listMapper(dataYandexMdbMysqlUserPermissionToTerraform, true)(this._permission.internalValue),
     };
   }
 }

@@ -940,7 +940,10 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._assignPublicIp = config.assignPublicIp;
     this._deletionProtection = config.deletionProtection;
@@ -1340,7 +1343,7 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
       master_host_count: cdktf.numberToTerraform(this._masterHostCount),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       segment_host_count: cdktf.numberToTerraform(this._segmentHostCount),
       segment_in_host: cdktf.numberToTerraform(this._segmentInHost),
       subnet_id: cdktf.stringToTerraform(this._subnetId),

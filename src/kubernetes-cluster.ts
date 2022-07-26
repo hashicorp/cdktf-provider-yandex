@@ -404,7 +404,7 @@ export function kubernetesClusterMasterMaintenancePolicyToTerraform(struct?: Kub
   }
   return {
     auto_upgrade: cdktf.booleanToTerraform(struct!.autoUpgrade),
-    maintenance_window: cdktf.listMapper(kubernetesClusterMasterMaintenancePolicyMaintenanceWindowToTerraform)(struct!.maintenanceWindow),
+    maintenance_window: cdktf.listMapper(kubernetesClusterMasterMaintenancePolicyMaintenanceWindowToTerraform, true)(struct!.maintenanceWindow),
   }
 }
 
@@ -619,7 +619,7 @@ export function kubernetesClusterMasterRegionalToTerraform(struct?: KubernetesCl
   }
   return {
     region: cdktf.stringToTerraform(struct!.region),
-    location: cdktf.listMapper(kubernetesClusterMasterRegionalLocationToTerraform)(struct!.location),
+    location: cdktf.listMapper(kubernetesClusterMasterRegionalLocationToTerraform, true)(struct!.location),
   }
 }
 
@@ -822,7 +822,7 @@ export function kubernetesClusterMasterToTerraform(struct?: KubernetesClusterMas
   }
   return {
     public_ip: cdktf.booleanToTerraform(struct!.publicIp),
-    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroupIds),
+    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroupIds),
     version: cdktf.stringToTerraform(struct!.version),
     maintenance_policy: kubernetesClusterMasterMaintenancePolicyToTerraform(struct!.maintenancePolicy),
     regional: kubernetesClusterMasterRegionalToTerraform(struct!.regional),
@@ -1313,7 +1313,10 @@ export class KubernetesCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterIpv4Range = config.clusterIpv4Range;
     this._clusterIpv6Range = config.clusterIpv6Range;

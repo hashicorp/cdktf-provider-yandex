@@ -335,8 +335,8 @@ export function mdbKafkaConnectorConnectorConfigMirrormakerSourceClusterToTerraf
   }
   return {
     alias: cdktf.stringToTerraform(struct!.alias),
-    external_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalClusterToTerraform)(struct!.externalCluster),
-    this_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClusterToTerraform)(struct!.thisCluster),
+    external_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerSourceClusterExternalClusterToTerraform, true)(struct!.externalCluster),
+    this_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerSourceClusterThisClusterToTerraform, true)(struct!.thisCluster),
   }
 }
 
@@ -730,8 +730,8 @@ export function mdbKafkaConnectorConnectorConfigMirrormakerTargetClusterToTerraf
   }
   return {
     alias: cdktf.stringToTerraform(struct!.alias),
-    external_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalClusterToTerraform)(struct!.externalCluster),
-    this_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClusterToTerraform)(struct!.thisCluster),
+    external_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerTargetClusterExternalClusterToTerraform, true)(struct!.externalCluster),
+    this_cluster: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerTargetClusterThisClusterToTerraform, true)(struct!.thisCluster),
   }
 }
 
@@ -1030,7 +1030,10 @@ export class MdbKafkaConnector extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._id = config.id;
@@ -1145,7 +1148,7 @@ export class MdbKafkaConnector extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       properties: cdktf.hashMapper(cdktf.stringToTerraform)(this._properties),
       tasks_max: cdktf.numberToTerraform(this._tasksMax),
-      connector_config_mirrormaker: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerToTerraform)(this._connectorConfigMirrormaker.internalValue),
+      connector_config_mirrormaker: cdktf.listMapper(mdbKafkaConnectorConnectorConfigMirrormakerToTerraform, true)(this._connectorConfigMirrormaker.internalValue),
     };
   }
 }

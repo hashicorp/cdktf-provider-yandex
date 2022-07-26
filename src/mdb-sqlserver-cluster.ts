@@ -691,7 +691,7 @@ export function mdbSqlserverClusterUserPermissionToTerraform(struct?: MdbSqlserv
   }
   return {
     database_name: cdktf.stringToTerraform(struct!.databaseName),
-    roles: cdktf.listMapper(cdktf.stringToTerraform)(struct!.roles),
+    roles: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.roles),
   }
 }
 
@@ -819,7 +819,7 @@ export function mdbSqlserverClusterUserToTerraform(struct?: MdbSqlserverClusterU
   return {
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
-    permission: cdktf.listMapper(mdbSqlserverClusterUserPermissionToTerraform)(struct!.permission),
+    permission: cdktf.listMapper(mdbSqlserverClusterUserPermissionToTerraform, true)(struct!.permission),
   }
 }
 
@@ -974,7 +974,10 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._deletionProtection = config.deletionProtection;
     this._description = config.description;
@@ -1289,20 +1292,20 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
-      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._hostGroupIds),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       sqlserver_config: cdktf.hashMapper(cdktf.stringToTerraform)(this._sqlserverConfig),
       version: cdktf.stringToTerraform(this._version),
       backup_window_start: mdbSqlserverClusterBackupWindowStartToTerraform(this._backupWindowStart.internalValue),
-      database: cdktf.listMapper(mdbSqlserverClusterDatabaseToTerraform)(this._database.internalValue),
-      host: cdktf.listMapper(mdbSqlserverClusterHostToTerraform)(this._host.internalValue),
+      database: cdktf.listMapper(mdbSqlserverClusterDatabaseToTerraform, true)(this._database.internalValue),
+      host: cdktf.listMapper(mdbSqlserverClusterHostToTerraform, true)(this._host.internalValue),
       resources: mdbSqlserverClusterResourcesToTerraform(this._resources.internalValue),
       timeouts: mdbSqlserverClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      user: cdktf.listMapper(mdbSqlserverClusterUserToTerraform)(this._user.internalValue),
+      user: cdktf.listMapper(mdbSqlserverClusterUserToTerraform, true)(this._user.internalValue),
     };
   }
 }

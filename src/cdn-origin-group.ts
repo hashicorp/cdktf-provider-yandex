@@ -350,7 +350,10 @@ export class CdnOriginGroup extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._id = config.id;
     this._name = config.name;
@@ -451,7 +454,7 @@ export class CdnOriginGroup extends cdktf.TerraformResource {
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       use_next: cdktf.booleanToTerraform(this._useNext),
-      origin: cdktf.listMapper(cdnOriginGroupOriginToTerraform)(this._origin.internalValue),
+      origin: cdktf.listMapper(cdnOriginGroupOriginToTerraform, true)(this._origin.internalValue),
       timeouts: cdnOriginGroupTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

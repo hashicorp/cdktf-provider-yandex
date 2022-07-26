@@ -64,7 +64,10 @@ export class ResourcemanagerFolderIamBinding extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._folderId = config.folderId;
     this._id = config.id;
@@ -156,7 +159,7 @@ export class ResourcemanagerFolderIamBinding extends cdktf.TerraformResource {
     return {
       folder_id: cdktf.stringToTerraform(this._folderId),
       id: cdktf.stringToTerraform(this._id),
-      members: cdktf.listMapper(cdktf.stringToTerraform)(this._members),
+      members: cdktf.listMapper(cdktf.stringToTerraform, false)(this._members),
       role: cdktf.stringToTerraform(this._role),
       sleep_after: cdktf.numberToTerraform(this._sleepAfter),
     };

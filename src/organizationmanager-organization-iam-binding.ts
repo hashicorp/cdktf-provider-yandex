@@ -64,7 +64,10 @@ export class OrganizationmanagerOrganizationIamBinding extends cdktf.TerraformRe
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._id = config.id;
     this._members = config.members;
@@ -155,7 +158,7 @@ export class OrganizationmanagerOrganizationIamBinding extends cdktf.TerraformRe
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
       id: cdktf.stringToTerraform(this._id),
-      members: cdktf.listMapper(cdktf.stringToTerraform)(this._members),
+      members: cdktf.listMapper(cdktf.stringToTerraform, false)(this._members),
       organization_id: cdktf.stringToTerraform(this._organizationId),
       role: cdktf.stringToTerraform(this._role),
       sleep_after: cdktf.numberToTerraform(this._sleepAfter),

@@ -211,7 +211,10 @@ export class DnsZone extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -385,7 +388,7 @@ export class DnsZone extends cdktf.TerraformResource {
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
-      private_networks: cdktf.listMapper(cdktf.stringToTerraform)(this._privateNetworks),
+      private_networks: cdktf.listMapper(cdktf.stringToTerraform, false)(this._privateNetworks),
       public: cdktf.booleanToTerraform(this._public),
       zone: cdktf.stringToTerraform(this._zone),
       timeouts: dnsZoneTimeoutsToTerraform(this._timeouts.internalValue),

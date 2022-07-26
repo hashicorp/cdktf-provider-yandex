@@ -1067,7 +1067,7 @@ export function mdbPostgresqlClusterDatabaseToTerraform(struct?: MdbPostgresqlCl
     lc_type: cdktf.stringToTerraform(struct!.lcType),
     name: cdktf.stringToTerraform(struct!.name),
     owner: cdktf.stringToTerraform(struct!.owner),
-    extension: cdktf.listMapper(mdbPostgresqlClusterDatabaseExtensionToTerraform)(struct!.extension),
+    extension: cdktf.listMapper(mdbPostgresqlClusterDatabaseExtensionToTerraform, true)(struct!.extension),
   }
 }
 
@@ -1972,12 +1972,12 @@ export function mdbPostgresqlClusterUserToTerraform(struct?: MdbPostgresqlCluste
   }
   return {
     conn_limit: cdktf.numberToTerraform(struct!.connLimit),
-    grants: cdktf.listMapper(cdktf.stringToTerraform)(struct!.grants),
+    grants: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.grants),
     login: cdktf.booleanToTerraform(struct!.login),
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
     settings: cdktf.hashMapper(cdktf.stringToTerraform)(struct!.settings),
-    permission: cdktf.listMapper(mdbPostgresqlClusterUserPermissionToTerraform)(struct!.permission),
+    permission: cdktf.listMapper(mdbPostgresqlClusterUserPermissionToTerraform, true)(struct!.permission),
   }
 }
 
@@ -2220,7 +2220,10 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._deletionProtection = config.deletionProtection;
     this._description = config.description;
@@ -2544,20 +2547,20 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
-      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._hostGroupIds),
       host_master_name: cdktf.stringToTerraform(this._hostMasterName),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       config: mdbPostgresqlClusterConfigAToTerraform(this._config.internalValue),
-      database: cdktf.listMapper(mdbPostgresqlClusterDatabaseToTerraform)(this._database.internalValue),
-      host: cdktf.listMapper(mdbPostgresqlClusterHostToTerraform)(this._host.internalValue),
+      database: cdktf.listMapper(mdbPostgresqlClusterDatabaseToTerraform, true)(this._database.internalValue),
+      host: cdktf.listMapper(mdbPostgresqlClusterHostToTerraform, true)(this._host.internalValue),
       maintenance_window: mdbPostgresqlClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       restore: mdbPostgresqlClusterRestoreToTerraform(this._restore.internalValue),
       timeouts: mdbPostgresqlClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      user: cdktf.listMapper(mdbPostgresqlClusterUserToTerraform)(this._user.internalValue),
+      user: cdktf.listMapper(mdbPostgresqlClusterUserToTerraform, true)(this._user.internalValue),
     };
   }
 }

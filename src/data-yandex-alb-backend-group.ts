@@ -1988,7 +1988,7 @@ export function dataYandexAlbBackendGroupHttpBackendToTerraform(struct?: DataYan
     http2: cdktf.booleanToTerraform(struct!.http2),
     port: cdktf.numberToTerraform(struct!.port),
     storage_bucket: cdktf.stringToTerraform(struct!.storageBucket),
-    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.targetGroupIds),
+    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.targetGroupIds),
     weight: cdktf.numberToTerraform(struct!.weight),
     healthcheck: dataYandexAlbBackendGroupHttpBackendHealthcheckToTerraform(struct!.healthcheck),
     load_balancing_config: dataYandexAlbBackendGroupHttpBackendLoadBalancingConfigToTerraform(struct!.loadBalancingConfig),
@@ -3652,7 +3652,10 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._backendGroupId = config.backendGroupId;
     this._description = config.description;
@@ -3847,10 +3850,10 @@ export class DataYandexAlbBackendGroup extends cdktf.TerraformDataSource {
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
-      grpc_backend: cdktf.listMapper(dataYandexAlbBackendGroupGrpcBackendToTerraform)(this._grpcBackend.internalValue),
-      http_backend: cdktf.listMapper(dataYandexAlbBackendGroupHttpBackendToTerraform)(this._httpBackend.internalValue),
+      grpc_backend: cdktf.listMapper(dataYandexAlbBackendGroupGrpcBackendToTerraform, true)(this._grpcBackend.internalValue),
+      http_backend: cdktf.listMapper(dataYandexAlbBackendGroupHttpBackendToTerraform, true)(this._httpBackend.internalValue),
       session_affinity: dataYandexAlbBackendGroupSessionAffinityToTerraform(this._sessionAffinity.internalValue),
-      stream_backend: cdktf.listMapper(dataYandexAlbBackendGroupStreamBackendToTerraform)(this._streamBackend.internalValue),
+      stream_backend: cdktf.listMapper(dataYandexAlbBackendGroupStreamBackendToTerraform, true)(this._streamBackend.internalValue),
     };
   }
 }

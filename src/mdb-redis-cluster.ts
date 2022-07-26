@@ -989,7 +989,10 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._deletionProtection = config.deletionProtection;
     this._description = config.description;
@@ -1298,11 +1301,11 @@ export class MdbRedisCluster extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
       persistence_mode: cdktf.stringToTerraform(this._persistenceMode),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       sharded: cdktf.booleanToTerraform(this._sharded),
       tls_enabled: cdktf.booleanToTerraform(this._tlsEnabled),
       config: mdbRedisClusterConfigAToTerraform(this._config.internalValue),
-      host: cdktf.listMapper(mdbRedisClusterHostToTerraform)(this._host.internalValue),
+      host: cdktf.listMapper(mdbRedisClusterHostToTerraform, true)(this._host.internalValue),
       maintenance_window: mdbRedisClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       resources: mdbRedisClusterResourcesToTerraform(this._resources.internalValue),
       timeouts: mdbRedisClusterTimeoutsToTerraform(this._timeouts.internalValue),

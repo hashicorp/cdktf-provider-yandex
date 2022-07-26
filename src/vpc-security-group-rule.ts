@@ -258,7 +258,10 @@ export class VpcSecurityGroupRule extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._direction = config.direction;
@@ -515,8 +518,8 @@ export class VpcSecurityGroupRule extends cdktf.TerraformResource {
       security_group_binding: cdktf.stringToTerraform(this._securityGroupBinding),
       security_group_id: cdktf.stringToTerraform(this._securityGroupId),
       to_port: cdktf.numberToTerraform(this._toPort),
-      v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(this._v4CidrBlocks),
-      v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(this._v6CidrBlocks),
+      v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(this._v4CidrBlocks),
+      v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(this._v6CidrBlocks),
       timeouts: vpcSecurityGroupRuleTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

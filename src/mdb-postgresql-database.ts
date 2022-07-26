@@ -357,7 +357,10 @@ export class MdbPostgresqlDatabase extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._id = config.id;
@@ -504,7 +507,7 @@ export class MdbPostgresqlDatabase extends cdktf.TerraformResource {
       lc_type: cdktf.stringToTerraform(this._lcType),
       name: cdktf.stringToTerraform(this._name),
       owner: cdktf.stringToTerraform(this._owner),
-      extension: cdktf.listMapper(mdbPostgresqlDatabaseExtensionToTerraform)(this._extension.internalValue),
+      extension: cdktf.listMapper(mdbPostgresqlDatabaseExtensionToTerraform, true)(this._extension.internalValue),
       timeouts: mdbPostgresqlDatabaseTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

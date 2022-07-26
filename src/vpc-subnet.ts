@@ -81,8 +81,8 @@ export function vpcSubnetDhcpOptionsToTerraform(struct?: VpcSubnetDhcpOptionsOut
   }
   return {
     domain_name: cdktf.stringToTerraform(struct!.domainName),
-    domain_name_servers: cdktf.listMapper(cdktf.stringToTerraform)(struct!.domainNameServers),
-    ntp_servers: cdktf.listMapper(cdktf.stringToTerraform)(struct!.ntpServers),
+    domain_name_servers: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.domainNameServers),
+    ntp_servers: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.ntpServers),
   }
 }
 
@@ -340,7 +340,10 @@ export class VpcSubnet extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -552,7 +555,7 @@ export class VpcSubnet extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
       route_table_id: cdktf.stringToTerraform(this._routeTableId),
-      v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(this._v4CidrBlocks),
+      v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(this._v4CidrBlocks),
       zone: cdktf.stringToTerraform(this._zone),
       dhcp_options: vpcSubnetDhcpOptionsToTerraform(this._dhcpOptions.internalValue),
       timeouts: vpcSubnetTimeoutsToTerraform(this._timeouts.internalValue),
