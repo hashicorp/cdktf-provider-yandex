@@ -23,6 +23,10 @@ export interface DataYandexMessageQueueConfig extends cdktf.TerraformMetaArgumen
   */
   readonly name: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/message_queue#region_id DataYandexMessageQueue#region_id}
+  */
+  readonly regionId?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/message_queue#secret_key DataYandexMessageQueue#secret_key}
   */
   readonly secretKey?: string;
@@ -54,8 +58,8 @@ export class DataYandexMessageQueue extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_message_queue',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -65,6 +69,7 @@ export class DataYandexMessageQueue extends cdktf.TerraformDataSource {
     this._accessKey = config.accessKey;
     this._id = config.id;
     this._name = config.name;
+    this._regionId = config.regionId;
     this._secretKey = config.secretKey;
   }
 
@@ -122,6 +127,22 @@ export class DataYandexMessageQueue extends cdktf.TerraformDataSource {
     return this._name;
   }
 
+  // region_id - computed: false, optional: true, required: false
+  private _regionId?: string; 
+  public get regionId() {
+    return this.getStringAttribute('region_id');
+  }
+  public set regionId(value: string) {
+    this._regionId = value;
+  }
+  public resetRegionId() {
+    this._regionId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get regionIdInput() {
+    return this._regionId;
+  }
+
   // secret_key - computed: false, optional: true, required: false
   private _secretKey?: string; 
   public get secretKey() {
@@ -152,6 +173,7 @@ export class DataYandexMessageQueue extends cdktf.TerraformDataSource {
       access_key: cdktf.stringToTerraform(this._accessKey),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
+      region_id: cdktf.stringToTerraform(this._regionId),
       secret_key: cdktf.stringToTerraform(this._secretKey),
     };
   }

@@ -55,6 +55,10 @@ export interface MessageQueueConfig extends cdktf.TerraformMetaArguments {
   */
   readonly redrivePolicy?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/message_queue#region_id MessageQueue#region_id}
+  */
+  readonly regionId?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/message_queue#secret_key MessageQueue#secret_key}
   */
   readonly secretKey?: string;
@@ -90,8 +94,8 @@ export class MessageQueue extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_message_queue',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -109,6 +113,7 @@ export class MessageQueue extends cdktf.TerraformResource {
     this._namePrefix = config.namePrefix;
     this._receiveWaitTimeSeconds = config.receiveWaitTimeSeconds;
     this._redrivePolicy = config.redrivePolicy;
+    this._regionId = config.regionId;
     this._secretKey = config.secretKey;
     this._visibilityTimeoutSeconds = config.visibilityTimeoutSeconds;
   }
@@ -298,6 +303,22 @@ export class MessageQueue extends cdktf.TerraformResource {
     return this._redrivePolicy;
   }
 
+  // region_id - computed: false, optional: true, required: false
+  private _regionId?: string; 
+  public get regionId() {
+    return this.getStringAttribute('region_id');
+  }
+  public set regionId(value: string) {
+    this._regionId = value;
+  }
+  public resetRegionId() {
+    this._regionId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get regionIdInput() {
+    return this._regionId;
+  }
+
   // secret_key - computed: false, optional: true, required: false
   private _secretKey?: string; 
   public get secretKey() {
@@ -347,6 +368,7 @@ export class MessageQueue extends cdktf.TerraformResource {
       name_prefix: cdktf.stringToTerraform(this._namePrefix),
       receive_wait_time_seconds: cdktf.numberToTerraform(this._receiveWaitTimeSeconds),
       redrive_policy: cdktf.stringToTerraform(this._redrivePolicy),
+      region_id: cdktf.stringToTerraform(this._regionId),
       secret_key: cdktf.stringToTerraform(this._secretKey),
       visibility_timeout_seconds: cdktf.numberToTerraform(this._visibilityTimeoutSeconds),
     };

@@ -1234,8 +1234,8 @@ export class DataYandexKubernetesNodeGroup extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_kubernetes_node_group',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,

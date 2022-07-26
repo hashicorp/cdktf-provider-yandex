@@ -24,6 +24,14 @@ export interface StorageBucketConfig extends cdktf.TerraformMetaArguments {
   */
   readonly bucketPrefix?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#default_storage_class StorageBucket#default_storage_class}
+  */
+  readonly defaultStorageClass?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#folder_id StorageBucket#folder_id}
+  */
+  readonly folderId?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#force_destroy StorageBucket#force_destroy}
   */
   readonly forceDestroy?: boolean | cdktf.IResolvable;
@@ -34,6 +42,10 @@ export interface StorageBucketConfig extends cdktf.TerraformMetaArguments {
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
   */
   readonly id?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#max_size StorageBucket#max_size}
+  */
+  readonly maxSize?: number;
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#policy StorageBucket#policy}
   */
@@ -51,6 +63,12 @@ export interface StorageBucketConfig extends cdktf.TerraformMetaArguments {
   */
   readonly websiteEndpoint?: string;
   /**
+  * anonymous_access_flags block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#anonymous_access_flags StorageBucket#anonymous_access_flags}
+  */
+  readonly anonymousAccessFlags?: StorageBucketAnonymousAccessFlags;
+  /**
   * cors_rule block
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#cors_rule StorageBucket#cors_rule}
@@ -62,6 +80,12 @@ export interface StorageBucketConfig extends cdktf.TerraformMetaArguments {
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#grant StorageBucket#grant}
   */
   readonly grant?: StorageBucketGrant[] | cdktf.IResolvable;
+  /**
+  * https block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#https StorageBucket#https}
+  */
+  readonly https?: StorageBucketHttps;
   /**
   * lifecycle_rule block
   * 
@@ -92,6 +116,98 @@ export interface StorageBucketConfig extends cdktf.TerraformMetaArguments {
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#website StorageBucket#website}
   */
   readonly website?: StorageBucketWebsite;
+}
+export interface StorageBucketAnonymousAccessFlags {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#list StorageBucket#list}
+  */
+  readonly list?: boolean | cdktf.IResolvable;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#read StorageBucket#read}
+  */
+  readonly read?: boolean | cdktf.IResolvable;
+}
+
+export function storageBucketAnonymousAccessFlagsToTerraform(struct?: StorageBucketAnonymousAccessFlagsOutputReference | StorageBucketAnonymousAccessFlags): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    list: cdktf.booleanToTerraform(struct!.list),
+    read: cdktf.booleanToTerraform(struct!.read),
+  }
+}
+
+export class StorageBucketAnonymousAccessFlagsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): StorageBucketAnonymousAccessFlags | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._list !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.list = this._list;
+    }
+    if (this._read !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.read = this._read;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: StorageBucketAnonymousAccessFlags | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._list = undefined;
+      this._read = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._list = value.list;
+      this._read = value.read;
+    }
+  }
+
+  // list - computed: false, optional: true, required: false
+  private _list?: boolean | cdktf.IResolvable; 
+  public get list() {
+    return this.getBooleanAttribute('list');
+  }
+  public set list(value: boolean | cdktf.IResolvable) {
+    this._list = value;
+  }
+  public resetList() {
+    this._list = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get listInput() {
+    return this._list;
+  }
+
+  // read - computed: false, optional: true, required: false
+  private _read?: boolean | cdktf.IResolvable; 
+  public get read() {
+    return this.getBooleanAttribute('read');
+  }
+  public set read(value: boolean | cdktf.IResolvable) {
+    this._read = value;
+  }
+  public resetRead() {
+    this._read = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get readInput() {
+    return this._read;
+  }
 }
 export interface StorageBucketCorsRule {
   /**
@@ -465,6 +581,68 @@ export class StorageBucketGrantList extends cdktf.ComplexList {
   */
   public get(index: number): StorageBucketGrantOutputReference {
     return new StorageBucketGrantOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface StorageBucketHttps {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/storage_bucket#certificate_id StorageBucket#certificate_id}
+  */
+  readonly certificateId: string;
+}
+
+export function storageBucketHttpsToTerraform(struct?: StorageBucketHttpsOutputReference | StorageBucketHttps): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    certificate_id: cdktf.stringToTerraform(struct!.certificateId),
+  }
+}
+
+export class StorageBucketHttpsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): StorageBucketHttps | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._certificateId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.certificateId = this._certificateId;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: StorageBucketHttps | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._certificateId = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._certificateId = value.certificateId;
+    }
+  }
+
+  // certificate_id - computed: false, optional: false, required: true
+  private _certificateId?: string; 
+  public get certificateId() {
+    return this.getStringAttribute('certificate_id');
+  }
+  public set certificateId(value: string) {
+    this._certificateId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get certificateIdInput() {
+    return this._certificateId;
   }
 }
 export interface StorageBucketLifecycleRuleExpiration {
@@ -1787,8 +1965,8 @@ export class StorageBucket extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_storage_bucket',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -1799,14 +1977,19 @@ export class StorageBucket extends cdktf.TerraformResource {
     this._acl = config.acl;
     this._bucket = config.bucket;
     this._bucketPrefix = config.bucketPrefix;
+    this._defaultStorageClass = config.defaultStorageClass;
+    this._folderId = config.folderId;
     this._forceDestroy = config.forceDestroy;
     this._id = config.id;
+    this._maxSize = config.maxSize;
     this._policy = config.policy;
     this._secretKey = config.secretKey;
     this._websiteDomain = config.websiteDomain;
     this._websiteEndpoint = config.websiteEndpoint;
+    this._anonymousAccessFlags.internalValue = config.anonymousAccessFlags;
     this._corsRule.internalValue = config.corsRule;
     this._grant.internalValue = config.grant;
+    this._https.internalValue = config.https;
     this._lifecycleRule.internalValue = config.lifecycleRule;
     this._logging.internalValue = config.logging;
     this._serverSideEncryptionConfiguration.internalValue = config.serverSideEncryptionConfiguration;
@@ -1887,6 +2070,38 @@ export class StorageBucket extends cdktf.TerraformResource {
     return this._bucketPrefix;
   }
 
+  // default_storage_class - computed: true, optional: true, required: false
+  private _defaultStorageClass?: string; 
+  public get defaultStorageClass() {
+    return this.getStringAttribute('default_storage_class');
+  }
+  public set defaultStorageClass(value: string) {
+    this._defaultStorageClass = value;
+  }
+  public resetDefaultStorageClass() {
+    this._defaultStorageClass = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get defaultStorageClassInput() {
+    return this._defaultStorageClass;
+  }
+
+  // folder_id - computed: true, optional: true, required: false
+  private _folderId?: string; 
+  public get folderId() {
+    return this.getStringAttribute('folder_id');
+  }
+  public set folderId(value: string) {
+    this._folderId = value;
+  }
+  public resetFolderId() {
+    this._folderId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get folderIdInput() {
+    return this._folderId;
+  }
+
   // force_destroy - computed: false, optional: true, required: false
   private _forceDestroy?: boolean | cdktf.IResolvable; 
   public get forceDestroy() {
@@ -1917,6 +2132,22 @@ export class StorageBucket extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get idInput() {
     return this._id;
+  }
+
+  // max_size - computed: false, optional: true, required: false
+  private _maxSize?: number; 
+  public get maxSize() {
+    return this.getNumberAttribute('max_size');
+  }
+  public set maxSize(value: number) {
+    this._maxSize = value;
+  }
+  public resetMaxSize() {
+    this._maxSize = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get maxSizeInput() {
+    return this._maxSize;
   }
 
   // policy - computed: false, optional: true, required: false
@@ -1983,6 +2214,22 @@ export class StorageBucket extends cdktf.TerraformResource {
     return this._websiteEndpoint;
   }
 
+  // anonymous_access_flags - computed: false, optional: true, required: false
+  private _anonymousAccessFlags = new StorageBucketAnonymousAccessFlagsOutputReference(this, "anonymous_access_flags");
+  public get anonymousAccessFlags() {
+    return this._anonymousAccessFlags;
+  }
+  public putAnonymousAccessFlags(value: StorageBucketAnonymousAccessFlags) {
+    this._anonymousAccessFlags.internalValue = value;
+  }
+  public resetAnonymousAccessFlags() {
+    this._anonymousAccessFlags.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get anonymousAccessFlagsInput() {
+    return this._anonymousAccessFlags.internalValue;
+  }
+
   // cors_rule - computed: false, optional: true, required: false
   private _corsRule = new StorageBucketCorsRuleList(this, "cors_rule", false);
   public get corsRule() {
@@ -2013,6 +2260,22 @@ export class StorageBucket extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get grantInput() {
     return this._grant.internalValue;
+  }
+
+  // https - computed: false, optional: true, required: false
+  private _https = new StorageBucketHttpsOutputReference(this, "https");
+  public get https() {
+    return this._https;
+  }
+  public putHttps(value: StorageBucketHttps) {
+    this._https.internalValue = value;
+  }
+  public resetHttps() {
+    this._https.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get httpsInput() {
+    return this._https.internalValue;
   }
 
   // lifecycle_rule - computed: false, optional: true, required: false
@@ -2105,14 +2368,19 @@ export class StorageBucket extends cdktf.TerraformResource {
       acl: cdktf.stringToTerraform(this._acl),
       bucket: cdktf.stringToTerraform(this._bucket),
       bucket_prefix: cdktf.stringToTerraform(this._bucketPrefix),
+      default_storage_class: cdktf.stringToTerraform(this._defaultStorageClass),
+      folder_id: cdktf.stringToTerraform(this._folderId),
       force_destroy: cdktf.booleanToTerraform(this._forceDestroy),
       id: cdktf.stringToTerraform(this._id),
+      max_size: cdktf.numberToTerraform(this._maxSize),
       policy: cdktf.stringToTerraform(this._policy),
       secret_key: cdktf.stringToTerraform(this._secretKey),
       website_domain: cdktf.stringToTerraform(this._websiteDomain),
       website_endpoint: cdktf.stringToTerraform(this._websiteEndpoint),
+      anonymous_access_flags: storageBucketAnonymousAccessFlagsToTerraform(this._anonymousAccessFlags.internalValue),
       cors_rule: cdktf.listMapper(storageBucketCorsRuleToTerraform)(this._corsRule.internalValue),
       grant: cdktf.listMapper(storageBucketGrantToTerraform)(this._grant.internalValue),
+      https: storageBucketHttpsToTerraform(this._https.internalValue),
       lifecycle_rule: cdktf.listMapper(storageBucketLifecycleRuleToTerraform)(this._lifecycleRule.internalValue),
       logging: cdktf.listMapper(storageBucketLoggingToTerraform)(this._logging.internalValue),
       server_side_encryption_configuration: storageBucketServerSideEncryptionConfigurationToTerraform(this._serverSideEncryptionConfiguration.internalValue),

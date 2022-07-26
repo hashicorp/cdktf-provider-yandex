@@ -24,6 +24,10 @@ export interface MdbPostgresqlClusterConfig extends cdktf.TerraformMetaArguments
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_postgresql_cluster#host_group_ids MdbPostgresqlCluster#host_group_ids}
+  */
+  readonly hostGroupIds?: string[];
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_postgresql_cluster#host_master_name MdbPostgresqlCluster#host_master_name}
   */
   readonly hostMasterName?: string;
@@ -61,7 +65,7 @@ export interface MdbPostgresqlClusterConfig extends cdktf.TerraformMetaArguments
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_postgresql_cluster#database MdbPostgresqlCluster#database}
   */
-  readonly database: MdbPostgresqlClusterDatabase[] | cdktf.IResolvable;
+  readonly database?: MdbPostgresqlClusterDatabase[] | cdktf.IResolvable;
   /**
   * host block
   * 
@@ -91,7 +95,7 @@ export interface MdbPostgresqlClusterConfig extends cdktf.TerraformMetaArguments
   * 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_postgresql_cluster#user MdbPostgresqlCluster#user}
   */
-  readonly user: MdbPostgresqlClusterUser[] | cdktf.IResolvable;
+  readonly user?: MdbPostgresqlClusterUser[] | cdktf.IResolvable;
 }
 export interface MdbPostgresqlClusterConfigAccess {
   /**
@@ -2210,8 +2214,8 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_mdb_postgresql_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.73.0',
-        providerVersionConstraint: '~> 0.73.0'
+        providerVersion: '0.76.0',
+        providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
       dependsOn: config.dependsOn,
@@ -2222,6 +2226,7 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
     this._description = config.description;
     this._environment = config.environment;
     this._folderId = config.folderId;
+    this._hostGroupIds = config.hostGroupIds;
     this._hostMasterName = config.hostMasterName;
     this._id = config.id;
     this._labels = config.labels;
@@ -2310,6 +2315,22 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
   // health - computed: true, optional: false, required: false
   public get health() {
     return this.getStringAttribute('health');
+  }
+
+  // host_group_ids - computed: true, optional: true, required: false
+  private _hostGroupIds?: string[]; 
+  public get hostGroupIds() {
+    return cdktf.Fn.tolist(this.getListAttribute('host_group_ids'));
+  }
+  public set hostGroupIds(value: string[]) {
+    this._hostGroupIds = value;
+  }
+  public resetHostGroupIds() {
+    this._hostGroupIds = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get hostGroupIdsInput() {
+    return this._hostGroupIds;
   }
 
   // host_master_name - computed: true, optional: true, required: false
@@ -2420,13 +2441,16 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
     return this._config.internalValue;
   }
 
-  // database - computed: false, optional: false, required: true
+  // database - computed: false, optional: true, required: false
   private _database = new MdbPostgresqlClusterDatabaseList(this, "database", false);
   public get database() {
     return this._database;
   }
   public putDatabase(value: MdbPostgresqlClusterDatabase[] | cdktf.IResolvable) {
     this._database.internalValue = value;
+  }
+  public resetDatabase() {
+    this._database.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get databaseInput() {
@@ -2494,13 +2518,16 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
     return this._timeouts.internalValue;
   }
 
-  // user - computed: false, optional: false, required: true
+  // user - computed: false, optional: true, required: false
   private _user = new MdbPostgresqlClusterUserList(this, "user", false);
   public get user() {
     return this._user;
   }
   public putUser(value: MdbPostgresqlClusterUser[] | cdktf.IResolvable) {
     this._user.internalValue = value;
+  }
+  public resetUser() {
+    this._user.internalValue = undefined;
   }
   // Temporarily expose input value. Use with caution.
   public get userInput() {
@@ -2517,6 +2544,7 @@ export class MdbPostgresqlCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
       host_master_name: cdktf.stringToTerraform(this._hostMasterName),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
