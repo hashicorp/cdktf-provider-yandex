@@ -102,8 +102,8 @@ export function serverlessContainerImageToTerraform(struct?: ServerlessContainer
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    args: cdktf.listMapper(cdktf.stringToTerraform)(struct!.args),
-    command: cdktf.listMapper(cdktf.stringToTerraform)(struct!.command),
+    args: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.args),
+    command: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.command),
     digest: cdktf.stringToTerraform(struct!.digest),
     environment: cdktf.hashMapper(cdktf.stringToTerraform)(struct!.environment),
     url: cdktf.stringToTerraform(struct!.url),
@@ -428,7 +428,10 @@ export class ServerlessContainer extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._concurrency = config.concurrency;
     this._coreFraction = config.coreFraction;

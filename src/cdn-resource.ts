@@ -158,10 +158,10 @@ export function cdnResourceOptionsToTerraform(struct?: CdnResourceOptionsOutputR
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    allowed_http_methods: cdktf.listMapper(cdktf.stringToTerraform)(struct!.allowedHttpMethods),
+    allowed_http_methods: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.allowedHttpMethods),
     browser_cache_settings: cdktf.numberToTerraform(struct!.browserCacheSettings),
-    cache_http_headers: cdktf.listMapper(cdktf.stringToTerraform)(struct!.cacheHttpHeaders),
-    cors: cdktf.listMapper(cdktf.stringToTerraform)(struct!.cors),
+    cache_http_headers: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.cacheHttpHeaders),
+    cors: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.cors),
     custom_host_header: cdktf.stringToTerraform(struct!.customHostHeader),
     custom_server_name: cdktf.stringToTerraform(struct!.customServerName),
     disable_cache: cdktf.booleanToTerraform(struct!.disableCache),
@@ -173,12 +173,12 @@ export function cdnResourceOptionsToTerraform(struct?: CdnResourceOptionsOutputR
     ignore_cookie: cdktf.booleanToTerraform(struct!.ignoreCookie),
     ignore_query_params: cdktf.booleanToTerraform(struct!.ignoreQueryParams),
     proxy_cache_methods_set: cdktf.booleanToTerraform(struct!.proxyCacheMethodsSet),
-    query_params_blacklist: cdktf.listMapper(cdktf.stringToTerraform)(struct!.queryParamsBlacklist),
-    query_params_whitelist: cdktf.listMapper(cdktf.stringToTerraform)(struct!.queryParamsWhitelist),
+    query_params_blacklist: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.queryParamsBlacklist),
+    query_params_whitelist: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.queryParamsWhitelist),
     redirect_http_to_https: cdktf.booleanToTerraform(struct!.redirectHttpToHttps),
     redirect_https_to_http: cdktf.booleanToTerraform(struct!.redirectHttpsToHttp),
     slice: cdktf.booleanToTerraform(struct!.slice),
-    static_request_headers: cdktf.listMapper(cdktf.stringToTerraform)(struct!.staticRequestHeaders),
+    static_request_headers: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.staticRequestHeaders),
     static_response_headers: cdktf.hashMapper(cdktf.stringToTerraform)(struct!.staticResponseHeaders),
   }
 }
@@ -949,7 +949,10 @@ export class CdnResource extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._active = config.active;
     this._cname = config.cname;
@@ -1166,7 +1169,7 @@ export class CdnResource extends cdktf.TerraformResource {
       origin_group_id: cdktf.numberToTerraform(this._originGroupId),
       origin_group_name: cdktf.stringToTerraform(this._originGroupName),
       origin_protocol: cdktf.stringToTerraform(this._originProtocol),
-      secondary_hostnames: cdktf.listMapper(cdktf.stringToTerraform)(this._secondaryHostnames),
+      secondary_hostnames: cdktf.listMapper(cdktf.stringToTerraform, false)(this._secondaryHostnames),
       updated_at: cdktf.stringToTerraform(this._updatedAt),
       options: cdnResourceOptionsToTerraform(this._options.internalValue),
       ssl_certificate: cdnResourceSslCertificateToTerraform(this._sslCertificate.internalValue),

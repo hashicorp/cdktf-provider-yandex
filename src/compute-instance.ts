@@ -1202,11 +1202,11 @@ export function computeInstanceNetworkInterfaceToTerraform(struct?: ComputeInsta
     ipv6_address: cdktf.stringToTerraform(struct!.ipv6Address),
     nat: cdktf.booleanToTerraform(struct!.nat),
     nat_ip_address: cdktf.stringToTerraform(struct!.natIpAddress),
-    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroupIds),
+    security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroupIds),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
-    dns_record: cdktf.listMapper(computeInstanceNetworkInterfaceDnsRecordToTerraform)(struct!.dnsRecord),
-    ipv6_dns_record: cdktf.listMapper(computeInstanceNetworkInterfaceIpv6DnsRecordToTerraform)(struct!.ipv6DnsRecord),
-    nat_dns_record: cdktf.listMapper(computeInstanceNetworkInterfaceNatDnsRecordToTerraform)(struct!.natDnsRecord),
+    dns_record: cdktf.listMapper(computeInstanceNetworkInterfaceDnsRecordToTerraform, true)(struct!.dnsRecord),
+    ipv6_dns_record: cdktf.listMapper(computeInstanceNetworkInterfaceIpv6DnsRecordToTerraform, true)(struct!.ipv6DnsRecord),
+    nat_dns_record: cdktf.listMapper(computeInstanceNetworkInterfaceNatDnsRecordToTerraform, true)(struct!.natDnsRecord),
   }
 }
 
@@ -1545,7 +1545,7 @@ export function computeInstancePlacementPolicyHostAffinityRulesToTerraform(struc
   return {
     key: cdktf.stringToTerraform(struct!.key),
     op: cdktf.stringToTerraform(struct!.op),
-    values: cdktf.listMapper(cdktf.stringToTerraform)(struct!.values),
+    values: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.values),
   }
 }
 
@@ -1690,7 +1690,7 @@ export function computeInstancePlacementPolicyToTerraform(struct?: ComputeInstan
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    host_affinity_rules: cdktf.listMapper(computeInstancePlacementPolicyHostAffinityRulesToTerraform)(struct!.hostAffinityRules),
+    host_affinity_rules: cdktf.listMapper(computeInstancePlacementPolicyHostAffinityRulesToTerraform, false)(struct!.hostAffinityRules),
     placement_group_id: cdktf.stringToTerraform(struct!.placementGroupId),
   }
 }
@@ -2307,7 +2307,10 @@ export class ComputeInstance extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._allowRecreate = config.allowRecreate;
     this._allowStoppingForUpdate = config.allowStoppingForUpdate;
@@ -2698,12 +2701,12 @@ export class ComputeInstance extends cdktf.TerraformResource {
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),
       zone: cdktf.stringToTerraform(this._zone),
       boot_disk: computeInstanceBootDiskToTerraform(this._bootDisk.internalValue),
-      local_disk: cdktf.listMapper(computeInstanceLocalDiskToTerraform)(this._localDisk.internalValue),
-      network_interface: cdktf.listMapper(computeInstanceNetworkInterfaceToTerraform)(this._networkInterface.internalValue),
+      local_disk: cdktf.listMapper(computeInstanceLocalDiskToTerraform, true)(this._localDisk.internalValue),
+      network_interface: cdktf.listMapper(computeInstanceNetworkInterfaceToTerraform, true)(this._networkInterface.internalValue),
       placement_policy: computeInstancePlacementPolicyToTerraform(this._placementPolicy.internalValue),
       resources: computeInstanceResourcesToTerraform(this._resources.internalValue),
       scheduling_policy: computeInstanceSchedulingPolicyToTerraform(this._schedulingPolicy.internalValue),
-      secondary_disk: cdktf.listMapper(computeInstanceSecondaryDiskToTerraform)(this._secondaryDisk.internalValue),
+      secondary_disk: cdktf.listMapper(computeInstanceSecondaryDiskToTerraform, true)(this._secondaryDisk.internalValue),
       timeouts: computeInstanceTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

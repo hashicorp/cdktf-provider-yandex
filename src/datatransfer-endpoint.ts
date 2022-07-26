@@ -54,7 +54,7 @@ export function datatransferEndpointSettingsClickhouseSourceConnectionConnection
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     name: cdktf.stringToTerraform(struct!.name),
   }
 }
@@ -391,7 +391,7 @@ export function datatransferEndpointSettingsClickhouseSourceConnectionConnection
   return {
     http_port: cdktf.numberToTerraform(struct!.httpPort),
     native_port: cdktf.numberToTerraform(struct!.nativePort),
-    shards: cdktf.listMapper(datatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseShardsToTerraform)(struct!.shards),
+    shards: cdktf.listMapper(datatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseShardsToTerraform, true)(struct!.shards),
     tls_mode: datatransferEndpointSettingsClickhouseSourceConnectionConnectionOptionsOnPremiseTlsModeToTerraform(struct!.tlsMode),
   }
 }
@@ -850,9 +850,9 @@ export function datatransferEndpointSettingsClickhouseSourceToTerraform(struct?:
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    exclude_tables: cdktf.listMapper(cdktf.stringToTerraform)(struct!.excludeTables),
-    include_tables: cdktf.listMapper(cdktf.stringToTerraform)(struct!.includeTables),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    exclude_tables: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.excludeTables),
+    include_tables: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.includeTables),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     connection: datatransferEndpointSettingsClickhouseSourceConnectionToTerraform(struct!.connection),
   }
@@ -1135,7 +1135,7 @@ export function datatransferEndpointSettingsClickhouseTargetConnectionConnection
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     name: cdktf.stringToTerraform(struct!.name),
   }
 }
@@ -1472,7 +1472,7 @@ export function datatransferEndpointSettingsClickhouseTargetConnectionConnection
   return {
     http_port: cdktf.numberToTerraform(struct!.httpPort),
     native_port: cdktf.numberToTerraform(struct!.nativePort),
-    shards: cdktf.listMapper(datatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseShardsToTerraform)(struct!.shards),
+    shards: cdktf.listMapper(datatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseShardsToTerraform, true)(struct!.shards),
     tls_mode: datatransferEndpointSettingsClickhouseTargetConnectionConnectionOptionsOnPremiseTlsModeToTerraform(struct!.tlsMode),
   }
 }
@@ -2144,9 +2144,9 @@ export function datatransferEndpointSettingsClickhouseTargetToTerraform(struct?:
   return {
     cleanup_policy: cdktf.stringToTerraform(struct!.cleanupPolicy),
     clickhouse_cluster_name: cdktf.stringToTerraform(struct!.clickhouseClusterName),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
-    alt_names: cdktf.listMapper(datatransferEndpointSettingsClickhouseTargetAltNamesToTerraform)(struct!.altNames),
+    alt_names: cdktf.listMapper(datatransferEndpointSettingsClickhouseTargetAltNamesToTerraform, true)(struct!.altNames),
     connection: datatransferEndpointSettingsClickhouseTargetConnectionToTerraform(struct!.connection),
     sharding: datatransferEndpointSettingsClickhouseTargetShardingToTerraform(struct!.sharding),
   }
@@ -2682,7 +2682,7 @@ export function datatransferEndpointSettingsMongoSourceConnectionConnectionOptio
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     port: cdktf.numberToTerraform(struct!.port),
     replica_set: cdktf.stringToTerraform(struct!.replicaSet),
     tls_mode: datatransferEndpointSettingsMongoSourceConnectionConnectionOptionsOnPremiseTlsModeToTerraform(struct!.tlsMode),
@@ -3276,11 +3276,11 @@ export function datatransferEndpointSettingsMongoSourceToTerraform(struct?: Data
   }
   return {
     secondary_preferred_mode: cdktf.booleanToTerraform(struct!.secondaryPreferredMode),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
-    collections: cdktf.listMapper(datatransferEndpointSettingsMongoSourceCollectionsToTerraform)(struct!.collections),
+    collections: cdktf.listMapper(datatransferEndpointSettingsMongoSourceCollectionsToTerraform, true)(struct!.collections),
     connection: datatransferEndpointSettingsMongoSourceConnectionToTerraform(struct!.connection),
-    excluded_collections: cdktf.listMapper(datatransferEndpointSettingsMongoSourceExcludedCollectionsToTerraform)(struct!.excludedCollections),
+    excluded_collections: cdktf.listMapper(datatransferEndpointSettingsMongoSourceExcludedCollectionsToTerraform, true)(struct!.excludedCollections),
   }
 }
 
@@ -3668,7 +3668,7 @@ export function datatransferEndpointSettingsMongoTargetConnectionConnectionOptio
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     port: cdktf.numberToTerraform(struct!.port),
     replica_set: cdktf.stringToTerraform(struct!.replicaSet),
     tls_mode: datatransferEndpointSettingsMongoTargetConnectionConnectionOptionsOnPremiseTlsModeToTerraform(struct!.tlsMode),
@@ -4131,7 +4131,7 @@ export function datatransferEndpointSettingsMongoTargetToTerraform(struct?: Data
   return {
     cleanup_policy: cdktf.stringToTerraform(struct!.cleanupPolicy),
     database: cdktf.stringToTerraform(struct!.database),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     connection: datatransferEndpointSettingsMongoTargetConnectionToTerraform(struct!.connection),
   }
@@ -4499,7 +4499,7 @@ export function datatransferEndpointSettingsMysqlSourceConnectionOnPremiseToTerr
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     port: cdktf.numberToTerraform(struct!.port),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     tls_mode: datatransferEndpointSettingsMysqlSourceConnectionOnPremiseTlsModeToTerraform(struct!.tlsMode),
@@ -4954,9 +4954,9 @@ export function datatransferEndpointSettingsMysqlSourceToTerraform(struct?: Data
   }
   return {
     database: cdktf.stringToTerraform(struct!.database),
-    exclude_tables_regex: cdktf.listMapper(cdktf.stringToTerraform)(struct!.excludeTablesRegex),
-    include_tables_regex: cdktf.listMapper(cdktf.stringToTerraform)(struct!.includeTablesRegex),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    exclude_tables_regex: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.excludeTablesRegex),
+    include_tables_regex: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.includeTablesRegex),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     service_database: cdktf.stringToTerraform(struct!.serviceDatabase),
     timezone: cdktf.stringToTerraform(struct!.timezone),
     user: cdktf.stringToTerraform(struct!.user),
@@ -5438,7 +5438,7 @@ export function datatransferEndpointSettingsMysqlTargetConnectionOnPremiseToTerr
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     port: cdktf.numberToTerraform(struct!.port),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     tls_mode: datatransferEndpointSettingsMysqlTargetConnectionOnPremiseTlsModeToTerraform(struct!.tlsMode),
@@ -5764,7 +5764,7 @@ export function datatransferEndpointSettingsMysqlTargetToTerraform(struct?: Data
   }
   return {
     database: cdktf.stringToTerraform(struct!.database),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     skip_constraint_checks: cdktf.booleanToTerraform(struct!.skipConstraintChecks),
     sql_mode: cdktf.stringToTerraform(struct!.sqlMode),
     timezone: cdktf.stringToTerraform(struct!.timezone),
@@ -6202,7 +6202,7 @@ export function datatransferEndpointSettingsPostgresSourceConnectionOnPremiseToT
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     port: cdktf.numberToTerraform(struct!.port),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     tls_mode: datatransferEndpointSettingsPostgresSourceConnectionOnPremiseTlsModeToTerraform(struct!.tlsMode),
@@ -7035,9 +7035,9 @@ export function datatransferEndpointSettingsPostgresSourceToTerraform(struct?: D
   }
   return {
     database: cdktf.stringToTerraform(struct!.database),
-    exclude_tables: cdktf.listMapper(cdktf.stringToTerraform)(struct!.excludeTables),
-    include_tables: cdktf.listMapper(cdktf.stringToTerraform)(struct!.includeTables),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    exclude_tables: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.excludeTables),
+    include_tables: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.includeTables),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     service_schema: cdktf.stringToTerraform(struct!.serviceSchema),
     slot_gigabyte_lag_limit: cdktf.numberToTerraform(struct!.slotGigabyteLagLimit),
     user: cdktf.stringToTerraform(struct!.user),
@@ -7519,7 +7519,7 @@ export function datatransferEndpointSettingsPostgresTargetConnectionOnPremiseToT
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    hosts: cdktf.listMapper(cdktf.stringToTerraform)(struct!.hosts),
+    hosts: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.hosts),
     port: cdktf.numberToTerraform(struct!.port),
     subnet_id: cdktf.stringToTerraform(struct!.subnetId),
     tls_mode: datatransferEndpointSettingsPostgresTargetConnectionOnPremiseTlsModeToTerraform(struct!.tlsMode),
@@ -7833,7 +7833,7 @@ export function datatransferEndpointSettingsPostgresTargetToTerraform(struct?: D
   }
   return {
     database: cdktf.stringToTerraform(struct!.database),
-    security_groups: cdktf.listMapper(cdktf.stringToTerraform)(struct!.securityGroups),
+    security_groups: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroups),
     user: cdktf.stringToTerraform(struct!.user),
     connection: datatransferEndpointSettingsPostgresTargetConnectionToTerraform(struct!.connection),
     password: datatransferEndpointSettingsPostgresTargetPasswordToTerraform(struct!.password),
@@ -8279,7 +8279,10 @@ export class DatatransferEndpoint extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;

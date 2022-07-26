@@ -1098,7 +1098,7 @@ export function dataYandexMdbKafkaClusterConfigAToTerraform(struct?: DataYandexM
     schema_registry: cdktf.booleanToTerraform(struct!.schemaRegistry),
     unmanaged_topics: cdktf.booleanToTerraform(struct!.unmanagedTopics),
     version: cdktf.stringToTerraform(struct!.version),
-    zones: cdktf.listMapper(cdktf.stringToTerraform)(struct!.zones),
+    zones: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.zones),
     kafka: dataYandexMdbKafkaClusterConfigKafkaToTerraform(struct!.kafka),
     zookeeper: dataYandexMdbKafkaClusterConfigZookeeperToTerraform(struct!.zookeeper),
   }
@@ -2024,7 +2024,7 @@ export function dataYandexMdbKafkaClusterUserToTerraform(struct?: DataYandexMdbK
   return {
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
-    permission: cdktf.listMapper(dataYandexMdbKafkaClusterUserPermissionToTerraform)(struct!.permission),
+    permission: cdktf.listMapper(dataYandexMdbKafkaClusterUserPermissionToTerraform, true)(struct!.permission),
   }
 }
 
@@ -2179,7 +2179,10 @@ export class DataYandexMdbKafkaCluster extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._deletionProtection = config.deletionProtection;
@@ -2409,10 +2412,10 @@ export class DataYandexMdbKafkaCluster extends cdktf.TerraformDataSource {
       folder_id: cdktf.stringToTerraform(this._folderId),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
-      subnet_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._subnetIds),
+      subnet_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._subnetIds),
       config: dataYandexMdbKafkaClusterConfigAToTerraform(this._config.internalValue),
-      topic: cdktf.listMapper(dataYandexMdbKafkaClusterTopicToTerraform)(this._topic.internalValue),
-      user: cdktf.listMapper(dataYandexMdbKafkaClusterUserToTerraform)(this._user.internalValue),
+      topic: cdktf.listMapper(dataYandexMdbKafkaClusterTopicToTerraform, true)(this._topic.internalValue),
+      user: cdktf.listMapper(dataYandexMdbKafkaClusterUserToTerraform, true)(this._user.internalValue),
     };
   }
 }

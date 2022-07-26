@@ -93,8 +93,8 @@ export function dataprocClusterClusterConfigHadoopToTerraform(struct?: DataprocC
   }
   return {
     properties: cdktf.hashMapper(cdktf.stringToTerraform)(struct!.properties),
-    services: cdktf.listMapper(cdktf.stringToTerraform)(struct!.services),
-    ssh_public_keys: cdktf.listMapper(cdktf.stringToTerraform)(struct!.sshPublicKeys),
+    services: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.services),
+    ssh_public_keys: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.sshPublicKeys),
   }
 }
 
@@ -807,7 +807,7 @@ export function dataprocClusterClusterConfigToTerraform(struct?: DataprocCluster
   return {
     version_id: cdktf.stringToTerraform(struct!.versionId),
     hadoop: dataprocClusterClusterConfigHadoopToTerraform(struct!.hadoop),
-    subcluster_spec: cdktf.listMapper(dataprocClusterClusterConfigSubclusterSpecToTerraform)(struct!.subclusterSpec),
+    subcluster_spec: cdktf.listMapper(dataprocClusterClusterConfigSubclusterSpecToTerraform, true)(struct!.subclusterSpec),
   }
 }
 
@@ -1062,7 +1062,10 @@ export class DataprocCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._bucket = config.bucket;
     this._deletionProtection = config.deletionProtection;
@@ -1314,11 +1317,11 @@ export class DataprocCluster extends cdktf.TerraformResource {
       deletion_protection: cdktf.booleanToTerraform(this._deletionProtection),
       description: cdktf.stringToTerraform(this._description),
       folder_id: cdktf.stringToTerraform(this._folderId),
-      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._hostGroupIds),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),
       ui_proxy: cdktf.booleanToTerraform(this._uiProxy),
       zone_id: cdktf.stringToTerraform(this._zoneId),

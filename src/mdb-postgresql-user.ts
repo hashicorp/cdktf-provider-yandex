@@ -338,7 +338,10 @@ export class MdbPostgresqlUser extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._connLimit = config.connLimit;
@@ -515,13 +518,13 @@ export class MdbPostgresqlUser extends cdktf.TerraformResource {
     return {
       cluster_id: cdktf.stringToTerraform(this._clusterId),
       conn_limit: cdktf.numberToTerraform(this._connLimit),
-      grants: cdktf.listMapper(cdktf.stringToTerraform)(this._grants),
+      grants: cdktf.listMapper(cdktf.stringToTerraform, false)(this._grants),
       id: cdktf.stringToTerraform(this._id),
       login: cdktf.booleanToTerraform(this._login),
       name: cdktf.stringToTerraform(this._name),
       password: cdktf.stringToTerraform(this._password),
       settings: cdktf.hashMapper(cdktf.stringToTerraform)(this._settings),
-      permission: cdktf.listMapper(mdbPostgresqlUserPermissionToTerraform)(this._permission.internalValue),
+      permission: cdktf.listMapper(mdbPostgresqlUserPermissionToTerraform, true)(this._permission.internalValue),
       timeouts: mdbPostgresqlUserTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

@@ -1629,7 +1629,7 @@ export function mdbMongodbClusterUserPermissionToTerraform(struct?: MdbMongodbCl
   }
   return {
     database_name: cdktf.stringToTerraform(struct!.databaseName),
-    roles: cdktf.listMapper(cdktf.stringToTerraform)(struct!.roles),
+    roles: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.roles),
   }
 }
 
@@ -1757,7 +1757,7 @@ export function mdbMongodbClusterUserToTerraform(struct?: MdbMongodbClusterUser 
   return {
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
-    permission: cdktf.listMapper(mdbMongodbClusterUserPermissionToTerraform)(struct!.permission),
+    permission: cdktf.listMapper(mdbMongodbClusterUserPermissionToTerraform, true)(struct!.permission),
   }
 }
 
@@ -1912,7 +1912,10 @@ export class MdbMongodbCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._deletionProtection = config.deletionProtection;
@@ -2220,14 +2223,14 @@ export class MdbMongodbCluster extends cdktf.TerraformResource {
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       cluster_config: mdbMongodbClusterClusterConfigToTerraform(this._clusterConfig.internalValue),
-      database: cdktf.listMapper(mdbMongodbClusterDatabaseToTerraform)(this._database.internalValue),
-      host: cdktf.listMapper(mdbMongodbClusterHostToTerraform)(this._host.internalValue),
+      database: cdktf.listMapper(mdbMongodbClusterDatabaseToTerraform, true)(this._database.internalValue),
+      host: cdktf.listMapper(mdbMongodbClusterHostToTerraform, true)(this._host.internalValue),
       maintenance_window: mdbMongodbClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       resources: mdbMongodbClusterResourcesToTerraform(this._resources.internalValue),
       timeouts: mdbMongodbClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      user: cdktf.listMapper(mdbMongodbClusterUserToTerraform)(this._user.internalValue),
+      user: cdktf.listMapper(mdbMongodbClusterUserToTerraform, true)(this._user.internalValue),
     };
   }
 }

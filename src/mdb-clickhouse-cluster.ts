@@ -676,7 +676,7 @@ export function mdbClickhouseClusterClickhouseConfigGraphiteRollupPatternToTerra
   return {
     function: cdktf.stringToTerraform(struct!.function),
     regexp: cdktf.stringToTerraform(struct!.regexp),
-    retention: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionToTerraform)(struct!.retention),
+    retention: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigGraphiteRollupPatternRetentionToTerraform, true)(struct!.retention),
   }
 }
 
@@ -821,7 +821,7 @@ export function mdbClickhouseClusterClickhouseConfigGraphiteRollupToTerraform(st
   }
   return {
     name: cdktf.stringToTerraform(struct!.name),
-    pattern: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigGraphiteRollupPatternToTerraform)(struct!.pattern),
+    pattern: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigGraphiteRollupPatternToTerraform, true)(struct!.pattern),
   }
 }
 
@@ -1848,10 +1848,10 @@ export function mdbClickhouseClusterClickhouseConfigToTerraform(struct?: MdbClic
     trace_log_retention_size: cdktf.numberToTerraform(struct!.traceLogRetentionSize),
     trace_log_retention_time: cdktf.numberToTerraform(struct!.traceLogRetentionTime),
     uncompressed_cache_size: cdktf.numberToTerraform(struct!.uncompressedCacheSize),
-    compression: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigCompressionToTerraform)(struct!.compression),
-    graphite_rollup: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigGraphiteRollupToTerraform)(struct!.graphiteRollup),
+    compression: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigCompressionToTerraform, true)(struct!.compression),
+    graphite_rollup: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigGraphiteRollupToTerraform, true)(struct!.graphiteRollup),
     kafka: mdbClickhouseClusterClickhouseConfigKafkaToTerraform(struct!.kafka),
-    kafka_topic: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigKafkaTopicToTerraform)(struct!.kafkaTopic),
+    kafka_topic: cdktf.listMapper(mdbClickhouseClusterClickhouseConfigKafkaTopicToTerraform, true)(struct!.kafkaTopic),
     merge_tree: mdbClickhouseClusterClickhouseConfigMergeTreeToTerraform(struct!.mergeTree),
     rabbitmq: mdbClickhouseClusterClickhouseConfigRabbitmqToTerraform(struct!.rabbitmq),
   }
@@ -3639,7 +3639,7 @@ export function mdbClickhouseClusterShardGroupToTerraform(struct?: MdbClickhouse
   return {
     description: cdktf.stringToTerraform(struct!.description),
     name: cdktf.stringToTerraform(struct!.name),
-    shard_names: cdktf.listMapper(cdktf.stringToTerraform)(struct!.shardNames),
+    shard_names: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.shardNames),
   }
 }
 
@@ -6799,8 +6799,8 @@ export function mdbClickhouseClusterUserToTerraform(struct?: MdbClickhouseCluste
   return {
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
-    permission: cdktf.listMapper(mdbClickhouseClusterUserPermissionToTerraform)(struct!.permission),
-    quota: cdktf.listMapper(mdbClickhouseClusterUserQuotaToTerraform)(struct!.quota),
+    permission: cdktf.listMapper(mdbClickhouseClusterUserPermissionToTerraform, true)(struct!.permission),
+    quota: cdktf.listMapper(mdbClickhouseClusterUserQuotaToTerraform, true)(struct!.quota),
     settings: mdbClickhouseClusterUserSettingsToTerraform(struct!.settings),
   }
 }
@@ -7186,7 +7186,10 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._adminPassword = config.adminPassword;
     this._copySchemaOnNewHosts = config.copySchemaOnNewHosts;
@@ -7704,7 +7707,7 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),
       sql_database_management: cdktf.booleanToTerraform(this._sqlDatabaseManagement),
       sql_user_management: cdktf.booleanToTerraform(this._sqlUserManagement),
@@ -7713,14 +7716,14 @@ export class MdbClickhouseCluster extends cdktf.TerraformResource {
       backup_window_start: mdbClickhouseClusterBackupWindowStartToTerraform(this._backupWindowStart.internalValue),
       clickhouse: mdbClickhouseClusterClickhouseToTerraform(this._clickhouse.internalValue),
       cloud_storage: mdbClickhouseClusterCloudStorageToTerraform(this._cloudStorage.internalValue),
-      database: cdktf.listMapper(mdbClickhouseClusterDatabaseToTerraform)(this._database.internalValue),
-      format_schema: cdktf.listMapper(mdbClickhouseClusterFormatSchemaToTerraform)(this._formatSchema.internalValue),
-      host: cdktf.listMapper(mdbClickhouseClusterHostToTerraform)(this._host.internalValue),
+      database: cdktf.listMapper(mdbClickhouseClusterDatabaseToTerraform, true)(this._database.internalValue),
+      format_schema: cdktf.listMapper(mdbClickhouseClusterFormatSchemaToTerraform, true)(this._formatSchema.internalValue),
+      host: cdktf.listMapper(mdbClickhouseClusterHostToTerraform, true)(this._host.internalValue),
       maintenance_window: mdbClickhouseClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
-      ml_model: cdktf.listMapper(mdbClickhouseClusterMlModelToTerraform)(this._mlModel.internalValue),
-      shard_group: cdktf.listMapper(mdbClickhouseClusterShardGroupToTerraform)(this._shardGroup.internalValue),
+      ml_model: cdktf.listMapper(mdbClickhouseClusterMlModelToTerraform, true)(this._mlModel.internalValue),
+      shard_group: cdktf.listMapper(mdbClickhouseClusterShardGroupToTerraform, true)(this._shardGroup.internalValue),
       timeouts: mdbClickhouseClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      user: cdktf.listMapper(mdbClickhouseClusterUserToTerraform)(this._user.internalValue),
+      user: cdktf.listMapper(mdbClickhouseClusterUserToTerraform, true)(this._user.internalValue),
       zookeeper: mdbClickhouseClusterZookeeperToTerraform(this._zookeeper.internalValue),
     };
   }

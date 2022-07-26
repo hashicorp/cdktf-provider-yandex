@@ -1388,7 +1388,7 @@ export function mdbMysqlClusterUserPermissionToTerraform(struct?: MdbMysqlCluste
   }
   return {
     database_name: cdktf.stringToTerraform(struct!.databaseName),
-    roles: cdktf.listMapper(cdktf.stringToTerraform)(struct!.roles),
+    roles: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.roles),
   }
 }
 
@@ -1529,11 +1529,11 @@ export function mdbMysqlClusterUserToTerraform(struct?: MdbMysqlClusterUser | cd
   }
   return {
     authentication_plugin: cdktf.stringToTerraform(struct!.authenticationPlugin),
-    global_permissions: cdktf.listMapper(cdktf.stringToTerraform)(struct!.globalPermissions),
+    global_permissions: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.globalPermissions),
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
     connection_limits: mdbMysqlClusterUserConnectionLimitsToTerraform(struct!.connectionLimits),
-    permission: cdktf.listMapper(mdbMysqlClusterUserPermissionToTerraform)(struct!.permission),
+    permission: cdktf.listMapper(mdbMysqlClusterUserPermissionToTerraform, true)(struct!.permission),
   }
 }
 
@@ -1754,7 +1754,10 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._allowRegenerationHost = config.allowRegenerationHost;
     this._deletionProtection = config.deletionProtection;
@@ -2161,24 +2164,24 @@ export class MdbMysqlCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
-      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._hostGroupIds),
+      host_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._hostGroupIds),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       mysql_config: cdktf.hashMapper(cdktf.stringToTerraform)(this._mysqlConfig),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       version: cdktf.stringToTerraform(this._version),
       access: mdbMysqlClusterAccessToTerraform(this._access.internalValue),
       backup_window_start: mdbMysqlClusterBackupWindowStartToTerraform(this._backupWindowStart.internalValue),
-      database: cdktf.listMapper(mdbMysqlClusterDatabaseToTerraform)(this._database.internalValue),
-      host: cdktf.listMapper(mdbMysqlClusterHostToTerraform)(this._host.internalValue),
+      database: cdktf.listMapper(mdbMysqlClusterDatabaseToTerraform, true)(this._database.internalValue),
+      host: cdktf.listMapper(mdbMysqlClusterHostToTerraform, true)(this._host.internalValue),
       maintenance_window: mdbMysqlClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       performance_diagnostics: mdbMysqlClusterPerformanceDiagnosticsToTerraform(this._performanceDiagnostics.internalValue),
       resources: mdbMysqlClusterResourcesToTerraform(this._resources.internalValue),
       restore: mdbMysqlClusterRestoreToTerraform(this._restore.internalValue),
       timeouts: mdbMysqlClusterTimeoutsToTerraform(this._timeouts.internalValue),
-      user: cdktf.listMapper(mdbMysqlClusterUserToTerraform)(this._user.internalValue),
+      user: cdktf.listMapper(mdbMysqlClusterUserToTerraform, true)(this._user.internalValue),
     };
   }
 }

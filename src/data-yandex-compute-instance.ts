@@ -931,7 +931,7 @@ export function dataYandexComputeInstancePlacementPolicyHostAffinityRulesToTerra
   return {
     key: cdktf.stringToTerraform(struct!.key),
     op: cdktf.stringToTerraform(struct!.op),
-    values: cdktf.listMapper(cdktf.stringToTerraform)(struct!.values),
+    values: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.values),
   }
 }
 
@@ -1076,7 +1076,7 @@ export function dataYandexComputeInstancePlacementPolicyToTerraform(struct?: Dat
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    host_affinity_rules: cdktf.listMapper(dataYandexComputeInstancePlacementPolicyHostAffinityRulesToTerraform)(struct!.hostAffinityRules),
+    host_affinity_rules: cdktf.listMapper(dataYandexComputeInstancePlacementPolicyHostAffinityRulesToTerraform, false)(struct!.hostAffinityRules),
     placement_group_id: cdktf.stringToTerraform(struct!.placementGroupId),
   }
 }
@@ -1184,7 +1184,10 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._folderId = config.folderId;
     this._id = config.id;
@@ -1386,7 +1389,7 @@ export class DataYandexComputeInstance extends cdktf.TerraformDataSource {
       id: cdktf.stringToTerraform(this._id),
       instance_id: cdktf.stringToTerraform(this._instanceId),
       name: cdktf.stringToTerraform(this._name),
-      local_disk: cdktf.listMapper(dataYandexComputeInstanceLocalDiskToTerraform)(this._localDisk.internalValue),
+      local_disk: cdktf.listMapper(dataYandexComputeInstanceLocalDiskToTerraform, true)(this._localDisk.internalValue),
       placement_policy: dataYandexComputeInstancePlacementPolicyToTerraform(this._placementPolicy.internalValue),
     };
   }

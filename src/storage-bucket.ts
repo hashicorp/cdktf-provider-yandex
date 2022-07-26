@@ -238,10 +238,10 @@ export function storageBucketCorsRuleToTerraform(struct?: StorageBucketCorsRule 
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    allowed_headers: cdktf.listMapper(cdktf.stringToTerraform)(struct!.allowedHeaders),
-    allowed_methods: cdktf.listMapper(cdktf.stringToTerraform)(struct!.allowedMethods),
-    allowed_origins: cdktf.listMapper(cdktf.stringToTerraform)(struct!.allowedOrigins),
-    expose_headers: cdktf.listMapper(cdktf.stringToTerraform)(struct!.exposeHeaders),
+    allowed_headers: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.allowedHeaders),
+    allowed_methods: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.allowedMethods),
+    allowed_origins: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.allowedOrigins),
+    expose_headers: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.exposeHeaders),
     max_age_seconds: cdktf.numberToTerraform(struct!.maxAgeSeconds),
   }
 }
@@ -437,7 +437,7 @@ export function storageBucketGrantToTerraform(struct?: StorageBucketGrant | cdkt
   }
   return {
     id: cdktf.stringToTerraform(struct!.id),
-    permissions: cdktf.listMapper(cdktf.stringToTerraform)(struct!.permissions),
+    permissions: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.permissions),
     type: cdktf.stringToTerraform(struct!.type),
     uri: cdktf.stringToTerraform(struct!.uri),
   }
@@ -1156,8 +1156,8 @@ export function storageBucketLifecycleRuleToTerraform(struct?: StorageBucketLife
     prefix: cdktf.stringToTerraform(struct!.prefix),
     expiration: storageBucketLifecycleRuleExpirationToTerraform(struct!.expiration),
     noncurrent_version_expiration: storageBucketLifecycleRuleNoncurrentVersionExpirationToTerraform(struct!.noncurrentVersionExpiration),
-    noncurrent_version_transition: cdktf.listMapper(storageBucketLifecycleRuleNoncurrentVersionTransitionToTerraform)(struct!.noncurrentVersionTransition),
-    transition: cdktf.listMapper(storageBucketLifecycleRuleTransitionToTerraform)(struct!.transition),
+    noncurrent_version_transition: cdktf.listMapper(storageBucketLifecycleRuleNoncurrentVersionTransitionToTerraform, true)(struct!.noncurrentVersionTransition),
+    transition: cdktf.listMapper(storageBucketLifecycleRuleTransitionToTerraform, true)(struct!.transition),
   }
 }
 
@@ -1971,7 +1971,10 @@ export class StorageBucket extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._accessKey = config.accessKey;
     this._acl = config.acl;
@@ -2378,11 +2381,11 @@ export class StorageBucket extends cdktf.TerraformResource {
       website_domain: cdktf.stringToTerraform(this._websiteDomain),
       website_endpoint: cdktf.stringToTerraform(this._websiteEndpoint),
       anonymous_access_flags: storageBucketAnonymousAccessFlagsToTerraform(this._anonymousAccessFlags.internalValue),
-      cors_rule: cdktf.listMapper(storageBucketCorsRuleToTerraform)(this._corsRule.internalValue),
-      grant: cdktf.listMapper(storageBucketGrantToTerraform)(this._grant.internalValue),
+      cors_rule: cdktf.listMapper(storageBucketCorsRuleToTerraform, true)(this._corsRule.internalValue),
+      grant: cdktf.listMapper(storageBucketGrantToTerraform, true)(this._grant.internalValue),
       https: storageBucketHttpsToTerraform(this._https.internalValue),
-      lifecycle_rule: cdktf.listMapper(storageBucketLifecycleRuleToTerraform)(this._lifecycleRule.internalValue),
-      logging: cdktf.listMapper(storageBucketLoggingToTerraform)(this._logging.internalValue),
+      lifecycle_rule: cdktf.listMapper(storageBucketLifecycleRuleToTerraform, true)(this._lifecycleRule.internalValue),
+      logging: cdktf.listMapper(storageBucketLoggingToTerraform, true)(this._logging.internalValue),
       server_side_encryption_configuration: storageBucketServerSideEncryptionConfigurationToTerraform(this._serverSideEncryptionConfiguration.internalValue),
       versioning: storageBucketVersioningToTerraform(this._versioning.internalValue),
       website: storageBucketWebsiteToTerraform(this._website.internalValue),

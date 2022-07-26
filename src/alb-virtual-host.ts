@@ -854,7 +854,7 @@ export function albVirtualHostRouteGrpcRouteToTerraform(struct?: AlbVirtualHostR
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    grpc_match: cdktf.listMapper(albVirtualHostRouteGrpcRouteGrpcMatchToTerraform)(struct!.grpcMatch),
+    grpc_match: cdktf.listMapper(albVirtualHostRouteGrpcRouteGrpcMatchToTerraform, true)(struct!.grpcMatch),
     grpc_route_action: albVirtualHostRouteGrpcRouteGrpcRouteActionToTerraform(struct!.grpcRouteAction),
     grpc_status_response_action: albVirtualHostRouteGrpcRouteGrpcStatusResponseActionToTerraform(struct!.grpcStatusResponseAction),
   }
@@ -1155,7 +1155,7 @@ export function albVirtualHostRouteHttpRouteHttpMatchToTerraform(struct?: AlbVir
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
-    http_method: cdktf.listMapper(cdktf.stringToTerraform)(struct!.httpMethod),
+    http_method: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.httpMethod),
     path: albVirtualHostRouteHttpRouteHttpMatchPathToTerraform(struct!.path),
   }
 }
@@ -1305,7 +1305,7 @@ export function albVirtualHostRouteHttpRouteHttpRouteActionToTerraform(struct?: 
     idle_timeout: cdktf.stringToTerraform(struct!.idleTimeout),
     prefix_rewrite: cdktf.stringToTerraform(struct!.prefixRewrite),
     timeout: cdktf.stringToTerraform(struct!.timeout),
-    upgrade_types: cdktf.listMapper(cdktf.stringToTerraform)(struct!.upgradeTypes),
+    upgrade_types: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.upgradeTypes),
   }
 }
 
@@ -1747,7 +1747,7 @@ export function albVirtualHostRouteHttpRouteToTerraform(struct?: AlbVirtualHostR
   }
   return {
     direct_response_action: albVirtualHostRouteHttpRouteDirectResponseActionToTerraform(struct!.directResponseAction),
-    http_match: cdktf.listMapper(albVirtualHostRouteHttpRouteHttpMatchToTerraform)(struct!.httpMatch),
+    http_match: cdktf.listMapper(albVirtualHostRouteHttpRouteHttpMatchToTerraform, true)(struct!.httpMatch),
     http_route_action: albVirtualHostRouteHttpRouteHttpRouteActionToTerraform(struct!.httpRouteAction),
     redirect_action: albVirtualHostRouteHttpRouteRedirectActionToTerraform(struct!.redirectAction),
   }
@@ -2184,7 +2184,10 @@ export class AlbVirtualHost extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._authority = config.authority;
     this._httpRouterId = config.httpRouterId;
@@ -2328,13 +2331,13 @@ export class AlbVirtualHost extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
-      authority: cdktf.listMapper(cdktf.stringToTerraform)(this._authority),
+      authority: cdktf.listMapper(cdktf.stringToTerraform, false)(this._authority),
       http_router_id: cdktf.stringToTerraform(this._httpRouterId),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
-      modify_request_headers: cdktf.listMapper(albVirtualHostModifyRequestHeadersToTerraform)(this._modifyRequestHeaders.internalValue),
-      modify_response_headers: cdktf.listMapper(albVirtualHostModifyResponseHeadersToTerraform)(this._modifyResponseHeaders.internalValue),
-      route: cdktf.listMapper(albVirtualHostRouteToTerraform)(this._route.internalValue),
+      modify_request_headers: cdktf.listMapper(albVirtualHostModifyRequestHeadersToTerraform, true)(this._modifyRequestHeaders.internalValue),
+      modify_response_headers: cdktf.listMapper(albVirtualHostModifyResponseHeadersToTerraform, true)(this._modifyResponseHeaders.internalValue),
+      route: cdktf.listMapper(albVirtualHostRouteToTerraform, true)(this._route.internalValue),
       timeouts: albVirtualHostTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

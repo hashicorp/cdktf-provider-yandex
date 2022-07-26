@@ -110,8 +110,8 @@ export function vpcSecurityGroupEgressToTerraform(struct?: VpcSecurityGroupEgres
     protocol: cdktf.stringToTerraform(struct!.protocol),
     security_group_id: cdktf.stringToTerraform(struct!.securityGroupId),
     to_port: cdktf.numberToTerraform(struct!.toPort),
-    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v4CidrBlocks),
-    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v6CidrBlocks),
+    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v4CidrBlocks),
+    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v6CidrBlocks),
   }
 }
 
@@ -452,8 +452,8 @@ export function vpcSecurityGroupIngressToTerraform(struct?: VpcSecurityGroupIngr
     protocol: cdktf.stringToTerraform(struct!.protocol),
     security_group_id: cdktf.stringToTerraform(struct!.securityGroupId),
     to_port: cdktf.numberToTerraform(struct!.toPort),
-    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v4CidrBlocks),
-    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v6CidrBlocks),
+    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v4CidrBlocks),
+    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v6CidrBlocks),
   }
 }
 
@@ -899,7 +899,10 @@ export class VpcSecurityGroup extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -1079,8 +1082,8 @@ export class VpcSecurityGroup extends cdktf.TerraformResource {
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      egress: cdktf.listMapper(vpcSecurityGroupEgressToTerraform)(this._egress.internalValue),
-      ingress: cdktf.listMapper(vpcSecurityGroupIngressToTerraform)(this._ingress.internalValue),
+      egress: cdktf.listMapper(vpcSecurityGroupEgressToTerraform, true)(this._egress.internalValue),
+      ingress: cdktf.listMapper(vpcSecurityGroupIngressToTerraform, true)(this._ingress.internalValue),
       timeouts: vpcSecurityGroupTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

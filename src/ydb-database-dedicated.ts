@@ -527,7 +527,10 @@ export class YdbDatabaseDedicated extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._assignPublicIps = config.assignPublicIps;
     this._description = config.description;
@@ -800,7 +803,7 @@ export class YdbDatabaseDedicated extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
       resource_preset_id: cdktf.stringToTerraform(this._resourcePresetId),
-      subnet_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._subnetIds),
+      subnet_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._subnetIds),
       location: ydbDatabaseDedicatedLocationToTerraform(this._location.internalValue),
       scale_policy: ydbDatabaseDedicatedScalePolicyToTerraform(this._scalePolicy.internalValue),
       storage_config: ydbDatabaseDedicatedStorageConfigToTerraform(this._storageConfig.internalValue),

@@ -992,7 +992,7 @@ export function albBackendGroupGrpcBackendToTerraform(struct?: AlbBackendGroupGr
   return {
     name: cdktf.stringToTerraform(struct!.name),
     port: cdktf.numberToTerraform(struct!.port),
-    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.targetGroupIds),
+    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.targetGroupIds),
     weight: cdktf.numberToTerraform(struct!.weight),
     healthcheck: albBackendGroupGrpcBackendHealthcheckToTerraform(struct!.healthcheck),
     load_balancing_config: albBackendGroupGrpcBackendLoadBalancingConfigToTerraform(struct!.loadBalancingConfig),
@@ -2147,7 +2147,7 @@ export function albBackendGroupHttpBackendToTerraform(struct?: AlbBackendGroupHt
     name: cdktf.stringToTerraform(struct!.name),
     port: cdktf.numberToTerraform(struct!.port),
     storage_bucket: cdktf.stringToTerraform(struct!.storageBucket),
-    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.targetGroupIds),
+    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.targetGroupIds),
     weight: cdktf.numberToTerraform(struct!.weight),
     healthcheck: albBackendGroupHttpBackendHealthcheckToTerraform(struct!.healthcheck),
     load_balancing_config: albBackendGroupHttpBackendLoadBalancingConfigToTerraform(struct!.loadBalancingConfig),
@@ -3693,7 +3693,7 @@ export function albBackendGroupStreamBackendToTerraform(struct?: AlbBackendGroup
     enable_proxy_protocol: cdktf.booleanToTerraform(struct!.enableProxyProtocol),
     name: cdktf.stringToTerraform(struct!.name),
     port: cdktf.numberToTerraform(struct!.port),
-    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(struct!.targetGroupIds),
+    target_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.targetGroupIds),
     weight: cdktf.numberToTerraform(struct!.weight),
     healthcheck: albBackendGroupStreamBackendHealthcheckToTerraform(struct!.healthcheck),
     load_balancing_config: albBackendGroupStreamBackendLoadBalancingConfigToTerraform(struct!.loadBalancingConfig),
@@ -4091,7 +4091,10 @@ export class AlbBackendGroup extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -4285,10 +4288,10 @@ export class AlbBackendGroup extends cdktf.TerraformResource {
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
-      grpc_backend: cdktf.listMapper(albBackendGroupGrpcBackendToTerraform)(this._grpcBackend.internalValue),
-      http_backend: cdktf.listMapper(albBackendGroupHttpBackendToTerraform)(this._httpBackend.internalValue),
+      grpc_backend: cdktf.listMapper(albBackendGroupGrpcBackendToTerraform, true)(this._grpcBackend.internalValue),
+      http_backend: cdktf.listMapper(albBackendGroupHttpBackendToTerraform, true)(this._httpBackend.internalValue),
       session_affinity: albBackendGroupSessionAffinityToTerraform(this._sessionAffinity.internalValue),
-      stream_backend: cdktf.listMapper(albBackendGroupStreamBackendToTerraform)(this._streamBackend.internalValue),
+      stream_backend: cdktf.listMapper(albBackendGroupStreamBackendToTerraform, true)(this._streamBackend.internalValue),
       timeouts: albBackendGroupTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

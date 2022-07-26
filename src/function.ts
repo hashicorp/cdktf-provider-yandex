@@ -418,7 +418,10 @@ export class Function extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._entrypoint = config.entrypoint;
@@ -720,7 +723,7 @@ export class Function extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       runtime: cdktf.stringToTerraform(this._runtime),
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),
-      tags: cdktf.listMapper(cdktf.stringToTerraform)(this._tags),
+      tags: cdktf.listMapper(cdktf.stringToTerraform, false)(this._tags),
       user_hash: cdktf.stringToTerraform(this._userHash),
       content: functionContentToTerraform(this._content.internalValue),
       package: functionPackageToTerraform(this._package.internalValue),

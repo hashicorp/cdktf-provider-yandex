@@ -462,7 +462,7 @@ export function mdbElasticsearchClusterConfigAToTerraform(struct?: MdbElasticsea
   return {
     admin_password: cdktf.stringToTerraform(struct!.adminPassword),
     edition: cdktf.stringToTerraform(struct!.edition),
-    plugins: cdktf.listMapper(cdktf.stringToTerraform)(struct!.plugins),
+    plugins: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.plugins),
     version: cdktf.stringToTerraform(struct!.version),
     data_node: mdbElasticsearchClusterConfigDataNodeToTerraform(struct!.dataNode),
     master_node: mdbElasticsearchClusterConfigMasterNodeToTerraform(struct!.masterNode),
@@ -1100,7 +1100,10 @@ export class MdbElasticsearchCluster extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._deletionProtection = config.deletionProtection;
     this._description = config.description;
@@ -1363,10 +1366,10 @@ export class MdbElasticsearchCluster extends cdktf.TerraformResource {
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       service_account_id: cdktf.stringToTerraform(this._serviceAccountId),
       config: mdbElasticsearchClusterConfigAToTerraform(this._config.internalValue),
-      host: cdktf.listMapper(mdbElasticsearchClusterHostToTerraform)(this._host.internalValue),
+      host: cdktf.listMapper(mdbElasticsearchClusterHostToTerraform, true)(this._host.internalValue),
       maintenance_window: mdbElasticsearchClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       timeouts: mdbElasticsearchClusterTimeoutsToTerraform(this._timeouts.internalValue),
     };

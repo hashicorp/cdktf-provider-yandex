@@ -1627,7 +1627,7 @@ export function dataYandexMdbMongodbClusterUserPermissionToTerraform(struct?: Da
   }
   return {
     database_name: cdktf.stringToTerraform(struct!.databaseName),
-    roles: cdktf.listMapper(cdktf.stringToTerraform)(struct!.roles),
+    roles: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.roles),
   }
 }
 
@@ -1758,7 +1758,7 @@ export function dataYandexMdbMongodbClusterUserToTerraform(struct?: DataYandexMd
   return {
     name: cdktf.stringToTerraform(struct!.name),
     password: cdktf.stringToTerraform(struct!.password),
-    permission: cdktf.listMapper(dataYandexMdbMongodbClusterUserPermissionToTerraform)(struct!.permission),
+    permission: cdktf.listMapper(dataYandexMdbMongodbClusterUserPermissionToTerraform, true)(struct!.permission),
   }
 }
 
@@ -1919,7 +1919,10 @@ export class DataYandexMdbMongodbCluster extends cdktf.TerraformDataSource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._clusterId = config.clusterId;
     this._createdAt = config.createdAt;
@@ -2284,15 +2287,15 @@ export class DataYandexMdbMongodbCluster extends cdktf.TerraformDataSource {
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform)(this._securityGroupIds),
+      security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
       sharded: cdktf.booleanToTerraform(this._sharded),
       status: cdktf.stringToTerraform(this._status),
       cluster_config: dataYandexMdbMongodbClusterClusterConfigToTerraform(this._clusterConfig.internalValue),
-      database: cdktf.listMapper(dataYandexMdbMongodbClusterDatabaseToTerraform)(this._database.internalValue),
-      host: cdktf.listMapper(dataYandexMdbMongodbClusterHostToTerraform)(this._host.internalValue),
+      database: cdktf.listMapper(dataYandexMdbMongodbClusterDatabaseToTerraform, true)(this._database.internalValue),
+      host: cdktf.listMapper(dataYandexMdbMongodbClusterHostToTerraform, true)(this._host.internalValue),
       maintenance_window: dataYandexMdbMongodbClusterMaintenanceWindowToTerraform(this._maintenanceWindow.internalValue),
       resources: dataYandexMdbMongodbClusterResourcesToTerraform(this._resources.internalValue),
-      user: cdktf.listMapper(dataYandexMdbMongodbClusterUserToTerraform)(this._user.internalValue),
+      user: cdktf.listMapper(dataYandexMdbMongodbClusterUserToTerraform, true)(this._user.internalValue),
     };
   }
 }

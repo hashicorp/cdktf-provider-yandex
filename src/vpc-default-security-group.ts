@@ -106,8 +106,8 @@ export function vpcDefaultSecurityGroupEgressToTerraform(struct?: VpcDefaultSecu
     protocol: cdktf.stringToTerraform(struct!.protocol),
     security_group_id: cdktf.stringToTerraform(struct!.securityGroupId),
     to_port: cdktf.numberToTerraform(struct!.toPort),
-    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v4CidrBlocks),
-    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v6CidrBlocks),
+    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v4CidrBlocks),
+    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v6CidrBlocks),
   }
 }
 
@@ -448,8 +448,8 @@ export function vpcDefaultSecurityGroupIngressToTerraform(struct?: VpcDefaultSec
     protocol: cdktf.stringToTerraform(struct!.protocol),
     security_group_id: cdktf.stringToTerraform(struct!.securityGroupId),
     to_port: cdktf.numberToTerraform(struct!.toPort),
-    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v4CidrBlocks),
-    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform)(struct!.v6CidrBlocks),
+    v4_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v4CidrBlocks),
+    v6_cidr_blocks: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.v6CidrBlocks),
   }
 }
 
@@ -922,7 +922,10 @@ export class VpcDefaultSecurityGroup extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -1089,8 +1092,8 @@ export class VpcDefaultSecurityGroup extends cdktf.TerraformResource {
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       network_id: cdktf.stringToTerraform(this._networkId),
-      egress: cdktf.listMapper(vpcDefaultSecurityGroupEgressToTerraform)(this._egress.internalValue),
-      ingress: cdktf.listMapper(vpcDefaultSecurityGroupIngressToTerraform)(this._ingress.internalValue),
+      egress: cdktf.listMapper(vpcDefaultSecurityGroupEgressToTerraform, true)(this._egress.internalValue),
+      ingress: cdktf.listMapper(vpcDefaultSecurityGroupIngressToTerraform, true)(this._ingress.internalValue),
       timeouts: vpcDefaultSecurityGroupTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }

@@ -333,7 +333,10 @@ export class VpcRouteTable extends cdktf.TerraformResource {
       provider: config.provider,
       dependsOn: config.dependsOn,
       count: config.count,
-      lifecycle: config.lifecycle
+      lifecycle: config.lifecycle,
+      provisioners: config.provisioners,
+      connection: config.connection,
+      forEach: config.forEach
     });
     this._description = config.description;
     this._folderId = config.folderId;
@@ -491,7 +494,7 @@ export class VpcRouteTable extends cdktf.TerraformResource {
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
-      static_route: cdktf.listMapper(vpcRouteTableStaticRouteToTerraform)(this._staticRoute.internalValue),
+      static_route: cdktf.listMapper(vpcRouteTableStaticRouteToTerraform, true)(this._staticRoute.internalValue),
       timeouts: vpcRouteTableTimeoutsToTerraform(this._timeouts.internalValue),
     };
   }
