@@ -50,7 +50,7 @@ export class IamServiceAccountIamPolicy extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_iam_service_account_iam_policy',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,

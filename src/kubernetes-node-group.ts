@@ -593,6 +593,356 @@ export class KubernetesNodeGroupInstanceTemplateContainerRuntimeOutputReference 
     return this._type;
   }
 }
+export interface KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#dns_zone_id KubernetesNodeGroup#dns_zone_id}
+  */
+  readonly dnsZoneId?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#fqdn KubernetesNodeGroup#fqdn}
+  */
+  readonly fqdn: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#ptr KubernetesNodeGroup#ptr}
+  */
+  readonly ptr?: boolean | cdktf.IResolvable;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#ttl KubernetesNodeGroup#ttl}
+  */
+  readonly ttl?: number;
+}
+
+export function kubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsToTerraform(struct?: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    dns_zone_id: cdktf.stringToTerraform(struct!.dnsZoneId),
+    fqdn: cdktf.stringToTerraform(struct!.fqdn),
+    ptr: cdktf.booleanToTerraform(struct!.ptr),
+    ttl: cdktf.numberToTerraform(struct!.ttl),
+  }
+}
+
+export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._dnsZoneId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.dnsZoneId = this._dnsZoneId;
+    }
+    if (this._fqdn !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.fqdn = this._fqdn;
+    }
+    if (this._ptr !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ptr = this._ptr;
+    }
+    if (this._ttl !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ttl = this._ttl;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = undefined;
+      this._fqdn = undefined;
+      this._ptr = undefined;
+      this._ttl = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = value.dnsZoneId;
+      this._fqdn = value.fqdn;
+      this._ptr = value.ptr;
+      this._ttl = value.ttl;
+    }
+  }
+
+  // dns_zone_id - computed: false, optional: true, required: false
+  private _dnsZoneId?: string; 
+  public get dnsZoneId() {
+    return this.getStringAttribute('dns_zone_id');
+  }
+  public set dnsZoneId(value: string) {
+    this._dnsZoneId = value;
+  }
+  public resetDnsZoneId() {
+    this._dnsZoneId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dnsZoneIdInput() {
+    return this._dnsZoneId;
+  }
+
+  // fqdn - computed: false, optional: false, required: true
+  private _fqdn?: string; 
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+  public set fqdn(value: string) {
+    this._fqdn = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get fqdnInput() {
+    return this._fqdn;
+  }
+
+  // ptr - computed: false, optional: true, required: false
+  private _ptr?: boolean | cdktf.IResolvable; 
+  public get ptr() {
+    return this.getBooleanAttribute('ptr');
+  }
+  public set ptr(value: boolean | cdktf.IResolvable) {
+    this._ptr = value;
+  }
+  public resetPtr() {
+    this._ptr = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ptrInput() {
+    return this._ptr;
+  }
+
+  // ttl - computed: false, optional: true, required: false
+  private _ttl?: number; 
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+  public set ttl(value: number) {
+    this._ttl = value;
+  }
+  public resetTtl() {
+    this._ttl = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ttlInput() {
+    return this._ttl;
+  }
+}
+
+export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsList extends cdktf.ComplexList {
+  public internalValue? : KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsOutputReference {
+    return new KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#dns_zone_id KubernetesNodeGroup#dns_zone_id}
+  */
+  readonly dnsZoneId?: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#fqdn KubernetesNodeGroup#fqdn}
+  */
+  readonly fqdn: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#ptr KubernetesNodeGroup#ptr}
+  */
+  readonly ptr?: boolean | cdktf.IResolvable;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#ttl KubernetesNodeGroup#ttl}
+  */
+  readonly ttl?: number;
+}
+
+export function kubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsToTerraform(struct?: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords | cdktf.IResolvable): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    dns_zone_id: cdktf.stringToTerraform(struct!.dnsZoneId),
+    fqdn: cdktf.stringToTerraform(struct!.fqdn),
+    ptr: cdktf.booleanToTerraform(struct!.ptr),
+    ttl: cdktf.numberToTerraform(struct!.ttl),
+  }
+}
+
+export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+  private resolvableValue?: cdktf.IResolvable;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords | cdktf.IResolvable | undefined {
+    if (this.resolvableValue) {
+      return this.resolvableValue;
+    }
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._dnsZoneId !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.dnsZoneId = this._dnsZoneId;
+    }
+    if (this._fqdn !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.fqdn = this._fqdn;
+    }
+    if (this._ptr !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ptr = this._ptr;
+    }
+    if (this._ttl !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ttl = this._ttl;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords | cdktf.IResolvable | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = undefined;
+      this._fqdn = undefined;
+      this._ptr = undefined;
+      this._ttl = undefined;
+    }
+    else if (cdktf.Tokenization.isResolvable(value)) {
+      this.isEmptyObject = false;
+      this.resolvableValue = value;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this.resolvableValue = undefined;
+      this._dnsZoneId = value.dnsZoneId;
+      this._fqdn = value.fqdn;
+      this._ptr = value.ptr;
+      this._ttl = value.ttl;
+    }
+  }
+
+  // dns_zone_id - computed: false, optional: true, required: false
+  private _dnsZoneId?: string; 
+  public get dnsZoneId() {
+    return this.getStringAttribute('dns_zone_id');
+  }
+  public set dnsZoneId(value: string) {
+    this._dnsZoneId = value;
+  }
+  public resetDnsZoneId() {
+    this._dnsZoneId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get dnsZoneIdInput() {
+    return this._dnsZoneId;
+  }
+
+  // fqdn - computed: false, optional: false, required: true
+  private _fqdn?: string; 
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+  public set fqdn(value: string) {
+    this._fqdn = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get fqdnInput() {
+    return this._fqdn;
+  }
+
+  // ptr - computed: false, optional: true, required: false
+  private _ptr?: boolean | cdktf.IResolvable; 
+  public get ptr() {
+    return this.getBooleanAttribute('ptr');
+  }
+  public set ptr(value: boolean | cdktf.IResolvable) {
+    this._ptr = value;
+  }
+  public resetPtr() {
+    this._ptr = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ptrInput() {
+    return this._ptr;
+  }
+
+  // ttl - computed: false, optional: true, required: false
+  private _ttl?: number; 
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+  public set ttl(value: number) {
+    this._ttl = value;
+  }
+  public resetTtl() {
+    this._ttl = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ttlInput() {
+    return this._ttl;
+  }
+}
+
+export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsList extends cdktf.ComplexList {
+  public internalValue? : KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords[] | cdktf.IResolvable
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsOutputReference {
+    return new KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface KubernetesNodeGroupInstanceTemplateNetworkInterface {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#ipv4 KubernetesNodeGroup#ipv4}
@@ -614,6 +964,18 @@ export interface KubernetesNodeGroupInstanceTemplateNetworkInterface {
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#subnet_ids KubernetesNodeGroup#subnet_ids}
   */
   readonly subnetIds: string[];
+  /**
+  * ipv4_dns_records block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#ipv4_dns_records KubernetesNodeGroup#ipv4_dns_records}
+  */
+  readonly ipv4DnsRecords?: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords[] | cdktf.IResolvable;
+  /**
+  * ipv6_dns_records block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#ipv6_dns_records KubernetesNodeGroup#ipv6_dns_records}
+  */
+  readonly ipv6DnsRecords?: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords[] | cdktf.IResolvable;
 }
 
 export function kubernetesNodeGroupInstanceTemplateNetworkInterfaceToTerraform(struct?: KubernetesNodeGroupInstanceTemplateNetworkInterface | cdktf.IResolvable): any {
@@ -627,6 +989,8 @@ export function kubernetesNodeGroupInstanceTemplateNetworkInterfaceToTerraform(s
     nat: cdktf.booleanToTerraform(struct!.nat),
     security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.securityGroupIds),
     subnet_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(struct!.subnetIds),
+    ipv4_dns_records: cdktf.listMapper(kubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsToTerraform, true)(struct!.ipv4DnsRecords),
+    ipv6_dns_records: cdktf.listMapper(kubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsToTerraform, true)(struct!.ipv6DnsRecords),
   }
 }
 
@@ -670,6 +1034,14 @@ export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceOutputReference 
       hasAnyValues = true;
       internalValueResult.subnetIds = this._subnetIds;
     }
+    if (this._ipv4DnsRecords?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipv4DnsRecords = this._ipv4DnsRecords?.internalValue;
+    }
+    if (this._ipv6DnsRecords?.internalValue !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.ipv6DnsRecords = this._ipv6DnsRecords?.internalValue;
+    }
     return hasAnyValues ? internalValueResult : undefined;
   }
 
@@ -682,6 +1054,8 @@ export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceOutputReference 
       this._nat = undefined;
       this._securityGroupIds = undefined;
       this._subnetIds = undefined;
+      this._ipv4DnsRecords.internalValue = undefined;
+      this._ipv6DnsRecords.internalValue = undefined;
     }
     else if (cdktf.Tokenization.isResolvable(value)) {
       this.isEmptyObject = false;
@@ -695,6 +1069,8 @@ export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceOutputReference 
       this._nat = value.nat;
       this._securityGroupIds = value.securityGroupIds;
       this._subnetIds = value.subnetIds;
+      this._ipv4DnsRecords.internalValue = value.ipv4DnsRecords;
+      this._ipv6DnsRecords.internalValue = value.ipv6DnsRecords;
     }
   }
 
@@ -773,6 +1149,38 @@ export class KubernetesNodeGroupInstanceTemplateNetworkInterfaceOutputReference 
   // Temporarily expose input value. Use with caution.
   public get subnetIdsInput() {
     return this._subnetIds;
+  }
+
+  // ipv4_dns_records - computed: false, optional: true, required: false
+  private _ipv4DnsRecords = new KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsList(this, "ipv4_dns_records", false);
+  public get ipv4DnsRecords() {
+    return this._ipv4DnsRecords;
+  }
+  public putIpv4DnsRecords(value: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords[] | cdktf.IResolvable) {
+    this._ipv4DnsRecords.internalValue = value;
+  }
+  public resetIpv4DnsRecords() {
+    this._ipv4DnsRecords.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipv4DnsRecordsInput() {
+    return this._ipv4DnsRecords.internalValue;
+  }
+
+  // ipv6_dns_records - computed: false, optional: true, required: false
+  private _ipv6DnsRecords = new KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsList(this, "ipv6_dns_records", false);
+  public get ipv6DnsRecords() {
+    return this._ipv6DnsRecords;
+  }
+  public putIpv6DnsRecords(value: KubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords[] | cdktf.IResolvable) {
+    this._ipv6DnsRecords.internalValue = value;
+  }
+  public resetIpv6DnsRecords() {
+    this._ipv6DnsRecords.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get ipv6DnsRecordsInput() {
+    return this._ipv6DnsRecords.internalValue;
   }
 }
 
@@ -1070,9 +1478,17 @@ export class KubernetesNodeGroupInstanceTemplateSchedulingPolicyOutputReference 
 }
 export interface KubernetesNodeGroupInstanceTemplate {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#labels KubernetesNodeGroup#labels}
+  */
+  readonly labels?: { [key: string]: string };
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#metadata KubernetesNodeGroup#metadata}
   */
   readonly metadata?: { [key: string]: string };
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#name KubernetesNodeGroup#name}
+  */
+  readonly name?: string;
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/kubernetes_node_group#nat KubernetesNodeGroup#nat}
   */
@@ -1129,7 +1545,9 @@ export function kubernetesNodeGroupInstanceTemplateToTerraform(struct?: Kubernet
     throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
   }
   return {
+    labels: cdktf.hashMapper(cdktf.stringToTerraform)(struct!.labels),
     metadata: cdktf.hashMapper(cdktf.stringToTerraform)(struct!.metadata),
+    name: cdktf.stringToTerraform(struct!.name),
     nat: cdktf.booleanToTerraform(struct!.nat),
     network_acceleration_type: cdktf.stringToTerraform(struct!.networkAccelerationType),
     platform_id: cdktf.stringToTerraform(struct!.platformId),
@@ -1156,9 +1574,17 @@ export class KubernetesNodeGroupInstanceTemplateOutputReference extends cdktf.Co
   public get internalValue(): KubernetesNodeGroupInstanceTemplate | undefined {
     let hasAnyValues = this.isEmptyObject;
     const internalValueResult: any = {};
+    if (this._labels !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.labels = this._labels;
+    }
     if (this._metadata !== undefined) {
       hasAnyValues = true;
       internalValueResult.metadata = this._metadata;
+    }
+    if (this._name !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.name = this._name;
     }
     if (this._nat !== undefined) {
       hasAnyValues = true;
@@ -1202,7 +1628,9 @@ export class KubernetesNodeGroupInstanceTemplateOutputReference extends cdktf.Co
   public set internalValue(value: KubernetesNodeGroupInstanceTemplate | undefined) {
     if (value === undefined) {
       this.isEmptyObject = false;
+      this._labels = undefined;
       this._metadata = undefined;
+      this._name = undefined;
       this._nat = undefined;
       this._networkAccelerationType = undefined;
       this._platformId = undefined;
@@ -1215,7 +1643,9 @@ export class KubernetesNodeGroupInstanceTemplateOutputReference extends cdktf.Co
     }
     else {
       this.isEmptyObject = Object.keys(value).length === 0;
+      this._labels = value.labels;
       this._metadata = value.metadata;
+      this._name = value.name;
       this._nat = value.nat;
       this._networkAccelerationType = value.networkAccelerationType;
       this._platformId = value.platformId;
@@ -1226,6 +1656,22 @@ export class KubernetesNodeGroupInstanceTemplateOutputReference extends cdktf.Co
       this._resources.internalValue = value.resources;
       this._schedulingPolicy.internalValue = value.schedulingPolicy;
     }
+  }
+
+  // labels - computed: false, optional: true, required: false
+  private _labels?: { [key: string]: string }; 
+  public get labels() {
+    return this.getStringMapAttribute('labels');
+  }
+  public set labels(value: { [key: string]: string }) {
+    this._labels = value;
+  }
+  public resetLabels() {
+    this._labels = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get labelsInput() {
+    return this._labels;
   }
 
   // metadata - computed: true, optional: true, required: false
@@ -1242,6 +1688,22 @@ export class KubernetesNodeGroupInstanceTemplateOutputReference extends cdktf.Co
   // Temporarily expose input value. Use with caution.
   public get metadataInput() {
     return this._metadata;
+  }
+
+  // name - computed: false, optional: true, required: false
+  private _name?: string; 
+  public get name() {
+    return this.getStringAttribute('name');
+  }
+  public set name(value: string) {
+    this._name = value;
+  }
+  public resetName() {
+    this._name = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get nameInput() {
+    return this._name;
   }
 
   // nat - computed: true, optional: true, required: false
@@ -2102,7 +2564,7 @@ export class KubernetesNodeGroup extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_kubernetes_node_group',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,

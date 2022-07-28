@@ -363,6 +363,164 @@ export class DataYandexKubernetesNodeGroupInstanceTemplateContainerRuntimeList e
     return new DataYandexKubernetesNodeGroupInstanceTemplateContainerRuntimeOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
   }
 }
+export interface DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords {
+}
+
+export function dataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsToTerraform(struct?: DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+export class DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecords | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // dns_zone_id - computed: true, optional: false, required: false
+  public get dnsZoneId() {
+    return this.getStringAttribute('dns_zone_id');
+  }
+
+  // fqdn - computed: true, optional: false, required: false
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+
+  // ptr - computed: true, optional: false, required: false
+  public get ptr() {
+    return this.getBooleanAttribute('ptr');
+  }
+
+  // ttl - computed: true, optional: false, required: false
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+}
+
+export class DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsOutputReference {
+    return new DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
+export interface DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords {
+}
+
+export function dataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsToTerraform(struct?: DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+  }
+}
+
+export class DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param complexObjectIndex the index of this item in the list
+  * @param complexObjectIsFromSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string, complexObjectIndex: number, complexObjectIsFromSet: boolean) {
+    super(terraformResource, terraformAttribute, complexObjectIsFromSet, complexObjectIndex);
+  }
+
+  public get internalValue(): DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecords | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+    }
+  }
+
+  // dns_zone_id - computed: true, optional: false, required: false
+  public get dnsZoneId() {
+    return this.getStringAttribute('dns_zone_id');
+  }
+
+  // fqdn - computed: true, optional: false, required: false
+  public get fqdn() {
+    return this.getStringAttribute('fqdn');
+  }
+
+  // ptr - computed: true, optional: false, required: false
+  public get ptr() {
+    return this.getBooleanAttribute('ptr');
+  }
+
+  // ttl - computed: true, optional: false, required: false
+  public get ttl() {
+    return this.getNumberAttribute('ttl');
+  }
+}
+
+export class DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsList extends cdktf.ComplexList {
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  * @param wrapsSet whether the list is wrapping a set (will add tolist() to be able to access an item via an index)
+  */
+  constructor(protected terraformResource: cdktf.IInterpolatingParent, protected terraformAttribute: string, protected wrapsSet: boolean) {
+    super(terraformResource, terraformAttribute, wrapsSet)
+  }
+
+  /**
+  * @param index the index of the item to return
+  */
+  public get(index: number): DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsOutputReference {
+    return new DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsOutputReference(this.terraformResource, this.terraformAttribute, index, this.wrapsSet);
+  }
+}
 export interface DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterface {
 }
 
@@ -408,9 +566,21 @@ export class DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceOutput
     return this.getBooleanAttribute('ipv4');
   }
 
+  // ipv4_dns_records - computed: true, optional: false, required: false
+  private _ipv4DnsRecords = new DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv4DnsRecordsList(this, "ipv4_dns_records", false);
+  public get ipv4DnsRecords() {
+    return this._ipv4DnsRecords;
+  }
+
   // ipv6 - computed: true, optional: false, required: false
   public get ipv6() {
     return this.getBooleanAttribute('ipv6');
+  }
+
+  // ipv6_dns_records - computed: true, optional: false, required: false
+  private _ipv6DnsRecords = new DataYandexKubernetesNodeGroupInstanceTemplateNetworkInterfaceIpv6DnsRecordsList(this, "ipv6_dns_records", false);
+  public get ipv6DnsRecords() {
+    return this._ipv6DnsRecords;
   }
 
   // nat - computed: true, optional: false, required: false
@@ -706,10 +876,21 @@ export class DataYandexKubernetesNodeGroupInstanceTemplateOutputReference extend
     return this._containerRuntime;
   }
 
+  // labels - computed: true, optional: false, required: false
+  private _labels = new cdktf.StringMap(this, "labels");
+  public get labels() {
+    return this._labels;
+  }
+
   // metadata - computed: true, optional: false, required: false
   private _metadata = new cdktf.StringMap(this, "metadata");
   public get metadata() {
     return this._metadata;
+  }
+
+  // name - computed: true, optional: false, required: false
+  public get name() {
+    return this.getStringAttribute('name');
   }
 
   // nat - computed: true, optional: false, required: false
@@ -1234,7 +1415,7 @@ export class DataYandexKubernetesNodeGroup extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_kubernetes_node_group',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,

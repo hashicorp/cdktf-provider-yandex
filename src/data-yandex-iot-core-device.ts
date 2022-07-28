@@ -50,7 +50,7 @@ export class DataYandexIotCoreDevice extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_iot_core_device',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,

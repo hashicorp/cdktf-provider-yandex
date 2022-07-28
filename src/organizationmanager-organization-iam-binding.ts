@@ -58,7 +58,7 @@ export class OrganizationmanagerOrganizationIamBinding extends cdktf.TerraformRe
       terraformResourceType: 'yandex_organizationmanager_organization_iam_binding',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,

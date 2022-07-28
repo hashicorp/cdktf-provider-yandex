@@ -16,6 +16,10 @@ export interface DataYandexCdnResourceConfig extends cdktf.TerraformMetaArgument
   */
   readonly cname?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/cdn_resource#folder_id DataYandexCdnResource#folder_id}
+  */
+  readonly folderId?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/cdn_resource#id DataYandexCdnResource#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
@@ -812,7 +816,7 @@ export class DataYandexCdnResource extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_cdn_resource',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
@@ -825,6 +829,7 @@ export class DataYandexCdnResource extends cdktf.TerraformDataSource {
     });
     this._active = config.active;
     this._cname = config.cname;
+    this._folderId = config.folderId;
     this._id = config.id;
     this._originGroupId = config.originGroupId;
     this._originGroupName = config.originGroupName;
@@ -877,9 +882,20 @@ export class DataYandexCdnResource extends cdktf.TerraformDataSource {
     return this.getStringAttribute('created_at');
   }
 
-  // folder_id - computed: true, optional: false, required: false
+  // folder_id - computed: true, optional: true, required: false
+  private _folderId?: string; 
   public get folderId() {
     return this.getStringAttribute('folder_id');
+  }
+  public set folderId(value: string) {
+    this._folderId = value;
+  }
+  public resetFolderId() {
+    this._folderId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get folderIdInput() {
+    return this._folderId;
   }
 
   // id - computed: true, optional: true, required: false
@@ -1034,6 +1050,7 @@ export class DataYandexCdnResource extends cdktf.TerraformDataSource {
     return {
       active: cdktf.booleanToTerraform(this._active),
       cname: cdktf.stringToTerraform(this._cname),
+      folder_id: cdktf.stringToTerraform(this._folderId),
       id: cdktf.stringToTerraform(this._id),
       origin_group_id: cdktf.numberToTerraform(this._originGroupId),
       origin_group_name: cdktf.stringToTerraform(this._originGroupName),
