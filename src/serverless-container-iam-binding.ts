@@ -1,4 +1,4 @@
-// https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member
+// https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding
 // generated from terraform resource schema
 
 import { Construct } from 'constructs';
@@ -6,56 +6,56 @@ import * as cdktf from 'cdktf';
 
 // Configuration
 
-export interface OrganizationmanagerOrganizationIamMemberConfig extends cdktf.TerraformMetaArguments {
+export interface ServerlessContainerIamBindingConfig extends cdktf.TerraformMetaArguments {
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member#id OrganizationmanagerOrganizationIamMember#id}
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding#container_id ServerlessContainerIamBinding#container_id}
+  */
+  readonly containerId: string;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding#id ServerlessContainerIamBinding#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
   * If you experience problems setting this value it might not be settable. Please take a look at the provider documentation to ensure it should be settable.
   */
   readonly id?: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member#member OrganizationmanagerOrganizationIamMember#member}
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding#members ServerlessContainerIamBinding#members}
   */
-  readonly member: string;
+  readonly members: string[];
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member#organization_id OrganizationmanagerOrganizationIamMember#organization_id}
-  */
-  readonly organizationId: string;
-  /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member#role OrganizationmanagerOrganizationIamMember#role}
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding#role ServerlessContainerIamBinding#role}
   */
   readonly role: string;
   /**
-  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member#sleep_after OrganizationmanagerOrganizationIamMember#sleep_after}
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding#sleep_after ServerlessContainerIamBinding#sleep_after}
   */
   readonly sleepAfter?: number;
 }
 
 /**
-* Represents a {@link https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member yandex_organizationmanager_organization_iam_member}
+* Represents a {@link https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding yandex_serverless_container_iam_binding}
 */
-export class OrganizationmanagerOrganizationIamMember extends cdktf.TerraformResource {
+export class ServerlessContainerIamBinding extends cdktf.TerraformResource {
 
   // =================
   // STATIC PROPERTIES
   // =================
-  public static readonly tfResourceType = "yandex_organizationmanager_organization_iam_member";
+  public static readonly tfResourceType = "yandex_serverless_container_iam_binding";
 
   // ===========
   // INITIALIZER
   // ===========
 
   /**
-  * Create a new {@link https://www.terraform.io/docs/providers/yandex/r/organizationmanager_organization_iam_member yandex_organizationmanager_organization_iam_member} Resource
+  * Create a new {@link https://www.terraform.io/docs/providers/yandex/r/serverless_container_iam_binding yandex_serverless_container_iam_binding} Resource
   *
   * @param scope The scope in which to define this construct
   * @param id The scoped construct ID. Must be unique amongst siblings in the same scope
-  * @param options OrganizationmanagerOrganizationIamMemberConfig
+  * @param options ServerlessContainerIamBindingConfig
   */
-  public constructor(scope: Construct, id: string, config: OrganizationmanagerOrganizationIamMemberConfig) {
+  public constructor(scope: Construct, id: string, config: ServerlessContainerIamBindingConfig) {
     super(scope, id, {
-      terraformResourceType: 'yandex_organizationmanager_organization_iam_member',
+      terraformResourceType: 'yandex_serverless_container_iam_binding',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
         providerVersion: '0.77.0',
@@ -69,9 +69,9 @@ export class OrganizationmanagerOrganizationIamMember extends cdktf.TerraformRes
       connection: config.connection,
       forEach: config.forEach
     });
+    this._containerId = config.containerId;
     this._id = config.id;
-    this._member = config.member;
-    this._organizationId = config.organizationId;
+    this._members = config.members;
     this._role = config.role;
     this._sleepAfter = config.sleepAfter;
   }
@@ -79,6 +79,19 @@ export class OrganizationmanagerOrganizationIamMember extends cdktf.TerraformRes
   // ==========
   // ATTRIBUTES
   // ==========
+
+  // container_id - computed: false, optional: false, required: true
+  private _containerId?: string; 
+  public get containerId() {
+    return this.getStringAttribute('container_id');
+  }
+  public set containerId(value: string) {
+    this._containerId = value;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get containerIdInput() {
+    return this._containerId;
+  }
 
   // id - computed: true, optional: true, required: false
   private _id?: string; 
@@ -96,30 +109,17 @@ export class OrganizationmanagerOrganizationIamMember extends cdktf.TerraformRes
     return this._id;
   }
 
-  // member - computed: false, optional: false, required: true
-  private _member?: string; 
-  public get member() {
-    return this.getStringAttribute('member');
+  // members - computed: false, optional: false, required: true
+  private _members?: string[]; 
+  public get members() {
+    return cdktf.Fn.tolist(this.getListAttribute('members'));
   }
-  public set member(value: string) {
-    this._member = value;
-  }
-  // Temporarily expose input value. Use with caution.
-  public get memberInput() {
-    return this._member;
-  }
-
-  // organization_id - computed: false, optional: false, required: true
-  private _organizationId?: string; 
-  public get organizationId() {
-    return this.getStringAttribute('organization_id');
-  }
-  public set organizationId(value: string) {
-    this._organizationId = value;
+  public set members(value: string[]) {
+    this._members = value;
   }
   // Temporarily expose input value. Use with caution.
-  public get organizationIdInput() {
-    return this._organizationId;
+  public get membersInput() {
+    return this._members;
   }
 
   // role - computed: false, optional: false, required: true
@@ -157,9 +157,9 @@ export class OrganizationmanagerOrganizationIamMember extends cdktf.TerraformRes
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      container_id: cdktf.stringToTerraform(this._containerId),
       id: cdktf.stringToTerraform(this._id),
-      member: cdktf.stringToTerraform(this._member),
-      organization_id: cdktf.stringToTerraform(this._organizationId),
+      members: cdktf.listMapper(cdktf.stringToTerraform, false)(this._members),
       role: cdktf.stringToTerraform(this._role),
       sleep_after: cdktf.numberToTerraform(this._sleepAfter),
     };

@@ -8,6 +8,10 @@ import * as cdktf from 'cdktf';
 
 export interface CdnOriginGroupConfig extends cdktf.TerraformMetaArguments {
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#folder_id CdnOriginGroup#folder_id}
+  */
+  readonly folderId?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/cdn_origin_group#id CdnOriginGroup#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
@@ -344,7 +348,7 @@ export class CdnOriginGroup extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_cdn_origin_group',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
@@ -355,6 +359,7 @@ export class CdnOriginGroup extends cdktf.TerraformResource {
       connection: config.connection,
       forEach: config.forEach
     });
+    this._folderId = config.folderId;
     this._id = config.id;
     this._name = config.name;
     this._useNext = config.useNext;
@@ -366,9 +371,20 @@ export class CdnOriginGroup extends cdktf.TerraformResource {
   // ATTRIBUTES
   // ==========
 
-  // folder_id - computed: true, optional: false, required: false
+  // folder_id - computed: true, optional: true, required: false
+  private _folderId?: string; 
   public get folderId() {
     return this.getStringAttribute('folder_id');
+  }
+  public set folderId(value: string) {
+    this._folderId = value;
+  }
+  public resetFolderId() {
+    this._folderId = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get folderIdInput() {
+    return this._folderId;
   }
 
   // id - computed: true, optional: true, required: false
@@ -451,6 +467,7 @@ export class CdnOriginGroup extends cdktf.TerraformResource {
 
   protected synthesizeAttributes(): { [name: string]: any } {
     return {
+      folder_id: cdktf.stringToTerraform(this._folderId),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
       use_next: cdktf.booleanToTerraform(this._useNext),

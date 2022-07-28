@@ -28,6 +28,10 @@ export interface MdbGreenplumClusterConfig extends cdktf.TerraformMetaArguments 
   */
   readonly folderId?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#greenplum_config MdbGreenplumCluster#greenplum_config}
+  */
+  readonly greenplumConfig?: { [key: string]: string };
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#id MdbGreenplumCluster#id}
   *
   * Please be aware that the id field is automatically added to all resources in Terraform providers using a Terraform provider SDK version below 2.
@@ -100,6 +104,12 @@ export interface MdbGreenplumClusterConfig extends cdktf.TerraformMetaArguments 
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#master_subcluster MdbGreenplumCluster#master_subcluster}
   */
   readonly masterSubcluster: MdbGreenplumClusterMasterSubcluster;
+  /**
+  * pooler_config block
+  * 
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#pooler_config MdbGreenplumCluster#pooler_config}
+  */
+  readonly poolerConfig?: MdbGreenplumClusterPoolerConfig;
   /**
   * segment_subcluster block
   * 
@@ -604,6 +614,125 @@ export class MdbGreenplumClusterMasterSubclusterOutputReference extends cdktf.Co
     return this._resources.internalValue;
   }
 }
+export interface MdbGreenplumClusterPoolerConfig {
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#pool_client_idle_timeout MdbGreenplumCluster#pool_client_idle_timeout}
+  */
+  readonly poolClientIdleTimeout?: number;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#pool_size MdbGreenplumCluster#pool_size}
+  */
+  readonly poolSize?: number;
+  /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#pooling_mode MdbGreenplumCluster#pooling_mode}
+  */
+  readonly poolingMode?: string;
+}
+
+export function mdbGreenplumClusterPoolerConfigToTerraform(struct?: MdbGreenplumClusterPoolerConfigOutputReference | MdbGreenplumClusterPoolerConfig): any {
+  if (!cdktf.canInspect(struct) || cdktf.Tokenization.isResolvable(struct)) { return struct; }
+  if (cdktf.isComplexElement(struct)) {
+    throw new Error("A complex element was used as configuration, this is not supported: https://cdk.tf/complex-object-as-configuration");
+  }
+  return {
+    pool_client_idle_timeout: cdktf.numberToTerraform(struct!.poolClientIdleTimeout),
+    pool_size: cdktf.numberToTerraform(struct!.poolSize),
+    pooling_mode: cdktf.stringToTerraform(struct!.poolingMode),
+  }
+}
+
+export class MdbGreenplumClusterPoolerConfigOutputReference extends cdktf.ComplexObject {
+  private isEmptyObject = false;
+
+  /**
+  * @param terraformResource The parent resource
+  * @param terraformAttribute The attribute on the parent resource this class is referencing
+  */
+  public constructor(terraformResource: cdktf.IInterpolatingParent, terraformAttribute: string) {
+    super(terraformResource, terraformAttribute, false, 0);
+  }
+
+  public get internalValue(): MdbGreenplumClusterPoolerConfig | undefined {
+    let hasAnyValues = this.isEmptyObject;
+    const internalValueResult: any = {};
+    if (this._poolClientIdleTimeout !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.poolClientIdleTimeout = this._poolClientIdleTimeout;
+    }
+    if (this._poolSize !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.poolSize = this._poolSize;
+    }
+    if (this._poolingMode !== undefined) {
+      hasAnyValues = true;
+      internalValueResult.poolingMode = this._poolingMode;
+    }
+    return hasAnyValues ? internalValueResult : undefined;
+  }
+
+  public set internalValue(value: MdbGreenplumClusterPoolerConfig | undefined) {
+    if (value === undefined) {
+      this.isEmptyObject = false;
+      this._poolClientIdleTimeout = undefined;
+      this._poolSize = undefined;
+      this._poolingMode = undefined;
+    }
+    else {
+      this.isEmptyObject = Object.keys(value).length === 0;
+      this._poolClientIdleTimeout = value.poolClientIdleTimeout;
+      this._poolSize = value.poolSize;
+      this._poolingMode = value.poolingMode;
+    }
+  }
+
+  // pool_client_idle_timeout - computed: false, optional: true, required: false
+  private _poolClientIdleTimeout?: number; 
+  public get poolClientIdleTimeout() {
+    return this.getNumberAttribute('pool_client_idle_timeout');
+  }
+  public set poolClientIdleTimeout(value: number) {
+    this._poolClientIdleTimeout = value;
+  }
+  public resetPoolClientIdleTimeout() {
+    this._poolClientIdleTimeout = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get poolClientIdleTimeoutInput() {
+    return this._poolClientIdleTimeout;
+  }
+
+  // pool_size - computed: false, optional: true, required: false
+  private _poolSize?: number; 
+  public get poolSize() {
+    return this.getNumberAttribute('pool_size');
+  }
+  public set poolSize(value: number) {
+    this._poolSize = value;
+  }
+  public resetPoolSize() {
+    this._poolSize = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get poolSizeInput() {
+    return this._poolSize;
+  }
+
+  // pooling_mode - computed: false, optional: true, required: false
+  private _poolingMode?: string; 
+  public get poolingMode() {
+    return this.getStringAttribute('pooling_mode');
+  }
+  public set poolingMode(value: string) {
+    this._poolingMode = value;
+  }
+  public resetPoolingMode() {
+    this._poolingMode = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get poolingModeInput() {
+    return this._poolingMode;
+  }
+}
 export interface MdbGreenplumClusterSegmentSubclusterResources {
   /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_greenplum_cluster#disk_size MdbGreenplumCluster#disk_size}
@@ -934,7 +1063,7 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_mdb_greenplum_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
@@ -950,6 +1079,7 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
     this._description = config.description;
     this._environment = config.environment;
     this._folderId = config.folderId;
+    this._greenplumConfig = config.greenplumConfig;
     this._id = config.id;
     this._labels = config.labels;
     this._masterHostCount = config.masterHostCount;
@@ -966,6 +1096,7 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
     this._access.internalValue = config.access;
     this._backupWindowStart.internalValue = config.backupWindowStart;
     this._masterSubcluster.internalValue = config.masterSubcluster;
+    this._poolerConfig.internalValue = config.poolerConfig;
     this._segmentSubcluster.internalValue = config.segmentSubcluster;
     this._timeouts.internalValue = config.timeouts;
   }
@@ -1051,6 +1182,22 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
   // Temporarily expose input value. Use with caution.
   public get folderIdInput() {
     return this._folderId;
+  }
+
+  // greenplum_config - computed: true, optional: true, required: false
+  private _greenplumConfig?: { [key: string]: string }; 
+  public get greenplumConfig() {
+    return this.getStringMapAttribute('greenplum_config');
+  }
+  public set greenplumConfig(value: { [key: string]: string }) {
+    this._greenplumConfig = value;
+  }
+  public resetGreenplumConfig() {
+    this._greenplumConfig = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get greenplumConfigInput() {
+    return this._greenplumConfig;
   }
 
   // health - computed: true, optional: false, required: false
@@ -1298,6 +1445,22 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
     return this._masterSubcluster.internalValue;
   }
 
+  // pooler_config - computed: false, optional: true, required: false
+  private _poolerConfig = new MdbGreenplumClusterPoolerConfigOutputReference(this, "pooler_config");
+  public get poolerConfig() {
+    return this._poolerConfig;
+  }
+  public putPoolerConfig(value: MdbGreenplumClusterPoolerConfig) {
+    this._poolerConfig.internalValue = value;
+  }
+  public resetPoolerConfig() {
+    this._poolerConfig.internalValue = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get poolerConfigInput() {
+    return this._poolerConfig.internalValue;
+  }
+
   // segment_subcluster - computed: false, optional: false, required: true
   private _segmentSubcluster = new MdbGreenplumClusterSegmentSubclusterOutputReference(this, "segment_subcluster");
   public get segmentSubcluster() {
@@ -1338,6 +1501,7 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
       description: cdktf.stringToTerraform(this._description),
       environment: cdktf.stringToTerraform(this._environment),
       folder_id: cdktf.stringToTerraform(this._folderId),
+      greenplum_config: cdktf.hashMapper(cdktf.stringToTerraform)(this._greenplumConfig),
       id: cdktf.stringToTerraform(this._id),
       labels: cdktf.hashMapper(cdktf.stringToTerraform)(this._labels),
       master_host_count: cdktf.numberToTerraform(this._masterHostCount),
@@ -1354,6 +1518,7 @@ export class MdbGreenplumCluster extends cdktf.TerraformResource {
       access: mdbGreenplumClusterAccessToTerraform(this._access.internalValue),
       backup_window_start: mdbGreenplumClusterBackupWindowStartToTerraform(this._backupWindowStart.internalValue),
       master_subcluster: mdbGreenplumClusterMasterSubclusterToTerraform(this._masterSubcluster.internalValue),
+      pooler_config: mdbGreenplumClusterPoolerConfigToTerraform(this._poolerConfig.internalValue),
       segment_subcluster: mdbGreenplumClusterSegmentSubclusterToTerraform(this._segmentSubcluster.internalValue),
       timeouts: mdbGreenplumClusterTimeoutsToTerraform(this._timeouts.internalValue),
     };

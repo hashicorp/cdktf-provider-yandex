@@ -110,7 +110,7 @@
   "cdktf": {
     "provider": {
       "name": "registry.terraform.io/yandex-cloud/yandex",
-      "version": "0.76.0"
+      "version": "0.77.0"
     }
   },
   "resolutions": {

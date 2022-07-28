@@ -51,6 +51,10 @@ export interface MdbSqlserverClusterConfig extends cdktf.TerraformMetaArguments 
   */
   readonly securityGroupIds?: string[];
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster#sqlcollation MdbSqlserverCluster#sqlcollation}
+  */
+  readonly sqlcollation?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/r/mdb_sqlserver_cluster#sqlserver_config MdbSqlserverCluster#sqlserver_config}
   */
   readonly sqlserverConfig?: { [key: string]: string };
@@ -968,7 +972,7 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_mdb_sqlserver_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
@@ -989,6 +993,7 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
     this._name = config.name;
     this._networkId = config.networkId;
     this._securityGroupIds = config.securityGroupIds;
+    this._sqlcollation = config.sqlcollation;
     this._sqlserverConfig = config.sqlserverConfig;
     this._version = config.version;
     this._backupWindowStart.internalValue = config.backupWindowStart;
@@ -1164,6 +1169,22 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
     return this._securityGroupIds;
   }
 
+  // sqlcollation - computed: true, optional: true, required: false
+  private _sqlcollation?: string; 
+  public get sqlcollation() {
+    return this.getStringAttribute('sqlcollation');
+  }
+  public set sqlcollation(value: string) {
+    this._sqlcollation = value;
+  }
+  public resetSqlcollation() {
+    this._sqlcollation = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sqlcollationInput() {
+    return this._sqlcollation;
+  }
+
   // sqlserver_config - computed: true, optional: true, required: false
   private _sqlserverConfig?: { [key: string]: string }; 
   public get sqlserverConfig() {
@@ -1298,6 +1319,7 @@ export class MdbSqlserverCluster extends cdktf.TerraformResource {
       name: cdktf.stringToTerraform(this._name),
       network_id: cdktf.stringToTerraform(this._networkId),
       security_group_ids: cdktf.listMapper(cdktf.stringToTerraform, false)(this._securityGroupIds),
+      sqlcollation: cdktf.stringToTerraform(this._sqlcollation),
       sqlserver_config: cdktf.hashMapper(cdktf.stringToTerraform)(this._sqlserverConfig),
       version: cdktf.stringToTerraform(this._version),
       backup_window_start: mdbSqlserverClusterBackupWindowStartToTerraform(this._backupWindowStart.internalValue),

@@ -147,7 +147,7 @@ export class YandexProvider extends cdktf.TerraformProvider {
       terraformResourceType: 'yandex',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       terraformProviderSource: 'yandex-cloud/yandex'

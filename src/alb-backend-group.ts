@@ -4085,7 +4085,7 @@ export class AlbBackendGroup extends cdktf.TerraformResource {
       terraformResourceType: 'yandex_alb_backend_group',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,

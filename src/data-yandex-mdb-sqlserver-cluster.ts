@@ -31,6 +31,10 @@ export interface DataYandexMdbSqlserverClusterConfig extends cdktf.TerraformMeta
   */
   readonly name?: string;
   /**
+  * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/mdb_sqlserver_cluster#sqlcollation DataYandexMdbSqlserverCluster#sqlcollation}
+  */
+  readonly sqlcollation?: string;
+  /**
   * Docs at Terraform Registry: {@link https://www.terraform.io/docs/providers/yandex/d/mdb_sqlserver_cluster#sqlserver_config DataYandexMdbSqlserverCluster#sqlserver_config}
   */
   readonly sqlserverConfig?: { [key: string]: string };
@@ -492,7 +496,7 @@ export class DataYandexMdbSqlserverCluster extends cdktf.TerraformDataSource {
       terraformResourceType: 'yandex_mdb_sqlserver_cluster',
       terraformGeneratorMetadata: {
         providerName: 'yandex',
-        providerVersion: '0.76.0',
+        providerVersion: '0.77.0',
         providerVersionConstraint: '~> 0.73'
       },
       provider: config.provider,
@@ -508,6 +512,7 @@ export class DataYandexMdbSqlserverCluster extends cdktf.TerraformDataSource {
     this._folderId = config.folderId;
     this._id = config.id;
     this._name = config.name;
+    this._sqlcollation = config.sqlcollation;
     this._sqlserverConfig = config.sqlserverConfig;
   }
 
@@ -660,6 +665,22 @@ export class DataYandexMdbSqlserverCluster extends cdktf.TerraformDataSource {
     return cdktf.Fn.tolist(this.getListAttribute('security_group_ids'));
   }
 
+  // sqlcollation - computed: true, optional: true, required: false
+  private _sqlcollation?: string; 
+  public get sqlcollation() {
+    return this.getStringAttribute('sqlcollation');
+  }
+  public set sqlcollation(value: string) {
+    this._sqlcollation = value;
+  }
+  public resetSqlcollation() {
+    this._sqlcollation = undefined;
+  }
+  // Temporarily expose input value. Use with caution.
+  public get sqlcollationInput() {
+    return this._sqlcollation;
+  }
+
   // sqlserver_config - computed: true, optional: true, required: false
   private _sqlserverConfig?: { [key: string]: string }; 
   public get sqlserverConfig() {
@@ -703,6 +724,7 @@ export class DataYandexMdbSqlserverCluster extends cdktf.TerraformDataSource {
       folder_id: cdktf.stringToTerraform(this._folderId),
       id: cdktf.stringToTerraform(this._id),
       name: cdktf.stringToTerraform(this._name),
+      sqlcollation: cdktf.stringToTerraform(this._sqlcollation),
       sqlserver_config: cdktf.hashMapper(cdktf.stringToTerraform)(this._sqlserverConfig),
     };
   }
